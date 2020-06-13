@@ -1,0 +1,10 @@
+.Example {
+  margin: 2rem;
+}
+
+.Example-button {
+  margin: 2rem;
+  padding: 1rem;
+  background: #ddd;
+  cursor: pointer;
+}
