@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/ConProfile.css';
+import '../../styles/ConProfile.css';
 
 export default () => {
   

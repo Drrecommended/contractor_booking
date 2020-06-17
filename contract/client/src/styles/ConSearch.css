@@ -1,0 +1,8 @@
+.input-shelf {
+    background-color: cadetblue;
+    padding: 2%;
+}
+
+.contractor-shelf {
+    display: flex;
+}
