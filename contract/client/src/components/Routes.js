@@ -5,11 +5,15 @@ import Dash from './pages/Dash'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import AuthRoute from '../utils/AuthRoute'
+import SearchPage from './pages/ConSearch'
 
 export default () => {
     return (
         <Router>
             <Route path="/" exact component={Example} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/login" component={Login} />
+            <Route path="/" component={SearchPage} />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <AuthRoute path="/dashboard" component={Dash} />
