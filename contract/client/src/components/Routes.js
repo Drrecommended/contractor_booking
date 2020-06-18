@@ -17,7 +17,7 @@ import example from '../redux/ducks/example'
 export default () => {
     return (
         <Router>
-            <Route path="/" exact component={Example} />
+            <Route path="/" exact component={SearchPage} />
             {/* <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Route path="/search" component={SearchPage} /> 
