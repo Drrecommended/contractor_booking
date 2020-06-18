@@ -5,4 +5,10 @@
 
 .contractor-shelf {
     display: flex;
+    border-bottom: solid 1px;
+    padding: 1.5%;
+}
+
+.info-shelf {
+    margin: 1%;
 }
