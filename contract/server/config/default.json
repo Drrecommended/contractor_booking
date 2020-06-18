@@ -3,7 +3,7 @@
     "host": "localhost",
     "user": "root",
     "password": "",
-    "database": "example"
+    "database": "contractor_app"
   },
   "secret": "2aXe-mrWMFPEyCaNpUYjKt$qramat_4xECWZ_a&?J-kdt4bC-!d2WFfxmT8z=crb"
 }
