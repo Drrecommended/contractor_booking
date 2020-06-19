@@ -18,8 +18,8 @@ export default () => {
     return (
         <Router>
             <Route path="/" exact component={SearchPage} />
-            {/* <Route path="/signup" component={Signup} />
-            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            {/*<Route path="/login" component={Login} />
             <Route path="/search" component={SearchPage} /> 
             <Route path="/checkout" component={Checkout} />
             <Route path="/order" component={ConOrder} />
