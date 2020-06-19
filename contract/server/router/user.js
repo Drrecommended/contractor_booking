@@ -16,10 +16,11 @@ router.post('/registration', (req, res, next) => {
             res.status(400).json({ message: 'username already exists' })
         } else {
             const addUserSql = `
-                INSERT INTO users (username, password, salt)
-                VALUES (?, ?, ?);
+                INSERT INTO users (username, password, salt, contractor, profile_id)
+                VALUES (?, ?, ?, ?, ?);
             `
-            conn.query(addUserSql, [username, hashedPassword, salt], (err, results, fields) => {
+            // TODO: needs to actually create a profile and accept contractor boolean
+            conn.query(addUserSql, [username, hashedPassword, salt, true, 1], (err, results, fields) => {
                 res.status(201).json({ message: 'user successfully created' })
             })
         }
