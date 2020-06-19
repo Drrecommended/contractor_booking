@@ -27,9 +27,9 @@ export default (props) => {
 				<button onClick={logout}>logout</button>
 			</form> 
 
-		
-		<div> < DividerExampleVerticalForm /> </div>
-		
+		<div className="DividerContainer">
+			<div className="Signup-login-divider"> < DividerExampleVerticalForm /> </div>
+		</div>
 		</div>
 		
 	)

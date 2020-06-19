@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react'
-import '../styles/signup.css'
+import '../styles/Signup.css'
+
 
 const DividerExampleVerticalForm = () => (
   <Segment placeholder>
