@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../hooks'
+import { useAuth } from '../../hooks';
+import  DividerExampleVerticalForm  from '../SignupForm'
+
 
 export default (props) => {
 	const { signup, logout } = useAuth()
@@ -23,7 +25,12 @@ export default (props) => {
 				<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 				<button>submit</button>
 				<button onClick={logout}>logout</button>
-			</form>
+			</form> 
+
+		<div className="DividerContainer">
+			<div className="Signup-login-divider"> < DividerExampleVerticalForm /> </div>
 		</div>
+		</div>
+		
 	)
 }

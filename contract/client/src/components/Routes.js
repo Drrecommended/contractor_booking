@@ -18,6 +18,7 @@ import example from '../redux/ducks/example'
 export default () => {
     return (
         <Router>
+<<<<<<< HEAD
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Route path="/sandbox" component={Sandbox} />
@@ -27,6 +28,17 @@ export default () => {
             <AuthRoute path="/profile" exact component={ConProfile} />
             <AuthRoute path="/profile/edit" component={ConEdit} />
             <AuthRoute path="/dashboard" component={Dash} />
+=======
+            <Route path="/" exact component={SearchPage} />
+            <Route path="/signup" component={Signup} />
+            {/*<Route path="/login" component={Login} />
+            <Route path="/search" component={SearchPage} /> 
+            <Route path="/checkout" component={Checkout} />
+            <Route path="/order" component={ConOrder} />
+            <Route path="/profile" component={ConProfile} />
+            <Route path="/edit" component={ConEdit} />
+            <AuthRoute path="/dashboard" component={Dash} /> */}
+>>>>>>> 552775430a1face7648fb302a432296b6ec4fb0d
         </Router>
     )
 }
