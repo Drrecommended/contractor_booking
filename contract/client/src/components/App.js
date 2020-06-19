@@ -7,5 +7,6 @@ import Routes from './Routes';
 export default () => <div>
   <Provider store={store}>
     <Routes />
+
   </Provider>
 </div>
