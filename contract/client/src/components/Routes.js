@@ -21,7 +21,7 @@ export default () => {
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Route path="/sandbox" component={Sandbox} />
-            <AuthRoute path="/search" component={Sandbox} />
+            <AuthRoute path="/search" component={SearchPage} />
             <AuthRoute path="/checkout" component={Checkout} />
             <AuthRoute path="/order" component={ConOrder} />
             <AuthRoute path="/profile" exact component={ConProfile} />
