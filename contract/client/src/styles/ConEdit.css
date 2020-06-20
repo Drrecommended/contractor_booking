@@ -1,0 +1,16 @@
+.EditContainer{
+    display: flex;
+}
+
+.BusinessEdit{
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+}
+
+.BusinessLocationEdit{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+
+}
