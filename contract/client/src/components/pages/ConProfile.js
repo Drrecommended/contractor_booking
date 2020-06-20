@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../../styles/ConProfile.css';
 import 'semantic-ui-css/semantic.min.css'
-import 'flexboxgrid/css/flexboxgrid.min.css'
 import Avatar from '../ui/Avatar'
 import { Link } from 'react-router-dom'
 export default () => {
