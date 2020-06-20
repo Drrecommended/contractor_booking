@@ -5,9 +5,36 @@ body{
 
 .Signup-login-divider{
     width: 50%;
+    padding-top: 280px;
 }
 
 .DividerContainer{
     display: flex;
     justify-content: center;
+}
+
+.SignUpPhoto{
+    height: 400px;
+    background-position: center ;
+    border-bottom-style: inset;
+}
+
+.NavContainer{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.NavLinks{
+    font-size: 15px;
+}
+
+.SearchLink{
+    padding-left: 20px;
+    padding-right: 20px;
+    color: darkolivegreen;
+}
+
+.AboutLink{
+    color: darkolivegreen;
 }
