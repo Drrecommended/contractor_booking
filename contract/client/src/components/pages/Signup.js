@@ -28,7 +28,7 @@ export default (props) => {
             		}}>
 				<div className="NavContainer">
 					<div>
-						<h1>NAME</h1>
+						<h1 className="NavName">LOGO</h1>
 					</div>
 					<div className="NavLinks">
 						<Link className="AboutLink">ABOUT</Link>

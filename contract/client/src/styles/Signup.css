@@ -1,11 +1,13 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+
 body{
     background-color: lightgray;
 }
 
 .Signup-login-divider{
     width: 50%;
-    padding-top: 280px;
+    padding-top: 230px;
 }
 
 .DividerContainer{
@@ -27,14 +29,23 @@ body{
 
 .NavLinks{
     font-size: 15px;
+    padding-top: 10px;
 }
 
 .SearchLink{
     padding-left: 20px;
     padding-right: 20px;
-    color: darkolivegreen;
+    color: black;
 }
 
 .AboutLink{
-    color: darkolivegreen;
+    color: black;
+}
+
+.NavName{
+    font-family: 'Oxygen', sans-serif;
+    color: black;
+    font-size: 40px;
+    padding-left: 20px;
+    padding-top: 10px;
 }
