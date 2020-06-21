@@ -3,9 +3,11 @@ import '../../styles/ConProfile.css';
 import 'semantic-ui-css/semantic.min.css'
 import Avatar from '../ui/Avatar'
 import { Link } from 'react-router-dom'
+import ImageGallery from '../ui/react-image-gallery';
+
 export default () => {
     const [profile] = useState({
-        thumbnail: "https://i.pinimg.com/736x/26/7f/be/267fbea90a49093798063fd26feb975b.jpg",
+        thumbnail: "https://pbs.twimg.com/profile_images/1050414908762939393/UKzYsgQg_400x400.jpg",
         first: "Prison",
         last: "Mike",
         address: {
@@ -14,18 +16,20 @@ export default () => {
             state: "NV"
 
         },
-        trade: "Plumber"
+        trade: "Origami Paper Company",
+
+
     })
     return (
         <div>
             <div className="row">
-                <div className="col-lg-2">
+                <div className="col-lg-1">
                     <Avatar
                         image={profile.thumbnail} />
                 </div>
                 <div className="col-lg-10">
                     <div className="row">
-                        <div className="col-lg-2">
+                        <div className="col-lg-10">
                             <p>
                                 {profile.first}
                                 {profile.last}
@@ -35,7 +39,7 @@ export default () => {
                             </p>
                             <Link to="profile/edit" >edit</Link>
                         </div>
-                        <div className="col-lg-10">
+                        <div className="col-lg-16">
                             <p>
                                 {profile.address.street}
                             </p>
@@ -49,9 +53,16 @@ export default () => {
             </div>
             <div className="row">
                 <div className="col-12">
-                    Bio
+                    Lorem ipsum..
                 </div>
             </div>
+            <div className="row">
+                <div className="col-12">
+                <ImageGallery items={images} />
+                </div>
+            </div>
+
+
         </div>
     )
 }
