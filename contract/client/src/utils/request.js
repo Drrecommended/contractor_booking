@@ -54,6 +54,10 @@ class Request {
         return this.request(url, 'patch', data)
     }
 
+    delete = (url) => {
+        return this.request(url, 'delete')
+    }
+
     post = (url, data) => {
         return this.request(url, 'post', data)
     }
@@ -66,10 +70,10 @@ export class AuthService {
             password: password
         }
         return api.post('/login', userToLogin)
-        .then(resp => {
-            Storage.setItem('authToken', resp.token)
-            return resp
-        })
+            .then(resp => {
+                Storage.setItem('authToken', resp.token)
+                return resp
+            })
     }
 
     static signup = (username, password) => {
@@ -88,7 +92,7 @@ export class AuthService {
     }
 
     static checkToken(token) {
-        
+
     }
 
     static isAuthenticated = () => !!Storage.getItem('authToken')
