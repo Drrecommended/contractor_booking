@@ -8,13 +8,7 @@ const GRAB_ORDERS = "example/GRAB_ORDERS"
 
 // 3. initial state
 const orderState = {
-  orderData: [
-    orderNumber: "3298472348032",
-    orderName: "Bill Murray",
-    orderDate: "2/22/22",
-    orderServices: "Moved Furniture",
-    orderTotal: "$120.00"
-  ],
+    orderData: [],
 }
 
 // 4. reducer
@@ -29,11 +23,12 @@ export default (state = orderState, action) => {
 
 // 5. action creators
 function userOrders() {
+    console.log('called')
   return dispatch => {
-      api.get('/contractor-search?word=' + search).then(resp =>{
+      api.get('/contractor-order').then(resp =>{
           dispatch({
               type: GRAB_ORDERS,
-              payload: resp
+              payload: resp.orderData
           })
       })
   }
@@ -42,12 +37,12 @@ function userOrders() {
 
 
 // 6. custom hook
-export function useOrders() {
+export function useOrder() {
   const dispatch = useDispatch()
   const orders = useSelector(appState => appState.orderState.orderData)
-
-  const getOrders = () => dispatch(userOrders())
+ 
+  const getOrder = () => dispatch(userOrders())
  
 
-  return { orders, getOrders }
+  return { orders, getOrder }
 }
