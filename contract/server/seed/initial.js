@@ -61,17 +61,22 @@ users.map(async user => {
       user.contractor,
       user.profile_id
     ],
-    (async result => {
-      const id = result.insertId
-      const service = makeService()
-      await query(`
+  )
+});
+
+// user w/ id 1: user
+// user w/ id: 2: contractor
+(async () => {
+  [makeService(), makeService()].map(async service => {
+    await query(
+      `
       INSERT INTO services (user_id, description, price)
       VALUES (?,?,?)
       `,
-        [id, service.description, service.price]
-      )
-    })
-  )
+      [2, service.description, service.price]
+    )
+  })
+
 
   await query(`
     INSERT INTO galleries (profile_id, img_src)
@@ -81,5 +86,10 @@ users.map(async user => {
     (1, 'https://placehold.it/250x250/8B63A1')
   `)
 
-  process.exit()
-})
+  await query(`
+      INSERT INTO orders (customer_id, contractor_id, date, services, total, status)
+      VALUES 
+      (1, 2, '2020-06-10', 'testing', 22.22, 'approved'),
+      (1, 2, '2020-06-7', 'testing', 42.22, 'denied')
+  `)
+})()
