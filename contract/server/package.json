@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon app.js",
     "seed:user": "node seed/user.js",
+    "seed:reset": "node seed/reset.js",
     "seed:initial": "node seed/initial.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

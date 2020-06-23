@@ -1,7 +1,9 @@
 const conn = require('../db.js')
 const { createHash } = require('../utils')
 const sha512 = require('js-sha512')
+const query = require('./query')
 
+// create a new user with hashed password
 class User {
   constructor(username, password, first, last, contractor) {
     this.username = username
@@ -18,25 +20,13 @@ const users = [
   new User('contractor', 'contractor', 'contractor', 'one', true)
 ]
 
-function query(sql, escaped, cb) {
-  return new Promise((res, rej) => {
-    conn.query(sql, escaped, (err, results, fields) => {
-      if (err) {
-        throw err
-      }
-      res(results)
-      if (cb) {
-        cb(results)
-      }
-    })
-  })
+// create a random service to be associated with a contractor
+function makeService() {
+  const services = ['clean pool', 'trim hedges', 'floor tiling', 'plumbing']
+  const randomPrice = Math.floor(Math.random() * (1000 - 100) + 100) / 100;
+  const randomIndex = Math.floor(Math.random() * services.length)
+  return { description: services[randomIndex], price: randomPrice }
 }
-
-// (async () => {
-//   await query(`TRUNCATE TABLE users`)
-//   await query(`TRUNCATE TABLE profiles`)
-//   await query(`TRUNCATE TABLE addresses`)
-// })()
 
 users.map(async user => {
   let addressId
@@ -71,9 +61,25 @@ users.map(async user => {
       user.contractor,
       user.profile_id
     ],
-    (result => {
-      const user = result
-
+    (async result => {
+      const id = result.insertId
+      const service = makeService()
+      await query(`
+      INSERT INTO services (user_id, description, price)
+      VALUES (?,?,?)
+      `,
+        [id, service.description, service.price]
+      )
     })
   )
+
+  await query(`
+    INSERT INTO galleries (profile_id, img_src)
+    VALUES 
+    (1, 'https://placehold.it/250x250/1D3030'),
+    (1, 'https://placehold.it/250x250/007B7B'),
+    (1, 'https://placehold.it/250x250/8B63A1')
+  `)
+
+  process.exit()
 })
