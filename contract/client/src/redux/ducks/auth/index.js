@@ -6,6 +6,7 @@ import { AuthService } from '../../../utils/request'
 
 // 2. action definitions
 const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS'
+const SIGNUP = 'auth/SIGNUP'
 const LOGIN_PENDING = 'auth/LOGIN_PENDING'
 const LOGOUT = 'auth/LOGOUT'
 
@@ -56,7 +57,7 @@ function signupUser(username, password) {
   return dispatch => {
     return api.signup(username, password).then(resp => {
       dispatch({
-        type: LOGOUT,
+        type: SIGNUP,
       })
     })
   }
