@@ -26,7 +26,6 @@
 //   PRIMARY KEY (`id`)
 // ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
 // CREATE TABLE `profiles` (
 //   `id` int unsigned NOT NULL AUTO_INCREMENT,
 //   `trade_1` enum('plumber') DEFAULT NULL,
@@ -47,6 +46,12 @@
 //   PRIMARY KEY (`id`)
 // ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+// TODO: update transaction table...
+
+// CREATE TABLE `transactions` (
+//   `id` int NOT NULL AUTO_INCREMENT,
+//   PRIMARY KEY (`id`)
+// ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 // CREATE TABLE `users` (
 //   `id` int NOT NULL AUTO_INCREMENT,
