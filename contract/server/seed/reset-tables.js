@@ -7,5 +7,6 @@ const query = require('./query');
   await query(`TRUNCATE TABLE galleries`)
   await query(`TRUNCATE TABLE services`)
   await query(`TRUNCATE TABLE orders`)
+  await query(`TRUNCATE TABLE transactions`)
   process.exit()
 })()
