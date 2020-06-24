@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Form, Dropdown } from 'semantic-ui-react'
-import '../../styles/Checkout.css';
+import { Button, Form, Dropdown, Divider, Icon} from 'semantic-ui-react'
+import '../../styles/Checkout.scss';
 
 
 export default () => {
@@ -12,25 +12,40 @@ export default () => {
   // }))
 
   return (
-    <div>
-      <Form className="checkout-form">
-        <Form.Group unstackable widths={2}>
-          <Form.Input label='First name' placeholder='First name' />
-          <Form.Input label='Last name' placeholder='Last name' />
-        </Form.Group>
-        <Form.Group widths={3}>
-          <Form.Input label='Address' placeholder='Address' />
-          <Form.Dropdown placeholder='city' search selection options="hey" />
-          <Form.Dropdown placeholder='state' search selection options="hey" />
-          <Form.Input label='Postal code' placeholder='Postal code' />
-        </Form.Group>
-        <Form.Group widths={2}>
-          <Form.Input label='Address' placeholder='Address' />
-          <Form.Input label='Phone' placeholder='Phone' />
-        </Form.Group>
-        <Form.Checkbox label='I agree to the Terms and Conditions' />
-        <Button type='submit'>Submit payment</Button>
-      </Form>
+    <div className="background">
+       <div id="header-style" class="ui clearing segment">
+        <h2 class="ui right floated header">
+          <Button icon>
+            <Icon name='home' />
+          </Button>
+        </h2>
+        <h2 class="ui left floated header">
+          <Button icon>
+            <Icon name='search' />
+          </Button>
+        </h2>
+      </div>
+      <div className="form-container">
+        <Form className="checkout-form">
+          <h1>Who and where should we bill this service?</h1>
+          <Form.Group unstackable widths={2}>
+            <Form.Input label='First name' placeholder='First name' />
+            <Form.Input label='Last name' placeholder='Last name' />
+          </Form.Group>
+          <Form.Group widths={4}>
+            <Form.Input label='Address' placeholder='Address' />
+            <Form.Dropdown placeholder='city' search selection options="hey" />
+            <Form.Dropdown placeholder='state' search selection options="hey" />
+            <Form.Input label='Postal code' placeholder='Postal code' />
+          </Form.Group>
+          <Form.Group widths={2}>
+            <Form.Input label='Email' placeholder='Email' />
+            <Form.Input label='Phone' placeholder='Phone' />
+          </Form.Group>
+          <Form.Checkbox label='I agree to the Terms and Conditions' />
+          <Button type='submit'>Billing info</Button>
+        </Form>
+      </div>
     </div>
   )
 }
