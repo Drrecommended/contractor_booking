@@ -14,9 +14,8 @@ router.get('/contractor-order', (req, res, next) => {
             orderServices: "Moved Furniture",
             orderTotal: "$120.00"
           }],
-
-
         }
+ 
   )
 })
   
