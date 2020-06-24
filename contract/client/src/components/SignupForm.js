@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react'
+import { useAuth } from '../hooks'
 import '../styles/Signup.css'
 
 
-const DividerExampleVerticalForm = () => (
+const DividerExampleVerticalForm = () => {
+ // const [modalVisible, setModalVisible] = useState(false)
+
+  //function showModal (){
+
+ // }
+
+  return(
   <Segment placeholder>
     <Grid columns={2} relaxed='very' stackable>
       <Grid.Column>
@@ -32,6 +40,6 @@ const DividerExampleVerticalForm = () => (
 
     <Divider vertical>Or</Divider>
   </Segment>
-)
+  )}
 
 export default DividerExampleVerticalForm
