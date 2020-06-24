@@ -3,7 +3,10 @@ import '../../styles/ConProfile.css';
 import 'semantic-ui-css/semantic.min.css'
 import Avatar from '../ui/Avatar'
 import { Link } from 'react-router-dom'
-import ImageGallery from '../ui/react-image-gallery';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick"
+
 
 export default () => {
     const [profile] = useState({
@@ -18,8 +21,34 @@ export default () => {
         },
         trade: "Origami Paper Company",
 
+        images: [
+
+            {
+                original: 'https://picsum.photos/id/1018/1000/600/',
+                thumbnail: 'https://picsum.photos/id/1018/250/150/',
+            },
+            {
+                original: 'https://picsum.photos/id/1015/1000/600/',
+                thumbnail: 'https://picsum.photos/id/1015/250/150/',
+            },
+            {
+                original: 'https://picsum.photos/id/1019/1000/600/',
+                thumbnail: 'https://picsum.photos/id/1019/250/150/',
+            },
+        ]
+
+
 
     })
+    var settings = {
+        variableWidth: true,
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1
+    }
+
     return (
         <div>
             <div className="row">
@@ -56,11 +85,16 @@ export default () => {
                     Lorem ipsum..
                 </div>
             </div>
-            <div className="row">
-                <div className="col-12">
-                <ImageGallery items={images} />
-                </div>
+            <div className="">
+                <Slider {...settings}>
+
+                    {profile.images.map(item => <div key={item.original} style={{ width: "30%" }}><img src={item.original} /></div>)}
+
+
+
+                </Slider>
             </div>
+
 
 
         </div>
