@@ -1,5 +1,11 @@
-.EditContainer{
+.EditTopOfPage{
     display: flex;
+}
+.EditAvatar{
+    height: 70px;
+    width: 100px;
+    background-size: cover;
+    border-radius: 50%;
 }
 
 .BusinessEdit{
