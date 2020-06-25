@@ -1,17 +1,33 @@
 import React, { useState } from 'react'
 import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react'
-import { useAuth } from '../hooks'
+import { useAuth, useForm } from '../hooks'
 import '../styles/Signup.css'
 
 
 const DividerExampleVerticalForm = () => {
+
+    const [form, setForm ] = useForm({username:''})
+    const {signup}= useAuth()
  // const [modalVisible, setModalVisible] = useState(false)
 
   //function showModal (){
 
  // }
 
-  return(
+  return(<div>
+    <Form onSubmit={() => signup(form)}>
+      {form.username}
+          <Form.Input onChange={setForm}
+            name='username'
+            icon='user'
+            iconPosition='left'
+            label='Username'
+            placeholder='Username'
+          />
+          <Button type='submit' content='Login' primary />
+          
+    </Form>
+  
   <Segment placeholder>
     <Grid columns={2} relaxed='very' stackable>
       <Grid.Column>
@@ -40,6 +56,9 @@ const DividerExampleVerticalForm = () => {
 
     <Divider vertical>Or</Divider>
   </Segment>
+  </div>
   )}
+
+  
 
 export default DividerExampleVerticalForm
