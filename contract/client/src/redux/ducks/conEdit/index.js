@@ -2,15 +2,14 @@ import {useSelector, useDispatch } from "react-redux"
 
 const EDIT_PROFILE = "edit/EDIT_PROFILE"
 
-const profileState =
-    user = [{
+const profileState = {
         id: '',
         trade_1: '',
         trade_2: '',
         bio: '',
-        address_id:'',
+        address:'',
         thumbnail: ''
-    }]
+    }
 
 export default (state = profileState, action) => {
     switch (action.type){
