@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
-    "seed:user": "node seed/user.js",
+    "tables:drop": "node seed/drop-tables.js",
+    "tables:create": "node seed/create-tables.js",
+    "tables:clear": "node seed/reset-tables.js",
+    "tables:seed": "node seed/seed-tables.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
