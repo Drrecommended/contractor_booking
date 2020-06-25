@@ -3,8 +3,8 @@ const router = express.Router()
 const conn = require('../db.js')
 
 // conn.query(sql , [], (err, results, fields) => {})
-router.get('/', (req, res, next) => {
-  res.send('Hello World!')
+router.get('/edit', (req, res, next) => {
+  res.send('Edit page!')
 })
 
 
