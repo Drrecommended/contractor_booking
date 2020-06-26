@@ -1,22 +1,41 @@
 import React, { useState } from 'react'
-import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react'
+import { Button, Divider, Form, Grid, Segment, Modal } from 'semantic-ui-react'
 import { useAuth, useForm } from '../hooks'
 import '../styles/Signup.css'
 
 
 const DividerExampleVerticalForm = () => {
 
-    const [form, setForm ] = useForm({username:''})
+    const [form, setForm, resetForm ] = useForm({firstname:'', lastname:'', username:'', address:'', email:'', password:''})
     const {signup}= useAuth()
  // const [modalVisible, setModalVisible] = useState(false)
 
-  //function showModal (){
+  function handleSubmit (){
+    signup(form)
+    .then( resp =>{
+      resetForm()
+    })
 
- // }
+  }
 
   return(<div>
-    <Form onSubmit={() => signup(form)}>
-      {form.username}
+    <Form onSubmit={handleSubmit}>
+      {form.username} 
+      {form.lastname}
+          <Form.Input onChange={setForm}
+            name='firstname'
+            icon='user'
+            iconPosition='left'
+            label='First Name'
+            placeholder='First Name'
+          />
+          <Form.Input onChange={setForm}
+            name='lastname'
+            icon='user'
+            iconPosition='left'
+            label='Last Name'
+            placeholder='Last Name'
+          />
           <Form.Input onChange={setForm}
             name='username'
             icon='user'
@@ -24,6 +43,22 @@ const DividerExampleVerticalForm = () => {
             label='Username'
             placeholder='Username'
           />
+          <Form.Input onChange={setForm}
+            name='username'
+            icon='user'
+            iconPosition='left'
+            label='Email'
+            placeholder='Email'
+          />
+          <Form.Input onChange={setForm}
+            name='username'
+            icon='user'
+            iconPosition='left'
+            label='Password'
+            placeholder='Password'
+      />
+
+      <p>Are you a contractor?</p>
           <Button type='submit' content='Login' primary />
           
     </Form>
@@ -48,9 +83,57 @@ const DividerExampleVerticalForm = () => {
           <Button content='Login' primary />
         </Form>
       </Grid.Column>
-
       <Grid.Column verticalAlign='middle'>
-        <Button content='Sign up' icon='signup' size='big' />
+      <Modal trigger={<Button content='Sign up' icon='signup' size='big'></Button>}>
+    <Modal.Header>Sign up</Modal.Header>
+    <Form onSubmit={() => signup(form)}>
+      <div className='FormSpacing'>
+        
+      <Form.Input onChange={setForm}
+            name='firstname'
+            icon='user'
+            iconPosition='left'
+            label='First Name'
+            placeholder='First Name'
+          />
+          <Form.Input onChange={setForm}
+            name='lastname'
+            icon='user'
+            iconPosition='left'
+            label='Last Name'
+            placeholder='Last Name'
+          />
+          <Form.Input onChange={setForm}
+            name='username'
+            icon='user'
+            iconPosition='left'
+            label='Username'
+            placeholder='Username'
+          />
+          <Form.Input onChange={setForm}
+            name='username'
+            icon='user'
+            iconPosition='left'
+            label='Email'
+            placeholder='Email'
+          />
+          <Form.Input onChange={setForm}
+            name='username'
+            icon='user'
+            iconPosition='left'
+            label='Password'
+            placeholder='Password'
+      />
+
+      <p>Are you a contractor?</p>
+          <Button type='submit' content='Submit' primary />
+        
+        </div> 
+          
+          
+    </Form>
+    
+    </Modal>
       </Grid.Column>
     </Grid>
 
