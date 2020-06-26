@@ -20,6 +20,7 @@ export default () => {
 
         },
         trade: "Origami Paper Company",
+        BIO: "About Me",
 
         images: [
 
@@ -81,20 +82,25 @@ export default () => {
                 </div>
             </div>
             <div className="row">
-                <div className="col-12">
-                    Lorem ipsum..
+                <div className="col-md-12">
+                    {profile.BIO}
                 </div>
             </div>
-            <div className="">
+            <div className="slider">
                 <Slider {...settings}>
 
-                    {profile.images.map(item => <div key={item.original} style={{ width: "30%" }}><img src={item.original} /></div>)}
+                    {profile.images.map(item => <div key={item.original} style={{ width: "30%", height: "50px" }}><img src={item.original} /></div>)}
 
 
 
                 </Slider>
             </div>
+            <div className="row">
+                <div className="col-md-12">
+                    
 
+                </div>
+            </div>
 
 
         </div>

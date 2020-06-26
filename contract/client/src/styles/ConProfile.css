@@ -2,3 +2,9 @@
     display: flex;
     justify-content: center;    
 }
+
+.slick-track {
+   
+    width: 25%;
+    height: 25%;
+}
