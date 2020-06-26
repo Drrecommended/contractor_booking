@@ -19,49 +19,7 @@ const DividerExampleVerticalForm = () => {
   }
 
   return(<div>
-    <Form onSubmit={handleSubmit}>
-      {form.username} 
-      {form.lastname}
-          <Form.Input onChange={setForm}
-            name='firstname'
-            icon='user'
-            iconPosition='left'
-            label='First Name'
-            placeholder='First Name'
-          />
-          <Form.Input onChange={setForm}
-            name='lastname'
-            icon='user'
-            iconPosition='left'
-            label='Last Name'
-            placeholder='Last Name'
-          />
-          <Form.Input onChange={setForm}
-            name='username'
-            icon='user'
-            iconPosition='left'
-            label='Username'
-            placeholder='Username'
-          />
-          <Form.Input onChange={setForm}
-            name='username'
-            icon='user'
-            iconPosition='left'
-            label='Email'
-            placeholder='Email'
-          />
-          <Form.Input onChange={setForm}
-            name='username'
-            icon='user'
-            iconPosition='left'
-            label='Password'
-            placeholder='Password'
-      />
-
-      <p>Are you a contractor?</p>
-          <Button type='submit' content='Login' primary />
-          
-    </Form>
+    
   
   <Segment placeholder>
     <Grid columns={2} relaxed='very' stackable>
@@ -86,7 +44,7 @@ const DividerExampleVerticalForm = () => {
       <Grid.Column verticalAlign='middle'>
       <Modal trigger={<Button content='Sign up' icon='signup' size='big'></Button>}>
     <Modal.Header>Sign up</Modal.Header>
-    <Form onSubmit={() => signup(form)}>
+    <Form onSubmit={handleSubmit}>
       <div className='FormSpacing'>
         
       <Form.Input onChange={setForm}
@@ -145,3 +103,14 @@ const DividerExampleVerticalForm = () => {
   
 
 export default DividerExampleVerticalForm
+
+//const myFuction = () => { 
+//for(i = 100; i <= 100; 1++)  
+// if(i%3 == 0){
+// by3 = 'fizz'
+//} else if (1%5 == 0){
+//    by5 = 'buzz'
+//  }
+    
+
+//}
