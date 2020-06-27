@@ -8,6 +8,7 @@ const { createHash } = require('../utils')
 
 router.post('/registration', (req, res, next) => {
     const { username, password } = req.body
+    console.log(req.body)
     const salt = createHash(20)
     const hashedPassword = sha512(password + salt)
     const checkIfUserExistsSql = `SELECT * FROM users WHERE username = ?;`
