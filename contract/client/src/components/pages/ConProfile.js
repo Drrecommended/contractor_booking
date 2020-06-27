@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import '../../styles/ConProfile.css';
 import Avatar from '../ui/Avatar'
 import { Link } from 'react-router-dom'
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick"
+import { Dropdown } from 'semantic-ui-react'
 
 
 export default () => {
@@ -35,19 +33,17 @@ export default () => {
                 original: 'https://picsum.photos/id/1019/1000/600/',
                 thumbnail: 'https://picsum.photos/id/1019/250/150/',
             },
-        ]
+        ],
+
+        options: [
+            { key: 1, text: 'cutting bushes', price: 20, value: 1 },
+            { key: 2, text: 'plumbing', price: 15, value: 2 },
+            { key: 3, text: 'renovation', price: 20, value: 3 },
+        ],
 
 
 
     })
-    var settings = {
-        variableWidth: true,
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1
-    }
 
     return (
         <div>
@@ -85,18 +81,9 @@ export default () => {
                     {profile.BIO}
                 </div>
             </div>
-            <div className="slider">
-                <Slider {...settings}>
-
-                    {profile.images.map(item => <div key={item.original} style={{ width: "30%", height: "50px" }}><img src={item.original} /></div>)}
-
-
-
-                </Slider>
-            </div>
             <div className="row">
                 <div className="col-md-12">
-
+                    <Dropdown clearable options={profile.options} selection />
 
                 </div>
             </div>
