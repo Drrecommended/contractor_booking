@@ -8,12 +8,16 @@ const DividerExampleVerticalForm = () => {
 
     const [form, setForm, resetForm ] = useForm({firstname:'', lastname:'', username:'', address:'', email:'', password:''})
     const {signup}= useAuth()
- // const [modalVisible, setModalVisible] = useState(false)
+    const [modalVisible, setModalVisible] = useState(false)
+    const handleClose = () => setModalVisible(false);
+    const handleShow = () => setModalVisible(true);
+
 
   function handleSubmit (){
     signup(form)
     .then( resp =>{
       resetForm()
+      handleClose()
     })
 
   }
@@ -42,9 +46,9 @@ const DividerExampleVerticalForm = () => {
         </Form>
       </Grid.Column>
       <Grid.Column verticalAlign='middle'>
-      <Modal trigger={<Button content='Sign up' icon='signup' size='big'></Button>}>
+      <Modal trigger={<Button onClick={() => setModalVisible(true)} content='Sign up' icon='signup' size='big'></Button>}>
     <Modal.Header>Sign up</Modal.Header>
-    <Form onSubmit={handleSubmit}>
+    <Form  onSubmit={handleSubmit}>
       <div className='FormSpacing'>
         
       <Form.Input onChange={setForm}
@@ -84,7 +88,7 @@ const DividerExampleVerticalForm = () => {
       />
 
       <p>Are you a contractor?</p>
-          <Button type='submit' content='Submit' primary />
+          <Button  type='submit' content='Submit' primary />
         
         </div> 
           
