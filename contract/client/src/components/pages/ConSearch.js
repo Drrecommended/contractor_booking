@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/ConSearch.css';
 import { useContractor } from '../../hooks'
+import { Button, Icon } from 'semantic-ui-react'
+
 
 
 
@@ -17,12 +19,6 @@ export default () => {
     }, [])
     return (
         <div>
-            <div className="input-shelf">
-                <form onSubmit={handleSubmit}>
-                {search}
-                <input onChange={(e) => setSearch(e.target.value)}/> <button>SEARCH</button>
-                </form>
-            </div>
             {contractors.map(contractor => {
                 return (
                     <div className="contractor-shelf">

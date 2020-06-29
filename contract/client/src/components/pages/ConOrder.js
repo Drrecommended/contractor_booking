@@ -12,18 +12,6 @@ export default () => {
   }, [])
   return (
     <div className="background">
-      <div id="header-style" class="ui clearing segment">
-        <h2 class="ui right floated header">
-          <Button icon>
-            <Icon name='home' />
-          </Button>
-        </h2>
-        <h2 class="ui left floated header">
-          <Button icon>
-            <Icon name='search' />
-          </Button>
-        </h2>
-      </div>
       <table id="table">
             <thead class="headColor">
               <tr class="">
