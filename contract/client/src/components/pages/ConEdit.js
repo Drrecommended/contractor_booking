@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../styles/ConEdit.css';
 import { Button, Input, Dropdown, Container, Label } from 'semantic-ui-react';
+import { BsFillPlusSquareFill } from "react-icons/bs";
 
 export default () => {
 
@@ -48,6 +49,11 @@ export default () => {
     <input />
     <Label>.00</Label>
     </Input>
+                
+        <div >
+          <BsFillPlusSquareFill size={25} />
+        </div>
+        
   </div>
 </div>
   )
