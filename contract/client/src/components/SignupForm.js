@@ -15,7 +15,7 @@ const DividerExampleVerticalForm = () => {
 
   function handleSubmit (){
     signup(form)
-    .then( resp =>{
+    .then( resp => {
       resetForm()
       handleClose()
     })
@@ -46,7 +46,7 @@ const DividerExampleVerticalForm = () => {
         </Form>
       </Grid.Column>
       <Grid.Column verticalAlign='middle'>
-      <Modal trigger={<Button onClick={() => setModalVisible(true)} content='Sign up' icon='signup' size='big'></Button>}>
+      <Modal open={modalVisible} trigger={<Button onClick={() => setModalVisible(true)} content='Sign up' icon='signup' size='big'></Button>}>
     <Modal.Header>Sign up</Modal.Header>
     <Form  onSubmit={handleSubmit}>
       <div className='FormSpacing'>
@@ -107,14 +107,3 @@ const DividerExampleVerticalForm = () => {
   
 
 export default DividerExampleVerticalForm
-
-//const myFuction = () => { 
-//for(i = 100; i <= 100; 1++)  
-// if(i%3 == 0){
-// by3 = 'fizz'
-//} else if (1%5 == 0){
-//    by5 = 'buzz'
-//  }
-    
-
-//}
