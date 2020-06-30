@@ -1,9 +1,11 @@
 .EditTopOfPage{
     display: flex;
+    padding-bottom: 35px;
+    margin: 40px;
 }
 .EditAvatar{
-    height: 70px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
     background-size: cover;
     border-radius: 50%;
 }
@@ -12,11 +14,34 @@
     display: flex;
     flex-direction: column;
     width: 10%;
+    margin-left: 100px;
+}
+
+.BioEdit{
+    padding-bottom: 35px;
+
 }
 
 .BusinessLocationEdit{
     display: flex;
     flex-direction: column;
     width: 15%;
+    margin-right: 50%;
 
+}
+
+.ui.focus.input{
+    margin: 40px;
+}
+
+.PriceEdit{
+    margin-left: 25px;
+}
+.BioEdit{
+    display: flex;
+    justify-content: center;
+}
+.TextEdit{
+    width: 1000px;
+    height: 200px;
 }
