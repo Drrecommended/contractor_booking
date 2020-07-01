@@ -4,6 +4,7 @@ const config = require('config')
 const jwt = require('express-jwt')
 const exampleRoutes = require('./router/example')
 const userRoutes = require('./router/user')
+const editProfileRoutes = require('./router/editProfile')
 const protectedRoutes = require('./router/protected')
 const unauthorized = require('./middleware/unauthorized')
 const attachUser = require('./middleware/attachUser')
@@ -16,6 +17,7 @@ app.use(attachUser)
 
 app.use('/api', exampleRoutes)
 app.use('/api', userRoutes)
+app.use('/api', editProfileRoutes)
 app.use('/api', jwt({ secret: config.get('secret') }), protectedRoutes)
 
 app.use('/', (req, res, next) => {
