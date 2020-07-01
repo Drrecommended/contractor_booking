@@ -55,6 +55,7 @@ class Request {
   }
 
   delete = (url) => {
+    console.log(url)
     return this.request(url, 'delete')
   }
 

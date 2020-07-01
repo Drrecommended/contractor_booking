@@ -29,7 +29,7 @@ function addImage(galleryItem) {
 
 function deleteImage(galleryId) {
     return dispatch => {
-        api.delete('/profile/gallery/'+ galleryId)
+        api.delete('/profile/gallery/' + galleryId)
     }
 }
 
