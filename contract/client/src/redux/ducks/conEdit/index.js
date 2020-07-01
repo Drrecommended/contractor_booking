@@ -27,13 +27,20 @@ function addImage(galleryItem) {
     }
 }
 
+function deleteImage(galleryId) {
+    return dispatch => {
+        api.delete('/profile/gallery/'+ galleryId)
+    }
+}
+
 
 export function useEditProfile() {
     const dispatch = useDispatch()
     const profile = useSelector(appState => appState.profileState.user)
     const addGalleryImage = (galleryItem) => dispatch(addImage(galleryItem))
+    const deleteGalleryImage = (galleryId) => dispatch(deleteImage(galleryId))
 
 
 
-    return { profile, addGalleryImage }
+    return { profile, addGalleryImage, deleteGalleryImage }
 }

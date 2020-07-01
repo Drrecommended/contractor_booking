@@ -12,6 +12,11 @@ router.post('/profile/gallery', (req, res, next) => {
   res.json({ message: 'success' })
 })
 
+router.delete('/profile/gallery/:id'), (req, res, next) => {
+  console.log("booga booga")
+  res.json({ message: 'Byebye'})
+}
+
 
 
 module.exports = router
