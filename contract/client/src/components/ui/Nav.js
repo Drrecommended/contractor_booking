@@ -9,8 +9,8 @@ export default () => {
     const { contractors, getContractor } = useContractor()
     const { isAuthenticated, logout } = useAuth()
     const [search, setSearch] = useState('')
-    const location = useLocation()
-
+    let location = useLocation()
+    console.log(location)
     // const [ user, allowUser ]
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -18,8 +18,9 @@ export default () => {
     }
     
     useEffect(() => {
+        console.log(location.pathname)
         getContractor()
-    }, [])
+    }, [location])
 
 
   return (
