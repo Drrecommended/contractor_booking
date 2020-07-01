@@ -33,14 +33,20 @@ function deleteImage(galleryId) {
     }
 }
 
+function updatedAllAddress(address) {
+    return dispatch => {
+        api.patch('/profile/address', address)
+    }
+}
+
 
 export function useEditProfile() {
     const dispatch = useDispatch()
     const profile = useSelector(appState => appState.profileState.user)
     const addGalleryImage = (galleryItem) => dispatch(addImage(galleryItem))
     const deleteGalleryImage = (galleryId) => dispatch(deleteImage(galleryId))
+    const updateAddress = (address) => dispatch(updatedAllAddress(address))
 
 
-
-    return { profile, addGalleryImage, deleteGalleryImage }
+    return { profile, addGalleryImage, deleteGalleryImage, updateAddress }
 }
