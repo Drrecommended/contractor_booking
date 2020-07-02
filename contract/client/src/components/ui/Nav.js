@@ -9,8 +9,8 @@ export default () => {
     const { contractors, getContractor } = useContractor()
     const { isAuthenticated, logout } = useAuth()
     const [search, setSearch] = useState('')
+    const [ searchPage, setSearchPage ] = useState(false)
     let location = useLocation()
-    console.log(location)
     // const [ user, allowUser ]
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -18,7 +18,12 @@ export default () => {
     }
     
     useEffect(() => {
-        console.log(location.pathname)
+        // if (location.pathname === "/search") {
+        //     setSearchPage(true)
+        // } else {
+        //     setSearchPage(false)
+        // }
+        setSearchPage(location.pathname === "/search")
         getContractor()
     }, [location])
 
@@ -37,11 +42,17 @@ export default () => {
                 </h2>  
             : null 
         }
-        <div>
-            <form className={isAuthenticated ? "show" : "hidden"} onSubmit={handleSubmit}>
-                <input onChange={(e) => setSearch(e.target.value)}/> <button>SEARCH</button>
-            </form>
-        </div>
+        {
+            isAuthenticated && searchPage ? 
+                <div>
+                    <form onSubmit={handleSubmit}>
+                        <input onChange={(e) => setSearch(e.target.value)}/> <button>SEARCH</button>
+                    </form>
+                </div> 
+            : null
+        }
+
+ 
         {
             isAuthenticated ? 
                 <h2 className="ui right floated header">
