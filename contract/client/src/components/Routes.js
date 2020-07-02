@@ -12,16 +12,18 @@ import ConOrder from './pages/ConOrder'
 import ConProfile from './pages/ConProfile'
 import ConEdit from './pages/ConEdit'
 import example from '../redux/ducks/example'
+import Navbar from './ui/Nav'
 
 
 
 export default () => {
     return (
         <Router>
+            <Navbar />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Route path="/sandbox" component={Sandbox} />
-            <AuthRoute path="/search" component={Sandbox} />
+            <AuthRoute path="/search" component={SearchPage} />
             <AuthRoute path="/checkout" component={Checkout} />
             <AuthRoute path="/order" component={ConOrder} />
             <AuthRoute path="/profile" exact component={ConProfile} />
