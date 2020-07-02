@@ -1,34 +1,23 @@
 // 1. imports
-import axios from 'axios'
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-
+import api from '../../../utils/request'
 // 2. action definitions
-const GET_ADDRESS = "ConProfileInfo/GET_ADDRESS"
+const GET_PROFILE = "ConProfileInfo/GET_PROFILE"
 
 
 // 3. initial state
 const profileState = {
   profile: {
-    thumbnail: "https://pbs.twimg.com/profile_images/1050414908762939393/UKzYsgQg_400x400.jpg",
-    first: "Prison",
-    last: "Mike",
-    address: {
-        street: "555 apple st",
-        city: "las vegas",
-        state: "NV"
-
-    },
-    trade: "Origami Paper Company",
-    BIO: "About Me",
+    address: {}
   },
 }
 
 // 4. reducer
 export default (state = profileState, action) => {
   switch (action.type) {
-    case GET_ADDRESS:
-      return { ...state, example: action.payload }
+    case GET_PROFILE:
+      return { ...state, profile: action.payload }
     default:
       return state
   }
@@ -37,12 +26,12 @@ export default (state = profileState, action) => {
 // 5. action creators
 
 
-  function getAddress() {
+  function getProfileData() {
     return dispatch => {
-        axios.get('/api').then(resp =>{
+        api.get('/profile').then(resp =>{
             dispatch({
-                type: GET_ADDRESS,
-                payload: resp.data
+                type: GET_PROFILE,
+                payload: resp
             })
         })
     }
@@ -51,13 +40,13 @@ export default (state = profileState, action) => {
 
 
 // 6. custom hook
-export function useProfile() {
+export function useProfileIndex() {
   const dispatch = useDispatch()
   const profile = useSelector(appState => appState.profileState.profile)
 
-  const grabAddress = () => dispatch(getAddress())
+  const getProfile = () => dispatch(getProfileData())
   
 
 
-  return { profile, grabAddress }
+  return { profile, getProfile }
 }

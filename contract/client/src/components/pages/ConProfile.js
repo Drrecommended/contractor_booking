@@ -3,15 +3,16 @@ import '../../styles/ConProfile.css';
 import Avatar from '../ui/Avatar'
 import { Link } from 'react-router-dom'
 import { Dropdown } from 'semantic-ui-react'
-import { useProfile } from '../../hooks'
+import { useProfileIndex } from '../../hooks'
 
 export default () => {
-    const {profile, grabAddress} = useProfile()
-   
+    const { profile, getProfile } = useProfileIndex()
+    console.log(profile)
+
     useEffect(() => {
-        grabAddress()
+        getProfile()
     }, [])
-        
+
 
     //     // images: [
 
@@ -29,11 +30,7 @@ export default () => {
     //         },
     //     ],
 
-    //     options: [
-    //         { key: 1, text: 'cutting bushes', price: 20, value: 1 },
-    //         { key: 2, text: 'plumbing', price: 15, value: 2 },
-    //         { key: 3, text: 'renovation', price: 20, value: 3 },
-    //     ],
+
 
 
 
@@ -50,7 +47,7 @@ export default () => {
                     <div className="row">
                         <div className="col-lg-10">
                             <p>
-                                {profile.map(item => item.first)}
+                                {profile.first}
                             </p>
                             <p>
                                 {profile.trade}
