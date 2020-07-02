@@ -39,6 +39,12 @@ function updatedAllAddress(address) {
     }
 }
 
+function updateService(service) {
+    return dispatch => {
+        api.post('/profile/service', service)
+    }
+}
+
 
 export function useEditProfile() {
     const dispatch = useDispatch()
@@ -46,7 +52,8 @@ export function useEditProfile() {
     const addGalleryImage = (galleryItem) => dispatch(addImage(galleryItem))
     const deleteGalleryImage = (galleryId) => dispatch(deleteImage(galleryId))
     const updateAddress = (address) => dispatch(updatedAllAddress(address))
+    const addService = (service) => dispatch(updateService(service))
 
 
-    return { profile, addGalleryImage, deleteGalleryImage, updateAddress }
+    return { profile, addGalleryImage, deleteGalleryImage, updateAddress, addService, deleteService }
 }
