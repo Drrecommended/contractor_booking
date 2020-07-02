@@ -3,7 +3,9 @@ import {useSelector, useDispatch } from "react-redux"
 const EDIT_PROFILE = "edit/EDIT_PROFILE"
 
 const profileState = {
-        id: '',
+        first: '',
+        last: '',
+        business_name: '',
         trade_1: '',
         trade_2: '',
         bio: '',

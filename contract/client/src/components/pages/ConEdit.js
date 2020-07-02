@@ -7,6 +7,9 @@ export default () => {
 
   return (
  <div>
+   <div className="TheNavOnEdit">
+     <h1>NAV BAR GOES HERE!</h1>
+   </div>
    
   <div className="EditTopOfPage">
     <div className="EditAvatar"
@@ -50,7 +53,7 @@ export default () => {
     <Label>.00</Label>
     </Input>
                 
-        <div >
+        <div className="AddDescriptionButton">
           <BsFillPlusSquareFill size={25} />
         </div>
         
