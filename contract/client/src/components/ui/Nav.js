@@ -29,33 +29,33 @@ export default () => {
 
 
   return (
-    <div id="header-style" class="ui clearing segment">
+      <div>
+           <div className="header">
         {
             isAuthenticated ? 
-                <h2 class="ui left floated header">
+                <h2 className="container">
+                    <Link to="/search">
+                        <button className="logo">SkillTrader</button>
+                    </Link>
                     <Link to="/profile">
                         <button>Profile</button>
-                    </Link>
-                    <Link to="/search">
-                        <button>Search</button>
                     </Link>
                 </h2>  
             : null 
         }
         {
             isAuthenticated && searchPage ? 
-                <div>
+                <div className="container">
                     <form onSubmit={handleSubmit}>
                         <input onChange={(e) => setSearch(e.target.value)}/> <button>SEARCH</button>
                     </form>
                 </div> 
-            : null
+            : 
+                null
         }
-
- 
         {
             isAuthenticated ? 
-                <h2 className="ui right floated header">
+                <h2 className="container">
                     <Link to="/order">
                         <button>Order</button>
                     </Link>
@@ -63,7 +63,9 @@ export default () => {
                 </h2>
             : null 
         }
-    </div>
+            </div>
+      </div>
+   
 
   )
 }

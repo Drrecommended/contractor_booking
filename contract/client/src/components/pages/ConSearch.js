@@ -18,7 +18,7 @@ export default () => {
         getContractor()
     }, [])
     return (
-        <div>
+        <div className="searchPage">
             {contractors.map(contractor => {
                 return (
                     <div className="contractor-shelf">

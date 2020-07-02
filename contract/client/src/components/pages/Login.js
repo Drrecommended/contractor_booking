@@ -9,7 +9,7 @@ export default (props) => {
 	function handleSubmit(e) {
 		e.preventDefault()
 		login(username, password).then(resp => {
-			props.history.push('/dashboard')
+			props.history.push('/search')
 		})
 	}
 	return (
