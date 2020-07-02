@@ -7,6 +7,21 @@ router.get('/edit', (req, res, next) => {
   res.send('Edit page!')
 })
 
+router.post('/profile/gallery', (req, res, next) => {
+  console.log(req.body)
+  res.json({ message: 'success' })
+})
+
+router.delete('/profile/gallery/:id', (req, res, next) => {
+  console.log(req.params.id)
+  res.json({ message: 'Byebye' })
+})
+
+router.post('/profile/service', (req, res, next) => {
+  console.log(req.body)
+  res.json({ message: 'Byebye' })
+})
+
 
 
 module.exports = router
