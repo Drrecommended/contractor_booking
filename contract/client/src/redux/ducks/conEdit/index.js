@@ -58,5 +58,5 @@ export function useEditProfile() {
     const addService = (service) => dispatch(updateService(service))
 
 
-    return { profile, addGalleryImage, deleteGalleryImage, updateAddress, addService, deleteService }
+    return { profile, addGalleryImage, deleteGalleryImage, updateAddress, addService }
 }

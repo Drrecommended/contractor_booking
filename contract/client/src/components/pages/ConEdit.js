@@ -27,14 +27,7 @@ export default () => {
      <h1>NAV BAR GOES HERE!</h1>
    </div>
    
-  <div className="EditTopOfPage">
-    <div className="EditAvatar"
-           		 style={{
-                backgroundImage:
-                `url('https://images.unsplash.com/photo-1516876437184-593fda40c7ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80')`
-            		}}></div>
-    <div className="UploadImg"></div>
-    <div>
+  
 
       <div className="EditTopOfPage">
         <div className="EditAvatar"
@@ -65,10 +58,10 @@ export default () => {
   </div>
                 
   <div className="BioEdit">
-    <textarea className="TextEdit">Brief Description of your business</textarea>
-</div>
-  <div>
-    <p>GALLERY AREA</p>
+   <textarea className="TextEdit">Brief Description of your business</textarea>
+  </div>
+  <div className="GalleryEditButton">
+    <Button  onClick={handleRequest}>add gallery image</Button>
   </div>
   <div class="ui focus input">
     <input type="text" placeholder="JOB DESCRIPTION" />
@@ -77,32 +70,13 @@ export default () => {
     <input />
     <Label>.00</Label>
     </Input>
-                
-        <div className="AddDescriptionButton">
-
-
-      </div>
-      <Button onClick={handleRequest}>add gallery image</Button>
-
-      <div className="BioEdit">
-        <textarea className="TextEdit">Brief Description of your business</textarea>
-      </div>
-      <div>
-        <p>GALLERY AREA</p>
-      </div>
-      <div class="ui focus input">
-        <input type="text" placeholder="JOB DESCRIPTION" />
-        <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
-          <Label basic>$</Label>
-          <input />
-          <Label>.00</Label>
-        </Input>
-
-        <div >
+  <div>
+  <div className="AddDescriptionButton">
           <BsFillPlusSquareFill size={25} />
-        </div>
+  </div>
 
       </div>
     </div>
+  </div>
   )
 }
