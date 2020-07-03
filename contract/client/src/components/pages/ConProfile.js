@@ -20,6 +20,7 @@ export default () => {
             <div className="row">
                 <div className="col-lg-2">
                     <Avatar
+                        size="100"
                         image={profile.thumbnail} />
                 </div>
                 <div className="col-lg-10">

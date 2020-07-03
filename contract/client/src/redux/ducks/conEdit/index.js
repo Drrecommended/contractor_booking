@@ -4,16 +4,16 @@ import api from "../../../utils/request"
 const EDIT_PROFILE = "edit/EDIT_PROFILE"
 
 const profileState = {
-        first: '',
-        last: '',
-        business_name: '',
-        trade_1: '',
-        trade_2: '',
-        bio: '',
-        address:'',
-        thumbnail: ''
-    }
-    
+    first: '',
+    last: '',
+    business_name: '',
+    trade_1: '',
+    trade_2: '',
+    bio: '',
+    address: '',
+    thumbnail: ''
+}
+
 
 export default (state = profileState, action) => {
     switch (action.type) {
@@ -45,6 +45,12 @@ function updatedAllAddress(address) {
 function updateService(service) {
     return dispatch => {
         api.post('/profile/service', service)
+    }
+}
+
+function deleteService(id) {
+    return dispatch => {
+        api.delete('/profile/service/' + id)
     }
 }
 

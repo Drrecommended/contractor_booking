@@ -1,30 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'semantic-ui-react'
 import { useForm } from '../../hooks'
 
 export default (props) => {
-  const [exampleForm, setExampleForm] = useForm({ first: '', last: '' })
-  function handleSubmit(e) {
-    e.preventDefault()
-    console.log(exampleForm)
-  }
+  const [isTrue, setTrue] = useState(false)
+
   return (
     <div className="Dash">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="first"
-          value={exampleForm.first}
-          onChange={setExampleForm}
-        />
-        <input
-          type="text"
-          name="last"
-          value={exampleForm.last}
-          onChange={setExampleForm}
-        />
-        <button type="submit">submit</button>
-      </form>
+      {
+        isTrue ?
+          <button style={{ padding: '20px' }} onClick={() => setTrue(!isTrue)}>it is true</button>
+          :
+          <button style={{ padding: '20px' }} onClick={() => setTrue(!isTrue)}>it is false</button>
+      }
     </div>
   )
 }

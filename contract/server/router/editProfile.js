@@ -8,8 +8,16 @@ router.get('/edit', (req, res, next) => {
 })
 
 router.post('/profile/gallery', (req, res, next) => {
-  console.log(req.body)
-  res.json({ message: 'success' })
+  const profileId = req.user.profile_id
+  const src = req.body.imgSrc
+  const sql = `INSERT INTO galleries (profile_id, img_src) VALUES (?, ?)`
+  conn.query(
+    sql,
+    [profileId, src],
+    (err, results, fields) => {
+      res.json({ data: 'created gallery' })
+    })
+  // res.json({ message: 'success' })
 })
 
 router.delete('/profile/gallery/:id', (req, res, next) => {
@@ -18,6 +26,11 @@ router.delete('/profile/gallery/:id', (req, res, next) => {
 })
 
 router.post('/profile/service', (req, res, next) => {
+  console.log(req.body)
+  res.json({ message: 'Byebye' })
+})
+
+router.patch('/profile/address', (req, res, next) => {
   console.log(req.body)
   res.json({ message: 'Byebye' })
 })
