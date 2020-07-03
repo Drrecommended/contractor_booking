@@ -4,13 +4,16 @@ import api from "../../../utils/request"
 const EDIT_PROFILE = "edit/EDIT_PROFILE"
 
 const profileState = {
-    id: '',
-    trade_1: '',
-    trade_2: '',
-    bio: '',
-    address: '',
-    thumbnail: ''
-}
+        first: '',
+        last: '',
+        business_name: '',
+        trade_1: '',
+        trade_2: '',
+        bio: '',
+        address:'',
+        thumbnail: ''
+    }
+    
 
 export default (state = profileState, action) => {
     switch (action.type) {
@@ -33,14 +36,27 @@ function deleteImage(galleryId) {
     }
 }
 
+function updatedAllAddress(address) {
+    return dispatch => {
+        api.patch('/profile/address', address)
+    }
+}
+
+function updateService(service) {
+    return dispatch => {
+        api.post('/profile/service', service)
+    }
+}
+
 
 export function useEditProfile() {
     const dispatch = useDispatch()
     const profile = useSelector(appState => appState.profileState.user)
     const addGalleryImage = (galleryItem) => dispatch(addImage(galleryItem))
     const deleteGalleryImage = (galleryId) => dispatch(deleteImage(galleryId))
+    const updateAddress = (address) => dispatch(updatedAllAddress(address))
+    const addService = (service) => dispatch(updateService(service))
 
 
-
-    return { profile, addGalleryImage, deleteGalleryImage }
+    return { profile, addGalleryImage, deleteGalleryImage, updateAddress, addService }
 }

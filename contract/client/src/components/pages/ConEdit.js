@@ -5,14 +5,29 @@ import { BsFillPlusSquareFill } from "react-icons/bs";
 import { useEditProfile } from '../../hooks'
 
 export default () => {
-  const { addGalleryImage, deleteGalleryImage } = useEditProfile()
+  const { addGalleryImage, deleteGalleryImage, addService, deleteService, updateAddress } = useEditProfile()
   function handleRequest() {
     // addGalleryImage({ imgSrc: 'https://placehold.it/250x250/8B63A1' })
-    deleteGalleryImage(1)
+    //deleteGalleryImage(1) *use later
+    // updateAddress({
+    //   street: "",
+    //   city: "",
+    //   state: "",
+    //   zipcode: ""
+    // })
+    deleteService({
+      description: "",
+      price: "6.66"
+    })
   }
 
   return (
-    <div>
+ <div>
+   <div className="TheNavOnEdit">
+     <h1>NAV BAR GOES HERE!</h1>
+   </div>
+   
+  
 
       <div className="EditTopOfPage">
         <div className="EditAvatar"
@@ -38,30 +53,30 @@ export default () => {
         <div>
           <Button positive>SAVE</Button>
         </div>
-
-
-      </div>
-      <Button onClick={handleRequest}>add gallery image</Button>
-
-      <div className="BioEdit">
-        <textarea className="TextEdit">Brief Description of your business</textarea>
-      </div>
-      <div>
-        <p>GALLERY AREA</p>
-      </div>
-      <div class="ui focus input">
-        <input type="text" placeholder="JOB DESCRIPTION" />
-        <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
-          <Label basic>$</Label>
-          <input />
-          <Label>.00</Label>
-        </Input>
-
-        <div >
+        
+      
+  </div>
+                
+  <div className="BioEdit">
+   <textarea className="TextEdit">Brief Description of your business</textarea>
+  </div>
+  <div className="GalleryEditButton">
+    <Button  onClick={handleRequest}>add gallery image</Button>
+  </div>
+  <div class="ui focus input">
+    <input type="text" placeholder="JOB DESCRIPTION" />
+    <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
+    <Label basic>$</Label>
+    <input />
+    <Label>.00</Label>
+    </Input>
+  <div>
+  <div className="AddDescriptionButton">
           <BsFillPlusSquareFill size={25} />
-        </div>
+  </div>
 
       </div>
     </div>
+  </div>
   )
 }

@@ -2,7 +2,15 @@
     display: flex;
     padding-bottom: 35px;
     margin: 40px;
+    border-bottom-style: ridge;
+    border-color: #efef16;
 }
+
+.TheNavOnEdit{
+   display: flex;
+   justify-content: center;
+}
+
 .EditAvatar{
     height: 150px;
     width: 150px;
@@ -19,6 +27,9 @@
 
 .BioEdit{
     padding-bottom: 35px;
+    margin: 40px;
+    border-bottom-style: ridge;
+    border-color: #efef16;
 
 }
 
@@ -44,4 +55,15 @@
 .TextEdit{
     width: 1000px;
     height: 200px;
+}
+.AddDescriptionButton{
+    margin-left: 24px;
+}
+
+.GalleryEditButton{
+    margin: 40px;
+    border-bottom-style: ridge;
+    border-color: #efef16;
+    padding-bottom: 20px;
+
 }
