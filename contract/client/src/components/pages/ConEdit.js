@@ -8,13 +8,13 @@ export default () => {
   const { addGalleryImage, deleteGalleryImage, addService, deleteService, updateAddress } = useEditProfile()
   function handleRequest() {
     // addGalleryImage({ imgSrc: 'https://placehold.it/250x250/8B63A1' })
-    deleteGalleryImage(4) // *use later
-    // updateAddress({
-    //   street: "",
-    //   city: "",
-    //   state: "",
-    //   zipcode: ""
-    // })
+    //deleteGalleryImage(4) // *use later
+    updateAddress({
+      street: "Fenway",
+      city: "LV",
+      state: "AZ",
+      zipcode: "89166"
+    })
     // deleteService({
     //   description: "",
     //   price: "6.66"
