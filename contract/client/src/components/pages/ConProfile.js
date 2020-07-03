@@ -14,71 +14,49 @@ export default () => {
     }, [])
 
 
-    //     // images: [
-
-    //         {
-    //             original: 'https://picsum.photos/id/1018/1000/600/',
-    //             thumbnail: 'https://picsum.photos/id/1018/250/150/',
-    //         },
-    //         {
-    //             original: 'https://picsum.photos/id/1015/1000/600/',
-    //             thumbnail: 'https://picsum.photos/id/1015/250/150/',
-    //         },
-    //         {
-    //             original: 'https://picsum.photos/id/1019/1000/600/',
-    //             thumbnail: 'https://picsum.photos/id/1019/250/150/',
-    //         },
-    //     ],
 
 
 
 
-
-    // })
 
     return (
         <div>
             <div className="row">
-                <div className="col-lg-1">
+                <div className="profile-nav">
                     <Avatar
                         image={profile.thumbnail} />
-                </div>
-                <div className="col-lg-10">
-                    <div className="row">
-                        <div className="col-lg-10">
-                            <p>
-                                {profile.first}
-                            </p>
-                            <p>
-                                {profile.trade}
-                            </p>
-                            <Link to="profile/edit" >edit</Link>
-                        </div>
-                        <div className="col-lg-16">
-                            <p>
-                                {profile.address.street}
-                            </p>
-                            <p>
-                                {profile.address.city}
-                                {profile.address.state}
-                            </p>
-                        </div>
-                    </div>
+
+                    <p>
+                        {profile.first}
+                    </p>
+                    <p>
+                        {profile.trade}
+                    </p>
+                    <Link to="profile/edit" >edit</Link>
+
+
+                    <p>
+                        {profile.address.street}
+                    </p>
+                    <p>
+                        {profile.address.city}
+                        {profile.address.state}
+                    </p>
+
+
                 </div>
             </div>
-            <div className="row">
-                <div className="col-md-12">
-                    {profile.BIO}
-                </div>
-            </div>
-            <div className="row">
-                <div className="drop-down">
+            <div className="profile-bio">
+                {profile.BIO}
+
+
+                <div className="profile-service">
                     <Dropdown clearable options={profile.options} selection />
 
+
                 </div>
+
             </div>
-
-
         </div>
     )
 }
