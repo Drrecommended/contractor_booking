@@ -53,9 +53,9 @@ function logoutUser() {
   }
 }
 
-function signupUser(username, password) {
+function signupUser(form) {
   return dispatch => {
-    return api.signup(username, password).then(resp => {
+    return api.signup(form).then(resp => {
       dispatch({
         type: SIGNUP,
       })
@@ -68,7 +68,7 @@ export function useAuth() {
   const dispatch = useDispatch()
   const isAuthenticated = useSelector(appState => appState.authState.isAuthenticated)
   const login = (username, password) => dispatch(loginUser(username, password))
-  const signup = (username, password) => dispatch(signupUser(username, password))
+  const signup = (form) => dispatch(signupUser(form))
   const logout = () => dispatch(logoutUser())
   const user = AuthService.getProfile()
   const testProtected = () => api.get('/dashboard')

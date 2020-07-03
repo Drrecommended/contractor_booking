@@ -8,6 +8,7 @@ const { createHash } = require('../utils')
 
 router.post('/registration', (req, res, next) => {
     const { username, password } = req.body
+    console.log(req.body)
     const salt = createHash(20)
     const hashedPassword = sha512(password + salt)
     const checkIfUserExistsSql = `SELECT * FROM users WHERE username = ?;`
@@ -38,7 +39,12 @@ router.post('/login', (req, res, next) => {
             const hashedPassword = sha512(password + user.salt)
             if (hashedPassword === user.password) {
                 // generate a token based on server secret for client to use to authenticate
+<<<<<<< HEAD
                 const token = jwt.sign({ id: user.id, username: user.username, profile_id: 1 }, config.get('secret'))
+=======
+                const token = jwt.sign({ id: user.id, username: user.username, profile_id: user.profile_id }, config.get('secret'))
+                console.log(user)
+>>>>>>> 45fffc5ca4b6e4b5bae1535ff21c5f2a6c8a3d37
                 res.status(200).json({ token: token })
             } else {
                 res.status(400).json({ message: 'invalid username or password' })
