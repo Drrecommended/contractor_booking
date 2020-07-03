@@ -7,8 +7,8 @@ import { useEditProfile } from '../../hooks'
 export default () => {
   const { addGalleryImage, deleteGalleryImage, addService, deleteService, updateAddress } = useEditProfile()
   function handleRequest() {
-    addGalleryImage({ imgSrc: 'https://placehold.it/250x250/8B63A1' })
-    //deleteGalleryImage(1) *use later
+    // addGalleryImage({ imgSrc: 'https://placehold.it/250x250/8B63A1' })
+    deleteGalleryImage(4) // *use later
     // updateAddress({
     //   street: "",
     //   city: "",
