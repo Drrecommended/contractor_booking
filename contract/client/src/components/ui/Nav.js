@@ -38,7 +38,12 @@ export default () => {
                         <button className="logo">SkillTrader</button>
                     </Link>
                     <Link to="/profile">
-                        <button>Profile</button>
+                        <button className="logo">
+                            <Icon name='user' size='' />
+                        </button>
+                    </Link>
+                    <Link to="/order">
+                        <button>Order</button>
                     </Link>
                 </h2>  
             : null 
@@ -55,11 +60,12 @@ export default () => {
         }
         {
             isAuthenticated ? 
-                <h2 className="container">
-                    <Link to="/order">
-                        <button>Order</button>
+                <h2 className="container2">
+                    <Link to="/login">
+                        <button  className="logo" onClick={logout} >
+                            <Icon name='sign-out' size='' />
+                        </button>
                     </Link>
-                    <Link to="/login"><button onClick={logout} >Log Out</button></Link>
                 </h2>
             : null 
         }
