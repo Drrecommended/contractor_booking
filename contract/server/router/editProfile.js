@@ -49,19 +49,38 @@ router.post('/profile/service', (req, res, next) => {
 
 router.patch('/profile/address', (req, res, next) => {
   console.log(req.body)
+  const { city, state, street, zipcode } = req.body
+
   const profileId = req.user.profile_id
   const sql = 'SELECT address_id FROM profiles WHERE id = ?'
   conn.query(
     sql,
     [profileId],
-    (err, results, fields) =>{
-      console.log(results[0].address_id)
-      res.json({ data: 'address'})
-      
+    (err, results, fields) => {
+      const addressId = results[0].address_id
+      const updateAddress = `
+        UPDATE addresses
+        SET city = ?,
+        state = ?,
+        street = ?,
+        zip = ?
+        WHERE id = ?;
+      `
+      conn.query(updateAddress, [
+        city,
+        state,
+        street,
+        zipcode,
+        addressId
+      ], (err, results, fields) => {
+        console.log(err)
+        res.json({ data: 'address updated' })
+      })
+
     }
   )
 
- 
+
 })
 
 
