@@ -15,15 +15,22 @@ router.post('/profile/gallery', (req, res, next) => {
     sql,
     [profileId, src],
     (err, results, fields) => {
-      res.json({ data: 'created gallery' })
+      res.json({ data: 'created gallery item' })
     })
   // res.json({ message: 'success' })
 })
 
 router.delete('/profile/gallery/:id', (req, res, next) => {
-  console.log(req.params.id)
-  res.json({ message: 'Byebye' })
+  const galleryId = req.params.id
+  const sql = `DELETE FROM galleries WHERE id = ?`
+  conn.query(
+    sql,
+    [galleryId],
+    (err, results, fields) => {
+      res.json({ data: 'deleted gallery item' })
+    })
 })
+
 
 router.post('/profile/service', (req, res, next) => {
   console.log(req.body)
