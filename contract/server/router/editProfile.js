@@ -34,7 +34,7 @@ router.delete('/profile/gallery/:id', (req, res, next) => {
 
 router.post('/profile/service', (req, res, next) => {
   console.log(req.body)
-  const userId = req.user.user_id
+  const userId = req.user.id
   const description = req.body.description
   const price = req.body.price
   const sql = `INSERT INTO services (user_id, description, price) VALUES (?, ?, ?)`
@@ -42,7 +42,7 @@ router.post('/profile/service', (req, res, next) => {
       sql,
       [userId, description, price],
       (err, results, fields) => {
-        console.log(err)
+        console.log(results)
         res.json({ message: 'Byebye' })
       })
     })
