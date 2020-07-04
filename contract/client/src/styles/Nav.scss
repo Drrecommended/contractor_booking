@@ -1,3 +1,27 @@
-.hidden {
-    display: none !important;
+.header {
+    background-color: cadetblue;
+    display: flex;
+    height: 15vh;
+    border-bottom: 5px solid white;
+}
+
+.logo {
+    background-color: cadetblue;
+    color: white;
+    border-style: none;
+    outline: none;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.container {
+    display: block;
+}
+
+.container2 {
+    display: block;
+}
+
+.search-bar {
+    width: 30%;
 }
