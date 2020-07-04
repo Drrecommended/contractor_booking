@@ -84,7 +84,11 @@ const DividerExampleVerticalForm = (props) => {
                     </Form>
                   </Grid.Column>
                   <Grid.Column verticalAlign='middle'>
-                    <Modal open={modalVisible} trigger={<Button onClick={() => setModalVisible(true)} content='Sign up' icon='signup' size='big'></Button>}>
+                    <Modal
+                      onClose={() => setModalVisible(false)}
+                      open={modalVisible}
+                      trigger={<Button onClick={() => setModalVisible(true)}
+                        content='Sign up' icon='signup' size='big'></Button>}>
                       <Modal.Header>Sign up</Modal.Header>
                       <Form onSubmit={handleSubmit}>
                         <div className='FormSpacing'>
