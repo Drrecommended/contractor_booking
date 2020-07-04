@@ -52,7 +52,7 @@ export default () => {
             isAuthenticated && searchPage ? 
                 <div className="container">
                     <form onSubmit={handleSubmit}>
-                        <input onChange={(e) => setSearch(e.target.value)}/> <button>SEARCH</button>
+                        <input className="search-bar" onChange={(e) => setSearch(e.target.value)}/> <button>SEARCH</button>
                     </form>
                 </div> 
             : 

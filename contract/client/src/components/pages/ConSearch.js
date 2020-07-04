@@ -18,7 +18,8 @@ export default () => {
         getContractor()
     }, [])
     return (
-        <div className="searchPage">
+        <div>
+            <div className="searchPage">
             {contractors.map(contractor => {
                 return (
                     <div className="contractor-shelf">
@@ -31,9 +32,11 @@ export default () => {
                     </div>
                 )  
             })}
-       
+            </div>
         </div>
 
+
+    
     )
 }
 
