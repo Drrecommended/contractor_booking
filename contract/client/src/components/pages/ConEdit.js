@@ -3,7 +3,8 @@ import '../../styles/ConEdit.css';
 import { Button, Input, Dropdown, Container, Label } from 'semantic-ui-react';
 import { BsFillPlusSquareFill } from "react-icons/bs";
 import {AiOutlineMinusCircle} from "react-icons/ai";
-import { useEditProfile } from '../../hooks'
+import { useEditProfile } from '../../hooks';
+import { TradeOptions } from '../TradeOptions';
 
 export default () => {
   const { addGalleryImage, deleteGalleryImage, addService, deleteConService, updateAddress } = useEditProfile()

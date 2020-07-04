@@ -4,7 +4,14 @@ const conn = require('../db.js')
 
 // conn.query(sql , [], (err, results, fields) => {})
 router.get('/edit', (req, res, next) => {
-  res.send('Edit page!')
+  const profileId = req.user.profile_id
+  const sql = `SELECT id, trade_1, trade_2, bio, address_id, thumbnail FROM profiles;`
+  conn.query(
+    sql,
+    [profileId],
+    (err, results,fields) => {
+      res.send('Edit page!')
+    })
 })
 
 router.post('/profile/gallery', (req, res, next) => {
