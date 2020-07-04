@@ -20,6 +20,22 @@ router.post('/registration', (req, res, next) => {
                 INSERT INTO users (username, password, salt, contractor, profile_id)
                 VALUES (?, ?, ?, ?, ?);
             `
+            const addressSql = `INSERT INTO addresses (street) VALUES (NULL)`
+            const profileSql = `INSERT INTO profiles (address_id) VALUES (?)`
+                conn.query(addressSql,
+                    (error,results,fields) => {
+                        const addressId = results.insertId
+                        conn.query(profileSql,
+                            [addressId],
+                            (error,results,fields) =>{
+                                const profileId = results.insertId
+                                conn.query(addUserSql, [username, hashedPassword, salt, true, profileId], (err, results, fields) => {
+                                    res.status(201).json({ message: 'user successfully created' })
+                                })
+                            })
+                        
+                        console.log(results)
+                    })
             // TODO: needs to actually create a profile and accept contractor boolean
             conn.query(addUserSql, [username, hashedPassword, salt, true, 1], (err, results, fields) => {
                 res.status(201).json({ message: 'user successfully created' })
