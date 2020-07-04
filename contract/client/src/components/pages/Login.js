@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks'
-import { signUpDivider } from '../SignupForm'
+import { signUpDivider } from './SignupForm'
 
 export default (props) => {
 	const { login, logout } = useAuth()
