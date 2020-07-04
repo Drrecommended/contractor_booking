@@ -2,6 +2,7 @@ import React from 'react';
 import '../../styles/ConEdit.css';
 import { Button, Input, Dropdown, Container, Label } from 'semantic-ui-react';
 import { BsFillPlusSquareFill } from "react-icons/bs";
+import {AiOutlineMinusCircle} from "react-icons/ai";
 import { useEditProfile } from '../../hooks'
 
 export default () => {
@@ -65,6 +66,9 @@ export default () => {
         <Button onClick={handleRequest}>add gallery image</Button>
       </div>
       <div class="ui focus input">
+        <div className="MinusButton">
+      <AiOutlineMinusCircle/>
+          </div>
         <input type="text" placeholder="JOB DESCRIPTION" />
         <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
           <Label basic>$</Label>

@@ -58,6 +58,7 @@
 }
 .AddDescriptionButton{
     margin-left: 24px;
+    margin-top: 7px;
 }
 
 .GalleryEditButton{
@@ -66,4 +67,8 @@
     border-color: #efef16;
     padding-bottom: 20px;
 
+}
+
+.MinusButton{
+    margin: 10px;
 }
