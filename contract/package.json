@@ -18,7 +18,7 @@
   "homepage": "https://github.com/PC-Fullstack-PT-Jan-2020/boilerplate#readme",
   "dependencies": {
     "concurrently": "^5.2.0",
-    "semantic-ui-react": "^0.88.2"
+    "is-arrayish": "^0.3.2"
   },
   "boilerplate": {
     "name": "boilerplate",
