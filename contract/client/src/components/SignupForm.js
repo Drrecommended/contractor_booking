@@ -4,6 +4,7 @@ import { useAuth, useForm } from '../hooks'
 import '../styles/Signup.css'
 
 
+
 const DividerExampleVerticalForm = () => {
 
     const [form, setForm, resetForm ] = useForm({firstname:'', lastname:'', username:'', address:'', email:'', password:''})
@@ -11,11 +12,21 @@ const DividerExampleVerticalForm = () => {
     const [modalVisible, setModalVisible] = useState(false)
     const handleClose = () => setModalVisible(false);
     const handleShow = () => setModalVisible(true);
+    const { login, logout } = useAuth()
+	  const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    
+	  //function handleSubmit(props) {
+		//e.preventDefault()
+		//login(username, password).then(resp => {
+		//	props.history.push('/dashboard')
+		//})
+	//}
 
 
   function handleSubmit (){
     signup(form)
-    .then( resp =>{
+    .then( resp => {
       resetForm()
       handleClose()
     })
@@ -28,14 +39,16 @@ const DividerExampleVerticalForm = () => {
   <Segment placeholder>
     <Grid columns={2} relaxed='very' stackable>
       <Grid.Column>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Input
+            //type="text" value={username} onChange={(e) => setUsername(e.target.value)}
             icon='user'
             iconPosition='left'
             label='Username'
             placeholder='Username'
           />
           <Form.Input
+            //type="password" value={password} onChange={(e) => setPassword(e.target.value)} 
             icon='lock'
             iconPosition='left'
             label='Password'
@@ -46,7 +59,7 @@ const DividerExampleVerticalForm = () => {
         </Form>
       </Grid.Column>
       <Grid.Column verticalAlign='middle'>
-      <Modal trigger={<Button onClick={() => setModalVisible(true)} content='Sign up' icon='signup' size='big'></Button>}>
+      <Modal open={modalVisible} trigger={<Button onClick={() => setModalVisible(true)} content='Sign up' icon='signup' size='big'></Button>}>
     <Modal.Header>Sign up</Modal.Header>
     <Form  onSubmit={handleSubmit}>
       <div className='FormSpacing'>
@@ -107,14 +120,3 @@ const DividerExampleVerticalForm = () => {
   
 
 export default DividerExampleVerticalForm
-
-//const myFuction = () => { 
-//for(i = 100; i <= 100; 1++)  
-// if(i%3 == 0){
-// by3 = 'fizz'
-//} else if (1%5 == 0){
-//    by5 = 'buzz'
-//  }
-    
-
-//}
