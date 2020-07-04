@@ -9,14 +9,14 @@ export default () => {
     const { contractors, getContractor } = useContractor()
     const { isAuthenticated, logout } = useAuth()
     const [search, setSearch] = useState('')
-    const [ searchPage, setSearchPage ] = useState(false)
+    const [searchPage, setSearchPage] = useState(false)
     let location = useLocation()
     // const [ user, allowUser ]
     const handleSubmit = (e) => {
         e.preventDefault()
         getContractor(search)
     }
-    
+
     useEffect(() => {
         // if (location.pathname === "/search") {
         //     setSearchPage(true)
@@ -28,43 +28,43 @@ export default () => {
     }, [location])
 
 
-  return (
-    <div id="header-style" class="ui clearing segment">
-        {
-            isAuthenticated ? 
-                <h2 class="ui left floated header">
-                    <Link to="/profile">
-                        <button>Profile</button>
-                    </Link>
-                    <Link to="/search">
-                        <button>Search</button>
-                    </Link>
-                </h2>  
-            : null 
-        }
-        {
-            isAuthenticated && searchPage ? 
-                <div>
-                    <form onSubmit={handleSubmit}>
-                        <input onChange={(e) => setSearch(e.target.value)}/> <button>SEARCH</button>
-                    </form>
-                </div> 
-            : null
-        }
+    return (
+        <div id="header-style" class="ui clearing segment">
+            {
+                isAuthenticated ?
+                    <h2 class="ui left floated header">
+                        <Link to="/profile">
+                            <button>Profile</button>
+                        </Link>
+                        <Link to="/search">
+                            <button>Search</button>
+                        </Link>
+                    </h2>
+                    : null
+            }
+            {
+                isAuthenticated && searchPage ?
+                    <div>
+                        <form onSubmit={handleSubmit}>
+                            <input onChange={(e) => setSearch(e.target.value)} /> <button>SEARCH</button>
+                        </form>
+                    </div>
+                    : null
+            }
 
- 
-        {
-            isAuthenticated ? 
-                <h2 className="ui right floated header">
-                    <Link to="/order">
-                        <button>Order</button>
-                    </Link>
-                    <Link to="/login"><button onClick={logout} >Log Out</button></Link>
-                </h2>
-            : null 
-        }
-    </div>
 
-  )
+            {
+                isAuthenticated ?
+                    <h2 className="ui right floated header">
+                        <Link to="/order">
+                            <button>Order</button>
+                        </Link>
+                        <Link to="/signup"><button onClick={logout} >Log Out</button></Link>
+                    </h2>
+                    : null
+            }
+        </div>
+
+    )
 }
 

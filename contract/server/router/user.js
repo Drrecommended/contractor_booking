@@ -7,7 +7,7 @@ const conn = require('../db.js')
 const { createHash } = require('../utils')
 
 router.post('/registration', (req, res, next) => {
-    const { username, password } = req.body
+    const { username, firstname, lastname, email, password, contractor } = req.body
     const salt = createHash(20)
     const hashedPassword = sha512(password + salt)
     const checkIfUserExistsSql = `SELECT * FROM users WHERE username = ?;`
@@ -16,13 +16,33 @@ router.post('/registration', (req, res, next) => {
             res.status(400).json({ message: 'username already exists' })
         } else {
             const addUserSql = `
-                INSERT INTO users (username, password, salt, contractor, profile_id)
-                VALUES (?, ?, ?, ?, ?);
+                INSERT INTO users 
+                (username, first_name, last_name, email, password, salt, contractor, profile_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?);
             `
-            // TODO: needs to actually create a profile and accept contractor boolean
-            conn.query(addUserSql, [username, hashedPassword, salt, true, 1], (err, results, fields) => {
-                res.status(201).json({ message: 'user successfully created' })
-            })
+            const addressSql = `INSERT INTO addresses (street) VALUES (NULL)`
+            const profileSql = `INSERT INTO profiles (address_id) VALUES (?)`
+            conn.query(addressSql,
+                (error, results, fields) => {
+                    const addressId = results.insertId
+                    conn.query(profileSql,
+                        [addressId],
+                        (error, results, fields) => {
+                            const profileId = results.insertId
+                            conn.query(addUserSql, [
+                                username,
+                                firstname,
+                                lastname,
+                                email,
+                                hashedPassword,
+                                salt,
+                                contractor,
+                                profileId
+                            ], (err, results, fields) => {
+                                res.status(201).json({ message: 'user successfully created' })
+                            })
+                        })
+                })
         }
     })
 })
@@ -38,7 +58,8 @@ router.post('/login', (req, res, next) => {
             const hashedPassword = sha512(password + user.salt)
             if (hashedPassword === user.password) {
                 // generate a token based on server secret for client to use to authenticate
-                const token = jwt.sign({ id: user.id, username: user.username, profile_id: 1 }, config.get('secret'))
+                const token = jwt.sign({ id: user.id, username: user.username, profile_id: user.profile_id }, config.get('secret'))
+                console.log(user)
                 res.status(200).json({ token: token })
             } else {
                 res.status(400).json({ message: 'invalid username or password' })
