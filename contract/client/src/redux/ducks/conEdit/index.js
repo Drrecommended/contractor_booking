@@ -24,6 +24,12 @@ export default (state = profileState, action) => {
     }
 }
 
+function getProfileData() {
+    return dispatch => {
+        api.get('/profile/edit')
+    }
+}
+
 function addImage(galleryItem) {
     return dispatch => {
         api.post('/profile/gallery', galleryItem)
@@ -63,7 +69,8 @@ export function useEditProfile() {
     const updateAddress = (address) => dispatch(updatedAllAddress(address))
     const addService = (service) => dispatch(updateService(service))
     const deleteConService = (serviceId) => dispatch(deleteService(serviceId))
+    const getProfile = () => dispatch(getProfileData())
 
 
-    return { profile, addGalleryImage, deleteGalleryImage, updateAddress, addService, deleteConService }
+    return { profile, addGalleryImage, deleteGalleryImage, updateAddress, addService, deleteConService, getProfile }
 }

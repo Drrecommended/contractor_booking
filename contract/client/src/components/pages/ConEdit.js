@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../styles/ConEdit.css';
 import { Button, Input, Dropdown, Container, Label } from 'semantic-ui-react';
 import { BsFillPlusSquareFill } from "react-icons/bs";
@@ -7,7 +7,7 @@ import { useEditProfile } from '../../hooks';
 import { TradeOptions } from '../TradeOptions';
 
 export default () => {
-  const { addGalleryImage, deleteGalleryImage, addService, deleteConService, updateAddress } = useEditProfile()
+  const { addGalleryImage, deleteGalleryImage, addService, deleteConService, updateAddress, getProfile } = useEditProfile()
   function handleRequest() {
     // addGalleryImage({ imgSrc: 'https://placehold.it/250x250/8B63A1' })
     //deleteGalleryImage(4) // *use later
@@ -23,6 +23,10 @@ export default () => {
     //  price: "600.00"
     //})
   }
+
+  useEffect(() => {
+    getProfile()
+  },[])
 
   return (
     <div>
