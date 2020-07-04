@@ -7,10 +7,12 @@ import { useProfileIndex } from '../../hooks'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { Button } from 'semantic-ui-react'
+import GalleryImage from '../GalleryImage'
 
 export default () => {
     const { profile, getProfile } = useProfileIndex()
     const [value, onChange] = useState(new Date());
+
 
     useEffect(() => {
         getProfile()
@@ -52,6 +54,13 @@ export default () => {
             </div>
             <div className="profile-bio">
                 {profile.BIO}
+            </div>
+            <div>
+                <GalleryImage 
+                    images={profile.images}
+                    onDelete={(id) => console.log(id)}
+                    isEditable={false}
+                />
 
 
                 <div className="profile-service">

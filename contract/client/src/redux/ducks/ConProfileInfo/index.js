@@ -9,7 +9,8 @@ const GET_PROFILE = "ConProfileInfo/GET_PROFILE"
 // 3. initial state
 const profileState = {
   profile: {
-    address: {}
+    address: {},
+    images: [],
   },
 }
 

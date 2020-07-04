@@ -22,7 +22,24 @@ router.get('/profile', (req, res, next) => {
       { key: 3, text: 'renovation', price: 20, value: 3 },
     ],
 
+    images: [
+      {
+        id: 1, 
+        image: "http://placehold.it/1250x250",
+      },
+      {
+        id: 2,
+        image: "http://placehold.it/1250x250",
+      },
+      {
+        id: 3,
+        image: "http://placehold.it/1250x250",
+      }
+    ]
+
   })
+
+
 })
 
 module.exports = router
