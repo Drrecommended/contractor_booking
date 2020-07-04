@@ -1,16 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/ConProfile.css';
 import Avatar from '../ui/Avatar'
 import { Link } from 'react-router-dom'
 import { Dropdown } from 'semantic-ui-react'
 import { useProfileIndex } from '../../hooks'
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import { Button } from 'semantic-ui-react'
 
 export default () => {
     const { profile, getProfile } = useProfileIndex()
-    console.log(profile)
+    const [value, onChange] = useState(new Date());
 
     useEffect(() => {
         getProfile()
+        onChange()
     }, [])
 
 
@@ -52,6 +56,12 @@ export default () => {
 
                 <div className="profile-service">
                     <Dropdown clearable options={profile.options} selection />
+                    <Button>Book</Button>
+                    <Calendar
+                        onChange={new Date()}
+                        value={value}
+                    />
+
 
 
                 </div>
