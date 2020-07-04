@@ -24,7 +24,7 @@ export default () => {
         //     setSearchPage(false)
         // }
         setSearchPage(location.pathname === "/search")
-        getContractor()
+        getContractor(search)
     }, [location])
 
 
