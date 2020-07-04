@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
-    "seed:user": "node seed/user.js",
+    "tables:drop": "node seed/drop-tables.js",
+    "tables:create": "node seed/create-tables.js",
+    "tables:clear": "node seed/reset-tables.js",
+    "tables:seed": "node seed/seed-tables.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -13,7 +16,7 @@
   "dependencies": {
     "config": "^3.3.1",
     "express": "^4.17.1",
-    "express-jwt": "^5.3.3",
+    "express-jwt": "^6.0.0",
     "js-sha512": "^0.8.0",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",

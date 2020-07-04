@@ -1,97 +1,107 @@
 import axios from 'axios'
 
 class Storage {
-    static getItem(key) {
-        return localStorage.getItem(key)
-    }
+  static getItem(key) {
+    return localStorage.getItem(key)
+  }
 
-    static setItem(key, value) {
-        return localStorage.setItem(key, value)
-    }
+  static setItem(key, value) {
+    return localStorage.setItem(key, value)
+  }
 
-    static removeItem(key) {
-        return localStorage.removeItem(key)
-    }
+  static removeItem(key) {
+    return localStorage.removeItem(key)
+  }
 }
 
 class Request {
-    constructor(config = {}) {
-        this.prefix = config.prefix || '/api'
-        this.req = axios.create({})
-    }
+  constructor(config = {}) {
+    this.prefix = config.prefix || '/api'
+    this.req = axios.create({})
+  }
 
-    request = (url, method, data) => {
-        const urlPath = this.prefix + url
-        const token = Storage.getItem('authToken')
-        // TODO: check expiry
-        if (token) {
-            this.req.defaults.headers.common['Authorization'] = `Bearer ${token}`
-        }
-        let prom
-        if (data) {
-            prom = this.req[method](urlPath, data)
-        } else {
-            prom = this.req[method](urlPath)
-        }
-        return new Promise((res, rej) => {
-            prom.then(resp => {
-                res(resp.data)
-            }).catch(err => {
-                rej(err.response)
-            })
-        })
+  request = (url, method, data) => {
+    const urlPath = this.prefix + url
+    const token = Storage.getItem('authToken')
+    // TODO: check expiry
+    if (token) {
+      this.req.defaults.headers.common['Authorization'] = `Bearer ${token}`
     }
+    let prom
+    if (data) {
+      prom = this.req[method](urlPath, data)
+    } else {
+      prom = this.req[method](urlPath)
+    }
+    return new Promise((res, rej) => {
+      prom.then(resp => {
+        res(resp.data)
+      }).catch(err => {
+        rej(err.response)
+      })
+    })
+  }
 
-    get = (url) => {
-        return this.request(url, 'get')
-    }
+  get = (url) => {
+    return this.request(url, 'get')
+  }
 
-    put = (url, data) => {
-        return this.request(url, 'put', data)
-    }
+  put = (url, data) => {
+    return this.request(url, 'put', data)
+  }
 
-    patch = (url, data) => {
-        return this.request(url, 'patch', data)
-    }
+  patch = (url, data) => {
+    return this.request(url, 'patch', data)
+  }
 
-    post = (url, data) => {
-        return this.request(url, 'post', data)
-    }
+  delete = (url) => {
+    return this.request(url, 'delete')
+  }
+
+  post = (url, data) => {
+    return this.request(url, 'post', data)
+  }
 }
 
 export class AuthService {
-    static login = (username, password) => {
-        const userToLogin = {
-            username: username,
-            password: password
-        }
-        return api.post('/login', userToLogin)
-        .then(resp => {
-            Storage.setItem('authToken', resp.token)
-            return resp
-        })
+  static login = (username, password) => {
+    const userToLogin = {
+      username: username,
+      password: password
     }
+    return api.post('/login', userToLogin)
+      .then(resp => {
+        Storage.setItem('authToken', resp.token)
+        return resp
+      })
+  }
 
-    static signup = (username, password) => {
-        const userToRegister = {
-            username: username,
-            password: password
-        }
-        return api.post('/registration', userToRegister)
+  static signup = (form) => {
+    
+    return api.post('/registration', form)
+  }
+
+  static logout = () => {
+    return new Promise((res, rej) => {
+      Storage.removeItem('authToken')
+      res(true)
+    })
+  }
+
+  static checkToken(token) {
+
+  }
+
+  static getProfile() {
+    try {
+      const token = Storage.getItem('authToken')
+      return JSON.parse(atob(token.split('.')[1]))
+    } catch (e) {
+      return null
     }
+  }
 
-    static logout = () => {
-        return new Promise((res, rej) => {
-            Storage.removeItem('authToken')
-            res(true)
-        })
-    }
-
-    static checkToken(token) {
-        
-    }
-
-    static isAuthenticated = () => !!Storage.getItem('authToken')
+  static isAuthenticated = () => !!Storage.getItem('authToken')
 }
 
 const api = new Request()
