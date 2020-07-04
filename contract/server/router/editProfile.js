@@ -4,7 +4,14 @@ const conn = require('../db.js')
 
 // conn.query(sql , [], (err, results, fields) => {})
 router.get('/edit', (req, res, next) => {
-  res.send('Edit page!')
+  const profileId = req.user.profile_id
+  const sql = `SELECT id, trade_1, trade_2, bio, address_id, thumbnail FROM profiles;`
+  conn.query(
+    sql,
+    [profileId],
+    (err, results,fields) => {
+      res.send('Edit page!')
+    })
 })
 
 router.post('/profile/gallery', (req, res, next) => {
@@ -34,8 +41,35 @@ router.delete('/profile/gallery/:id', (req, res, next) => {
 
 router.post('/profile/service', (req, res, next) => {
   console.log(req.body)
-  res.json({ message: 'Byebye' })
-})
+  const userId = req.user.id
+  const description = req.body.description
+  const price = req.body.price
+  const sql = `INSERT INTO services (user_id, description, price) VALUES (?, ?, ?)`
+    conn.query(
+      sql,
+      [userId, description, price],
+      (err, results, fields) => {
+        console.log(results)
+        res.json({ message: 'Hello' })
+      })
+    })
+
+router.delete('/profile/service/:id', (req, res, next) => {
+      console.log(req.params.id)
+      const serviceId= req.params.id
+      const sql = `DELETE FROM services WHERE id = ?`
+      conn.query(
+        sql,
+        [serviceId],
+        (err,results,fields) => {
+          console.log(results)
+          res.json({ message: 'Byebye' })
+        })
+      })
+        
+    
+
+  
 
 router.patch('/profile/address', (req, res, next) => {
   console.log(req.body)

@@ -2,23 +2,26 @@ import React from 'react';
 import '../../styles/ConEdit.css';
 import { Button, Input, Dropdown, Container, Label } from 'semantic-ui-react';
 import { BsFillPlusSquareFill } from "react-icons/bs";
-import { useEditProfile } from '../../hooks'
+import {AiOutlineMinusCircle} from "react-icons/ai";
+import { useEditProfile } from '../../hooks';
+import { TradeOptions } from '../TradeOptions';
 
 export default () => {
-  const { addGalleryImage, deleteGalleryImage, addService, deleteService, updateAddress } = useEditProfile()
+  const { addGalleryImage, deleteGalleryImage, addService, deleteConService, updateAddress } = useEditProfile()
   function handleRequest() {
     // addGalleryImage({ imgSrc: 'https://placehold.it/250x250/8B63A1' })
     //deleteGalleryImage(4) // *use later
-    updateAddress({
-      street: "Fenway",
-      city: "LV",
-      state: "AZ",
-      zipcode: "89166"
-    })
-    // deleteService({
-    //   description: "",
-    //   price: "6.66"
-    // })
+    //updateAddress({
+    //  street: "Fenway",
+    //  city: "LV",
+    //  state: "AZ",
+    //  zipcode: "89166"
+    //})
+     deleteConService(2)
+    //addService({
+    //  description:"Tile Removal",
+    //  price: "600.00"
+    //})
   }
 
   return (
@@ -64,6 +67,9 @@ export default () => {
         <Button onClick={handleRequest}>add gallery image</Button>
       </div>
       <div class="ui focus input">
+        <div className="MinusButton">
+      <AiOutlineMinusCircle/>
+          </div>
         <input type="text" placeholder="JOB DESCRIPTION" />
         <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
           <Label basic>$</Label>
