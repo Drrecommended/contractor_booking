@@ -1,13 +1,55 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+
 body{
     background-color: lightgray;
 }
 
 .Signup-login-divider{
     width: 50%;
+    padding-top: 230px;
 }
 
 .DividerContainer{
     display: flex;
     justify-content: center;
+}
+
+.SignUpPhoto{
+    height: 400px;
+    background-position: center ;
+    border-bottom-style: inset;
+}
+
+.NavContainer{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.NavLinks{
+    font-size: 15px;
+    padding-top: 10px;
+}
+
+.SearchLink{
+    padding-left: 20px;
+    padding-right: 20px;
+    color: black;
+}
+
+.AboutLink{
+    color: black;
+}
+
+.NavName{
+    font-family: 'Oxygen', sans-serif;
+    color: black;
+    font-size: 40px;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.FormSpacing{
+    margin: 20px;
 }
