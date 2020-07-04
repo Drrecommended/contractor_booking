@@ -43,9 +43,26 @@ router.post('/profile/service', (req, res, next) => {
       [userId, description, price],
       (err, results, fields) => {
         console.log(results)
-        res.json({ message: 'Byebye' })
+        res.json({ message: 'Hello' })
       })
     })
+
+router.delete('/profile/service/:id', (req, res, next) => {
+      console.log(req.params.id)
+      const serviceId= req.params.id
+      const sql = `DELETE FROM services WHERE id = ?`
+      conn.query(
+        sql,
+        [serviceId],
+        (err,results,fields) => {
+          console.log(results)
+          res.json({ message: 'Byebye' })
+        })
+      })
+        
+    
+
+  
 
 router.patch('/profile/address', (req, res, next) => {
   console.log(req.body)

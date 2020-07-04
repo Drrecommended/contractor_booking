@@ -48,9 +48,9 @@ function updateService(service) {
     }
 }
 
-function deleteService(id) {
+function deleteService(serviceId) {
     return dispatch => {
-        api.delete('/profile/service/' + id)
+        api.delete('/profile/service/' + serviceId)
     }
 }
 
@@ -62,7 +62,8 @@ export function useEditProfile() {
     const deleteGalleryImage = (galleryId) => dispatch(deleteImage(galleryId))
     const updateAddress = (address) => dispatch(updatedAllAddress(address))
     const addService = (service) => dispatch(updateService(service))
+    const deleteConService = (serviceId) => dispatch(deleteService(serviceId))
 
 
-    return { profile, addGalleryImage, deleteGalleryImage, updateAddress, addService }
+    return { profile, addGalleryImage, deleteGalleryImage, updateAddress, addService, deleteConService }
 }

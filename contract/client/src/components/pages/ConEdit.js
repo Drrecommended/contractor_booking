@@ -5,7 +5,7 @@ import { BsFillPlusSquareFill } from "react-icons/bs";
 import { useEditProfile } from '../../hooks'
 
 export default () => {
-  const { addGalleryImage, deleteGalleryImage, addService, deleteService, updateAddress } = useEditProfile()
+  const { addGalleryImage, deleteGalleryImage, addService, deleteConService, updateAddress } = useEditProfile()
   function handleRequest() {
     // addGalleryImage({ imgSrc: 'https://placehold.it/250x250/8B63A1' })
     //deleteGalleryImage(4) // *use later
@@ -15,14 +15,11 @@ export default () => {
     //  state: "AZ",
     //  zipcode: "89166"
     //})
-    // deleteService({
-    //   description: "",
-    //   price: "6.66"
-    // })
-    addService({
-      description:"Tile Removal",
-      price: "600.00"
-    })
+     deleteConService(2)
+    //addService({
+    //  description:"Tile Removal",
+    //  price: "600.00"
+    //})
   }
 
   return (
