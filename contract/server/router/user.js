@@ -6,17 +6,6 @@ const config = require('config')
 const conn = require('../db.js')
 const { createHash } = require('../utils')
 
-/*
-    {
-[1]   firstname: 'sas',
-[1]   lastname: 'sas',
-[1]   username: 'sas',
-[1]   email: '',
-[1]   password: '',
-[1]   contractor: true
-[1] }
-*/
-
 router.post('/registration', (req, res, next) => {
     const { username, firstname, lastname, email, password, contractor } = req.body
     const salt = createHash(20)
