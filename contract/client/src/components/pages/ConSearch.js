@@ -15,10 +15,10 @@ export default () => {
     }
 
     useEffect(() => {
-        getContractor()
+        getContractor(search)
     }, [])
     return (
-        <div>
+        <div className="background-search">
             <div className="searchPage">
             {contractors.map(contractor => {
                 return (
@@ -33,6 +33,7 @@ export default () => {
                 )  
             })}
             </div>
+            <div>socials</div>
         </div>
 
 
