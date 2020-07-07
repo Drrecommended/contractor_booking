@@ -63,7 +63,7 @@ function deleteService(serviceId) {
 
 export function useEditProfile() {
     const dispatch = useDispatch()
-    const profile = useSelector(appState => appState.profileState.user)
+    const profile = useSelector(appState => appState.profileEditState.user)
     const addGalleryImage = (galleryItem) => dispatch(addImage(galleryItem))
     const deleteGalleryImage = (galleryId) => dispatch(deleteImage(galleryId))
     const updateAddress = (address) => dispatch(updatedAllAddress(address))
