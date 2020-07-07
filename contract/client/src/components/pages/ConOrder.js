@@ -33,11 +33,12 @@ export default () => {
               <Table.Cell>{moment(order.date).subtract(10, 'days').calendar()}</Table.Cell>
               <Table.Cell>{order.services}</Table.Cell>
               <Table.Cell>$ {order.total}</Table.Cell>
-              <Table.Cell>          
-                <Button onClick={approve} icon>
+              <Table.Cell>   
+                {order.status === "approved" ? "true" : "false"}       
+                <Button onClick={() => approve(order.id)} icon>
                   <Icon name='wrench' />
                 </Button>
-                <Button onClick={deny} icon>
+                <Button onClick={() => deny(order.id)} icon>
                   deny 
                 </Button>
               </Table.Cell>

@@ -36,13 +36,10 @@ function userOrders() {
 
 //send order id and whether it's approved or denied as a string
 
-function handleOrder() {
+function handleOrder(id, status) {
   return dispatch => {
-    api.patch('/contractor-order').then(resp =>{
-      dispatch({
-        type: GRAB_ORDERS,
-        payload: resp
-      })
+    api.patch('/contractor-order', {id, status}).then(resp =>{
+      dispatch(userOrders())
     })
   }
 }
@@ -55,8 +52,8 @@ export function useOrder() {
   const orders = useSelector(appState => appState.orderState.orderData)
  
   const getOrder = () => dispatch(userOrders())
-  const approve = () => dispatch(handleOrder())
-  const deny = () => dispatch(handleOrder())
+  const approve = (id) => dispatch(handleOrder(id, "approved"))
+  const deny = (id) => dispatch(handleOrder(id, "denied"))
  
 
   return { orders, getOrder, approve, deny }
