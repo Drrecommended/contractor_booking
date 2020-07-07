@@ -22,7 +22,7 @@ app.use('/api', userRoutes)
 app.use('/api', editProfileRoutes)
 app.use('/api', contractRoutes)
 app.use('/api', orderRoutes)
-app.use('/api', jwt({ secret: config.get('secret') }), protectedRoutes)
+app.use('/api', jwt({ secret: config.get('secret'), algorithms: ['RS256'] }), protectedRoutes)
 
 app.use('/', (req, res, next) => {
   res.json({ message: 'hi' })

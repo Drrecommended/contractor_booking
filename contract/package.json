@@ -19,7 +19,9 @@
   "dependencies": {
     "concurrently": "^5.2.0",
     "react-icons": "^3.10.0",
-    "semantic-ui-react": "^0.88.2"
+    "semantic-ui-react": "^0.88.2",
+    "is-arrayish": "^0.3.2",
+    "node-sass": "^4.14.1"
   },
   "boilerplate": {
     "name": "boilerplate",

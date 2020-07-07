@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Example from './Example'
 import Dash from './pages/Dash'
 import Login from './pages/Login'
-import Signup from './pages/Signup'
+import SignupForm from './pages/SignupForm'
 import AuthRoute from '../utils/AuthRoute'
 import SearchPage from './pages/ConSearch'
 import Sandbox from './pages/Sandbox'
@@ -20,7 +20,7 @@ export default () => {
     return (
         <Router>
             <Navbar />
-            <Route path="/signup" component={Signup} />
+            <Route path="/signup" component={SignupForm} />
             <Route path="/login" component={Login} />
             <Route path="/sandbox" component={Sandbox} />
             <AuthRoute path="/search" component={SearchPage} />

@@ -3,13 +3,14 @@ const router = express.Router()
 const conn = require('../db.js')
 
 // conn.query(sql , [], (err, results, fields) => {})
-router.get('/edit', (req, res, next) => {
+router.get('/profile/edit', (req, res, next) => {
   const profileId = req.user.profile_id
-  const sql = `SELECT id, trade_1, trade_2, bio, address_id, thumbnail FROM profiles;`
+  const sql = `SELECT * FROM profiles WHERE id = ? ;`
   conn.query(
     sql,
     [profileId],
     (err, results,fields) => {
+      console.log(results)
       res.send('Edit page!')
     })
 })

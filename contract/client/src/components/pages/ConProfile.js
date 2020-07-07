@@ -1,56 +1,81 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/ConProfile.css';
 import Avatar from '../ui/Avatar'
 import { Link } from 'react-router-dom'
-export default () => {
-    const [profile] = useState({
-        thumbnail: "https://i.pinimg.com/736x/26/7f/be/267fbea90a49093798063fd26feb975b.jpg",
-        first: "Prison",
-        last: "Mike",
-        address: {
-            street: "555 apple st",
-            city: "las vegas",
-            state: "NV"
+import { Dropdown } from 'semantic-ui-react'
+import { useProfileIndex } from '../../hooks'
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import { Button } from 'semantic-ui-react'
+import GalleryImage from '../GalleryImage'
 
-        },
-        trade: "Plumber"
-    })
+export default () => {
+    const { profile, getProfile } = useProfileIndex()
+    const [value, onChange] = useState(new Date());
+
+
+    useEffect(() => {
+        getProfile()
+        onChange()
+    }, [])
+
+
+
+
+
+
+
     return (
         <div>
             <div className="row">
-                <div className="col-lg-2">
+                <div className="profile-nav">
                     <Avatar
                         size="100"
                         image={profile.thumbnail} />
-                </div>
-                <div className="col-lg-10">
-                    <div className="row">
-                        <div className="col-lg-2">
-                            <p>
-                                {profile.first}
-                                {profile.last}
-                            </p>
-                            <p>
-                                {profile.trade}
-                            </p>
-                            <Link to="profile/edit" >edit</Link>
-                        </div>
-                        <div className="col-lg-10">
-                            <p>
-                                {profile.address.street}
-                            </p>
-                            <p>
-                                {profile.address.city}
-                                {profile.address.state}
-                            </p>
-                        </div>
-                    </div>
+
+                    <p>
+                        {profile.first}
+                    </p>
+                    <p>
+                        {profile.trade}
+                    </p>
+                    <Link to="profile/edit" >edit</Link>
+
+
+                    <p>
+                        {profile.address.street}
+                    </p>
+                    <p>
+                        {profile.address.city}
+                        {profile.address.state}
+                    </p>
+
+
                 </div>
             </div>
-            <div className="row">
-                <div className="col-12">
-                    Bio
+            <div className="profile-bio">
+                {profile.BIO}
+            </div>
+            <div>
+                <GalleryImage 
+                    images={profile.images}
+                    onDelete={(id) => console.log(id)}
+                    isEditable={false}
+                />
+
+
+                <div className="profile-service">
+                    <Dropdown clearable options={profile.options} selection />
+                    <Button>Book</Button>
+                    <Calendar
+                        onChange={new Date()}
+                        value={value}
+                    />
+
+
+
                 </div>
+
             </div>
         </div>
     )

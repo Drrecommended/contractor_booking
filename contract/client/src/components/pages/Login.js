@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../hooks'
-import { signUpDivider } from '../SignupForm'
+import { signUpDivider } from './SignupForm'
 
 export default (props) => {
 	const { login, logout } = useAuth()
@@ -9,7 +9,7 @@ export default (props) => {
 	function handleSubmit(e) {
 		e.preventDefault()
 		login(username, password).then(resp => {
-			props.history.push('/dashboard')
+			props.history.push('/search')
 		})
 	}
 	return (
