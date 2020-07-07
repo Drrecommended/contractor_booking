@@ -23,14 +23,24 @@ export default (state = orderState, action) => {
 
 // 5. action creators
 function userOrders() {
-    console.log('called')
   return dispatch => {
       api.get('/contractor-order').then(resp =>{
+        console.log(resp)
           dispatch({
               type: GRAB_ORDERS,
-              payload: resp.orderData
+              payload: resp
           })
       })
+  }
+}
+
+//send order id and whether it's approved or denied as a string
+
+function handleOrder(id, status) {
+  return dispatch => {
+    api.patch('/contractor-order', {id, status}).then(resp =>{
+      dispatch(userOrders())
+    })
   }
 }
 
@@ -42,7 +52,9 @@ export function useOrder() {
   const orders = useSelector(appState => appState.orderState.orderData)
  
   const getOrder = () => dispatch(userOrders())
+  const approve = (id) => dispatch(handleOrder(id, "approved"))
+  const deny = (id) => dispatch(handleOrder(id, "denied"))
  
 
-  return { orders, getOrder }
+  return { orders, getOrder, approve, deny }
 }
