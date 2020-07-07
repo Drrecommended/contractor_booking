@@ -27,11 +27,20 @@ export default () => {
 
 
     return (
-        <div>
+        <div className="profile-page">
             {
                 cart.length > 0 ?
-                    <div style={{ padding: '10px', background: '#f7f7f7' }}>
-                        <h2>There are {cart.length} items in the cart</h2>
+                    <div>
+                        <div className="banner">
+                            <h2>There are {cart.length} items in the cart</h2>
+                        </div>
+                        <div className="hide">
+                            <ul>
+                                {cart.map(item => {
+                                    return <li>{item.text}</li>
+                                })}
+                            </ul>
+                        </div>
                     </div>
                     :
                     null

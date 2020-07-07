@@ -2,3 +2,22 @@
     display: flex;
     justify-content: space-evenly;
 }
+
+.profile-page .hide {
+    display: none;
+    padding: 20px;
+    background: #ddd;
+  }
+
+.profile-page .banner {
+    padding: 10px;
+    background: #f7f7f7;
+}
+  
+.profile-page .banner:hover + .hide {
+    display: block;
+  }
+
+.profile-page .hide:hover {
+    display: block;
+}
