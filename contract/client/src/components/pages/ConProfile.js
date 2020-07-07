@@ -3,7 +3,7 @@ import '../../styles/ConProfile.css';
 import Avatar from '../ui/Avatar'
 import { Link } from 'react-router-dom'
 import { Dropdown } from 'semantic-ui-react'
-import { useProfileIndex } from '../../hooks'
+import { useProfileIndex, useCart } from '../../hooks'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { Button } from 'semantic-ui-react'
@@ -11,12 +11,14 @@ import GalleryImage from '../GalleryImage'
 
 export default () => {
     const { profile, getProfile } = useProfileIndex()
+    const {cart, addAllCart} = useCart()
     const [value, onChange] = useState(new Date());
+    const handleChange = (e, { value }) => console.log(value)
 
 
     useEffect(() => {
         getProfile()
-        onChange()
+        addAllCart()
     }, [])
 
 
@@ -64,10 +66,11 @@ export default () => {
 
 
                 <div className="profile-service">
-                    <Dropdown clearable options={profile.options} selection />
-                    <Button>Book</Button>
+                    <Dropdown clearable options={profile.options} onChange={handleChange} selection />
+                    
+                    <Button onClick={() => addAllCart()}>Book</Button>
                     <Calendar
-                        onChange={new Date()}
+                        onChange={onChange}
                         value={value}
                     />
 
