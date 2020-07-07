@@ -1,3 +1,10 @@
+.searchPage {
+    height: 85vh;
+    width: 50%;
+    border: solid 1px;
+    margin: 3%;
+}
+
 .input-shelf {
     background-color: cadetblue;
     padding: 2%;
