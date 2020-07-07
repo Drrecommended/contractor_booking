@@ -4,9 +4,11 @@ const TradeOptions = () => {
 
 
   return (<div>
-      <span>1</span>
-      <span>1</span>
-      <span>1</span>
+      <select>
+        <option>Plumber</option>
+        <option>Painter</option>
+        <option>Lawn Services</option>
+      </select>
 
 
 
