@@ -3,6 +3,7 @@
     width: 50%;
     border: solid 1px;
     margin: 3%;
+    background-color: white;
 }
 
 .input-shelf {
@@ -19,3 +20,8 @@
 .info-shelf {
     margin: 1%;
 }
+
+.background-search {
+    background-image: url("https://images.unsplash.com/photo-1556912167-f556f1f39fdf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1660&q=80");
+}
+

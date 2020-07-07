@@ -29,10 +29,10 @@ export default () => {
 
 
     return (
-        <div id="header-style" class="ui clearing segment">
+        <div className="navbar">
             {
                 isAuthenticated ?
-                    <h2 class="ui left floated header">
+                    <h2>
                         <Link to="/profile">
                             <button>Profile</button>
                         </Link>
@@ -55,7 +55,7 @@ export default () => {
 
             {
                 isAuthenticated ?
-                    <h2 className="ui right floated header">
+                    <h2>
                         <Link to="/order">
                             <button>Order</button>
                         </Link>
