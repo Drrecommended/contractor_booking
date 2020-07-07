@@ -45,8 +45,10 @@ export default (props) => {
                     )
                 })}
             </Slider>
-            {/* <ButtonBack className="slider-btn">a</ButtonBack>
-        <ButtonNext className="slider-btn">a</ButtonNext> */}
+            <Button.Content>
+                <ButtonBack className="slider-btn" icon='left chevron' content='Forward' />
+                <ButtonNext className="slider-btn" icon='right chevron' content='Back' />
+            </Button.Content>
         </CarouselProvider>
     )
 }
