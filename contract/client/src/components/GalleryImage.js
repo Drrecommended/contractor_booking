@@ -5,7 +5,7 @@ import { Button, Icon } from 'semantic-ui-react'
 
 export default (props) => {
     return (
-        <div style={{height: '200px'}}>
+        <div style={{ height: '200px' }}>
             <CarouselProvider
                 naturalSlideWidth={100}
                 naturalSlideHeight={200}
@@ -15,7 +15,7 @@ export default (props) => {
                 <Slider>
                     {props.images.map((item, index) => {
                         return (
-                            <Slide key={index} index={index}>
+                            <Slide key={index} index={index} style={{ paddingBottom: '200px' }}>
                                 <div style={{
                                     marginRight: '10px',
                                     marginLeft: '10px',

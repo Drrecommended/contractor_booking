@@ -11,14 +11,13 @@ import GalleryImage from '../GalleryImage'
 
 export default () => {
     const { profile, getProfile } = useProfileIndex()
-    const {cart, addAllCart} = useCart()
-    const [value, onChange] = useState(new Date());
-    const handleChange = (e, { value }) => console.log(value)
-
+    const { cart, addToCart } = useCart()
+    const [value, onChange] = useState(new Date())
+    const [serviceId, setServiceId] = useState(null)
+    const handleChange = (e, { value }) => setServiceId(value)
 
     useEffect(() => {
         getProfile()
-        addAllCart()
     }, [])
 
 
@@ -29,6 +28,15 @@ export default () => {
 
     return (
         <div>
+            {
+                cart.length > 0 ?
+                    <div style={{ padding: '10px', background: '#f7f7f7' }}>
+                        <h2>There are {cart.length} items in the cart</h2>
+                    </div>
+                    :
+                    null
+            }
+
             <div className="row">
                 <div className="profile-nav">
                     <Avatar
@@ -58,7 +66,7 @@ export default () => {
                 {profile.BIO}
             </div>
             <div>
-                <GalleryImage 
+                <GalleryImage
                     images={profile.images}
                     onDelete={(id) => console.log(id)}
                     isEditable={false}
@@ -67,8 +75,11 @@ export default () => {
 
                 <div className="profile-service">
                     <Dropdown clearable options={profile.options} onChange={handleChange} selection />
-                    
-                    <Button onClick={() => addAllCart()}>Book</Button>
+
+                    <Button
+                        onClick={() => addToCart(profile.options.find(o => o.id === serviceId))}>
+                        Book
+                    </Button>
                     <Calendar
                         onChange={onChange}
                         value={value}

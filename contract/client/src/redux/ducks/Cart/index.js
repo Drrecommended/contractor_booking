@@ -5,19 +5,20 @@ import { useSelector, useDispatch } from "react-redux"
 import api from '../../../utils/request'
 
 // 2. action definitions
-const ADD_CART = "product/ADD_CART"
+const ADD_TO_CART = "product/ADD_TO_CART"
 
 
 // 3. initial state
 const cartState = {
-  cart: {}
+  cart: []
 }
 
 // 4. reducer
+
 export default (state = cartState, action) => {
   switch (action.type) {
-    case ADD_CART:
-      return { ...state, cart: action.payload }
+    case ADD_TO_CART:
+      return {...state, cart: [...state.cart, action.payload] }
     default:
       return state
   }
@@ -25,16 +26,10 @@ export default (state = cartState, action) => {
 
 // 5. action creators
 
-
-function addCart() {
-  return dispatch => {
-    api.get('/profile').then(resp => {
-      dispatch({
-        type: ADD_CART,
-        payload: resp
-      })
-    }
-    )
+function addCart(service) {
+  return {
+    type: ADD_TO_CART,
+    payload: service
   }
 }
 
@@ -44,10 +39,9 @@ function addCart() {
 export function useCart() {
   const dispatch = useDispatch()
   const cart = useSelector(appState => appState.cartState.cart)
-
-  const addAllCart = () => dispatch(addCart())
-
+  const addToCart = (service) => dispatch(addCart(service))
 
 
-  return { cart, addAllCart }
+
+  return { cart, addToCart }
 }
