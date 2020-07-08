@@ -14,7 +14,11 @@ export default () => {
     updateAddress, 
     getProfile } = useEditProfile()
 
-    
+    const options = [
+      {key: 'Plumber', text: 'Plumber', value: 'plumber',},
+      {key: 'lanscaper', text: 'Landscaper', value: 'landscaper',},
+      {key: 'junk removal', text: 'Junk Removal', value: 'junk removal',}]
+
   function handleRequest() {
     // addGalleryImage({ imgSrc: 'https://placehold.it/250x250/8B63A1' })
     //deleteGalleryImage(4) // *use later
@@ -50,13 +54,7 @@ export default () => {
         <div className="BusinessEdit">
           <Input placeholder='Name' />
           <Input placeholder='Business Name' />
-          <Dropdown placeholder='Trade 1'>
-            <Dropdown.Menu>
-              <Dropdown.Item text='Plumber'/>
-              <Dropdown.Item text='Painter'/>
-              <Dropdown.Item text='Lawn Services'/>
-            </Dropdown.Menu>
-          </Dropdown>
+          <Dropdown placeholder='Skills' fluid multiple selection options={options} />
          
         </div>
         <div className="BusinessLocationEdit">
@@ -78,7 +76,7 @@ export default () => {
       <div className="GalleryEditButton">
         <Button onClick={handleRequest}>add gallery image</Button>
       </div>
-      
+      <div className="InputContainer">
       <div class="ui focus input">
         <div className="MinusButton">
             <AiOutlineMinusCircle/>
@@ -127,9 +125,11 @@ export default () => {
             <Label>.00</Label>
           </Input>
         </div>
+        </div>
         <div className="AddDescriptionButton">
             <BsFillPlusSquareFill size={25} on  />
         </div>
+        
           
 
 

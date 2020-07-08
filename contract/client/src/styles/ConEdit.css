@@ -72,3 +72,9 @@
 .MinusButton{
     margin: 10px;
 }
+
+.InputContainer{
+    display: flex;
+    flex-wrap: wrap;
+    width: 75%;
+}
