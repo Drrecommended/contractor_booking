@@ -1,11 +1,3 @@
-#table {
-    width: 50%;
-    border: 5px inset cadetblue;
-    background-color: white;
-    border-radius: 10px;
-    margin-left: 25%;
-    margin-top: 8%;
-}
 
 .order {
     background-image: url("https://assets.dumpsters.com/images/blog/national-home-improvement-month_1557237076/national-home-improvement-month-1200x600.jpg");
@@ -30,4 +22,10 @@
     background-color: cadetblue;
     border-bottom: 2px solid white;
     padding: 20px;
+}
+
+.tableResize {
+    margin-left: 15%;
+    margin-top: 3%;
+    width: 65%;
 }
