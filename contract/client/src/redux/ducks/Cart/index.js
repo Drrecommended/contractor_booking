@@ -8,6 +8,7 @@ import api from '../../../utils/request'
 const ADD_TO_CART = "product/ADD_TO_CART"
 
 
+
 // 3. initial state
 const cartState = {
   cart: []
@@ -30,6 +31,14 @@ function addCart(service) {
   return {
     type: ADD_TO_CART,
     payload: service
+  }
+}
+
+function createOrder() {
+
+  return dispatch =>{
+    api.post('/orders', {})
+
   }
 }
 
