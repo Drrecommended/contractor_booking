@@ -9,10 +9,9 @@ router.get('/profile/edit', (req, res, next) => {
   const addressId = results[0].address_id
   const sql = `SELECT * FROM profiles
                 INNER JOIN addresses ON profiles.address_id = addresses.id
-                WHERE profiles.id=2
-                SELECT * FROM galleries WHERE galleries.profile_id = 2
-                SELECT * FROM services WHERE services.user_id = 2;`
-  
+                WHERE profiles.id=2`
+  const sql2 = `SELECT * FROM galleries WHERE galleries.profile_id = 2`
+  const sql3 = `SELECT * FROM services WHERE services.user_id = 2;`
   conn.query(
     sql,
     [profileId,addressId, galleryId ],

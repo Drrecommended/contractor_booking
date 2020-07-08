@@ -15,7 +15,6 @@ export default () => {
     getProfile } = useEditProfile()
 
     
-
   function handleRequest() {
     // addGalleryImage({ imgSrc: 'https://placehold.it/250x250/8B63A1' })
     //deleteGalleryImage(4) // *use later
@@ -36,6 +35,7 @@ export default () => {
     getProfile()
   },[])
 
+  
   return (
     <div>
       <div className="TheNavOnEdit">
@@ -96,7 +96,7 @@ export default () => {
         </Input>
         <div>
           <div className="AddDescriptionButton">
-            <BsFillPlusSquareFill size={25} />
+            <BsFillPlusSquareFill size={25}  />
           </div>
 
         </div>
