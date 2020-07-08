@@ -3,18 +3,22 @@ const router = express.Router()
 const conn = require('../db.js')
 
 // conn.query(sql , [], (err, results, fields) => {})
-router.get('/profile/edit', (req, res, next) => {
+router.get('/profile/edit', async (req, res, next) => {
   const profileId = req.user.profile_id
   const galleryId = req.params.id
-  const addressId = results[0].address_id
   const sql = `SELECT * FROM profiles
                 INNER JOIN addresses ON profiles.address_id = addresses.id
                 WHERE profiles.id=2`
-  const sql2 = `SELECT * FROM galleries WHERE galleries.profile_id = 2`
-  const sql3 = `SELECT * FROM services WHERE services.user_id = 2;`
+  const sql2 = `SELECT * FROM galleries WHERE profile_id = 2`
+  const sql3 = `SELECT * FROM services WHERE user_id = 2;`
+  const [addressProfile] = await conn.promise().query(sql)
+  const [galleriesProfile] = await conn.promise().query(sql2)
+  console.log('Hi', galleriesProfile)
+  const [servicesProfile] = await conn.promise().query(sql3)
+  
   conn.query(
     sql,
-    [profileId,addressId, galleryId ],
+    [],
     (err, results,fields) => {
       console.log(results)
       res.json('Edit page!')

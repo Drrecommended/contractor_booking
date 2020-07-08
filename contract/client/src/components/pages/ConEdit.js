@@ -96,7 +96,7 @@ export default () => {
         </Input>
         <div>
           <div className="AddDescriptionButton">
-            <BsFillPlusSquareFill size={25}  />
+            <BsFillPlusSquareFill size={25} on  />
           </div>
 
         </div>
