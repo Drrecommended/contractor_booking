@@ -31,7 +31,7 @@ router.patch('/contractor-order', (req, res, next) => {
   conn.query(
     sql, 
     [req.user.id],
-    (err, results, fields) => 
+    (err, results, fields) => {
       res.json(results)
     }
   )
