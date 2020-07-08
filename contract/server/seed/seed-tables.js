@@ -81,9 +81,9 @@ users.map(async user => {
   await query(`
     INSERT INTO galleries (profile_id, img_src)
     VALUES 
-    (1, 'https://placehold.it/250x250/1D3030'),
-    (1, 'https://placehold.it/250x250/007B7B'),
-    (1, 'https://placehold.it/250x250/8B63A1')
+    (2, 'https://placehold.it/250x250/1D3030'),
+    (2, 'https://placehold.it/250x250/007B7B'),
+    (2, 'https://placehold.it/250x250/8B63A1')
   `)
 
   await query(`
