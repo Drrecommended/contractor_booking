@@ -5,5 +5,4 @@ export { default as profileState } from "./conEdit"
 export { default as profileEditState } from "./conEdit"
 
 export { default as orderState } from "./ConOrder"
-
-
+export { default as cartState } from "./Cart"
