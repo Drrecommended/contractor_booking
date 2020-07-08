@@ -3,10 +3,11 @@ import { Button } from 'semantic-ui-react'
 import { useForm } from '../../hooks'
 
 export default (props) => {
-  const [exampleForm, setExampleForm] = useForm({ first: '', last: '' })
+  const [exampleForm, setExampleForm, resetForm, setFormTo] = useForm({ first: '', last: '' })
   function handleSubmit(e) {
     e.preventDefault()
     console.log(exampleForm)
+    resetForm()
   }
   return (
     <div className="Dash">
@@ -25,6 +26,7 @@ export default (props) => {
         />
         <button type="submit">submit</button>
       </form>
+      <button onClick={() => setFormTo({ first: 'john', last: 'smith' })}>set form programatically</button>
     </div>
   )
 }
