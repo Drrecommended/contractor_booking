@@ -36,6 +36,6 @@ router.patch('/contractor-order', (req, res, next) => {
       console.log(err)
       res.json(results)
     })
-})
+p})
   
   module.exports = router
