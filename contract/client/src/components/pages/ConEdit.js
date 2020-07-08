@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../styles/ConEdit.css';
 import { Button, Input, Dropdown, Container, Label } from 'semantic-ui-react';
 import { BsFillPlusSquareFill } from "react-icons/bs";
@@ -7,7 +7,14 @@ import { useEditProfile } from '../../hooks';
 import { TradeOptions } from '../TradeOptions';
 
 export default () => {
-  const { addGalleryImage, deleteGalleryImage, addService, deleteConService, updateAddress } = useEditProfile()
+  const { addGalleryImage, 
+    deleteGalleryImage, 
+    addService, 
+    deleteConService,
+    updateAddress, 
+    getProfile } = useEditProfile()
+
+    
   function handleRequest() {
     // addGalleryImage({ imgSrc: 'https://placehold.it/250x250/8B63A1' })
     //deleteGalleryImage(4) // *use later
@@ -24,6 +31,11 @@ export default () => {
     //})
   }
 
+  useEffect(() => {
+    getProfile()
+  },[])
+
+  
   return (
     <div>
       <div className="TheNavOnEdit">
@@ -44,8 +56,14 @@ export default () => {
         <div className="BusinessEdit">
           <Input placeholder='Name' />
           <Input placeholder='Business Name' />
-          <Dropdown placeholder='Trade 1' />
-          <Dropdown placeholder='Trade 2' />
+          <Dropdown placeholder='Trade 1'>
+            <Dropdown.Menu>
+              <Dropdown.Item text='Plumber'/>
+              <Dropdown.Item text='Painter'/>
+              <Dropdown.Item text='Lawn Services'/>
+            </Dropdown.Menu>
+          </Dropdown>
+         
         </div>
         <div className="BusinessLocationEdit">
           <Input placeholder='Address' />
@@ -78,7 +96,7 @@ export default () => {
         </Input>
         <div>
           <div className="AddDescriptionButton">
-            <BsFillPlusSquareFill size={25} />
+            <BsFillPlusSquareFill size={25} on  />
           </div>
 
         </div>
