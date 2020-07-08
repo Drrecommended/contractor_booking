@@ -42,7 +42,7 @@
 }
 
 .ui.focus.input{
-    margin: 40px;
+    margin: 30px;
 }
 
 .PriceEdit{
@@ -57,7 +57,7 @@
     height: 200px;
 }
 .AddDescriptionButton{
-    margin-left: 24px;
+    margin-left: 40px;
     margin-top: 7px;
 }
 

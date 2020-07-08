@@ -37,14 +37,8 @@ export default () => {
 
   
   return (
-    <div>
-      <div className="TheNavOnEdit">
-        <h1>NAV BAR GOES HERE!</h1>
-      </div>
-
-
-
-      <div className="EditTopOfPage">
+<div>
+  <div className="EditTopOfPage">
         <div className="EditAvatar"
           style={{
             backgroundImage:
@@ -84,23 +78,63 @@ export default () => {
       <div className="GalleryEditButton">
         <Button onClick={handleRequest}>add gallery image</Button>
       </div>
+      
       <div class="ui focus input">
         <div className="MinusButton">
-      <AiOutlineMinusCircle/>
+            <AiOutlineMinusCircle/>
           </div>
-        <input type="text" placeholder="JOB DESCRIPTION" />
-        <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
-          <Label basic>$</Label>
+          <input type="text" placeholder="JOB DESCRIPTION" />
+            <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
+            <Label basic>$</Label>
           <input />
-          <Label>.00</Label>
-        </Input>
+            <Label>.00</Label>
+          </Input>
         <div>
-          <div className="AddDescriptionButton">
-            <BsFillPlusSquareFill size={25} on  />
-          </div>
-
-        </div>
       </div>
     </div>
+        <div class="ui focus input">
+          <div className="MinusButton">
+            <AiOutlineMinusCircle/>
+          </div>
+          <input type="text" placeholder="JOB DESCRIPTION" />
+            <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
+            <Label basic>$</Label>
+          <input />
+            <Label>.00</Label>
+          </Input>
+        </div>
+        <div class="ui focus input">
+        <div className="MinusButton">
+            <AiOutlineMinusCircle/>
+          </div>
+          <input type="text" placeholder="JOB DESCRIPTION" />
+            <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
+            <Label basic>$</Label>
+          <input />
+            <Label>.00</Label>
+          </Input>
+        <div>
+      </div>
+    </div>
+        <div class="ui focus input">
+          <div className="MinusButton">
+            <AiOutlineMinusCircle/>
+          </div>
+          <input type="text" placeholder="JOB DESCRIPTION" />
+            <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
+            <Label basic>$</Label>
+          <input />
+            <Label>.00</Label>
+          </Input>
+        </div>
+        <div className="AddDescriptionButton">
+            <BsFillPlusSquareFill size={25} on  />
+        </div>
+          
+
+
+
+</div>
+    
   )
 }
