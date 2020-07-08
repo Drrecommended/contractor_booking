@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Button, Input } from 'semantic-ui-react'
 import { useForm, useExample } from '../../hooks'
-import api from '../../utils/request';
 
 export default (props) => {
   const [exampleForm, setExampleForm, resetForm, setFormTo] = useForm({ first: '', last: '' })
