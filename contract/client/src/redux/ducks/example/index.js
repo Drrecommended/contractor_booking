@@ -1,5 +1,5 @@
 // 1. imports
-import axios from 'axios'
+import api from '../../../utils/request'
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
@@ -44,11 +44,12 @@ function someAsyncAction() {
 
 function getExampleData() {
   return dispatch => {
-    axios.get('/api').then(resp => {
+    return api.get('/').then(resp => {
       dispatch({
         type: EXAMPLE_ACTION,
         payload: resp.data
       })
+      return resp
     })
   }
 }
