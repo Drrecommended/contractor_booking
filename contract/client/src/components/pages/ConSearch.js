@@ -34,8 +34,8 @@ export default () => {
             })}
             </div>
             <div className="welcomeShelf">
-                WELCOME
-                </div>
+                <h1>Welcome</h1>
+            </div>
         </div>
 
 
