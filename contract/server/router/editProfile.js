@@ -5,13 +5,20 @@ const conn = require('../db.js')
 // conn.query(sql , [], (err, results, fields) => {})
 router.get('/profile/edit', (req, res, next) => {
   const profileId = req.user.profile_id
-  const sql = `SELECT * FROM profiles WHERE id = ? `
+  const galleryId = req.params.id
+  const addressId = results[0].address_id
+  const sql = `SELECT * FROM profiles
+                INNER JOIN addresses ON profiles.address_id = addresses.id
+                WHERE profiles.id=2
+                SELECT * FROM galleries WHERE galleries.profile_id = 2
+                SELECT * FROM services WHERE services.user_id = 2;`
+  
   conn.query(
     sql,
-    [profileId],
+    [profileId,addressId, galleryId ],
     (err, results,fields) => {
       console.log(results)
-      res.send('Edit page!')
+      res.json('Edit page!')
     })
 })
 
