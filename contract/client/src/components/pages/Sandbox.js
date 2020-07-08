@@ -12,7 +12,7 @@ export default (props) => {
   }
   function populateFormWithDataFromBackend() {
     getExample().then(resp => {
-      // populate form with initial data...
+      // populate form with data from backend
       setFormTo(resp.user)
     })
   }
