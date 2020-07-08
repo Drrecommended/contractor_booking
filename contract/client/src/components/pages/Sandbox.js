@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Button } from 'semantic-ui-react'
+import { Button, Input } from 'semantic-ui-react'
 import { useForm } from '../../hooks'
 import api from '../../utils/request';
 
@@ -18,21 +18,21 @@ export default (props) => {
   return (
     <div className="Dash">
       <form onSubmit={handleSubmit}>
-        <input
+        <Input
           type="text"
           name="first"
           value={exampleForm.first}
           onChange={setExampleForm}
         />
-        <input
+        <Input
           type="text"
           name="last"
           value={exampleForm.last}
           onChange={setExampleForm}
         />
-        <button type="submit">submit</button>
+        <Button type="submit">submit</Button>
       </form>
-      <button onClick={() => populateFormWithDataFromBackend()}>set form programatically</button>
+      <Button style={{ margin: '20px' }} onClick={() => populateFormWithDataFromBackend()}>set form programatically from data in backend</Button>
     </div>
   )
 }
