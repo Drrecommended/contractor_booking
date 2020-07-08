@@ -1,17 +1,19 @@
 import React, { useEffect } from 'react';
 import { Button, Input } from 'semantic-ui-react'
-import { useForm } from '../../hooks'
+import { useForm, useExample } from '../../hooks'
 import api from '../../utils/request';
 
 export default (props) => {
   const [exampleForm, setExampleForm, resetForm, setFormTo] = useForm({ first: '', last: '' })
+  const { getExample } = useExample()
   function handleSubmit(e) {
     e.preventDefault()
     console.log(exampleForm)
     resetForm()
   }
   function populateFormWithDataFromBackend() {
-    api.get('/').then(resp => {
+    getExample().then(resp => {
+      // populate form with initial data...
       setFormTo(resp.user)
     })
   }
