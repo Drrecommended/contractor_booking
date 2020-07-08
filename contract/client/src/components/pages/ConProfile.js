@@ -3,7 +3,7 @@ import '../../styles/ConProfile.css';
 import Avatar from '../ui/Avatar'
 import { Link } from 'react-router-dom'
 import { Dropdown } from 'semantic-ui-react'
-import { useProfileIndex } from '../../hooks'
+import { useProfileIndex, useCart } from '../../hooks'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { Button } from 'semantic-ui-react'
@@ -11,12 +11,13 @@ import GalleryImage from '../GalleryImage'
 
 export default () => {
     const { profile, getProfile } = useProfileIndex()
-    const [value, onChange] = useState(new Date());
-
+    const { cart, addToCart } = useCart()
+    const [value, onChange] = useState(new Date())
+    const [serviceId, setServiceId] = useState(null)
+    const handleChange = (e, { value }) => setServiceId(value)
 
     useEffect(() => {
         getProfile()
-        onChange()
     }, [])
 
 
@@ -26,7 +27,25 @@ export default () => {
 
 
     return (
-        <div>
+        <div className="profile-page">
+            {
+                cart.length > 0 ?
+                    <div>
+                        <div className="banner">
+                            <h2>There are {cart.length} items in the cart</h2>
+                        </div>
+                        <div className="hide">
+                            <ul>
+                                {cart.map(item => {
+                                    return <li>{item.text}</li>
+                                })}
+                            </ul>
+                        </div>
+                    </div>
+                    :
+                    null
+            }
+
             <div className="row">
                 <div className="profile-nav">
                     <Avatar
@@ -56,7 +75,7 @@ export default () => {
                 {profile.BIO}
             </div>
             <div>
-                <GalleryImage 
+                <GalleryImage
                     images={profile.images}
                     onDelete={(id) => console.log(id)}
                     isEditable={false}
@@ -64,10 +83,14 @@ export default () => {
 
 
                 <div className="profile-service">
-                    <Dropdown clearable options={profile.options} selection />
-                    <Button>Book</Button>
+                    <Dropdown clearable options={profile.options} onChange={handleChange} selection />
+
+                    <Button
+                        onClick={() => addToCart(profile.options.find(o => o.id === serviceId))}>
+                        Book
+                    </Button>
                     <Calendar
-                        onChange={new Date()}
+                        onChange={onChange}
                         value={value}
                     />
 
