@@ -1,67 +1,75 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/ConOrder.css';
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon, Table, Menu } from 'semantic-ui-react'
+import moment from 'moment'
 import { useOrder } from '../../hooks'
 
+
 export default () => {
-  const { orders, getOrder } = useOrder()
+  const { orders, getOrder, approve, deny } = useOrder()
 
 
   useEffect(() => {
     getOrder()
   }, [])
   return (
-    <div className="background">
-      <table id="table">
-            <thead class="headColor">
-              <tr class="">
-                <th class="">Order #</th>
-                <th class="">Customer</th>
-                <th class="">Date</th>
-                <th class="">Services</th>
-                <th class="">Total</th>
-                <th class="">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="borderBottom">
-              {orders.map(order => {
-                return (
-                  <tr class="">
-                  <td class="">{order.orderNumber}</td>
-                  <td class="">{order.orderName}</td>
-                  <td class="">{order.orderDate}</td>
-                  <td class="">{order.orderServices}</td>
-                  <td class="">{order.orderTotal}</td>
-                  <td class="buttons">
-                    <Button icon>
-                      <Icon name='wrench' />
-                    </Button>
-                    <Button icon>
-                      deny 
-                    </Button>
-                  </td>
-                </tr>
-                )
-              })}
-            </tbody>
-            <tfoot class="">
-              <tr class="">
-                <th class="">3 People</th>
-                <th class="">2 Approved</th>
-                <th class=""></th>
-                <th class=""></th>
-                <th class=""></th>
-              </tr>
-            </tfoot>
-          </table>
+    <div className="order">
+      <div className="tableResize">      
+        <Table celled>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Order #</Table.HeaderCell>
+            <Table.HeaderCell>Customer</Table.HeaderCell>
+            <Table.HeaderCell>Date</Table.HeaderCell>
+            <Table.HeaderCell>Services</Table.HeaderCell>
+            <Table.HeaderCell>Total</Table.HeaderCell>
+            <Table.HeaderCell>Actions</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {orders.map(order => {
+            return (
+              <Table.Row>
+                <Table.Cell>{order.id}</Table.Cell>
+                <Table.Cell>{order.first_name} {order.last_name}</Table.Cell>
+                <Table.Cell>{moment(order.date).subtract(10, 'days').calendar()}</Table.Cell>
+                <Table.Cell>{order.services}</Table.Cell>
+                <Table.Cell>$ {order.total}</Table.Cell>
+                <Table.Cell>   
+                  {order.status === "pending" ? "PENDING" : "false"}       
+                  <Button onClick={() => approve(order.id)} icon>
+                    <Icon name='wrench' />
+                  </Button>
+                  <Button onClick={() => deny(order.id)} icon>
+                    deny 
+                  </Button>
+                </Table.Cell>
+              </Table.Row>
+          )
+        })}
+        </Table.Body>
+
+        <Table.Footer>
+          <Table.Row>
+            <Table.HeaderCell onClick="" colSpan='6'>
+                <Menu floated='right' pagination>
+                  <Menu.Item as='a' icon>
+                    <Icon name='chevron left' />
+                  </Menu.Item>
+                  <Menu.Item as='a'>1</Menu.Item>
+                  <Menu.Item as='a'>2</Menu.Item>
+                  <Menu.Item as='a'>3</Menu.Item>
+                  <Menu.Item as='a'>4</Menu.Item>
+                  <Menu.Item as='a' icon>
+                    <Icon name='chevron right' />
+                  </Menu.Item>
+                </Menu>
+              </Table.HeaderCell>
+            </Table.Row>
+          </Table.Footer>
+        </Table>
+      </div>
     </div>
+
   )
 }
-
-// const [order] = useState({
-//   orderNumber: "3298472348032",
-//   orderName: "Bill Murray",
-//   orderDate: "2/22/22",
-//   orderServices: "Moved Furniture",
-//   orderTotal: "$120.00"
-// })

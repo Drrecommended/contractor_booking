@@ -17,7 +17,10 @@
   },
   "homepage": "https://github.com/PC-Fullstack-PT-Jan-2020/boilerplate#readme",
   "dependencies": {
-    "concurrently": "^5.2.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.29",
+    "@fortawesome/free-solid-svg-icons": "^5.13.1",
+    "@fortawesome/react-fontawesome": "^0.1.11",
+    "concurrently": "^5.1.1",
     "is-arrayish": "^0.3.2",
     "node-sass": "^4.14.1"
   },

@@ -39,22 +39,7 @@ const DividerExampleVerticalForm = (props) => {
 
     <div className="Login">
       <div>
-        <div className="SignUpPhoto"
-          style={{
-            backgroundImage:
-              `url('https://images.unsplash.com/photo-1556912167-f556f1f39fdf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1660&q=80')`
-          }}>
-          <div className="NavContainer">
-            <div>
-              <h1 className="NavName">LOGO</h1>
-            </div>
-            <div className="NavLinks">
-              <Link className="AboutLink">
-                ABOUT</Link>
-              <Link className="SearchLink">
-                SEARCH</Link>
-            </div>
-          </div>
+        <div className="SignUpPhoto">
           <div className="DividerContainer">
             <div className="Signup-login-divider">
               <Segment placeholder>

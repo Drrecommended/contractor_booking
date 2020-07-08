@@ -1,3 +1,25 @@
-.hidden {
-    display: none !important;
+.logo {
+    background-color: cadetblue;
+    color: white;
+    border-style: none;
+    outline: none;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+
+.search-bar {
+    width: 30%;
+}
+.navbar {
+    display: flex;
+    width: 100%;
+    background-color: cadetblue;
+    display: flex;
+    height: 15vh;
+    border-bottom: 5px solid white;
+}
+
+.navbar h2 {
+  margin: 0;
 }
