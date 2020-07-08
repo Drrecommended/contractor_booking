@@ -24,10 +24,6 @@ app.use('/api', contractRoutes)
 app.use('/api', orderRoutes)
 app.use('/api', jwt({ secret: config.get('secret'), algorithms: ['RS256'] }), protectedRoutes)
 
-app.use('/', (req, res, next) => {
-  res.json({ message: 'hi' })
-})
-
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`)
 })

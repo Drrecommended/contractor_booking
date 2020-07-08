@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Button } from 'semantic-ui-react'
 import { useForm } from '../../hooks'
+import api from '../../utils/request';
 
 export default (props) => {
   const [exampleForm, setExampleForm, resetForm, setFormTo] = useForm({ first: '', last: '' })
@@ -8,6 +9,11 @@ export default (props) => {
     e.preventDefault()
     console.log(exampleForm)
     resetForm()
+  }
+  function populateFormWithDataFromBackend() {
+    api.get('/').then(resp => {
+      setFormTo(resp.user)
+    })
   }
   return (
     <div className="Dash">
@@ -26,7 +32,7 @@ export default (props) => {
         />
         <button type="submit">submit</button>
       </form>
-      <button onClick={() => setFormTo({ first: 'john', last: 'smith' })}>set form programatically</button>
+      <button onClick={() => populateFormWithDataFromBackend()}>set form programatically</button>
     </div>
   )
 }
