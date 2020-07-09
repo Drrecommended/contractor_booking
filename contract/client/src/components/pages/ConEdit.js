@@ -3,7 +3,7 @@ import '../../styles/ConEdit.css';
 import { Button, Input, Dropdown, Container, Label } from 'semantic-ui-react';
 import { BsFillPlusSquareFill } from "react-icons/bs";
 import {AiOutlineMinusCircle} from "react-icons/ai";
-import { useEditProfile } from '../../hooks';
+import { useEditProfile, useForm, useProfileIndex } from '../../hooks';
 import { TradeOptions } from '../TradeOptions';
 
 export default () => {
@@ -12,13 +12,29 @@ export default () => {
     addService, 
     deleteConService,
     updateAddress, 
-    getProfile } = useEditProfile()
+    getProfile} = useEditProfile()
+
+    
+
+    const [ editForm, resetForm, setFormTo, setEditForm ] = useForm({ first: ''})
 
     const options = [
       {key: 'Plumber', text: 'Plumber', value: 'plumber',},
       {key: 'lanscaper', text: 'Landscaper', value: 'landscaper',},
       {key: 'junk removal', text: 'Junk Removal', value: 'junk removal',}]
 
+
+  function handlesubmit(e) {
+    e.preventDefault()
+    console.log(getProfile)
+    resetForm()
+  }
+
+  function dataFromBackend(){
+    getProfile().then(resp => {
+      setFormTo(resp.user)
+    })
+  }
   function handleRequest() {
     // addGalleryImage({ imgSrc: 'https://placehold.it/250x250/8B63A1' })
     //deleteGalleryImage(4) // *use later
@@ -47,28 +63,45 @@ export default () => {
           style={{
             backgroundImage:
               `url('https://images.unsplash.com/photo-1516876437184-593fda40c7ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80')`
-          }}></div>
-        <div className="UploadImg">
+          }}>
+          </div>
+        
+        
 
-        </div>
-        <div className="BusinessEdit">
-          <Input placeholder='Name' />
-          <Input placeholder='Business Name' />
-          <Dropdown placeholder='Skills' fluid multiple selection options={options} />
-         
-        </div>
-        <div className="BusinessLocationEdit">
-          <Input placeholder='Address' />
-          <Input placeholder='City, State' />
-          <Input placeholder='Zip Code' />
-        </div>
+        
+        
+       
+          <div className="BusinessEdit">
+          <form onSubmit={handlesubmit}>
+            <Input placeholder='Name' 
+              type="text"
+              name="first"
+              value={getProfile.first}
+              onChange={setEditForm}/>
+            <Input placeholder='Business Name' />
+            <Dropdown placeholder='Skills' fluid multiple selection options={options} />
+          </form>
+          </div>
+          <Button style={{ margin: '20px' }} onClick={
+            () =>dataFromBackend()}>{editForm.first}</Button>
+          <div className="BusinessLocationEdit">
+            <Input placeholder='Address' />
+            <Input placeholder='City, State' />
+            <Input placeholder='Zip Code' />
+          </div>
+          <div>
+            <Button positive>SAVE</Button>
+          </div>
+  </div>
+        
+        
+        
+        
+        
 
-        <div>
-          <Button positive>SAVE</Button>
-        </div>
 
-
-      </div>
+      
+      
 
       <div className="BioEdit">
         <textarea className="TextEdit">Brief Description of your business</textarea>
