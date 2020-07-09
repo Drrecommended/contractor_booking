@@ -49,7 +49,7 @@ export default () => {
                 </Link>
                 <Link to="/order">
                 <Menu.Item
-                    name='Order'
+                    name='Orders'
                     active={activeItem === '/order'}
                 />
                 </Link>

@@ -26,7 +26,7 @@ export default () => {
                             <div className="contractor-shelf">
                                 <div className="conSearchImage"><img src={contractor.thumbnail} /></div>
                                 <div className="info-shelf">
-                                    <h2>{contractor.first_name} {contractor.last_name}</h2>
+                                    <h2 className="conName">{contractor.first_name} {contractor.last_name}</h2>
                                     <div>{contractor.bio}</div>
                                 </div>
                                 <Rating icon='star' defaultRating={3} maxRating={4} />
@@ -34,7 +34,9 @@ export default () => {
                         )  
                     })}
                     </div> : 
-                    <div className="searchPage"> No RESULTS </div>
+                    <div className="searchPage">
+                        <div className="noResults">No results... try searching something else!!</div>
+                    </div>
                 }
         </div>
 

@@ -12,7 +12,7 @@ export default () => {
   // }))
 
   return (
-    <div className="background">
+    <div className="checkoutBackground">
       <div className="form-container">
         <Form className="checkout-form">
           <h1>Who and where should we bill this service?</h1>
