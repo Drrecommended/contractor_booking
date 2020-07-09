@@ -5,24 +5,21 @@ const conn = require('../db.js')
 // conn.query(sql , [], (err, results, fields) => {})
 router.get('/profile/edit', async (req, res, next) => {
   const profileId = req.user.profile_id
-  const galleryId = req.params.id
+  const userId = req.user.id
   const sql = `SELECT * FROM profiles
                 INNER JOIN addresses ON profiles.address_id = addresses.id
-                WHERE profiles.id=2`
-  const sql2 = `SELECT * FROM galleries WHERE profile_id = 2`
-  const sql3 = `SELECT * FROM services WHERE user_id = 2;`
-  const [addressProfile] = await conn.promise().query(sql)
-  const [galleriesProfile] = await conn.promise().query(sql2)
+                WHERE profiles.id = ?`
+  const sql2 = `SELECT * FROM galleries WHERE profile_id = ?`
+  const sql3 = `SELECT * FROM services WHERE user_id = ?;`
+  const [addressProfile] = await conn.promise().query(sql, [profileId])
+  const [galleriesProfile] = await conn.promise().query(sql2, [profileId])
   console.log('Hi', galleriesProfile)
-  const [servicesProfile] = await conn.promise().query(sql3)
-  
-  conn.query(
-    sql,
-    [],
-    (err, results,fields) => {
-      console.log(results)
-      res.json('Edit page!')
-    })
+  const [servicesProfile] = await conn.promise().query(sql3, [userId])
+  res.json({
+    address: addressProfile,
+    gallery: galleriesProfile,
+    services: servicesProfile
+  })
 })
 
 router.post('/profile/gallery', (req, res, next) => {
