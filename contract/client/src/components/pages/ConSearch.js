@@ -19,24 +19,25 @@ export default () => {
     }, [])
     return (
         <div className="background-search">
-            <div className="searchPage">
-            {contractors.map(contractor => {
-                return (
-                    <div className="contractor-shelf">
-                        <div className="conSearchImage"><img src={contractor.thumbnail} /></div>
-                        <div className="info-shelf">
-                            <h2>{contractor.first_name} {contractor.last_name}</h2>
-                            <div>{contractor.bio}</div>
-                        </div>
-                        <Rating icon='star' defaultRating={3} maxRating={4} />
-                    </div>
-                )  
-            })}
-            </div>
-            <div className="welcomeShelf">
-                <h1>Welcome</h1>
-            </div>
+                {contractors.length !== 0 ? 
+                    <div className="searchPage">
+                    {contractors.map(contractor => {
+                        return (
+                            <div className="contractor-shelf">
+                                <div className="conSearchImage"><img src={contractor.thumbnail} /></div>
+                                <div className="info-shelf">
+                                    <h2>{contractor.first_name} {contractor.last_name}</h2>
+                                    <div>{contractor.bio}</div>
+                                </div>
+                                <Rating icon='star' defaultRating={3} maxRating={4} />
+                            </div>
+                        )  
+                    })}
+                    </div> : 
+                    <div className="searchPage"> No RESULTS </div>
+                }
         </div>
+
 
 
     

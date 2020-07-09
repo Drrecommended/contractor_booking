@@ -22,8 +22,8 @@ export default () => {
           </Form.Group>
           <Form.Group widths={4}>
             <Form.Input label='Address' placeholder='Address' />
-            <Form.Dropdown placeholder='city' search selection options="hey" />
-            <Form.Dropdown placeholder='state' search selection options="hey" />
+            <Form.Dropdown label='City' placeholder='city' search selection options="hey" />
+            <Form.Dropdown label='State' placeholder='state' search selection options="hey" />
             <Form.Input label='Postal code' placeholder='Postal code' />
           </Form.Group>
           <Form.Group widths={2}>
