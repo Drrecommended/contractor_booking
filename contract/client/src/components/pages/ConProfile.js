@@ -9,12 +9,17 @@ import 'react-calendar/dist/Calendar.css';
 import { Button } from 'semantic-ui-react'
 import GalleryImage from '../GalleryImage'
 
-export default () => {
+export default (props) => {
+    console.log(props)
     const { profile, getProfile } = useProfileIndex()
     const { cart, addToCart } = useCart()
-    const [value, onChange] = useState(new Date())
+    const [date, setDate] = useState(new Date());
     const [serviceId, setServiceId] = useState(null)
     const handleChange = (e, { value }) => setServiceId(value)
+
+    const onChange = date => {
+        setDate(date);
+    }
 
     useEffect(() => {
         getProfile()
@@ -27,12 +32,25 @@ export default () => {
 
 
     return (
+
         <div className="profile-page">
             {
+
                 cart.length > 0 ?
+
                     <div>
                         <div className="banner">
+                            <div>
                             <h2>There are {cart.length} items in the cart</h2>
+                            </div>
+                            <div>
+                            <Button className="banner-button"
+                            onClick={() => { props.history.push('/checkout') }}>
+
+                                Book
+                            </Button>
+                            </div>
+
                         </div>
                         <div className="hide">
                             <ul>
@@ -48,29 +66,32 @@ export default () => {
 
             <div className="row">
                 <div className="profile-nav">
-                    <Avatar
-                        image={profile.thumbnail} />
+                    <div>
+                        <Avatar
+                            image={profile.thumbnail} />
+                    </div>
+                    <div>
+                        <p>
+                            {profile.first}
+                        </p>
+                        <p>
+                            {profile.trade}
+                        </p>
 
-                    <p>
-                        {profile.first}
-                    </p>
-                    <p>
-                        {profile.trade}
-                    </p>
-                    <Link to="profile/edit" >edit</Link>
-
-
-                    <p>
-                        {profile.address.street}
-                    </p>
-                    <p>
-                        {profile.address.city}
-                        {profile.address.state}
-                    </p>
-
+                        <Link to="profile/edit" >edit</Link>
+                    </div>
+                    <div>
+                        <p className="profile-info">
+                            {profile.address.street}
+                            <br></br>
+                            {profile.address.city}
+                            {profile.address.state}
+                        </p>
+                    </div>
 
                 </div>
             </div>
+            <br></br>
             <div className="profile-bio">
                 {profile.BIO}
             </div>
@@ -83,17 +104,29 @@ export default () => {
 
 
                 <div className="profile-service">
-                    <Dropdown clearable options={profile.options} onChange={handleChange} selection />
-
-                    <Button
-                        onClick={() => addToCart(profile.options.find(o => o.id === serviceId))}>
-                        Book
+                    <div>
+                        <p className="service-font">
+                            Service
+                        </p>
+                        <Dropdown clearable options={profile.options}
+                            onChange={handleChange}
+                            selection
+                        />
+                        <br></br>
+                        <Button
+                            onClick={() => addToCart(profile.options.find(o => o.id === serviceId))}>
+                            Book
                     </Button>
-                    <Calendar
-                        onChange={onChange}
-                        value={value}
-                    />
+                    </div>
+                    <div>
+                        <Calendar
+                            onClickDay={date}
+                            onChange={onChange}
+                            value={date}
 
+                        />
+
+                    </div>
 
 
                 </div>
