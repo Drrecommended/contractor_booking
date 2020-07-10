@@ -11,6 +11,23 @@
     display: flex;
     justify-content: space-between;
     padding-top: 50px;
+    
+}
+
+.ui.selection.dropdown{
+  min-width: 25em;
+  min-height: 2.71428571em;
+  
+}
+
+.ui.button{
+  font-size: 1.5em;
+  
+}
+
+.profile-info  {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .profile-page .hide {
@@ -23,6 +40,7 @@
     padding: 10px;
     background: #f7f7f7;
     
+    
 }
   
 .profile-page .banner:hover + .hide {
@@ -34,3 +52,7 @@
 }
 
 
+.banner-button{
+  display: flex;
+  justify-content: center;
+}

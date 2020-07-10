@@ -40,11 +40,16 @@ export default (props) => {
 
                     <div>
                         <div className="banner">
+                            <div>
                             <h2>There are {cart.length} items in the cart</h2>
-                            <Button onClick={() => { props.history.push('/checkout') }}>
+                            </div>
+                            <div>
+                            <Button className="banner-button"
+                            onClick={() => { props.history.push('/checkout') }}>
 
                                 Book
                             </Button>
+                            </div>
 
                         </div>
                         <div className="hide">
@@ -76,10 +81,9 @@ export default (props) => {
                         <Link to="profile/edit" >edit</Link>
                     </div>
                     <div>
-                        <p>
+                        <p className="profile-info">
                             {profile.address.street}
-                        </p>
-                        <p>
+                            <br></br>
                             {profile.address.city}
                             {profile.address.state}
                         </p>
@@ -104,7 +108,10 @@ export default (props) => {
                         <p className="service-font">
                             Service
                         </p>
-                        <Dropdown clearable options={profile.options} onChange={handleChange} selection />
+                        <Dropdown clearable options={profile.options}
+                            onChange={handleChange}
+                            selection
+                        />
                         <br></br>
                         <Button
                             onClick={() => addToCart(profile.options.find(o => o.id === serviceId))}>
