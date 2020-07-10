@@ -1,5 +1,4 @@
 // 1. imports
-import axios from 'axios'
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import api from '../../../utils/request'
@@ -34,8 +33,8 @@ function addCart(service) {
   }
 }
 
-function createOrder() {
-
+function createOrderData() {
+  console.log("hello")
   return dispatch =>{
     api.post('/orders', {})
 
@@ -49,8 +48,9 @@ export function useCart() {
   const dispatch = useDispatch()
   const cart = useSelector(appState => appState.cartState.cart)
   const addToCart = (service) => dispatch(addCart(service))
+  const createOrder=() => dispatch(createOrderData())
 
 
 
-  return { cart, addToCart }
+  return { cart, addToCart, createOrder }
 }

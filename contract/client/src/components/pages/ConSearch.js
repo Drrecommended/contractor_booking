@@ -23,9 +23,9 @@ export default () => {
             {contractors.map(contractor => {
                 return (
                     <div className="contractor-shelf">
-                        <div><img src={contractor.thumbnail} /></div>
+                        <div className="conSearchImage"><img src={contractor.thumbnail} /></div>
                         <div className="info-shelf">
-                            <div>{contractor.first_name} {contractor.last_name}</div>
+                            <h2>{contractor.first_name} {contractor.last_name}</h2>
                             <div>{contractor.bio}</div>
                         </div>
                         <Rating icon='star' defaultRating={3} maxRating={4} />
@@ -34,8 +34,8 @@ export default () => {
             })}
             </div>
             <div className="welcomeShelf">
-                WELCOME
-                </div>
+                <h1>Welcome</h1>
+            </div>
         </div>
 
 

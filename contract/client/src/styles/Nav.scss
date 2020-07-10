@@ -1,25 +1,21 @@
-.logo {
+
+.ui.segment { 
+    margin: 0;
+
+}
+
+.ui.inverted.segment { 
     background-color: cadetblue;
-    color: white;
-    border-style: none;
-    outline: none;
-    font-size: 40px;
-    cursor: pointer;
+    border-bottom: 1px black solid;
+
 }
 
-
-.search-bar {
-    width: 30%;
-}
-.navbar {
-    display: flex;
-    width: 100%;
-    background-color: cadetblue;
-    display: flex;
-    height: 15vh;
-    border-bottom: 5px solid white;
+.ui.secondary.inverted.pointing.menu {
+    border: none;
+    font-size: 16px;
+    height: 10vh;
 }
 
-.navbar h2 {
-  margin: 0;
+Input {
+    width: fit-content;
 }

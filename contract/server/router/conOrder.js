@@ -37,5 +37,9 @@ router.patch('/contractor-order', (req, res, next) => {
       res.json(results)
     })
 })
+router.post('/orders', (req, res, next) => {
+  console.log('hello')
+  res.json({})
+})
 
 module.exports = router

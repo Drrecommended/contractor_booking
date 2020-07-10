@@ -41,10 +41,11 @@ export default (props) => {
                     <div>
                         <div className="banner">
                             <h2>There are {cart.length} items in the cart</h2>
-                            <Button onClick={() => {props.history.push('/checkout')}}>
-                            
+                            <Button onClick={() => { props.history.push('/checkout') }}>
+
                                 Book
                             </Button>
+
                         </div>
                         <div className="hide">
                             <ul>
@@ -60,29 +61,33 @@ export default (props) => {
 
             <div className="row">
                 <div className="profile-nav">
-                    <Avatar
-                        image={profile.thumbnail} />
+                    <div>
+                        <Avatar
+                            image={profile.thumbnail} />
+                    </div>
+                    <div>
+                        <p>
+                            {profile.first}
+                        </p>
+                        <p>
+                            {profile.trade}
+                        </p>
 
-                    <p>
-                        {profile.first}
-                    </p>
-                    <p>
-                        {profile.trade}
-                    </p>
-                    <Link to="profile/edit" >edit</Link>
-
-
-                    <p>
-                        {profile.address.street}
-                    </p>
-                    <p>
-                        {profile.address.city}
-                        {profile.address.state}
-                    </p>
-
+                        <Link to="profile/edit" >edit</Link>
+                    </div>
+                    <div>
+                        <p>
+                            {profile.address.street}
+                        </p>
+                        <p>
+                            {profile.address.city}
+                            {profile.address.state}
+                        </p>
+                    </div>
 
                 </div>
             </div>
+            <br></br>
             <div className="profile-bio">
                 {profile.BIO}
             </div>
@@ -95,12 +100,17 @@ export default (props) => {
 
 
                 <div className="profile-service">
-                    <Dropdown clearable options={profile.options} onChange={handleChange} selection />
-
-                    <Button
-                        onClick={() => addToCart(profile.options.find(o => o.id === serviceId))}>
-                        Book
+                    <div>
+                        <p className="service-font">
+                            Service
+                        </p>
+                        <Dropdown clearable options={profile.options} onChange={handleChange} selection />
+                        <br></br>
+                        <Button
+                            onClick={() => addToCart(profile.options.find(o => o.id === serviceId))}>
+                            Book
                     </Button>
+                    </div>
                     <div>
                         <Calendar
                             onClickDay={date}
@@ -108,7 +118,7 @@ export default (props) => {
                             value={date}
 
                         />
-                    
+
                     </div>
 
 

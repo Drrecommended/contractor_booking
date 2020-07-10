@@ -1,6 +1,16 @@
-.profile-service .Dropdown .Calendar {
+.profile-nav{
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+}
+.service-font {
+  font-size: large;
+}
+
+.profile-service {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    padding-top: 50px;
 }
 
 .profile-page .hide {
@@ -12,6 +22,7 @@
 .profile-page .banner {
     padding: 10px;
     background: #f7f7f7;
+    
 }
   
 .profile-page .banner:hover + .hide {
@@ -21,3 +32,5 @@
 .profile-page .hide:hover {
     display: block;
 }
+
+
