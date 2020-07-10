@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/ConSearch.css';
-import { useContractor } from '../../hooks'
+import { useContractor, useLoad } from '../../hooks'
 import { Rating } from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { fa-instagram} from '@fortawesome/fa-instagram'
@@ -9,14 +9,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export default () => {
     const { contractors, getContractor } = useContractor()
     const [ search, setSearch ] = useState('')
-    const { loaded, setLoaded } = useLoad()
+    const { setLoaded } = useLoad()
     const handleSubmit = (e) => {
         e.preventDefault()
         getContractor(search)
     }
 
     useEffect(() => {
-        getContractor(search)
+        setLoaded(true)
+        getContractor(search).then(load => {
+            setLoaded(false)
+        })
+        
     }, [])
     return (
         <div className="background-search">

@@ -13,15 +13,18 @@ import ConProfile from './pages/ConProfile'
 import ConEdit from './pages/ConEdit'
 import example from '../redux/ducks/example'
 import Navbar from './ui/Nav'
+import { useLoad } from '../hooks'
 import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
 
 
 
 export default () => {
+    const { loading } = useLoad()
+
     return (
         <Router>
             <Navbar />
-            <Dimmer active>
+            <Dimmer active={loading}>
             <Loader>Loading</Loader>
             </Dimmer>
             <Route path="/signup" component={SignupForm} />

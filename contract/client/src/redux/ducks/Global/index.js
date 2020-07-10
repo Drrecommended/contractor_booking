@@ -23,23 +23,36 @@ export default (state = globalState, action) => {
 
 // 5. action creators
 
-function isLoaded() {
-    return {
-      type: SET_LOADED,
-      payload: true
+
+
+function isLoaded(load) {
+return dispatch => {
+    if(load === false) {
+        setTimeout(() => {
+        dispatch({
+            type: SET_LOADED,
+            payload: load
+        })
+        }, 1000)
+    } else {
+        dispatch({
+            type: SET_LOADED,
+            payload: load
+        })
     }
-  }
+}
+}
+
 
 
 
 // 6. custom hook
 export function useLoad() {
   const dispatch = useDispatch()
-  const loading = useSelector(appState => appState.globalState)
+  const loading = useSelector(appState => appState.globalState.loaded)
 
-  const loaded = () => dispatch(isLoaded())
-  const setLoaded = () => dispatch(isLoaded())
+  const setLoaded = (load) => dispatch(isLoaded(load))
  
 
-  return { loading, loaded, setLoaded }
+  return { loading, setLoaded }
 }
