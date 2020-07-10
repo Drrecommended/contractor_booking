@@ -11,14 +11,22 @@ router.get('/profile/edit', async (req, res, next) => {
                 WHERE profiles.id = ?`
   const sql2 = `SELECT * FROM galleries WHERE profile_id = ?`
   const sql3 = `SELECT * FROM services WHERE user_id = ?;`
+  const userSql = `SELECT * FROM users WHERE id = ?`
   const [addressProfile] = await conn.promise().query(sql, [profileId])
   const [galleriesProfile] = await conn.promise().query(sql2, [profileId])
   console.log('Hi', galleriesProfile)
   const [servicesProfile] = await conn.promise().query(sql3, [userId])
+  const [userInfo] = await conn.promise().query(userSql, [userId])
+  const user = userInfo[0]
   res.json({
-    address: addressProfile,
+    address: addressProfile[0],
     gallery: galleriesProfile,
-    services: servicesProfile
+    services: servicesProfile,
+    user: {
+      id: user.id,
+      first: user.first_name,
+      last: user.last_name
+    }
   })
 })
 
@@ -53,31 +61,31 @@ router.post('/profile/service', (req, res, next) => {
   const description = req.body.description
   const price = req.body.price
   const sql = `INSERT INTO services (user_id, description, price) VALUES (?, ?, ?)`
-    conn.query(
-      sql,
-      [userId, description, price],
-      (err, results, fields) => {
-        console.log(results)
-        res.json({ message: 'Hello' })
-      })
+  conn.query(
+    sql,
+    [userId, description, price],
+    (err, results, fields) => {
+      console.log(results)
+      res.json({ message: 'Hello' })
     })
+})
 
 router.delete('/profile/service/:id', (req, res, next) => {
-      console.log(req.params.id)
-      const serviceId= req.params.id
-      const sql = `DELETE FROM services WHERE id = ?`
-      conn.query(
-        sql,
-        [serviceId],
-        (err,results,fields) => {
-          console.log(results)
-          res.json({ message: 'Byebye' })
-        })
-      })
-        
-    
+  console.log(req.params.id)
+  const serviceId = req.params.id
+  const sql = `DELETE FROM services WHERE id = ?`
+  conn.query(
+    sql,
+    [serviceId],
+    (err, results, fields) => {
+      console.log(results)
+      res.json({ message: 'Byebye' })
+    })
+})
 
-  
+
+
+
 
 router.patch('/profile/address', (req, res, next) => {
   console.log(req.body)
