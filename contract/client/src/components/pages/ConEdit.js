@@ -5,14 +5,16 @@ import { BsFillPlusSquareFill } from "react-icons/bs";
 import {AiOutlineMinusCircle} from "react-icons/ai";
 import { useEditProfile, useForm, useProfileIndex } from '../../hooks';
 import { TradeOptions } from '../TradeOptions';
+import GalleryImage from '../GalleryImage'
 
 export default () => {
+  //const { profile, getProfile } = useProfileIndex()
   const { addGalleryImage, 
     deleteGalleryImage, 
     addService, 
     deleteConService,
-    updateAddress, 
-    getProfile} = useEditProfile()
+    updateAddress, getProfile
+    } = useEditProfile()
 
     
 
@@ -26,7 +28,7 @@ export default () => {
 
   function handlesubmit(e) {
     e.preventDefault()
-    console.log(getProfile)
+    console.log(editForm)
     resetForm()
   }
 
@@ -76,7 +78,7 @@ export default () => {
             <Input placeholder='Name' 
               type="text"
               name="first"
-              value={getProfile.first}
+              value={editForm.first}
               onChange={setEditForm}/>
             <Input placeholder='Business Name' />
             <Dropdown placeholder='Skills' fluid multiple selection options={options} />
@@ -107,6 +109,7 @@ export default () => {
         <textarea className="TextEdit">Brief Description of your business</textarea>
       </div>
       <div className="GalleryEditButton">
+      
         <Button onClick={handleRequest}>add gallery image</Button>
       </div>
       <div className="InputContainer">

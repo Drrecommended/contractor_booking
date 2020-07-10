@@ -26,9 +26,20 @@ export default (state = profileState, action) => {
 
 function getProfileData() {
     return dispatch => {
-        api.get('/profile/edit')
+      return api.get('/profile/edit').then(resp => {
+        dispatch({
+          type: EDIT_PROFILE,
+          payload: resp.data
+        })
+        return resp
+      })
     }
-}
+  }
+//function getProfileData() {
+//    return dispatch => {
+//        api.get('/profile/edit')
+//    }
+//}
 
 function addImage(galleryItem) {
     return dispatch => {
