@@ -1,9 +1,10 @@
 import React from 'react';
 import { Button, Form, Dropdown, Divider, Icon} from 'semantic-ui-react'
 import '../../styles/Checkout.scss';
-
+import { useCart } from '../../hooks'
 
 export default () => {
+  const { createOrder } = useCart()
   // const addressDefinitions = faker.definitions.address
   // const stateOptions = _.map(addressDefinitions.state, (state, index) => ({
   //   key: addressDefinitions.state_abbr[index],
@@ -31,7 +32,7 @@ export default () => {
             <Form.Input label='Phone' placeholder='Phone' />
           </Form.Group>
           <Form.Checkbox label='I agree to the Terms and Conditions' />
-          <Button type='submit'>Billing info</Button>
+          <Button onClick={() => {createOrder()}} type='submit'>Billing info</Button>
         </Form>
       </div>
     </div>

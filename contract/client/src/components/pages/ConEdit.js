@@ -27,7 +27,7 @@ export default () => {
 
   const options = [
     { key: 'Plumber', text: 'Plumber', value: 'plumber', },
-    { key: 'lanscaper', text: 'Landscaper', value: 'landscaper', },
+    { key: 'landscaper', text: 'Landscaper', value: 'landscaper', },
     { key: 'junk removal', text: 'Junk Removal', value: 'junk removal', }]
 
   const states = [

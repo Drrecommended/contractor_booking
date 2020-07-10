@@ -1,11 +1,11 @@
 // 1. imports
-import axios from 'axios'
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import api from '../../../utils/request'
 
 // 2. action definitions
 const ADD_TO_CART = "product/ADD_TO_CART"
+
 
 
 // 3. initial state
@@ -33,6 +33,14 @@ function addCart(service) {
   }
 }
 
+function createOrderData() {
+  console.log("hello")
+  return dispatch =>{
+    api.post('/orders', {})
+
+  }
+}
+
 
 
 // 6. custom hook
@@ -40,8 +48,9 @@ export function useCart() {
   const dispatch = useDispatch()
   const cart = useSelector(appState => appState.cartState.cart)
   const addToCart = (service) => dispatch(addCart(service))
+  const createOrder=() => dispatch(createOrderData())
 
 
 
-  return { cart, addToCart }
+  return { cart, addToCart, createOrder }
 }
