@@ -13,10 +13,12 @@ export default () => {
     deleteGalleryImage,
     addService,
     deleteConService,
-    updateAddress, getProfile
+    updateAddress,
+    getProfile,
+    gallery
   } = useEditProfile()
 
-
+  console.log(gallery)
 
   const [editForm, resetForm, setFormTo, setEditForm] = useForm({ first: '' })
   const [topForm, handleTopForm, resetTopForm, setTopFormTo] = useForm({ first: '', last: '' })
@@ -181,6 +183,8 @@ export default () => {
         <textarea className="TextEdit">Brief Description of your business</textarea>
       </div>
       <div className="GalleryEditButton">
+
+        <GalleryImage images={gallery} isEditable={true} onDelete={(id) => { console.log(id) }}></GalleryImage>
 
         <Button onClick={handleRequest}>add gallery image</Button>
       </div>
