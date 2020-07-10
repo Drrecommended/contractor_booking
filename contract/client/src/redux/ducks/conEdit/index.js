@@ -3,17 +3,18 @@ import api from "../../../utils/request"
 
 const EDIT_PROFILE = "edit/EDIT_PROFILE"
 const SET_GALLERY = "edit/SET_GALLERY"
+const SET_SERVICES = "edit/SET_SERVICES"
 
 const profileState = {
     first: '',
     last: '',
-    business_name: '',
     trade_1: '',
     trade_2: '',
     bio: '',
     address: '',
     thumbnail: '',
-    gallery: []
+    gallery: [],
+    services: []
 }
 
 
@@ -23,6 +24,8 @@ export default (state = profileState, action) => {
             return { ...state, user: action.payload }
         case SET_GALLERY:
             return { ...state, gallery: action.payload }
+        case SET_SERVICES:
+            return { ...state, services: action.payload }
         default:
             return state
     }
@@ -37,6 +40,10 @@ function getProfileData() {
             })
             dispatch({
                 type: SET_GALLERY,
+                payload: resp.gallery
+            })
+            dispatch({
+                type: SET_SERVICES,
                 payload: resp.gallery
             })
             return resp

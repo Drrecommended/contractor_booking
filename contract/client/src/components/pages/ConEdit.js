@@ -21,7 +21,9 @@ export default () => {
   console.log(gallery)
 
   const [editForm, resetForm, setFormTo, setEditForm] = useForm({ first: '' })
-  const [topForm, handleTopForm, resetTopForm, setTopFormTo] = useForm({ first: '', last: '' })
+  const [topForm, handleTopForm, 
+        resetTopForm, setTopFormTo] = useForm({ first: '', last: '', 
+                                                bio: '', trade1: '', })
 
   const options = [
     { key: 'Plumber', text: 'Plumber', value: 'plumber', },
@@ -121,7 +123,8 @@ export default () => {
   useEffect(() => {
     getProfile().then(resp => {
       console.log(resp)
-      setTopFormTo({ first: resp.user.first, last: resp.user.last })
+      setTopFormTo({ first: resp.user.first, last: resp.user.last, 
+                      bio: resp.address.bio, trade1: resp.address.trade_1 })
     })
   }, [])
 
@@ -153,8 +156,9 @@ export default () => {
               name="last"
               value={topForm.last}
               onChange={handleTopForm} />
-            <Input placeholder='Business Name' />
-            <Dropdown placeholder='Skills' fluid selection options={options} />
+            <Dropdown placeholder='Skills' fluid selection options={options} 
+              value={topForm.trade1}
+              onChange={handleTopForm}/>
           </form>
         </div>
         <Button style={{ margin: '20px' }} onClick={
@@ -180,7 +184,7 @@ export default () => {
 
 
       <div className="BioEdit">
-        <textarea className="TextEdit">Brief Description of your business</textarea>
+        <textarea className="TextEdit">{topForm.bio}</textarea>
       </div>
       <div className="GalleryEditButton">
 
