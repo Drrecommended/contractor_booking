@@ -3,7 +3,6 @@ import '../../styles/ConSearch.css';
 import { useContractor, useLoad } from '../../hooks'
 import { Rating } from 'semantic-ui-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { fa-instagram} from '@fortawesome/fa-instagram'
 
 
 export default () => {
