@@ -32,7 +32,7 @@ export default () => {
 
 
     return (
-        <Segment inverted>
+        <Segment style={{zIndex: 10000}} inverted>
         { isAuthenticated ? 
             <Menu inverted pointing secondary>
                 <Link to="/profile">

@@ -8,7 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default () => {
     const { contractors, getContractor } = useContractor()
-    const [search, setSearch] = useState('')
+    const [ search, setSearch ] = useState('')
+    const { loaded, setLoaded } = useLoad()
     const handleSubmit = (e) => {
         e.preventDefault()
         getContractor(search)
@@ -28,8 +29,12 @@ export default () => {
                                 <div className="info-shelf">
                                     <h2 className="conName">{contractor.first_name} {contractor.last_name}</h2>
                                     <div>{contractor.bio}</div>
+                                    <div className="trades">
+                                        <div>Landscaper</div>
+                                        <div>Carpenter</div>
+                                    </div>
                                 </div>
-                                <Rating icon='star' defaultRating={3} maxRating={4} />
+                                <Rating bool icon='star' defaultRating={3} maxRating={4} />
                             </div>
                         )  
                     })}
