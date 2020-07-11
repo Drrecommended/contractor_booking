@@ -25,7 +25,7 @@ export default (state = contractState, action) => {
 function contract(search) {
   console.log(search)
   return dispatch => {
-      api.get('/contractor-search?word=' + search).then(resp =>{
+      return api.get('/contractor-search?word=' + search).then(resp =>{
           dispatch({
               type: GRAB_CONTRACTOR,
               payload: resp

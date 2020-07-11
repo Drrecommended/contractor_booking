@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/Nav.scss';
 import { Button, Icon, Menu, Segment, Input } from 'semantic-ui-react'
-import { useContractor, useAuth } from '../../hooks'
+import { useContractor, useAuth, useLoad } from '../../hooks'
 import { Link, useLocation } from 'react-router-dom'
 
 
@@ -11,11 +11,15 @@ export default () => {
     const [ search, setSearch ] = useState('')
     const [ searchPage, setSearchPage ] = useState(false)
     const [ activeItem, setActiveItem ] = useState('')
+    const { setLoaded } = useLoad()
     let location = useLocation()
     // const [ user, allowUser ]
     const handleSubmit = (e) => {
         e.preventDefault()
-        getContractor(search)
+        setLoaded(true)
+        getContractor(search).then(() => {
+            setLoaded(false)
+        })
     }
 
     useEffect(() => {
@@ -32,7 +36,7 @@ export default () => {
 
 
     return (
-        <Segment inverted>
+        <Segment style={{zIndex: 10000}} inverted>
         { isAuthenticated ? 
             <Menu inverted pointing secondary>
                 <Link to="/profile">
@@ -49,7 +53,7 @@ export default () => {
                 </Link>
                 <Link to="/order">
                 <Menu.Item
-                    name='Order'
+                    name='Orders'
                     active={activeItem === '/order'}
                 />
                 </Link>

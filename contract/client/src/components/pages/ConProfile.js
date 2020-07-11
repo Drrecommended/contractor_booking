@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../../styles/ConProfile.css';
 import Avatar from '../ui/Avatar'
 import { Link } from 'react-router-dom'
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown, Icon } from 'semantic-ui-react'
 import { useProfileIndex, useCart } from '../../hooks'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -25,114 +25,82 @@ export default (props) => {
         getProfile()
     }, [])
 
-
-
-
-
-
-
     return (
-
-        <div className="profile-page">
-            {
-
-                cart.length > 0 ?
-
-                    <div>
-                        <div className="banner">
-                            <div>
-                                <h2>There are {cart.length} items in the cart</h2>
-                            </div>
-                            <div>
-                                <Button className="banner-button"
-                                    onClick={() => { props.history.push('/checkout') }}>
-
-                                    Book
-                            </Button>
-                            </div>
-
-                        </div>
-                        <div className="hide">
-                            <ul>
-                                {cart.map(item => {
-                                    return <li>{item.text}</li>
-                                })}
-                            </ul>
-                        </div>
+        <div className="Login">
+            <div className="profilePage">
+                <div className="profile-nav">
+                    <div className="profile-image">
+                        <Avatar image={profile.thumbnail} />
                     </div>
-                    :
-                    null
-            }
-
-
-            <div className="profile-nav">
-
-                <div>
-                    <Avatar
-                        image={profile.thumbnail} />
+                    <div className="name-trade-edit-shelf">
+                        <div>{profile.first} {profile.last}</div>
+                        <div>{profile.trade}</div>
+                        <Link to="profile/edit" >edit profile</Link>
+                    </div>
+                    <div className="profile-info">
+                        <div>{profile.address.street}</div>
+                        <div>{profile.address.city},</div>
+                        <div>{profile.address.state}</div>
+                    </div>
                 </div>
-                <div>
-                    <p>
-                        {profile.first}
-                    </p>
-                    <p>
-                        {profile.trade}
-                    </p>
-
-                    <Link to="profile/edit" >edit</Link>
+                <div className="profile-bio"> 
+                    {profile.BIO}
                 </div>
-                <div className="profile-info">
-
-                    {profile.address.street}
-                    <br></br>
-                    {profile.address.city}
-                    {profile.address.state}
-
-                </div>
-
-
-            </div>
-            <br></br>
-            <div className="profile-bio">
-                {profile.BIO}
-            </div>
-            <div>
-                <GalleryImage
-                    images={profile.images}
-                    onDelete={(id) => console.log(id)}
-                    isEditable={false}
-                />
-
-
-                <div className="profile-service">
-                    <div>
-                        <p className="service-font">
-                            Service
-                        </p>
-                        <Dropdown clearable options={profile.options}
+                <div className="gallery-shelf">
+                    <GalleryImage
+                        images={profile.images}
+                        onDelete={(id) => console.log(id)}
+                        isEditable={false}
+                    />
+                </div>    
+                <div className="service-shelf">
+                    <div className="select-service">
+                        <div className="service-font">Select your service</div>
+                        <Dropdown 
+                            clearable options={profile.options}
                             onChange={handleChange}
                             selection
                         />
                         <br></br>
                         <Button
+                            style={{backgroundColor: 'cadetblue', color: "white", marginTop: "10%"}}
                             onClick={() => addToCart(profile.options.find(o => o.id === serviceId))}>
-                            Book
-                    </Button>
+                            Add to cart
+                        </Button>
                     </div>
-                    <div>
+                    {cart.length > 0 ?
+                        <div className="cart-shelf">
+                            <div className="banner">
+                                <div>
+                                    <h2>Would you like to book {cart.length} services?</h2>
+                                </div>
+                                <ol className="service-list">
+                                    {cart.map(item => {
+                                        return <li>{item.text}</li>
+                                    })}
+                                </ol>
+                                <Button style={{backgroundColor: 'cadetblue', color: "white", marginTop: "10%", marginLeft: "70%"}}
+                                    onClick={() => { props.history.push('/checkout') }}>
+                                        Book
+                                </Button>     
+                            </div>
+                        </div>
+                        :
+                        <div className="cart-shelf">
+                            <Icon name='shopping cart' size='large' />
+                        </div>
+                    }
+                    <div className="calender-shelf">
                         <Calendar
+                            style={{float: "right"}}
                             onClickDay={date}
                             onChange={onChange}
                             value={date}
-
                         />
-
                     </div>
-
-
-                </div>
-
             </div>
         </div>
+        </div>
+        
     )
 }

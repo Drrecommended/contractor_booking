@@ -26,17 +26,18 @@ export default () => {
             <Table.HeaderCell>Actions</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
+        {orders.length !== 0 ? 
         <Table.Body>
           {orders.map(order => {
             return (
-              <Table.Row>
+              <Table.Row className={{}}>
                 <Table.Cell>{order.id}</Table.Cell>
                 <Table.Cell>{order.first_name} {order.last_name}</Table.Cell>
                 <Table.Cell>{moment(order.date).subtract(10, 'days').calendar()}</Table.Cell>
                 <Table.Cell>{order.services}</Table.Cell>
                 <Table.Cell>$ {order.total}</Table.Cell>
                 <Table.Cell>   
-                  {order.status === "pending" ? "PENDING" : "false"}       
+                  {order.status === "pending" ? "pending order" : "false"}       
                   <Button onClick={() => approve(order.id)} icon>
                     <Icon name='wrench' />
                   </Button>
@@ -47,7 +48,9 @@ export default () => {
               </Table.Row>
           )
         })}
-        </Table.Body>
+        </Table.Body> : 
+        
+        <Table.Body>No orders yet! Check back soon!</Table.Body>}
 
         <Table.Footer>
           <Table.Row>
