@@ -44,8 +44,10 @@ function getProfileData() {
             })
             dispatch({
                 type: SET_SERVICES,
-                payload: resp.gallery
+                payload: resp.services
+                
             })
+            
             return resp
         })
     }

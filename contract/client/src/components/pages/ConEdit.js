@@ -27,6 +27,9 @@ export default () => {
                                                 street: '', city: '',
                                                 state:'', zip: ''})
 
+  const [serviceForm, handleServiceForm, 
+    resetServiceForm, setServiceFormTo] = useForm({ description: ''})
+
         
 
   const options = [
@@ -131,6 +134,9 @@ export default () => {
                       bio: resp.address.bio, trade1: resp.address.trade_1,
                       street: resp.address.street, city: resp.address.city,
                       state: resp.address.state, zip: resp.address.zip  })
+        
+      setServiceFormTo({ description: resp.services[0].description})
+      console.log(resp.services[0].description)
     })
   }, [])
 
@@ -213,7 +219,10 @@ export default () => {
           <div className="MinusButton">
             <AiOutlineMinusCircle />
           </div>
-          <input type="text" placeholder="JOB DESCRIPTION" />
+          <input type="text" placeholder="JOB DESCRIPTION"
+            name="description"
+            value={serviceForm.description}
+            onChange={handleServiceForm} />
           <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
             <Label basic>$</Label>
             <input />
@@ -226,7 +235,10 @@ export default () => {
           <div className="MinusButton">
             <AiOutlineMinusCircle />
           </div>
-          <input type="text" placeholder="JOB DESCRIPTION" />
+          <input type="text" placeholder="JOB DESCRIPTION"
+            name="description"
+            value={serviceForm.description}
+            onChange={handleServiceForm}/>
           <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
             <Label basic>$</Label>
             <input />
@@ -237,7 +249,10 @@ export default () => {
           <div className="MinusButton">
             <AiOutlineMinusCircle />
           </div>
-          <input type="text" placeholder="JOB DESCRIPTION" />
+          <input type="text" placeholder="JOB DESCRIPTION"
+            name="description"
+            value={serviceForm.description}
+            onChange={handleServiceForm} />
           <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
             <Label basic>$</Label>
             <input />
@@ -250,7 +265,10 @@ export default () => {
           <div className="MinusButton">
             <AiOutlineMinusCircle />
           </div>
-          <input type="text" placeholder="JOB DESCRIPTION" />
+          <input type="text" placeholder="JOB DESCRIPTION"
+            name="description"
+            value={serviceForm.description}
+            onChange={handleServiceForm}/>
           <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
             <Label basic>$</Label>
             <input />
