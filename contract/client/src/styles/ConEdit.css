@@ -78,3 +78,7 @@
     flex-wrap: wrap;
     width: 75%;
 }
+
+.ui.selection.dropdown {
+    min-width: 15em;
+}
