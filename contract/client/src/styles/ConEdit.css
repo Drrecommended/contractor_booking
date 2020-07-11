@@ -30,8 +30,10 @@
     margin: 40px;
     border-bottom-style: ridge;
     border-color: #efef16;
-
+    flex-direction: column;
 }
+
+
 
 .BusinessLocationEdit{
     display: flex;
@@ -85,4 +87,14 @@
 
 .EditPen{
     margin: 10px;
+}
+
+.ui.button {
+    font-size: 1.0em;
+}
+
+.EditContainer{
+        display: flex;
+        justify-content: center;
+    
 }

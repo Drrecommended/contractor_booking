@@ -212,10 +212,10 @@ export default () => {
             value={topForm.state}
             onChange={handleTopForm}></Dropdown>
           <Input placeholder='Zip Code' 
-          type="text"
-          name="zip"
-          value={topForm.zip}
-          onChange={handleTopForm}/>
+            type="text"
+            name="zip"
+            value={topForm.zip}
+            onChange={handleTopForm}/>
         </div>
         
         <div>
@@ -226,13 +226,19 @@ export default () => {
 
 
       <div className="BioEdit">
-        <textarea className="TextEdit" value={topForm.bio}></textarea>
+        <div className="EditContainer">
+          <textarea className="TextEdit" value={topForm.bio}></textarea>
+        </div>
+          <div>
+            <Button positive>SAVE</Button>
+          </div>
       </div>
       <div className="GalleryEditButton">
-
         <GalleryImage images={gallery} isEditable={true} onDelete={(id) => { console.log(id) }}></GalleryImage>
-
-        <Button onClick={handleRequest}>add gallery image</Button>
+          <div>
+            <Button onClick={handleRequest}>add gallery image</Button>
+            <Button positive>SAVE</Button>
+        </div>
       </div>
       <div className="InputContainer">
         <div class="ui focus input">
