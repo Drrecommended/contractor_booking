@@ -28,30 +28,6 @@ export default (props) => {
     return (
         <div className="Login">
             <div className="profilePage">
-                {/* {cart.length > 0 ?
-                    <div>
-                        <div className="banner">
-                            <div>
-                                <h2>There are {cart.length} items in the cart</h2>
-                            </div>
-                            <div>
-                                <Button className="banner-button"
-                                onClick={() => { props.history.push('/checkout') }}>
-                                    Book
-                                </Button>
-                            </div>
-                        </div>
-                        <div className="hide">
-                            <ul>
-                                {cart.map(item => {
-                                    return <li>{item.text}</li>
-                                })}
-                            </ul>
-                        </div>
-                    </div>
-                    :
-                    null
-                } */}
                 <div className="profile-nav">
                     <div className="profile-image">
                         <Avatar image={profile.thumbnail} />
@@ -63,7 +39,7 @@ export default (props) => {
                     </div>
                     <div className="profile-info">
                         <div>{profile.address.street}</div>
-                        <div>{profile.address.city}</div>
+                        <div>{profile.address.city},</div>
                         <div>{profile.address.state}</div>
                     </div>
                 </div>
@@ -77,23 +53,44 @@ export default (props) => {
                         isEditable={false}
                     />
                 </div>    
-                <div className="profile-service">
-                    <div>
-                        <div className="service-font">
-                            Service
-                        </div>
-                        <Dropdown clearable options={profile.options}
+                <div className="service-shelf">
+                    <div className="select-service">
+                        <div className="service-font">Select your service</div>
+                        <Dropdown 
+                            clearable options={profile.options}
                             onChange={handleChange}
                             selection
                         />
                         <br></br>
                         <Button
+                            style={{backgroundColor: 'cadetblue', color: "white", marginTop: "10%"}}
                             onClick={() => addToCart(profile.options.find(o => o.id === serviceId))}>
-                            Book
+                            Add to cart
                         </Button>
                     </div>
-                    <div>
+                    {cart.length > 0 ?
+                        <div className="cart-shelf">
+                            <div className="banner">
+                                <div>
+                                    <h2>Would you like to book {cart.length} services?</h2>
+                                </div>
+                                <ol>
+                                    {cart.map(item => {
+                                        return <li>{item.text}</li>
+                                    })}
+                                </ol>
+                                <Button style={{backgroundColor: 'cadetblue', color: "white", marginTop: "10%", marginLeft: "20%"}}
+                                    onClick={() => { props.history.push('/checkout') }}>
+                                        Book
+                                </Button>     
+                            </div>
+                        </div>
+                        :
+                        null
+                    }
+                    <div className="calender-shelf">
                         <Calendar
+                            style={{float: "right"}}
                             onClickDay={date}
                             onChange={onChange}
                             value={date}
