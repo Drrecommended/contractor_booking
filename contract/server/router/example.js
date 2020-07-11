@@ -4,7 +4,9 @@ const conn = require('../db.js')
 
 // conn.query(sql , [], (err, results, fields) => {})
 router.get('/', (req, res, next) => {
-  res.send('Hello World!')
+  res.json({ user: { first: 'john', last: 'smith' } })
 })
+
+
 
 module.exports = router

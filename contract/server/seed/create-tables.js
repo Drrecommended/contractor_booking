@@ -46,8 +46,8 @@ const query = require('./query');
     `
       CREATE TABLE IF NOT EXISTS profiles (
         id int unsigned NOT NULL AUTO_INCREMENT,
-        trade_1 enum('plumber') DEFAULT NULL,
-        trade_2 enum('plumber') DEFAULT NULL,
+        trade_1 enum('plumber', 'carpenter', 'painter', 'electrician', 'roofer', 'landscaper', 'pipefitter', 'welder', 'mechanic') DEFAULT NULL,
+        trade_2 enum('plumber', 'carpenter', 'painter', 'electrician', 'roofer', 'landscaper', 'pipefitter', 'welder', 'mechanic') DEFAULT NULL,
         bio text,
         address_id int unsigned NOT NULL,
         thumbnail varchar(500) DEFAULT NULL,

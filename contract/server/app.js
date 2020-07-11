@@ -4,6 +4,7 @@ const config = require('config')
 const jwt = require('express-jwt')
 const exampleRoutes = require('./router/example')
 const userRoutes = require('./router/user')
+const editProfileRoutes = require('./router/editProfile')
 const profileRoutes = require('./router/profile')
 const contractRoutes = require('./router/conSearch')
 const orderRoutes = require('./router/conOrder')
@@ -19,14 +20,11 @@ app.use(attachUser)
 
 app.use('/api', exampleRoutes)
 app.use('/api', userRoutes)
+app.use('/api', editProfileRoutes)
 app.use('/api', profileRoutes)
 app.use('/api', contractRoutes)
 app.use('/api', orderRoutes)
 app.use('/api', jwt({ secret: config.get('secret'), algorithms: ['RS256'] }), protectedRoutes)
-
-app.use('/', (req, res, next) => {
-  res.json({ message: 'hi' })
-})
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`)

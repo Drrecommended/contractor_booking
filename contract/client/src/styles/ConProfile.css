@@ -1,10 +1,96 @@
-.row {
-    display: flex;
-    justify-content: center;    
+.profilePage {
+  width: 90%;
+  background-color: white;
+  margin: auto;
+  margin-top: 3%;
+  height: 100%;
 }
 
-.slick-track {
-   
-    width: 25%;
-    height: 25%;
+.select-service {
+  margin-left: 5%;
+  margin-top: 2%;
 }
+
+.profile-nav{
+  display: flex;
+}
+
+.profile-image {
+  margin: 2%
+}
+
+.name-trade-edit-shelf {
+  margin: 2%;
+}
+
+.profile-bio {
+  margin: 2%;
+}
+
+.service-font {
+  font-size: 22px;
+  margin-bottom: 3%;
+}
+
+.service-shelf {
+    display: flex;
+}
+
+.ui.selection.dropdown{
+  min-width: 25em;
+  min-height: 2.71428571em;
+  
+}
+
+.ui.button{
+  font-size: 1.5em;
+  
+}
+
+.profile-info  {
+  margin: 2%;
+}
+
+.profile-page .hide {
+    display: none;
+    padding: 20px;
+    background: #ddd;
+  }
+
+.profile-page .banner {
+    padding: 10px;
+    background: #f7f7f7;
+    
+    
+}
+  
+.profile-page .banner:hover + .hide {
+    display: block;
+  }
+
+.profile-page .hide:hover {
+    display: block;
+}
+
+
+.banner-button{
+  display: flex;
+  justify-content: center;
+}
+
+
+.calender-shelf {    
+  margin-top: 2%;
+  margin-left: 4%;
+}
+
+.cart-shelf {
+  margin-top: 2%;
+  margin-left: 5%;
+  width: 40%;
+}
+
+.service-list {
+  margin-left: 7%;
+}
+

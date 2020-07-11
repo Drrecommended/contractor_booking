@@ -13,7 +13,7 @@ router.get('/contractor-order', (req, res, next) => {
       WHERE contractor_id = ?
     `
   conn.query(
-    sql, 
+    sql,
     [req.user.id],
     (err, results, fields) => {
       console.log(results)
@@ -24,17 +24,22 @@ router.get('/contractor-order', (req, res, next) => {
 
 router.patch('/contractor-order', (req, res, next) => {
   const sql = `
-    UPDATE users u 
+    UPDATE orders o 
     SET status = ? 
     WHERE id = ?;
     `
+  console.log(req.body)
   conn.query(
-    sql, 
-    [req.user.id],
+    sql,
+    [req.body.status, req.body.id],
     (err, results, fields) => {
+      console.log(err)
       res.json(results)
-    }
-  )
+    })
 })
-  
-  module.exports = router
+router.post('/orders', (req, res, next) => {
+  console.log('hello')
+  res.json({})
+})
+
+module.exports = router

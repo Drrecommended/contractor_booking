@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import '../../styles/ConSearch.css';
 import { useContractor } from '../../hooks'
 import { Rating } from 'semantic-ui-react'
-
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { fa-instagram} from '@fortawesome/fa-instagram'
 
 
 export default () => {
@@ -23,9 +23,9 @@ export default () => {
             {contractors.map(contractor => {
                 return (
                     <div className="contractor-shelf">
-                        <div><img src={contractor.thumbnail} /></div>
+                        <div className="conSearchImage"><img src={contractor.thumbnail} /></div>
                         <div className="info-shelf">
-                            <div>{contractor.first_name} {contractor.last_name}</div>
+                            <h2>{contractor.first_name} {contractor.last_name}</h2>
                             <div>{contractor.bio}</div>
                         </div>
                         <Rating icon='star' defaultRating={3} maxRating={4} />
@@ -33,7 +33,9 @@ export default () => {
                 )  
             })}
             </div>
-            <div>socials</div>
+            <div className="welcomeShelf">
+                <h1>Welcome</h1>
+            </div>
         </div>
 
 
