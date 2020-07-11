@@ -80,13 +80,17 @@
 
 
 .calender-shelf {    
-  position: absolute; /*or fixed*/
-  right: 10%;
   margin-top: 2%;
+  margin-left: 4%;
 }
 
 .cart-shelf {
   margin-top: 2%;
   margin-left: 5%;
+  width: 40%;
+}
+
+.service-list {
+  margin-left: 7%;
 }
 

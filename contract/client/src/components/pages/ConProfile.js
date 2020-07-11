@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../../styles/ConProfile.css';
 import Avatar from '../ui/Avatar'
 import { Link } from 'react-router-dom'
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown, Icon } from 'semantic-ui-react'
 import { useProfileIndex, useCart } from '../../hooks'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -74,19 +74,21 @@ export default (props) => {
                                 <div>
                                     <h2>Would you like to book {cart.length} services?</h2>
                                 </div>
-                                <ol>
+                                <ol className="service-list">
                                     {cart.map(item => {
                                         return <li>{item.text}</li>
                                     })}
                                 </ol>
-                                <Button style={{backgroundColor: 'cadetblue', color: "white", marginTop: "10%", marginLeft: "20%"}}
+                                <Button style={{backgroundColor: 'cadetblue', color: "white", marginTop: "10%", marginLeft: "70%"}}
                                     onClick={() => { props.history.push('/checkout') }}>
                                         Book
                                 </Button>     
                             </div>
                         </div>
                         :
-                        null
+                        <div className="cart-shelf">
+                            <Icon name='shopping cart' size='large' />
+                        </div>
                     }
                     <div className="calender-shelf">
                         <Calendar
