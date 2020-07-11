@@ -58,6 +58,8 @@
   }
 
 .profile-page .banner {
+  display: flex;
+  justify-content: center;
     padding: 10px;
     background: #f7f7f7;
     
@@ -73,7 +75,7 @@
 }
 
 
-.banner-button{
+.ui.button.banner-button{
   display: flex;
   justify-content: center;
 }
