@@ -1,8 +1,11 @@
 .profile-nav{
   display: flex;
-  justify-content: space-around;
-  margin: 10px;
+  justify-content: space-between;
+  margin: 35px;
+  
 }
+
+
 .service-font {
   font-size: large;
 }
@@ -26,8 +29,7 @@
 }
 
 .profile-info  {
-  display: flex;
-  justify-content: space-evenly;
+  left: 10px;
 }
 
 .profile-page .hide {
@@ -37,6 +39,8 @@
   }
 
 .profile-page .banner {
+  display: flex;
+  justify-content: center;
     padding: 10px;
     background: #f7f7f7;
     
@@ -52,7 +56,7 @@
 }
 
 
-.banner-button{
+.ui.button.banner-button{
   display: flex;
   justify-content: center;
 }

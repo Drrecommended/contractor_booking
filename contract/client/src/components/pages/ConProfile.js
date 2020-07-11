@@ -41,13 +41,13 @@ export default (props) => {
                     <div>
                         <div className="banner">
                             <div>
-                            <h2>There are {cart.length} items in the cart</h2>
+                                <h2>There are {cart.length} items in the cart</h2>
                             </div>
                             <div>
-                            <Button className="banner-button"
-                            onClick={() => { props.history.push('/checkout') }}>
+                                <Button className="banner-button"
+                                    onClick={() => { props.history.push('/checkout') }}>
 
-                                Book
+                                    Book
                             </Button>
                             </div>
 
@@ -64,32 +64,33 @@ export default (props) => {
                     null
             }
 
-            <div className="row">
-                <div className="profile-nav">
-                    <div>
-                        <Avatar
-                            image={profile.thumbnail} />
-                    </div>
-                    <div>
-                        <p>
-                            {profile.first}
-                        </p>
-                        <p>
-                            {profile.trade}
-                        </p>
 
-                        <Link to="profile/edit" >edit</Link>
-                    </div>
-                    <div>
-                        <p className="profile-info">
-                            {profile.address.street}
-                            <br></br>
-                            {profile.address.city}
-                            {profile.address.state}
-                        </p>
-                    </div>
+            <div className="profile-nav">
+
+                <div>
+                    <Avatar
+                        image={profile.thumbnail} />
+                </div>
+                <div>
+                    <p>
+                        {profile.first}
+                    </p>
+                    <p>
+                        {profile.trade}
+                    </p>
+
+                    <Link to="profile/edit" >edit</Link>
+                </div>
+                <div className="profile-info">
+
+                    {profile.address.street}
+                    <br></br>
+                    {profile.address.city}
+                    {profile.address.state}
 
                 </div>
+
+
             </div>
             <br></br>
             <div className="profile-bio">
