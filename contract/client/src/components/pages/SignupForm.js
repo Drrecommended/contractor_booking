@@ -16,12 +16,15 @@ const DividerExampleVerticalForm = (props) => {
   const { login, logout } = useAuth()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [loginError, setLoginError] = useState('')
   const [contractor, setContractor] = useState(false)
 
   function handleLogin(e) {
     e.preventDefault()
     login(username, password).then(resp => {
       props.history.push('/search')
+    }).catch(err => {
+      setLoginError(err.data.message)
     })
   }
 
@@ -46,6 +49,7 @@ const DividerExampleVerticalForm = (props) => {
                 <Grid columns={2} relaxed='very' stackable>
                   <Grid.Column>
                     <Form onSubmit={handleLogin}>
+                      <p>{loginError}</p>
                       <Form.Input
                         type="text"
                         value={username}

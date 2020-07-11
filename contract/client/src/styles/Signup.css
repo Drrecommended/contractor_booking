@@ -10,6 +10,12 @@ body{
     margin-top: 3%;
 }
 
+@media(max-width: 768px) {
+    .Signup-login-divider {
+        width: 90%;
+    }
+}
+
 .DividerContainer{
     display: flex;
     justify-content: center;
