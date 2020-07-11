@@ -28,7 +28,7 @@ export default () => {
                                                 state:'', zip: ''})
 
   const [serviceForm, handleServiceForm, 
-    resetServiceForm, setServiceFormTo] = useForm({ description: ''})
+    resetServiceForm, setServiceFormTo] = useForm({ description: '', price: ''})
 
         
 
@@ -135,8 +135,9 @@ export default () => {
                       street: resp.address.street, city: resp.address.city,
                       state: resp.address.state, zip: resp.address.zip  })
         
-      setServiceFormTo({ description: resp.services[0].description})
-      console.log(resp.services[0].description)
+      setServiceFormTo({ description: resp.services[0].description,
+                        price: resp.services[0].price})
+      console.log(resp.services[0].price)
     })
   }, [])
 
@@ -225,7 +226,11 @@ export default () => {
             onChange={handleServiceForm} />
           <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
             <Label basic>$</Label>
-            <input />
+            <input 
+              name="price"
+              value={serviceForm.price}
+              onChange={handleServiceForm}
+              />
             <Label>.00</Label>
           </Input>
           <div>
@@ -241,7 +246,11 @@ export default () => {
             onChange={handleServiceForm}/>
           <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
             <Label basic>$</Label>
-            <input />
+            <input 
+              name="price"
+              value={serviceForm.price}
+              onChange={handleServiceForm}
+              />
             <Label>.00</Label>
           </Input>
         </div>
@@ -253,9 +262,17 @@ export default () => {
             name="description"
             value={serviceForm.description}
             onChange={handleServiceForm} />
-          <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
+          <Input className="PriceEdit" 
+            labelPosition='right' 
+            type='text' 
+            placeholder='Amount'
+            >
             <Label basic>$</Label>
-            <input />
+            <input
+            name="price"
+            value={serviceForm.price}
+            onChange={handleServiceForm}
+            />
             <Label>.00</Label>
           </Input>
           <div>
@@ -269,11 +286,17 @@ export default () => {
             name="description"
             value={serviceForm.description}
             onChange={handleServiceForm}/>
-          <Input className="PriceEdit" labelPosition='right' type='text' placeholder='Amount'>
+
+          <Input  className="PriceEdit" labelPosition='right' type='text' placeholder='Amount' >
             <Label basic>$</Label>
-            <input />
+            <input
+            name="price"
+            value={serviceForm.price}
+            onChange={handleServiceForm}
+            />
             <Label>.00</Label>
           </Input>
+
         </div>
       </div>
       <div className="AddDescriptionButton">
