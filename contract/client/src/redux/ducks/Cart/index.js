@@ -18,7 +18,7 @@ const cartState = {
 export default (state = cartState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      return {...state, cart: [...state.cart, action.payload] }
+      return { ...state, cart: [...state.cart, action.payload] }
     default:
       return state
   }
@@ -33,10 +33,12 @@ function addCart(service) {
   }
 }
 
-function createOrderData() {
-  console.log("hello")
-  return dispatch =>{
-    api.post('/orders', {})
+function createOrderData(cart) {
+  const orderData = { contractor_id: 2, date: '2020-07-11', cart }
+  console.log(orderData)
+  return dispatch => {
+    api.post('/orders', orderData)
+
 
   }
 }
@@ -48,7 +50,7 @@ export function useCart() {
   const dispatch = useDispatch()
   const cart = useSelector(appState => appState.cartState.cart)
   const addToCart = (service) => dispatch(addCart(service))
-  const createOrder=() => dispatch(createOrderData())
+  const createOrder = () => dispatch(createOrderData(cart))
 
 
 
