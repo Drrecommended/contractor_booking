@@ -56,35 +56,32 @@ export default (props) => {
                     <div className="profile-image">
                         <Avatar image={profile.thumbnail} />
                     </div>
-                    <div>
-                        <p>{profile.first}</p>
-                        <p>{profile.trade}</p>
+                    <div className="name-trade-edit-shelf">
+                        <div>{profile.first} {profile.last}</div>
+                        <div>{profile.trade}</div>
                         <Link to="profile/edit" >edit profile</Link>
                     </div>
-                    <div>
-                        <p className="profile-info">
-                            {profile.address.street}
-                            {profile.address.city}
-                            {profile.address.state}
-                        </p>
+                    <div className="profile-info">
+                        <div>{profile.address.street}</div>
+                        <div>{profile.address.city}</div>
+                        <div>{profile.address.state}</div>
                     </div>
                 </div>
-            <div className="profile-bio">
-                {profile.BIO}
-            </div>
-            <div>
-                <GalleryImage
-                    images={profile.images}
-                    onDelete={(id) => console.log(id)}
-                    isEditable={false}
-                />
-
-
+                <div className="profile-bio"> 
+                    {profile.BIO}
+                </div>
+                <div className="gallery-shelf">
+                    <GalleryImage
+                        images={profile.images}
+                        onDelete={(id) => console.log(id)}
+                        isEditable={false}
+                    />
+                </div>    
                 <div className="profile-service">
                     <div>
-                        <p className="service-font">
+                        <div className="service-font">
                             Service
-                        </p>
+                        </div>
                         <Dropdown clearable options={profile.options}
                             onChange={handleChange}
                             selection
@@ -93,21 +90,15 @@ export default (props) => {
                         <Button
                             onClick={() => addToCart(profile.options.find(o => o.id === serviceId))}>
                             Book
-                    </Button>
+                        </Button>
                     </div>
                     <div>
                         <Calendar
                             onClickDay={date}
                             onChange={onChange}
                             value={date}
-
                         />
-
                     </div>
-
-
-                </div>
-
             </div>
         </div>
         </div>

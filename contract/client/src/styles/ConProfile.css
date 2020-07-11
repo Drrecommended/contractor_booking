@@ -3,7 +3,7 @@
   background-color: white;
   margin: auto;
   opacity: 0.8;
-  
+  margin-top: 3%;
 }
 
 .profile-nav{
@@ -12,6 +12,10 @@
 
 .profile-image {
   margin: 2%
+}
+
+.name-trade-edit-shelf {
+  margin: 2%;
 }
 
 .service-font {
@@ -37,8 +41,7 @@
 }
 
 .profile-info  {
-  display: flex;
-  justify-content: space-evenly;
+  margin: 2%;
 }
 
 .profile-page .hide {
