@@ -19,9 +19,10 @@ const cartState = {
 export default (state = cartState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
+      console.log(state.cart)
       return {...state, cart: [...state.cart, action.payload] }
     case DELETE_FROM_CART:
-      return {...state, cart: [...state.cart, action.payload] -1}
+      return {...state, cart: state.cart.filter(item => item.id !== action.payload)}
     default:
       return state
   }
@@ -36,10 +37,10 @@ function addCart(service) {
   }
 }
 
-function deleteCart(service) {
+function deleteCart(id) {
   return {
     type: DELETE_FROM_CART,
-    payload: service 
+    payload: id 
 
   }
 }
@@ -59,7 +60,7 @@ export function useCart() {
   const dispatch = useDispatch()
   const cart = useSelector(appState => appState.cartState.cart)
   const addToCart = (service) => dispatch(addCart(service))
-  const deleteCartItem = (service) => dispatch(deleteCart(service))
+  const deleteCartItem = (id) => dispatch(deleteCart(id))
 
   const createOrder=() => dispatch(createOrderData())
 

@@ -29,7 +29,7 @@ export default (state = profileState, action) => {
 
   function getProfileData() {
     return dispatch => {
-        api.get('/profile').then(resp =>{
+        return api.get('/profile').then(resp =>{
             dispatch({
                 type: GET_PROFILE,
                 payload: resp

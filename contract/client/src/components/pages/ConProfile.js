@@ -14,16 +14,22 @@ export default (props) => {
     const { profile, getProfile } = useProfileIndex()
     const { cart, addToCart, deleteCartItem } = useCart()
     const [ date, setDate ]   = useState(new Date());
+    const [ loading ] = useState('')
     const [ serviceId, setServiceId ] = useState(null)
     const { setLoaded } = useLoad()
     const handleChange = (e, { value }) => setServiceId(value)
+
 
     const onChange = date => {
         setDate(date);
     }
 
     useEffect(() => {
-        getProfile()
+        setLoaded(true)
+        console.log(getProfile())
+        getProfile().then(() => {
+            setLoaded(false)
+        })
     }, [])
 
     return (
@@ -56,14 +62,16 @@ export default (props) => {
                 </div>    
                 <div className="service-shelf">
                     <div className="select-service-shelf">
-                        <div className="service-font">Select your service</div>
+                        <div className="service-font">Select your service below</div>
                         <Dropdown 
+                            placeholder="services"
                             options={profile.options} 
                             onChange={handleChange}
                             selection
                         />
                         <br></br>
                         <Button
+                            disabled={!serviceId}
                             style={{backgroundColor: 'cadetblue', color: "white", marginTop: "10%"}}
                             onClick={() => addToCart(profile.options.find(o => o.id === serviceId))}>
                             Add to cart
@@ -77,9 +85,10 @@ export default (props) => {
                                 </div>
                                 <div>
                                     {cart.map(item => {
+                                        console.log(item)
                                         return <div className="service-list">
                                                 <div className="service">{item.text}</div>
-                                                <div onClick={() => deleteCartItem(item.text)} className="delete-cart-item">x</div>
+                                                <div onClick={() => deleteCartItem(item.id)} className="delete-cart-item">x</div>
                                             </div>
                                     })}
                                 </div>

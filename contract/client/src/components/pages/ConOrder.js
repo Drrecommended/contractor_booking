@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import '../../styles/ConOrder.css';
 import { Button, Icon, Table, Menu } from 'semantic-ui-react'
 import moment from 'moment'
-import { useOrder } from '../../hooks'
+import { useOrder, useLoad } from '../../hooks'
 
 
 export default () => {
   const { orders, getOrder, approve, deny } = useOrder()
+  const { setLoaded } = useLoad()
+  const [ loading ] = useState('')
 
 
   useEffect(() => {
