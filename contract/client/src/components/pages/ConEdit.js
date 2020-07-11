@@ -3,6 +3,7 @@ import '../../styles/ConEdit.css';
 import { Button, Input, Dropdown, Container, Label } from 'semantic-ui-react';
 import { BsFillPlusSquareFill } from "react-icons/bs";
 import { AiOutlineMinusCircle } from "react-icons/ai";
+import { GrEdit } from "react-icons/gr";
 import { useEditProfile, useForm, useProfileIndex } from '../../hooks';
 import { TradeOptions } from '../TradeOptions';
 import GalleryImage from '../GalleryImage'
@@ -211,29 +212,36 @@ export default () => {
             value={topForm.state}
             onChange={handleTopForm}></Dropdown>
           <Input placeholder='Zip Code' 
-          type="text"
-          name="zip"
-          value={topForm.zip}
-          onChange={handleTopForm}/>
+            type="text"
+            name="zip"
+            value={topForm.zip}
+            onChange={handleTopForm}/>
         </div>
         
         <div>
-          <Button positive>SAVE</Button>
+          <Button onClick={ () => updateAddress(topForm)} positive>SAVE</Button>
         </div>
       </div>
 
 
 
       <div className="BioEdit">
-        <textarea className="TextEdit" value={topForm.bio}></textarea>
+        <div className="EditContainer">
+          <textarea className="TextEdit" value={topForm.bio}></textarea>
+        </div>
+          <div>
+            <Button positive>SAVE</Button>
+          </div>
       </div>
       <div className="GalleryEditButton">
-
         <GalleryImage images={gallery} isEditable={true} onDelete={(id) => { console.log(id) }}></GalleryImage>
-
-        <Button onClick={handleRequest}>add gallery image</Button>
+          <div>
+            <Button onClick={handleRequest}>add gallery image</Button>
+            <Button positive>SAVE</Button>
+        </div>
       </div>
       <div className="InputContainer">
+        <div>
         <div class="ui focus input">
           <div className="MinusButton">
             <AiOutlineMinusCircle />
@@ -251,6 +259,9 @@ export default () => {
               />
             <Label>.00</Label>
           </Input>
+          <div className="EditPen">
+            <GrEdit/>
+          </div>
           <div>
           </div>
         </div>
@@ -271,6 +282,9 @@ export default () => {
               />
             <Label>.00</Label>
           </Input>
+          <div className="EditPen">
+            <GrEdit/>
+          </div>
         </div>
         <div class="ui focus input">
           <div className="MinusButton">
@@ -293,6 +307,9 @@ export default () => {
             />
             <Label>.00</Label>
           </Input>
+          <div className="EditPen">
+            <GrEdit/>
+          </div>
           <div>
           </div>
         </div>
@@ -314,6 +331,10 @@ export default () => {
             />
             <Label>.00</Label>
           </Input>
+          <div className="EditPen">
+            <GrEdit/>
+          </div>
+          </div>
 
         </div>
       </div>
