@@ -38,7 +38,7 @@ router.patch('/contractor-order', (req, res, next) => {
     })
 })
 router.post('/orders', (req, res, next) => {
-  console.log('hello')
+  console.log(req.body)
   res.json({})
 })
 

@@ -33,10 +33,12 @@ function addCart(service) {
   }
 }
 
-function createOrderData() {
-  console.log("hello")
+function createOrderData(cart) {
+  const orderData = {contractor_id: 2, date: '7/11/2020', cart}
+  console.log(orderData)
   return dispatch =>{
-    api.post('/orders', {})
+    api.post('/orders',orderData)
+    
 
   }
 }
@@ -48,8 +50,8 @@ export function useCart() {
   const dispatch = useDispatch()
   const cart = useSelector(appState => appState.cartState.cart)
   const addToCart = (service) => dispatch(addCart(service))
-  const createOrder=() => dispatch(createOrderData())
-
+  const createOrder=() => dispatch(createOrderData(cart))
+  
 
 
   return { cart, addToCart, createOrder }
