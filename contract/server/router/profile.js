@@ -4,7 +4,6 @@ const conn = require('../db.js')
 
 // conn.query(sql , [], (err, results, fields) => {})
 router.get('/profile', (req, res, next) => {
-
   res.json({
     thumbnail: "https://pbs.twimg.com/profile_images/1050414908762939393/UKzYsgQg_400x400.jpg",
     first: "Prison",
