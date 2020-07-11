@@ -1,3 +1,21 @@
-.hidden {
-    display: none !important;
+
+.ui.segment { 
+    margin: 0;
+
+}
+
+.ui.inverted.segment { 
+    background-color: cadetblue;
+    border-bottom: 1px black solid;
+
+}
+
+.ui.secondary.inverted.pointing.menu {
+    border: none;
+    font-size: 16px;
+    height: 10vh;
+}
+
+Input {
+    width: fit-content;
 }

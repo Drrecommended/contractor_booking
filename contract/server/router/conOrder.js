@@ -4,19 +4,42 @@ const conn = require('../db.js')
 
 
 router.get('/contractor-order', (req, res, next) => {
-  console.log(req.query)
-  res.json( 
-      {
-        orderData: [{
-            orderNumber: "3298472348032",
-            orderName: "Bill Murray",
-            orderDate: "2/22/22",
-            orderServices: "Moved Furniture",
-            orderTotal: "$120.00"
-          }],
-        }
- 
+  console.log(req.user)
+  const sql = `
+      SELECT 
+      o.status, o.id, o.services, o.date, o.total, u.first_name, u.last_name
+      FROM orders o 
+      JOIN users u ON customer_id = u.id
+      WHERE contractor_id = ?
+    `
+  conn.query(
+    sql,
+    [req.user.id],
+    (err, results, fields) => {
+      console.log(results)
+      res.json(results)
+    }
   )
 })
-  
-  module.exports = router
+
+router.patch('/contractor-order', (req, res, next) => {
+  const sql = `
+    UPDATE orders o 
+    SET status = ? 
+    WHERE id = ?;
+    `
+  console.log(req.body)
+  conn.query(
+    sql,
+    [req.body.status, req.body.id],
+    (err, results, fields) => {
+      console.log(err)
+      res.json(results)
+    })
+})
+router.post('/orders', (req, res, next) => {
+  console.log('hello')
+  res.json({})
+})
+
+module.exports = router

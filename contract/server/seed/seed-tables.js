@@ -31,18 +31,18 @@ function makeService() {
 users.map(async user => {
   let addressId
   await query(
-    `INSERT INTO addresses (street) VALUES (NULL)
+    `INSERT INTO addresses (city, street, state, zip) VALUES (?,?,?,?)
     `,
-    null,
+    ['las vegas', '555 apple st', 'AZ', '89101'],
     (result => {
       addressId = result.insertId
     })
   )
 
   await query(
-    `INSERT INTO profiles (address_id) VALUES(?)
+    `INSERT INTO profiles (address_id, bio, thumbnail, trade_1, trade_2) VALUES(?, ?, ?, ?, ?)
     `,
-    [addressId],
+    [addressId, 'I am a bio', 'https://placehold.it/250x250/8B63A1', 'plumber', 'electrician'],
     (result => {
       user.profile_id = result.insertId
     })
@@ -81,15 +81,16 @@ users.map(async user => {
   await query(`
     INSERT INTO galleries (profile_id, img_src)
     VALUES 
-    (1, 'https://placehold.it/250x250/1D3030'),
-    (1, 'https://placehold.it/250x250/007B7B'),
-    (1, 'https://placehold.it/250x250/8B63A1')
+    (2, 'https://placehold.it/250x250/1D3030'),
+    (2, 'https://placehold.it/250x250/007B7B'),
+    (2, 'https://placehold.it/250x250/8B63A1')
   `)
 
   await query(`
       INSERT INTO orders (customer_id, contractor_id, date, services, total, status)
       VALUES 
       (1, 2, '2020-06-10', 'testing', 22.22, 'approved'),
-      (1, 2, '2020-06-7', 'testing', 42.22, 'denied')
+      (1, 2, '2020-06-7', 'testing', 42.22, 'denied'),
+      (1, 2, '2020-06-7', 'testing', 52.22, 'pending')
   `)
 })()

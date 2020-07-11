@@ -55,6 +55,7 @@ class Request {
   }
 
   delete = (url) => {
+    console.log(url)
     return this.request(url, 'delete')
   }
 
@@ -76,12 +77,9 @@ export class AuthService {
       })
   }
 
-  static signup = (username, password) => {
-    const userToRegister = {
-      username: username,
-      password: password
-    }
-    return api.post('/registration', userToRegister)
+  static signup = (form) => {
+    
+    return api.post('/registration', form)
   }
 
   static logout = () => {
