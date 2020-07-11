@@ -1,8 +1,19 @@
+.profilePage {
+  width: 90%;
+  background-color: white;
+  margin: auto;
+  opacity: 0.8;
+  
+}
+
 .profile-nav{
   display: flex;
-  justify-content: space-around;
-  margin: 10px;
 }
+
+.profile-image {
+  margin: 2%
+}
+
 .service-font {
   font-size: large;
 }
@@ -56,3 +67,5 @@
   display: flex;
   justify-content: center;
 }
+
+

@@ -25,32 +25,21 @@ export default (props) => {
         getProfile()
     }, [])
 
-
-
-
-
-
-
     return (
-
-        <div className="profile-page">
-            {
-
-                cart.length > 0 ?
-
+        <div className="Login">
+            <div className="profilePage">
+                {/* {cart.length > 0 ?
                     <div>
                         <div className="banner">
                             <div>
-                            <h2>There are {cart.length} items in the cart</h2>
+                                <h2>There are {cart.length} items in the cart</h2>
                             </div>
                             <div>
-                            <Button className="banner-button"
-                            onClick={() => { props.history.push('/checkout') }}>
-
-                                Book
-                            </Button>
+                                <Button className="banner-button"
+                                onClick={() => { props.history.push('/checkout') }}>
+                                    Book
+                                </Button>
                             </div>
-
                         </div>
                         <div className="hide">
                             <ul>
@@ -62,36 +51,24 @@ export default (props) => {
                     </div>
                     :
                     null
-            }
-
-            <div className="row">
+                } */}
                 <div className="profile-nav">
-                    <div>
-                        <Avatar
-                            image={profile.thumbnail} />
+                    <div className="profile-image">
+                        <Avatar image={profile.thumbnail} />
                     </div>
                     <div>
-                        <p>
-                            {profile.first}
-                        </p>
-                        <p>
-                            {profile.trade}
-                        </p>
-
-                        <Link to="profile/edit" >edit</Link>
+                        <p>{profile.first}</p>
+                        <p>{profile.trade}</p>
+                        <Link to="profile/edit" >edit profile</Link>
                     </div>
                     <div>
                         <p className="profile-info">
                             {profile.address.street}
-                            <br></br>
                             {profile.address.city}
                             {profile.address.state}
                         </p>
                     </div>
-
                 </div>
-            </div>
-            <br></br>
             <div className="profile-bio">
                 {profile.BIO}
             </div>
@@ -133,5 +110,7 @@ export default (props) => {
 
             </div>
         </div>
+        </div>
+        
     )
 }
