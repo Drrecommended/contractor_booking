@@ -3,6 +3,7 @@ import '../../styles/ConEdit.css';
 import { Button, Input, Dropdown, Container, Label } from 'semantic-ui-react';
 import { BsFillPlusSquareFill } from "react-icons/bs";
 import { AiOutlineMinusCircle } from "react-icons/ai";
+import { GrEdit } from "react-icons/gr";
 import { useEditProfile, useForm, useProfileIndex } from '../../hooks';
 import { TradeOptions } from '../TradeOptions';
 import GalleryImage from '../GalleryImage'
@@ -251,6 +252,9 @@ export default () => {
               />
             <Label>.00</Label>
           </Input>
+          <div className="EditPen">
+            <GrEdit/>
+          </div>
           <div>
           </div>
         </div>
@@ -271,6 +275,9 @@ export default () => {
               />
             <Label>.00</Label>
           </Input>
+          <div className="EditPen">
+            <GrEdit/>
+          </div>
         </div>
         <div class="ui focus input">
           <div className="MinusButton">
@@ -293,6 +300,9 @@ export default () => {
             />
             <Label>.00</Label>
           </Input>
+          <div className="EditPen">
+            <GrEdit/>
+          </div>
           <div>
           </div>
         </div>
@@ -314,6 +324,9 @@ export default () => {
             />
             <Label>.00</Label>
           </Input>
+          <div className="EditPen">
+            <GrEdit/>
+          </div>
 
         </div>
       </div>
