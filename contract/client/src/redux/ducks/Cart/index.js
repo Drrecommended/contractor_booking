@@ -5,6 +5,7 @@ import api from '../../../utils/request'
 
 // 2. action definitions
 const ADD_TO_CART = "product/ADD_TO_CART"
+const DELETE_FROM_CART = "product/DELETE_FROM_CART"
 
 
 
@@ -19,6 +20,8 @@ export default (state = cartState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
       return {...state, cart: [...state.cart, action.payload] }
+    case DELETE_FROM_CART:
+      return {...state, cart: [...state.cart, action.payload] -1}
     default:
       return state
   }
@@ -30,6 +33,14 @@ function addCart(service) {
   return {
     type: ADD_TO_CART,
     payload: service
+  }
+}
+
+function deleteCart(service) {
+  return {
+    type: DELETE_FROM_CART,
+    payload: service 
+
   }
 }
 
@@ -48,9 +59,11 @@ export function useCart() {
   const dispatch = useDispatch()
   const cart = useSelector(appState => appState.cartState.cart)
   const addToCart = (service) => dispatch(addCart(service))
+  const deleteCartItem = (service) => dispatch(deleteCart(service))
+
   const createOrder=() => dispatch(createOrderData())
 
 
 
-  return { cart, addToCart, createOrder }
+  return { cart, addToCart, deleteCartItem, createOrder }
 }
