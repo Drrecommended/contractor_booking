@@ -23,7 +23,11 @@ export default () => {
   const [editForm, resetForm, setFormTo, setEditForm] = useForm({ first: '' })
   const [topForm, handleTopForm, 
         resetTopForm, setTopFormTo] = useForm({ first: '', last: '', 
-                                                bio: '', trade1: '', })
+                                                bio: '', trade1: '',
+                                                street: '', city: '',
+                                                state:'', zip: ''})
+
+        
 
   const options = [
     { key: 'Plumber', text: 'Plumber', value: 'plumber', },
@@ -124,7 +128,9 @@ export default () => {
     getProfile().then(resp => {
       console.log(resp)
       setTopFormTo({ first: resp.user.first, last: resp.user.last, 
-                      bio: resp.address.bio, trade1: resp.address.trade_1 })
+                      bio: resp.address.bio, trade1: resp.address.trade_1,
+                      street: resp.address.street, city: resp.address.city,
+                      state: resp.address.state, zip: resp.address.zip  })
     })
   }, [])
 
@@ -164,10 +170,27 @@ export default () => {
         <Button style={{ margin: '20px' }} onClick={
           () => dataFromBackend()}>{editForm.first}</Button>
         <div className="BusinessLocationEdit">
-          <Input placeholder='Street' />
-          <Input placeholder='City' />
-          <Dropdown placeholder='State' fluid selection options={states}></Dropdown>
-          <Input placeholder='Zip Code' />
+          <Input placeholder='Street' 
+            type="text"
+            name="street"
+            value={topForm.street}
+            onChange={handleTopForm}/>
+          <Input placeholder='City'
+           type="text"
+           name="city"
+           value={topForm.city}
+           onChange={handleTopForm}/>
+          <Dropdown placeholder='State' 
+            fluid selection options={states}
+            type="text"
+            name="state"
+            value={topForm.state}
+            onChange={handleTopForm}></Dropdown>
+          <Input placeholder='Zip Code' 
+          type="text"
+          name="zip"
+          value={topForm.zip}
+          onChange={handleTopForm}/>
         </div>
         <div>
           <Button positive>SAVE</Button>
@@ -176,15 +199,8 @@ export default () => {
 
 
 
-
-
-
-
-
-
-
       <div className="BioEdit">
-        <textarea className="TextEdit">{topForm.bio}</textarea>
+        <textarea className="TextEdit" value={topForm.bio}></textarea>
       </div>
       <div className="GalleryEditButton">
 
