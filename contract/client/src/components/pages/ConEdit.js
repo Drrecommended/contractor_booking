@@ -219,7 +219,7 @@ export default () => {
         </div>
         
         <div>
-          <Button positive>SAVE</Button>
+          <Button onClick={ () => updateAddress(topForm)} positive>SAVE</Button>
         </div>
       </div>
 
@@ -241,6 +241,7 @@ export default () => {
         </div>
       </div>
       <div className="InputContainer">
+        <div>
         <div class="ui focus input">
           <div className="MinusButton">
             <AiOutlineMinusCircle />
@@ -332,6 +333,7 @@ export default () => {
           </Input>
           <div className="EditPen">
             <GrEdit/>
+          </div>
           </div>
 
         </div>

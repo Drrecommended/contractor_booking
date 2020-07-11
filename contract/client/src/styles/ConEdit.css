@@ -44,7 +44,7 @@
 }
 
 .ui.focus.input{
-    margin: 30px;
+    margin: 20px;
 }
 
 .PriceEdit{
@@ -78,7 +78,7 @@
 .InputContainer{
     display: flex;
     flex-wrap: wrap;
-    width: 75%;
+   
 }
 
 .ui.selection.dropdown {
