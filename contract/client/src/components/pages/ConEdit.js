@@ -25,18 +25,31 @@ export default () => {
         resetTopForm, setTopFormTo] = useForm({ first: '', last: '', 
                                                 bio: '', trade1: '',
                                                 street: '', city: '',
-                                                state:'', zip: ''})
+                                                state:'', zip: '', trade2:''})
 
   const [serviceForm, handleServiceForm, 
     resetServiceForm, setServiceFormTo] = useForm({ description: '', price: ''})
+
+    const [galleryForm, handleGalleryForm, 
+      resetGalleryForm, setGalleryFormTo] = useForm()
 
         
 
   const options = [
     { key: 'Plumber', text: 'Plumber', value: 'plumber', },
     { key: 'landscaper', text: 'Landscaper', value: 'landscaper', },
-    { key: 'junk removal', text: 'Junk Removal', value: 'junk removal', }]
+    { key: 'junk removal', text: 'Junk Removal', value: 'junk removal', },
+    { key: 'electrician', text: 'Electrician', value: 'electrician', },
+    { key: 'painter', text: 'Painter', value: 'painter', },
+    { key: 'carpenter', text: 'Carpenter', value: 'carpenter', },
+    { key: 'roofer', text: 'Roofer', value: 'roofer', },
+    { key: 'welder', text: 'Welder', value: 'welder', },
+    { key: 'mechanic', text: 'Mechanic', value: 'mechanic', }]
 
+
+
+
+   
   const states = [
     "AL",
     "AK",
@@ -133,11 +146,12 @@ export default () => {
       setTopFormTo({ first: resp.user.first, last: resp.user.last, 
                       bio: resp.address.bio, trade1: resp.address.trade_1,
                       street: resp.address.street, city: resp.address.city,
-                      state: resp.address.state, zip: resp.address.zip  })
+                      state: resp.address.state, zip: resp.address.zip, trade2: resp.address.trade_2  })
         
       setServiceFormTo({ description: resp.services[0].description,
                         price: resp.services[0].price})
       console.log(resp.services[0].price)
+      //resp.services[0].price.. will give me the first index in the services array which will give me access to the price object
     })
   }, [])
 
@@ -156,7 +170,7 @@ export default () => {
 
 
 
-
+          
         <div className="BusinessEdit">
           <form onSubmit={handlesubmit}>
             <Input placeholder='First'
@@ -171,6 +185,9 @@ export default () => {
               onChange={handleTopForm} />
             <Dropdown placeholder='Skills' fluid selection options={options} 
               value={topForm.trade1}
+              onChange={handleTopForm}/>
+            <Dropdown placeholder='Skills' fluid selection options={options} 
+              value={topForm.trade2}
               onChange={handleTopForm}/>
           </form>
         </div>
@@ -199,6 +216,7 @@ export default () => {
           value={topForm.zip}
           onChange={handleTopForm}/>
         </div>
+        
         <div>
           <Button positive>SAVE</Button>
         </div>

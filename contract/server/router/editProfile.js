@@ -14,7 +14,7 @@ router.get('/profile/edit', async (req, res, next) => {
   const userSql = `SELECT * FROM users WHERE id = ?`
   const [addressProfile] = await conn.promise().query(sql, [profileId])
   const [galleriesProfile] = await conn.promise().query(sql2, [profileId])
-  console.log('Hi', galleriesProfile)
+  console.log('Hi', addressProfile)
   const [servicesProfile] = await conn.promise().query(sql3, [userId])
   const [userInfo] = await conn.promise().query(userSql, [userId])
   const user = userInfo[0]
