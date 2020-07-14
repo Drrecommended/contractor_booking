@@ -26,7 +26,6 @@ export default (props) => {
 
     useEffect(() => {
         setLoaded(true)
-        console.log(getProfile())
         getProfile().then(() => {
             setLoaded(false)
         })

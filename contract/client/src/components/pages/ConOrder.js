@@ -12,7 +12,10 @@ export default () => {
 
 
   useEffect(() => {
-    getOrder()
+    setLoaded(true)
+    getOrder().then(() => {
+      setLoaded(false)
+    })
   }, [])
   return (
     <div className="order">
