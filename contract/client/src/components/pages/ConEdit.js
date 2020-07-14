@@ -8,6 +8,7 @@ import { useEditProfile, useForm, useProfileIndex } from '../../hooks';
 import { TradeOptions } from '../TradeOptions';
 import GalleryImage from '../GalleryImage'
 
+
 export default () => {
   //const { profile, getProfile } = useProfileIndex()
   const { addGalleryImage,
@@ -18,6 +19,8 @@ export default () => {
     getProfile,
     gallery
   } = useEditProfile()
+
+  const { profile } = useProfileIndex()
 
   console.log(gallery)
 
@@ -30,11 +33,6 @@ export default () => {
 
   const [serviceForm, handleServiceForm, 
     resetServiceForm, setServiceFormTo] = useForm({ description: '', price: ''})
-
-    const [galleryForm, handleGalleryForm, 
-      resetGalleryForm, setGalleryFormTo] = useForm()
-
-        
 
   const options = [
     { key: 'Plumber', text: 'Plumber', value: 'plumber', },
@@ -160,18 +158,9 @@ export default () => {
   return (
     <div>
       <div className="EditTopOfPage">
-        <div className="EditAvatar"
-          style={{
-            backgroundImage:
-              `url('https://images.unsplash.com/photo-1516876437184-593fda40c7ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80')`
-          }}>
-        </div>
-
-
-
-
-
-          
+        
+      
+      <div className="BusinessInfoContainer">
         <div className="BusinessEdit">
           <form onSubmit={handlesubmit}>
             <Input placeholder='First'
@@ -192,8 +181,7 @@ export default () => {
               onChange={handleTopForm}/>
           </form>
         </div>
-        <Button style={{ margin: '20px' }} onClick={
-          () => dataFromBackend()}>{editForm.first}</Button>
+       
         <div className="BusinessLocationEdit">
           <Input placeholder='Street' 
             type="text"
@@ -217,6 +205,7 @@ export default () => {
             value={topForm.zip}
             onChange={handleTopForm}/>
         </div>
+      </div>
         
         <div>
           <Button onClick={ () => updateAddress(topForm)} positive>SAVE</Button>
@@ -342,7 +331,7 @@ export default () => {
         <BsFillPlusSquareFill size={25} on />
       </div>
 
-
+          
 
 
 
