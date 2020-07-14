@@ -4,6 +4,7 @@
     margin: 40px;
     border-bottom-style: ridge;
     border-color: #efef16;
+    justify-content: space-between;
 }
 
 .TheNavOnEdit{

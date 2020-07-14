@@ -156,9 +156,12 @@ export default () => {
 
 
   return (
-    <div>
+    <div className="EditPage"
+    style={{
+      backgroundImage:
+        `url('https://images.unsplash.com/photo-1556912167-f556f1f39fdf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1660&q=80')`
+    }}>
       <div className="EditTopOfPage">
-        
       
       <div className="BusinessInfoContainer">
         <div className="BusinessEdit">
@@ -333,7 +336,7 @@ export default () => {
 
           
 
-
+  
 
     </div>
 
