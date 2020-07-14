@@ -71,7 +71,7 @@
 }
 
 
-.banner-button{
+.ui.button.banner-button{
   display: flex;
   justify-content: center;
 }
@@ -84,6 +84,7 @@
 
 .calender-shelf {    
   margin-top: 2%;
+  margin-right: 50px;
 }
 
 .cart-shelf {

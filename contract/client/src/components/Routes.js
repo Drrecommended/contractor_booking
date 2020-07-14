@@ -25,7 +25,7 @@ export default () => {
         <Router>
             <Navbar />
             <Dimmer active={loading}>
-            <Loader>Loading</Loader>
+                <Loader>Loading</Loader>
             </Dimmer>
             <Route path="/signup" component={SignupForm} />
             <Route path="/login" component={Login} />
@@ -35,6 +35,7 @@ export default () => {
             <AuthRoute path="/order" component={ConOrder} />
             <AuthRoute path="/profile" exact component={ConProfile} />
             <AuthRoute path="/profile/edit" component={ConEdit} />
+            <AuthRoute path="/profile/:id" exact component={ConProfile} />
             <AuthRoute path="/dashboard" component={Dash} />
         </Router>
     )

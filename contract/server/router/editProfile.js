@@ -14,7 +14,7 @@ router.get('/profile/edit', async (req, res, next) => {
   const userSql = `SELECT * FROM users WHERE id = ?`
   const [addressProfile] = await conn.promise().query(sql, [profileId])
   const [galleriesProfile] = await conn.promise().query(sql2, [profileId])
-  console.log('Hi', addressProfile)
+  //console.log('Hi', addressProfile)
   const [servicesProfile] = await conn.promise().query(sql3, [userId])
   const [userInfo] = await conn.promise().query(userSql, [userId])
   const user = userInfo[0]
@@ -29,6 +29,8 @@ router.get('/profile/edit', async (req, res, next) => {
     }
   })
 })
+
+
 
 router.post('/profile/gallery', (req, res, next) => {
   const profileId = req.user.profile_id
@@ -87,40 +89,29 @@ router.delete('/profile/service/:id', (req, res, next) => {
 
 
 
-router.patch('/profile/address', (req, res, next) => {
-  console.log(req.body)
-  const { city, state, street, zipcode } = req.body
+router.patch('/profile/address', async (req, res, next) => {
+  console.log('is it working', req.body)
+  const { city, state, street, zip, first, last, trade_1, trade_2, bio } = req.body
 
   const profileId = req.user.profile_id
   const sql = 'SELECT address_id FROM profiles WHERE id = ?'
-  conn.query(
-    sql,
-    [profileId],
-    (err, results, fields) => {
-      const addressId = results[0].address_id
-      const updateAddress = `
-        UPDATE addresses
+  const [addressInfo] =  await conn.promise().query(sql, [profileId])
+  const updateAddress = `
+        UPDATE addresses  
         SET city = ?,
         state = ?,
         street = ?,
         zip = ?
-        WHERE id = ?;
-      `
-      conn.query(updateAddress, [
-        city,
-        state,
-        street,
-        zipcode,
-        addressId
-      ], (err, results, fields) => {
-        console.log(err)
+        WHERE id = ?;`
+        await conn.promise().query(updateAddress, [city, state, street,zip, addressInfo[0].address_id])
+  const updateUser = 
+        ` UPDATE users
+          SET first_name = ?, last_name = ? WHERE id = ?;`
+          await conn.promise().query(updateUser, [first, last, req.user.id])
+  const updateProfile = ` UPDATE profiles SET trade_1 = ?, trade_2 = ?, bio = ? WHERE id = ?;`
+        await conn.promise().query(updateProfile, [trade_1, trade_2, bio, profileId])
         res.json({ data: 'address updated' })
-      })
-
-    }
-  )
-
-
+      
 })
 
 

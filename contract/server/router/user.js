@@ -58,7 +58,7 @@ router.post('/login', (req, res, next) => {
             const hashedPassword = sha512(password + user.salt)
             if (hashedPassword === user.password) {
                 // generate a token based on server secret for client to use to authenticate
-                const token = jwt.sign({ id: user.id, username: user.username, profile_id: user.profile_id }, config.get('secret'))
+                const token = jwt.sign({ id: user.id, username: user.username, profile_id: user.profile_id, contractor: user.contractor }, config.get('secret'))
                 console.log(user)
                 res.status(200).json({ token: token })
             } else {
