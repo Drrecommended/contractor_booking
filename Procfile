@@ -1,0 +1,1 @@
+web: node contract/server/app.js
