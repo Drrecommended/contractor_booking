@@ -9,6 +9,6 @@ const connObj = {
   password: config.get('db.password'),
   database: config.get('db.database')
 }
-const connection = process.env.NODE_ENV === 'production' ? process.env.JAWSDB_URL : connObj
-const pool = mysql.createPool(process.env.JAWSDB_URL)
+const connection = process.env.NODE_ENV === 'development' ? connObj : process.env.JAWSDB_URL
+const pool = mysql.createPool(connection)
 module.exports = pool
