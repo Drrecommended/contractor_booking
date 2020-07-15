@@ -7,8 +7,9 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd contract && npm run deploy-start",
-    "heroku-postbuild": "cd contract/client && npm install --only=dev && npm install && npm run build"
+    "start": "npm run build-client && npm run build-server && cd contract && npm run deploy-start",
+    "build-client": "cd contract/client && npm install --only=dev && npm run build",
+    "build-server": "cd contract/server && npm install"
   },
   "repository": {
     "type": "git",
