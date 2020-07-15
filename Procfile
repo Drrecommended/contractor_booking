@@ -1,1 +1,1 @@
-web: npm start --prefix contract/server
+web: npm run deploy-start --prefix contract/server
