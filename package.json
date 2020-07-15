@@ -8,9 +8,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cd contract && npm run server-prod",
-    "build-client": "cd contract/client && npm install --only=dev && npm run build",
     "build-server": "cd contract/server && npm install",
-    "postinstall": "npm install --prefix contract/server && npm install --prefix contract/client"
+    "postinstall": "npm install --prefix contract/server && npm install --prefix contract/client && cd contract/client && npm run build"
 
   },
   "repository": {
