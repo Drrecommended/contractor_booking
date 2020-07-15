@@ -6,7 +6,10 @@
   "scripts": {
     "client": "cd client && npm start",
     "server": "cd server && npm start",
+    "server-prod": "cd server && npm run start-prod",
     "start": "concurrently \"npm run client\" \"npm run server\"",
+    "build-react": "cd client && npm run build",
+    "deploy-start": "npm run build-react && npm run server-prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

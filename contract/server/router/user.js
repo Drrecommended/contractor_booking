@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const config = require('config')
 const conn = require('../db.js')
 const { createHash } = require('../utils')
+const r = require('../')
 
 router.post('/registration', (req, res, next) => {
     const { username, firstname, lastname, email, password, contractor } = req.body

@@ -2,9 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
+    "start-prod": "node app.js",
     "tables:drop": "node seed/drop-tables.js",
     "tables:create": "node seed/create-tables.js",
     "tables:clear": "node seed/reset-tables.js",
