@@ -10,7 +10,7 @@
     "start": "npm run build-client && npm run build-server && cd contract && npm run deploy-start",
     "build-client": "cd contract/client && npm install --only=dev && npm run build",
     "build-server": "cd contract/server && npm install",
-    "postinstall": "npm install --prefix contract/server && npm install --prefix contract/client && cd contract/client && npm run deploy-start"
+    "postinstall": "npm install --prefix contract/server && npm install --prefix contract/client && cd contract && npm run deploy-start"
 
   },
   "repository": {
