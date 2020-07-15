@@ -7,9 +7,11 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run build-client && npm run build-server && cd contract && npm run deploy-start",
+    "start": "npm run build-client && npm run build-server && rcd contract && npm run deploy-start",
     "build-client": "cd contract/client && npm install --only=dev && npm run build",
-    "build-server": "cd contract/server && npm install"
+    "build-server": "cd contract/server && npm install",
+    "postinstall": "npm install --prefix contract/server && npm install --prefix contract/client"
+
   },
   "repository": {
     "type": "git",

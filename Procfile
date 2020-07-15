@@ -1,1 +1,1 @@
-web: node contract/server/app.js
+web: npm start --prefix contract/server
