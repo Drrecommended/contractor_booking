@@ -33,6 +33,6 @@ app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname + '/../client/build/index.html'));
 });
 
-app.listen(PORT, () => {
+app.listen(80, () => {
   console.log(`listening on port ${PORT}`)
 })
