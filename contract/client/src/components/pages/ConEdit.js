@@ -4,6 +4,7 @@ import { Button, Input, Dropdown, Container, Label } from "semantic-ui-react"
 import { BsFillPlusSquareFill } from "react-icons/bs"
 import { AiOutlineMinusCircle } from "react-icons/ai"
 import { GrEdit } from "react-icons/gr"
+import Avatar from "../ui/Avatar"
 import { useEditProfile, useForm, useProfileIndex } from "../../hooks"
 import { TradeOptions } from "../TradeOptions"
 import GalleryImage from "../GalleryImage"
@@ -18,7 +19,7 @@ export default () => {
     deleteConService,
     updateAddress,
     getProfile,
-    gallery,
+    gallery, 
   } = useEditProfile()
 
   const { profile } = useProfileIndex()
@@ -36,6 +37,7 @@ export default () => {
     state: "",
     zip: "",
     trade2: "",
+    thumbnail: ""
   })
 
   const [
@@ -166,6 +168,7 @@ export default () => {
         state: resp.address.state,
         zip: resp.address.zip,
         trade2: resp.address.trade_2,
+        thumbnail: resp.address.thumbnail
       })
 
       setServiceFormTo({
@@ -180,8 +183,10 @@ export default () => {
   return (
     <div className="EditPage">
       <div className="EditTopOfPage">
-      
       <div className="BusinessInfoContainer">
+        <div className="profile-image">
+            <Avatar image={topForm.thumbnail} />
+          </div>
         <div className="BusinessEdit">
           <form onSubmit={handlesubmit}>
             <Input
@@ -215,7 +220,7 @@ export default () => {
               onChange={handleTopForm}
             />
           </form>
-        </div>
+        </div></div>
         <Button style={{ margin: "20px" }} onClick={() => dataFromBackend()}>
           {editForm.first}
         </Button>
@@ -407,5 +412,6 @@ export default () => {
         <BsFillPlusSquareFill size={25} on />
       </div>
     </div>
+    
   )
 }
