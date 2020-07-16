@@ -299,7 +299,14 @@ export default () => {
           }}
         ></GalleryImage>
         <div>
-          <Button onClick={handleRequest}>add gallery image</Button>
+        <Modal trigger={<Button onClick={handleRequest}>add gallery image</Button>}>
+              <Modal.Content>
+                <Form onSubmit={handlesubmit}>
+                  <Input icon={<Icon name='search' inverted circular link />} placeholder='Search...'/>
+                  <GiSaveArrow/>
+                </Form>
+              </Modal.Content>
+            </Modal>
           <Button positive>SAVE</Button>
         </div>
       </div>
