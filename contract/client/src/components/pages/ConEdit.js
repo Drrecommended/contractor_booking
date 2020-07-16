@@ -1,8 +1,9 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import "../../styles/ConEdit.css"
-import { Button, Input, Dropdown, Container, Label } from "semantic-ui-react"
+import { Button, Input, Dropdown, Container, Label, Modal, Image, Form, Icon } from "semantic-ui-react"
 import { BsFillPlusSquareFill } from "react-icons/bs"
-import { AiOutlineMinusCircle } from "react-icons/ai"
+import { GiSaveArrow } from "react-icons/gi"
+import { AiOutlineMinusCircle, AiOutlinePlus } from "react-icons/ai"
 import { GrEdit } from "react-icons/gr"
 import Avatar from "../ui/Avatar"
 import { useEditProfile, useForm, useProfileIndex } from "../../hooks"
@@ -11,7 +12,11 @@ import GalleryImage from "../GalleryImage"
 
 
 export default () => {
-  //const { profile, getProfile } = useProfileIndex()
+  
+  // const [modalVisible, setModalVisible] = useState(false)
+  // const handleClose = () => setModalVisible(false)
+  // const handleShow = () => setModalVisible(true)
+
   const {
     addGalleryImage,
     deleteGalleryImage,
@@ -132,6 +137,7 @@ export default () => {
     e.preventDefault()
     console.log(editForm)
     resetForm()
+    
   }
 
   function dataFromBackend() {
@@ -185,7 +191,17 @@ export default () => {
       <div className="EditTopOfPage">
       <div className="BusinessInfoContainer">
         <div className="profile-image">
+          <div className="avatarEdit">
+            <Modal trigger={<AiOutlinePlus/>}>
+              <Modal.Content>
+                <Form onSubmit={handlesubmit}>
+                  <Input icon={<Icon name='search' inverted circular link />} placeholder='Search...'/>
+                  <GiSaveArrow/>
+                </Form>
+              </Modal.Content>
+            </Modal>
             <Avatar image={topForm.thumbnail} />
+           </div>
           </div>
           
         <div className="BusinessEdit">
