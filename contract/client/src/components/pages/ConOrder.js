@@ -5,14 +5,18 @@ import moment from 'moment'
 import { useOrder, useLoad } from '../../hooks'
 
 
+
 export default () => {
   const { orders, getOrder, approve, deny } = useOrder()
   const { setLoaded } = useLoad()
   const [ loading ] = useState('')
-
+  
 
   useEffect(() => {
-    getOrder()
+    setLoaded(true)
+    getOrder().then(() => {
+      setLoaded(false)
+    })
   }, [])
   return (
     <div className="order">
@@ -26,6 +30,7 @@ export default () => {
             <Table.HeaderCell>Services</Table.HeaderCell>
             <Table.HeaderCell>Total</Table.HeaderCell>
             <Table.HeaderCell>Actions</Table.HeaderCell>
+            <Table.HeaderCell>Order Status</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         {orders.length !== 0 ? 
@@ -38,8 +43,7 @@ export default () => {
                 <Table.Cell>{moment(order.date).subtract(10, 'days').calendar()}</Table.Cell>
                 <Table.Cell>{order.services}</Table.Cell>
                 <Table.Cell>$ {order.total}</Table.Cell>
-                <Table.Cell>   
-                  {order.status === "pending" ? "pending order" : "false"}       
+                <Table.Cell>         
                   <Button onClick={() => approve(order.id)} icon>
                     <Icon name='wrench' />
                   </Button>
@@ -47,6 +51,7 @@ export default () => {
                     deny 
                   </Button>
                 </Table.Cell>
+                <Table.Cell>{order.status === "pending" ? "pending order" : "false"} </Table.Cell>
               </Table.Row>
           )
         })}
@@ -54,24 +59,6 @@ export default () => {
         
         <Table.Body>No orders yet! Check back soon!</Table.Body>}
 
-        <Table.Footer>
-          <Table.Row>
-            <Table.HeaderCell onClick="" colSpan='6'>
-                <Menu floated='right' pagination>
-                  <Menu.Item as='a' icon>
-                    <Icon name='chevron left' />
-                  </Menu.Item>
-                  <Menu.Item as='a'>1</Menu.Item>
-                  <Menu.Item as='a'>2</Menu.Item>
-                  <Menu.Item as='a'>3</Menu.Item>
-                  <Menu.Item as='a'>4</Menu.Item>
-                  <Menu.Item as='a' icon>
-                    <Icon name='chevron right' />
-                  </Menu.Item>
-                </Menu>
-              </Table.HeaderCell>
-            </Table.Row>
-          </Table.Footer>
         </Table>
       </div>
     </div>

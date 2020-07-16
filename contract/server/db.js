@@ -9,6 +9,7 @@ const connObj = {
   password: config.get('db.password'),
   database: config.get('db.database')
 }
+// TODO: NOT WORKING IN PROD needs to be fixed....
 const connection = process.env.NODE_ENV === 'development' ? connObj : process.env.JAWSDB_URL
 const pool = mysql.createPool(connObj)
 module.exports = pool

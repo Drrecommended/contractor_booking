@@ -5,19 +5,20 @@ const query = require('./query')
 
 // create a new user with hashed password
 class User {
-  constructor(username, password, first, last, contractor) {
+  constructor(username, password, first, last, email, contractor) {
     this.username = username
     this.salt = createHash(20)
     this.password = sha512(password + this.salt)
     this.first = first
     this.last = last
     this.contractor = contractor
+    this.email = email
   }
 }
 
 const users = [
-  new User('user', 'user', 'user', 'one', false),
-  new User('contractor', 'contractor', 'contractor', 'one', true)
+  new User('user', 'user', 'user', 'one', 'user@example.com', false),
+  new User('contractor', 'contractor', 'contractor', 'one', 'contractor@example.com', true)
 ]
 
 // create a random service to be associated with a contractor
@@ -50,14 +51,15 @@ users.map(async user => {
 
   await query(
     `INSERT INTO users
-    (username, password, salt, first_name, last_name, contractor, profile_id)
-    VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    (username, password, salt, first_name, last_name, email, contractor, profile_id)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       user.username,
       user.password,
       user.salt,
       user.first,
       user.last,
+      user.email,
       user.contractor,
       user.profile_id
     ],

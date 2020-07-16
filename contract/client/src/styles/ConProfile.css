@@ -32,6 +32,7 @@
 }
 
 .service-shelf {
+    margin: auto;
     padding: 2%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -77,19 +78,20 @@
 }
 
 .select-service-shelf {
-  margin-top: 2%;
   width: 100%;
+  margin: auto;
 }
 
 
 .calender-shelf {    
   margin-top: 2%;
-  margin-right: 50px;
+  margin: auto;
 }
 
 .cart-shelf {
   margin-top: 2%;
   width: 100%;
+  margin: auto;
 }
 
 .service-list {
