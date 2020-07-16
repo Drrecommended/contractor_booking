@@ -3,14 +3,23 @@ import "../../styles/ConSearch.css"
 import { useContractor, useLoad } from "../../hooks"
 import { Rating } from "semantic-ui-react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useHistory } from "react-router-dom"
 
 export default () => {
   const { contractors, getContractor } = useContractor()
   const [search, setSearch] = useState("")
   const { setLoaded } = useLoad()
+
   const handleSubmit = (e) => {
     e.preventDefault()
     getContractor(search)
+  }
+
+  const history = useHistory()
+
+  const profilePage = () => {
+    let path = ``;
+    history.pushState(path)
   }
 
   useEffect(() => {
@@ -25,7 +34,7 @@ export default () => {
         <div className="searchPage">
           {contractors.map((contractor) => {
             return (
-              <div className="contractor-shelf">
+              <div className="contractor-shelf" onClick={profilePage}>
                 <div className="conSearchImage">
                   <img src={contractor.thumbnail} />
                 </div>
