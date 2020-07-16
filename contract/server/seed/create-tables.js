@@ -84,6 +84,7 @@ const query = require('./query');
       CREATE TABLE IF NOT EXISTS users (
         id int NOT NULL AUTO_INCREMENT,
         username varchar(45) NOT NULL,
+        email varchar(45) NOT NULL,
         password varchar(128) NOT NULL,
         salt varchar(20) NOT NULL,
         contractor tinyint unsigned NOT NULL,

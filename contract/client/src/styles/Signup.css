@@ -8,6 +8,7 @@ body{
 .Signup-login-divider{
     width: 50%;
     margin-top: 3%;
+    position: absolute;
 }
 
 @media(max-width: 768px) {
@@ -63,4 +64,11 @@ body{
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover; /* Resize the background image to cover the entire container */
     position: absolute;
+}
+
+.login-error {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    color: red;
 }

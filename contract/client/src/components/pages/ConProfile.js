@@ -26,7 +26,6 @@ export default (props) => {
 
     useEffect(() => {
         setLoaded(true)
-        console.log(getProfile())
         getProfile().then(() => {
             setLoaded(false)
         })
@@ -42,7 +41,7 @@ export default (props) => {
                     <div className="name-trade-edit-shelf">
                         <h2 className="conName">{profile.first} {profile.last}</h2>
                         <div>{profile.trade}</div>
-                        <Link to="profile/edit" >edit profile</Link>
+                        <Link to="/profile/edit" >edit profile</Link>
                     </div>
                     <div className="profile-address">
                         <div>{profile.address.street}</div>

@@ -24,7 +24,7 @@ export default (state = orderState, action) => {
 // 5. action creators
 function userOrders() {
   return dispatch => {
-      api.get('/contractor-order').then(resp =>{
+      return api.get('/contractor-order').then(resp =>{
         console.log(resp)
           dispatch({
               type: GRAB_ORDERS,
