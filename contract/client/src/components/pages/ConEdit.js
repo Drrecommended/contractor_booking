@@ -187,6 +187,7 @@ export default () => {
         <div className="profile-image">
             <Avatar image={topForm.thumbnail} />
           </div>
+          
         <div className="BusinessEdit">
           <form onSubmit={handlesubmit}>
             <Input
@@ -220,10 +221,10 @@ export default () => {
               onChange={handleTopForm}
             />
           </form>
-        </div></div>
-        <Button style={{ margin: "20px" }} onClick={() => dataFromBackend()}>
+        </div>
+        {/* <Button style={{ margin: "20px" }} onClick={() => dataFromBackend()}>
           {editForm.first}
-        </Button>
+        </Button> */}
         <div className="BusinessLocationEdit">
           <Input
             placeholder="Street"
@@ -256,7 +257,8 @@ export default () => {
             value={topForm.zip}
             onChange={handleTopForm}
           />
-        </div>
+        </div></div>
+        
         <div>
           <Button onClick={() => updateAddress(topForm)} positive>
             SAVE
