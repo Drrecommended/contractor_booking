@@ -1,10 +1,14 @@
+.EditPage{
+    background-Image: url('https://images.unsplash.com/photo-1556912167-f556f1f39fdf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1660&q=80')
+}
+
 .EditTopOfPage{
     display: flex;
     padding-bottom: 35px;
-    margin: 40px;
-    border-bottom-style: ridge;
-    border-color: #efef16;
     justify-content: space-between;
+    padding: 40px
+   
+          
 }
 
 .TheNavOnEdit{
