@@ -65,8 +65,8 @@ body {
 }
 
 .login-error {
-  position: absolute;
-  margin: auto;
+ 
+  margin-left: 25%;
   top: 0;
-  color: red;
+  color: #A64D4C;
 }
