@@ -1,7 +1,7 @@
-import React from 'react';
-import { Button, Form, Dropdown, Divider, Icon} from 'semantic-ui-react'
-import '../../styles/Checkout.scss';
-import { useCart } from '../../hooks'
+import React from "react"
+import { Button, Form, Dropdown, Divider, Icon } from "semantic-ui-react"
+import "../../styles/Checkout.scss"
+import { useCart } from "../../hooks"
 
 export default () => {
   const { createOrder } = useCart()
@@ -13,31 +13,47 @@ export default () => {
   // }))
 
   return (
-    <div className="background">
+    <div className="checkoutBackground">
       <div className="form-container">
         <Form className="checkout-form">
           <h1>Who and where should we bill this service?</h1>
           <Form.Group unstackable widths={2}>
-            <Form.Input label='First name' placeholder='First name' />
-            <Form.Input label='Last name' placeholder='Last name' />
+            <Form.Input label="First name" placeholder="First name" />
+            <Form.Input label="Last name" placeholder="Last name" />
           </Form.Group>
           <Form.Group widths={4}>
-            <Form.Input label='Address' placeholder='Address' />
-            <Form.Dropdown placeholder='city' search selection options="hey" />
-            <Form.Dropdown placeholder='state' search selection options="hey" />
-            <Form.Input label='Postal code' placeholder='Postal code' />
+            <Form.Input label="Address" placeholder="Address" />
+            <Form.Dropdown
+              label="City"
+              placeholder="city"
+              search
+              selection
+              options="hey"
+            />
+            <Form.Dropdown
+              label="State"
+              placeholder="state"
+              search
+              selection
+              options="hey"
+            />
+            <Form.Input label="Postal code" placeholder="Postal code" />
           </Form.Group>
           <Form.Group widths={2}>
-            <Form.Input label='Email' placeholder='Email' />
-            <Form.Input label='Phone' placeholder='Phone' />
+            <Form.Input label="Email" placeholder="Email" />
+            <Form.Input label="Phone" placeholder="Phone" />
           </Form.Group>
-          <Form.Checkbox label='I agree to the Terms and Conditions' />
-          <Button onClick={() => {createOrder()}} type='submit'>Billing info</Button>
+          <Form.Checkbox label="I agree to the Terms and Conditions" />
+          <Button
+            onClick={() => {
+              createOrder()
+            }}
+            type="submit"
+          >
+            Billing info
+          </Button>
         </Form>
       </div>
     </div>
   )
 }
-
-
-

@@ -5,13 +5,14 @@ const jwt = require('jsonwebtoken')
 const config = require('config')
 const conn = require('../db.js')
 const { createHash } = require('../utils')
+const r = require('../')
 
 router.post('/registration', (req, res, next) => {
     const { username, firstname, lastname, email, password, contractor } = req.body
     const salt = createHash(20)
     const hashedPassword = sha512(password + salt)
     const checkIfUserExistsSql = `SELECT * FROM users WHERE username = ?;`
-    conn.query(checkIfUserExistsSql, [username], (err, results, fields) => {
+    conn.query(checkIfUserExistsSql, [username], async (err, results, fields) => {
         if (results.length) {
             res.status(400).json({ message: 'username already exists' })
         } else {
@@ -22,27 +23,22 @@ router.post('/registration', (req, res, next) => {
             `
             const addressSql = `INSERT INTO addresses (street) VALUES (NULL)`
             const profileSql = `INSERT INTO profiles (address_id) VALUES (?)`
-            conn.query(addressSql,
-                (error, results, fields) => {
-                    const addressId = results.insertId
-                    conn.query(profileSql,
-                        [addressId],
-                        (error, results, fields) => {
-                            const profileId = results.insertId
-                            conn.query(addUserSql, [
-                                username,
-                                firstname,
-                                lastname,
-                                email,
-                                hashedPassword,
-                                salt,
-                                contractor,
-                                profileId
-                            ], (err, results, fields) => {
-                                res.status(201).json({ message: 'user successfully created' })
-                            })
-                        })
-                })
+            const [results] = await conn.promise().query(addressSql)
+            const addressId = results.insertId
+            const [profile] = await conn.promise().query(profileSql, [addressId])
+            const profileId = profile.insertId
+            const userFields = [
+                username,
+                firstname,
+                lastname,
+                email,
+                hashedPassword,
+                salt,
+                contractor,
+                profileId
+            ]
+            await conn.promise().query(addUserSql, userFields)
+            res.status(201).json({ message: 'user successfully created' })
         }
     })
 })
@@ -58,7 +54,7 @@ router.post('/login', (req, res, next) => {
             const hashedPassword = sha512(password + user.salt)
             if (hashedPassword === user.password) {
                 // generate a token based on server secret for client to use to authenticate
-                const token = jwt.sign({ id: user.id, username: user.username, profile_id: user.profile_id }, config.get('secret'))
+                const token = jwt.sign({ id: user.id, username: user.username, profile_id: user.profile_id, contractor: user.contractor }, config.get('secret'))
                 console.log(user)
                 res.status(200).json({ token: token })
             } else {

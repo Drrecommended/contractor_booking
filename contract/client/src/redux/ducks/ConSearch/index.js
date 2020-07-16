@@ -1,5 +1,5 @@
 // 1. imports
-import api from '../../../utils/request'
+import api from "../../../utils/request"
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
@@ -24,25 +24,24 @@ export default (state = contractState, action) => {
 // 5. action creators
 function contract(search) {
   console.log(search)
-  return dispatch => {
-      api.get('/contractor-search?word=' + search).then(resp =>{
-          dispatch({
-              type: GRAB_CONTRACTOR,
-              payload: resp
-          })
+  return (dispatch) => {
+    return api.get("/contractor-search?word=" + search).then((resp) => {
+      dispatch({
+        type: GRAB_CONTRACTOR,
+        payload: resp,
       })
+    })
   }
 }
-
-
 
 // 6. custom hook
 export function useContractor() {
   const dispatch = useDispatch()
-  const contractors = useSelector(appState => appState.contractorState.contractData)
+  const contractors = useSelector(
+    (appState) => appState.contractorState.contractData
+  )
 
   const getContractor = (search) => dispatch(contract(search))
- 
 
   return { contractors, getContractor }
 }

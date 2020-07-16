@@ -1,0 +1,26 @@
+{
+  "name": "contractor_booking",
+  "version": "1.0.0",
+  "description": "### to start",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd contract && npm run server-prod",
+    "build-server": "cd contract/server && npm install",
+    "postinstall": "npm install --prefix contract/server && npm install --prefix contract/client && cd contract/client && npm run build"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Drrecommended/contractor_booking.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Drrecommended/contractor_booking/issues"
+  },
+  "homepage": "https://github.com/Drrecommended/contractor_booking#readme"
+}

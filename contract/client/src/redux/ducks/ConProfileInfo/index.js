@@ -1,10 +1,9 @@
 // 1. imports
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import api from '../../../utils/request'
+import api from "../../../utils/request"
 // 2. action definitions
 const GET_PROFILE = "ConProfileInfo/GET_PROFILE"
-
 
 // 3. initial state
 const profileState = {
@@ -26,28 +25,23 @@ export default (state = profileState, action) => {
 
 // 5. action creators
 
-
-  function getProfileData() {
-    return dispatch => {
-        api.get('/profile').then(resp =>{
-            dispatch({
-                type: GET_PROFILE,
-                payload: resp
-            })
-        })
-    }
+function getProfileData() {
+  return (dispatch) => {
+    return api.get("/profile").then((resp) => {
+      dispatch({
+        type: GET_PROFILE,
+        payload: resp,
+      })
+    })
   }
-
-
+}
 
 // 6. custom hook
 export function useProfileIndex() {
   const dispatch = useDispatch()
-  const profile = useSelector(appState => appState.profileState.profile)
+  const profile = useSelector((appState) => appState.profileState.profile)
 
   const getProfile = () => dispatch(getProfileData())
-  
-
 
   return { profile, getProfile }
 }

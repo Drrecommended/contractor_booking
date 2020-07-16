@@ -1,58 +1,108 @@
-.profile-nav{
+.profilePage {
+  width: 90%;
+  background-color: white;
+  margin: auto;
+  margin-top: 3%;
+  -webkit-box-shadow: 0px 0px 89px -4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 89px -4px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 89px -4px rgba(0, 0, 0, 0.75);
+  border-radius: 0.28571429rem;
+}
+
+.profile-nav {
   display: flex;
-  justify-content: space-around;
-  margin: 10px;
+  margin-left: 4%;
 }
+
+.profile-image {
+  margin: 2%;
+}
+
+.name-trade-edit-shelf {
+  margin: 2%;
+}
+
+.profile-bio {
+  margin: 2%;
+}
+
 .service-font {
-  font-size: large;
+  font-size: 22px;
+  margin-bottom: 3%;
 }
 
-.profile-service {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 50px;
-    
+.service-shelf {
+  margin: auto;
+  padding: 2%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
 }
 
-.ui.selection.dropdown{
+.ui.selection.dropdown {
   min-width: 25em;
   min-height: 2.71428571em;
-  
 }
 
-.ui.button{
+.ui.button {
   font-size: 1.5em;
-  
 }
 
-.profile-info  {
-  display: flex;
-  justify-content: space-evenly;
+.profile-address {
+  margin-left: 2%;
+  margin-top: 2.5%;
 }
 
 .profile-page .hide {
-    display: none;
-    padding: 20px;
-    background: #ddd;
-  }
-
-.profile-page .banner {
-    padding: 10px;
-    background: #f7f7f7;
-    
-    
+  display: none;
+  padding: 20px;
+  background: #ddd;
 }
-  
+
 .profile-page .banner:hover + .hide {
-    display: block;
-  }
+  display: block;
+}
 
 .profile-page .hide:hover {
-    display: block;
+  display: block;
 }
 
-
-.banner-button{
+.ui.button.banner-button {
   display: flex;
   justify-content: center;
+}
+
+.select-service-shelf {
+  width: 100%;
+  margin: auto;
+}
+
+.calender-shelf {
+  margin-top: 2%;
+  margin: auto;
+}
+
+.cart-shelf {
+  margin-top: 2%;
+  width: 100%;
+  margin: auto;
+}
+
+.service-list {
+  margin-left: 7%;
+  padding: 2%;
+  display: flex;
+}
+
+.delete-cart-item {
+  margin-left: 2%;
+}
+
+.delete-cart-item:hover {
+  cursor: pointer;
+}
+
+.service {
+  text-decoration: underline;
+  text-decoration-color: cadetblue;
 }

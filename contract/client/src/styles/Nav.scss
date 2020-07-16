@@ -1,21 +1,18 @@
-
-.ui.segment { 
-    margin: 0;
-
+.ui.segment {
+  margin: 0;
 }
 
-.ui.inverted.segment { 
-    background-color: cadetblue;
-    border-bottom: 1px black solid;
-
+.ui.inverted.segment {
+  background-color: cadetblue;
+  border-bottom: 1px black solid;
 }
 
 .ui.secondary.inverted.pointing.menu {
-    border: none;
-    font-size: 16px;
-    height: 10vh;
+  border: none;
+  font-size: 16px;
+  height: 67.5px;
 }
 
 Input {
-    width: fit-content;
+  width: fit-content;
 }

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "axios"
 
 class Storage {
   static getItem(key) {
@@ -16,16 +16,16 @@ class Storage {
 
 class Request {
   constructor(config = {}) {
-    this.prefix = config.prefix || '/api'
+    this.prefix = config.prefix || "/api"
     this.req = axios.create({})
   }
 
   request = (url, method, data) => {
     const urlPath = this.prefix + url
-    const token = Storage.getItem('authToken')
+    const token = Storage.getItem("authToken")
     // TODO: check expiry
     if (token) {
-      this.req.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      this.req.defaults.headers.common["Authorization"] = `Bearer ${token}`
     }
     let prom
     if (data) {
@@ -34,33 +34,35 @@ class Request {
       prom = this.req[method](urlPath)
     }
     return new Promise((res, rej) => {
-      prom.then(resp => {
-        res(resp.data)
-      }).catch(err => {
-        rej(err.response)
-      })
+      prom
+        .then((resp) => {
+          res(resp.data)
+        })
+        .catch((err) => {
+          rej(err.response)
+        })
     })
   }
 
   get = (url) => {
-    return this.request(url, 'get')
+    return this.request(url, "get")
   }
 
   put = (url, data) => {
-    return this.request(url, 'put', data)
+    return this.request(url, "put", data)
   }
 
   patch = (url, data) => {
-    return this.request(url, 'patch', data)
+    return this.request(url, "patch", data)
   }
 
   delete = (url) => {
     console.log(url)
-    return this.request(url, 'delete')
+    return this.request(url, "delete")
   }
 
   post = (url, data) => {
-    return this.request(url, 'post', data)
+    return this.request(url, "post", data)
   }
 }
 
@@ -68,41 +70,37 @@ export class AuthService {
   static login = (username, password) => {
     const userToLogin = {
       username: username,
-      password: password
+      password: password,
     }
-    return api.post('/login', userToLogin)
-      .then(resp => {
-        Storage.setItem('authToken', resp.token)
-        return resp
-      })
+    return api.post("/login", userToLogin).then((resp) => {
+      Storage.setItem("authToken", resp.token)
+      return resp
+    })
   }
 
   static signup = (form) => {
-    
-    return api.post('/registration', form)
+    return api.post("/registration", form)
   }
 
   static logout = () => {
     return new Promise((res, rej) => {
-      Storage.removeItem('authToken')
+      Storage.removeItem("authToken")
       res(true)
     })
   }
 
-  static checkToken(token) {
-
-  }
+  static checkToken(token) {}
 
   static getProfile() {
     try {
-      const token = Storage.getItem('authToken')
-      return JSON.parse(atob(token.split('.')[1]))
+      const token = Storage.getItem("authToken")
+      return JSON.parse(atob(token.split(".")[1]))
     } catch (e) {
       return null
     }
   }
 
-  static isAuthenticated = () => !!Storage.getItem('authToken')
+  static isAuthenticated = () => !!Storage.getItem("authToken")
 }
 
 const api = new Request()
