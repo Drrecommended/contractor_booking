@@ -24,7 +24,8 @@ export default () => {
     deleteConService,
     updateAddress,
     getProfile,
-    gallery, 
+    gallery,
+    services, 
   } = useEditProfile()
 
   const { profile } = useProfileIndex()
@@ -196,7 +197,7 @@ export default () => {
               <Modal.Content>
                 <Form onSubmit={handlesubmit}>
                   <Input icon={<Icon name='search' inverted circular link />} placeholder='Search...'/>
-                  <GiSaveArrow/>
+                  <GiSaveArrow onChange={handleTopForm}/>
                 </Form>
               </Modal.Content>
             </Modal>
@@ -294,11 +295,11 @@ export default () => {
         <GalleryImage
           images={gallery}
           isEditable={true}
-          onDelete={(id) => {
+          onDelete={(id) => { deleteGalleryImage(id)
             console.log(id)
           }}
         ></GalleryImage>
-        <div>
+        <div className="GalleryButtons">
         <Modal trigger={<Button onClick={handleRequest}>add gallery image</Button>}>
               <Modal.Content>
                 <Form onSubmit={handlesubmit}>
@@ -310,106 +311,17 @@ export default () => {
           <Button positive>SAVE</Button>
         </div>
       </div>
-      <div className="InputContainer">
-        <div>
-          <div class="ui focus input">
-            <div className="MinusButton">
+
+          {services.map((item) => {
+            return (
+          <div className="InputContainer">
+            <div class="ui focus input">
               <AiOutlineMinusCircle />
-            </div>
-            <input
+                <input
               type="text"
               placeholder="JOB DESCRIPTION"
               name="description"
-              value={serviceForm.description}
-              onChange={handleServiceForm}
-            />
-            <Input
-              className="PriceEdit"
-              labelPosition="right"
-              type="text"
-              placeholder="Amount"
-            >
-              <Label basic>$</Label>
-              <input
-                name="price"
-                value={serviceForm.price}
-                onChange={handleServiceForm}
-              />
-              <Label>.00</Label>
-            </Input>
-            <div className="EditPen">
-              <GrEdit />
-            </div>
-            <div></div>
-          </div>
-          <div class="ui focus input">
-            <div className="MinusButton">
-              <AiOutlineMinusCircle />
-            </div>
-            <input
-              type="text"
-              placeholder="JOB DESCRIPTION"
-              name="description"
-              value={serviceForm.description}
-              onChange={handleServiceForm}
-            />
-            <Input
-              className="PriceEdit"
-              labelPosition="right"
-              type="text"
-              placeholder="Amount"
-            >
-              <Label basic>$</Label>
-              <input
-                name="price"
-                value={serviceForm.price}
-                onChange={handleServiceForm}
-              />
-              <Label>.00</Label>
-            </Input>
-            <div className="EditPen">
-              <GrEdit />
-            </div>
-          </div>
-          <div class="ui focus input">
-            <div className="MinusButton">
-              <AiOutlineMinusCircle />
-            </div>
-            <input
-              type="text"
-              placeholder="JOB DESCRIPTION"
-              name="description"
-              value={serviceForm.description}
-              onChange={handleServiceForm}
-            />
-            <Input
-              className="PriceEdit"
-              labelPosition="right"
-              type="text"
-              placeholder="Amount"
-            >
-              <Label basic>$</Label>
-              <input
-                name="price"
-                value={serviceForm.price}
-                onChange={handleServiceForm}
-              />
-              <Label>.00</Label>
-            </Input>
-            <div className="EditPen">
-              <GrEdit />
-            </div>
-            <div></div>
-          </div>
-          <div class="ui focus input">
-            <div className="MinusButton">
-              <AiOutlineMinusCircle />
-            </div>
-            <input
-              type="text"
-              placeholder="JOB DESCRIPTION"
-              name="description"
-              value={serviceForm.description}
+              value={item.description}
               onChange={handleServiceForm}
             />
 
@@ -422,7 +334,7 @@ export default () => {
               <Label basic>$</Label>
               <input
                 name="price"
-                value={serviceForm.price}
+                value={item.price}
                 onChange={handleServiceForm}
               />
               <Label>.00</Label>
@@ -432,10 +344,8 @@ export default () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="AddDescriptionButton">
-        <BsFillPlusSquareFill size={25} on />
-      </div>
+            )
+          })}
     </div>
     
   )
