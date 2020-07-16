@@ -115,6 +115,7 @@ const DividerExampleVerticalForm = (props) => {
                       iconPosition="left"
                       label="Username"
                       placeholder="Username"
+                      error={!!loginError}
                     />
                     <Form.Input
                       type="password"
@@ -124,6 +125,7 @@ const DividerExampleVerticalForm = (props) => {
                       iconPosition="left"
                       label="Password"
                       type="password"
+                      error={!!loginError}
                     />
                     <Button content="Login" primary />
                   </Form>
