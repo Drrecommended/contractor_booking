@@ -24,6 +24,7 @@ const DividerExampleVerticalForm = (props) => {
   const [emailError, setEmailError] = useState(null)
   const [passwordError, setPasswordError] = useState(null)
   const [confirm, setconfirm] = useState()
+  const [nameExists, setNameExists] = useState()
   const [contractor, setContractor] = useState(false)
 
   function handleLogin(e) {
@@ -56,6 +57,9 @@ const DividerExampleVerticalForm = (props) => {
     } else {
       setUsernameError('')
     }
+    // if(form.username === username) {
+    //   setNameExists('UserName already exists')
+    // }
     if(!form.email) {
       setEmailError('cannot be blank')
       canSubmit = false
@@ -159,7 +163,7 @@ const DividerExampleVerticalForm = (props) => {
                             name='password'
                             icon='user'
                             iconPosition='left'
-                            label={"Password " + (passwordError || "")}
+                            label={"Password " + (passwordError || confirm)}
                             type="password"
                             placeholder='Password'
                             error={!!passwordError || !!confirm}
