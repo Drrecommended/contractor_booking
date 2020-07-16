@@ -3,19 +3,19 @@
   background-color: white;
   margin: auto;
   margin-top: 3%;
-  -webkit-box-shadow: 0px 0px 89px -4px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 0px 89px -4px rgba(0,0,0,0.75);
-  box-shadow: 0px 0px 89px -4px rgba(0,0,0,0.75);    
-  border-radius: .28571429rem;
+  -webkit-box-shadow: 0px 0px 89px -4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 89px -4px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 89px -4px rgba(0, 0, 0, 0.75);
+  border-radius: 0.28571429rem;
 }
 
-.profile-nav{
+.profile-nav {
   display: flex;
   margin-left: 4%;
 }
 
 .profile-image {
-  margin: 2%
+  margin: 2%;
 }
 
 .name-trade-edit-shelf {
@@ -32,23 +32,20 @@
 }
 
 .service-shelf {
-    margin: auto;
-    padding: 2%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-items: center;
-
+  margin: auto;
+  padding: 2%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
 }
 
-.ui.selection.dropdown{
+.ui.selection.dropdown {
   min-width: 25em;
   min-height: 2.71428571em;
-  
 }
 
-.ui.button{
+.ui.button {
   font-size: 1.5em;
-  
 }
 
 .profile-address {
@@ -57,22 +54,20 @@
 }
 
 .profile-page .hide {
-    display: none;
-    padding: 20px;
-    background: #ddd;
-  }
-
-  
-.profile-page .banner:hover + .hide {
-    display: block;
-  }
-
-.profile-page .hide:hover {
-    display: block;
+  display: none;
+  padding: 20px;
+  background: #ddd;
 }
 
+.profile-page .banner:hover + .hide {
+  display: block;
+}
 
-.ui.button.banner-button{
+.profile-page .hide:hover {
+  display: block;
+}
+
+.ui.button.banner-button {
   display: flex;
   justify-content: center;
 }
@@ -82,8 +77,7 @@
   margin: auto;
 }
 
-
-.calender-shelf {    
+.calender-shelf {
   margin-top: 2%;
   margin: auto;
 }
@@ -102,12 +96,10 @@
 
 .delete-cart-item {
   margin-left: 2%;
-  
 }
 
 .delete-cart-item:hover {
   cursor: pointer;
-  
 }
 
 .service {

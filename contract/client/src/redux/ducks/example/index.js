@@ -1,5 +1,5 @@
 // 1. imports
-import api from '../../../utils/request'
+import api from "../../../utils/request"
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
@@ -27,27 +27,27 @@ export default (state = initialState, action) => {
 // 5. action creators
 function someSyncAction() {
   return {
-    type: EXAMPLE_ACTION
+    type: EXAMPLE_ACTION,
   }
 }
 
 function someAsyncAction() {
-  return dispatch => {
+  return (dispatch) => {
     setTimeout(() => {
       dispatch({
         type: EXAMPLE_ACTION,
-        payload: 'hello async from timer!'
+        payload: "hello async from timer!",
       })
     }, 3000)
   }
 }
 
 function getExampleData() {
-  return dispatch => {
-    return api.get('/').then(resp => {
+  return (dispatch) => {
+    return api.get("/").then((resp) => {
       dispatch({
         type: EXAMPLE_ACTION,
-        payload: resp.data
+        payload: resp.data,
       })
       return resp
     })
@@ -56,14 +56,14 @@ function getExampleData() {
 
 function resetAction() {
   return {
-    type: RESET_ACTION
+    type: RESET_ACTION,
   }
 }
 
 // 6. custom hook
 export function useExample() {
   const dispatch = useDispatch()
-  const example = useSelector(appState => appState.exampleState.example)
+  const example = useSelector((appState) => appState.exampleState.example)
 
   const syncaction = () => dispatch(someSyncAction())
   const asyncaction = () => dispatch(someAsyncAction())

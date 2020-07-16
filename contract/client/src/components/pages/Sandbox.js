@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
-import { Button, Input } from 'semantic-ui-react'
-import { useForm, useExample } from '../../hooks'
+import React, { useEffect } from "react"
+import { Button, Input } from "semantic-ui-react"
+import { useForm, useExample } from "../../hooks"
 
 export default (props) => {
-  const [exampleForm, setExampleForm, resetForm, setFormTo] = useForm({ first: '', last: '' })
+  const [exampleForm, setExampleForm, resetForm, setFormTo] = useForm({
+    first: "",
+    last: "",
+  })
   const { getExample } = useExample()
   function handleSubmit(e) {
     e.preventDefault()
@@ -11,7 +14,7 @@ export default (props) => {
     resetForm()
   }
   function populateFormWithDataFromBackend() {
-    getExample().then(resp => {
+    getExample().then((resp) => {
       // populate form with data from backend
       setFormTo(resp.user)
     })
@@ -33,7 +36,12 @@ export default (props) => {
         />
         <Button type="submit">submit</Button>
       </form>
-      <Button style={{ margin: '20px' }} onClick={() => populateFormWithDataFromBackend()}>set form programatically from data in backend</Button>
+      <Button
+        style={{ margin: "20px" }}
+        onClick={() => populateFormWithDataFromBackend()}
+      >
+        set form programatically from data in backend
+      </Button>
     </div>
   )
 }

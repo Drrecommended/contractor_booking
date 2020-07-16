@@ -1,74 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
-
-body{
-    background-color: lightgray;
+body {
+  background-color: lightgray;
 }
 
-.Signup-login-divider{
-    width: 50%;
-    margin-top: 3%;
-    position: absolute;
+.Signup-login-divider {
+  width: 50%;
+  margin-top: 3%;
+  position: absolute;
 }
 
-@media(max-width: 768px) {
-    .Signup-login-divider {
-        width: 90%;
-    }
+@media (max-width: 768px) {
+  .Signup-login-divider {
+    width: 90%;
+  }
 }
 
-.DividerContainer{
-    display: flex;
-    justify-content: center;
+.DividerContainer {
+  display: flex;
+  justify-content: center;
 }
 
-.NavContainer{
-    display: flex;
-    justify-content: space-between;
-    
+.NavContainer {
+  display: flex;
+  justify-content: space-between;
 }
 
-.NavLinks{
-    font-size: 15px;
-    padding-top: 10px;
+.NavLinks {
+  font-size: 15px;
+  padding-top: 10px;
 }
 
-.SearchLink{
-    padding-left: 20px;
-    padding-right: 20px;
-    color: black;
+.SearchLink {
+  padding-left: 20px;
+  padding-right: 20px;
+  color: black;
 }
 
-.AboutLink{
-    color: black;
+.AboutLink {
+  color: black;
 }
 
-.NavName{
-    font-family: 'Oxygen', sans-serif;
-    color: black;
-    font-size: 40px;
-    padding-left: 20px;
-    padding-top: 10px;
+.NavName {
+  font-family: "Oxygen", sans-serif;
+  color: black;
+  font-size: 40px;
+  padding-left: 20px;
+  padding-top: 10px;
 }
 
-.FormSpacing{
-    margin: 20px;
+.FormSpacing {
+  margin: 20px;
 }
 
 .Login {
-    background-image: url("https://images.unsplash.com/photo-1556912167-f556f1f39fdf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1660&q=80");
-    background-color: #cccccc; /* Used if the image is unavailable */
-    background-position: center; /* Center the image */
-    height: 100%;
-    width: 100%;
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
-    position: absolute;
+  background-image: url("https://images.unsplash.com/photo-1556912167-f556f1f39fdf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1660&q=80");
+  background-color: #cccccc; /* Used if the image is unavailable */
+  background-position: center; /* Center the image */
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+  position: absolute;
 }
 
 .login-error {
-    position: absolute;
-    margin: auto;
-    top: 0;
-    color: red;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  color: red;
 }

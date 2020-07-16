@@ -1,19 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react"
 
 const TradeOptions = () => {
-
-
-  return (<div>
+  return (
+    <div>
       <select>
         <option>Plumber</option>
         <option>Painter</option>
         <option>Lawn Services</option>
       </select>
-
-
-
-  </div>)
-
+    </div>
+  )
 }
 
 export default TradeOptions

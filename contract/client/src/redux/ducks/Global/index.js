@@ -1,5 +1,5 @@
 // 1. imports
-import api from '../../../utils/request'
+import api from "../../../utils/request"
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
@@ -23,36 +23,30 @@ export default (state = globalState, action) => {
 
 // 5. action creators
 
-
-
 function isLoaded(load) {
-return dispatch => {
-    if(load === false) {
-        setTimeout(() => {
+  return (dispatch) => {
+    if (load === false) {
+      setTimeout(() => {
         dispatch({
-            type: SET_LOADED,
-            payload: load
+          type: SET_LOADED,
+          payload: load,
         })
-        }, 1000)
+      }, 1000)
     } else {
-        dispatch({
-            type: SET_LOADED,
-            payload: load
-        })
+      dispatch({
+        type: SET_LOADED,
+        payload: load,
+      })
     }
+  }
 }
-}
-
-
-
 
 // 6. custom hook
 export function useLoad() {
   const dispatch = useDispatch()
-  const loading = useSelector(appState => appState.globalState.loaded)
+  const loading = useSelector((appState) => appState.globalState.loaded)
 
   const setLoaded = (load) => dispatch(isLoaded(load))
- 
 
   return { loading, setLoaded }
 }
