@@ -29,7 +29,6 @@ export default () => {
   } = useEditProfile()
 
   const { profile } = useProfileIndex()
-
   console.log(gallery)
 
   const [editForm, resetForm, setFormTo, setEditForm] = useForm({ first: "" })
@@ -45,7 +44,7 @@ export default () => {
     trade2: "",
     thumbnail: ""
   })
-
+  const [ trade, setTrade ] = useState('')
   const [
     serviceForm,
     handleServiceForm,
@@ -140,7 +139,10 @@ export default () => {
     resetForm()
     
   }
-
+  const handleTrade =(e) =>{
+    console.log(e)
+    setTrade(e)
+  }
   function dataFromBackend() {
     getProfile().then((resp) => {
       setFormTo(resp.user)
@@ -178,10 +180,7 @@ export default () => {
         thumbnail: resp.address.thumbnail
       })
 
-      setServiceFormTo({
-        description: resp.services[0].description,
-        price: resp.services[0].price,
-      })
+     
       console.log(resp.services[0].price)
       //resp.services[0].price.. will give me the first index in the services array which will give me access to the price object
     })
@@ -196,8 +195,8 @@ export default () => {
             <Modal trigger={<AiOutlinePlus/>}>
               <Modal.Content>
                 <Form onSubmit={handlesubmit}>
-                  <Input icon={<Icon name='search' inverted circular link />} placeholder='Search...'/>
-                  <GiSaveArrow onChange={handleTopForm}/>
+                  <Input onChange={handleTopForm} icon={<Icon name='search' inverted circular link />} placeholder='Search...'/>
+                  <GiSaveArrow/>
                 </Form>
               </Modal.Content>
             </Modal>
@@ -227,7 +226,7 @@ export default () => {
               selection
               options={options}
               value={topForm.trade1}
-              onChange={handleTopForm}
+              onChange={(e, value) => handleTrade(value)}
             />
             <Dropdown
               placeholder="Skills"
