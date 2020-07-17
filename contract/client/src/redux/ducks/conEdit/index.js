@@ -43,7 +43,7 @@ function getProfileData() {
       })
       dispatch({
         type: SET_SERVICES,
-        payload: resp.services,
+        payload: resp.services, 
       })
 
       return resp

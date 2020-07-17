@@ -292,7 +292,11 @@ export default () => {
 
       <div className="BioEdit">
         <div className="EditContainer">
-          <textarea className="TextEdit" value={topForm.bio}></textarea>
+          <textarea className="TextEdit"
+           name="bio" 
+           value={topForm.bio}
+           onChange={handleTopForm}>
+           </textarea>
         </div>
         <div>
           <Button positive>SAVE</Button>
