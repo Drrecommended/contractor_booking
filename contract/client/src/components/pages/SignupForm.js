@@ -69,9 +69,6 @@ const DividerExampleVerticalForm = (props) => {
     } else {
       setUsernameError("")
     }
-    // if(form.username === username) {
-    //   setNameExists('UserName already exists')
-    // }
     if (!form.email) {
       setEmailError("cannot be blank")
       canSubmit = false
@@ -90,11 +87,16 @@ const DividerExampleVerticalForm = (props) => {
     if (validator.isEmail(form.email)) {
     }
     if (canSubmit) {
-      signup({ ...form, contractor }).then((resp) => {
+      signup({ ...form, contractor })
+      .then((resp) => {
         resetForm()
         handleClose()
-      })
-    }
+      }).catch((err) => {
+        console.log(err)
+        setNameExists('already exists')
+      }
+      )
+    } 
   }
 
   return (
@@ -169,9 +171,9 @@ const DividerExampleVerticalForm = (props) => {
                           name="username"
                           icon="user"
                           iconPosition="left"
-                          label={"UserName " + (userNameError || "")}
+                          label={"UserName " + (userNameError || nameExists || "")}
                           placeholder="Username"
-                          error={!!userNameError}
+                          error={!!userNameError || !!nameExists}
                         />
                         <Form.Input
                           onChange={setForm}
