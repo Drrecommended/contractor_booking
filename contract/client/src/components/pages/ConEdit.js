@@ -16,7 +16,7 @@ export default () => {
   // const [modalVisible, setModalVisible] = useState(false)
   // const handleClose = () => setModalVisible(false)
   // const handleShow = () => setModalVisible(true)
-
+  
   const {
     addGalleryImage,
     deleteGalleryImage,
@@ -45,6 +45,14 @@ export default () => {
     thumbnail: ""
   })
   const [ trade, setTrade ] = useState('')
+  const handleChange = (e, { value }) => {
+    console.log(value)
+    setTopFormTo({...topForm, trade1: value})
+    
+  }
+
+
+
   const [
     serviceForm,
     handleServiceForm,
@@ -226,7 +234,7 @@ export default () => {
               selection
               options={options}
               value={topForm.trade1}
-              onChange={(e, value) => handleTrade(value)}
+              onChange={handleChange}
             />
             <Dropdown
               placeholder="Skills"
@@ -313,10 +321,11 @@ export default () => {
 
           {services.map((item) => {
             return (
-          <div className="InputContainer">
+          <div  className="InputContainer">
             <div class="ui focus input">
               <AiOutlineMinusCircle />
                 <input
+              disabled={true}
               type="text"
               placeholder="JOB DESCRIPTION"
               name="description"
@@ -324,7 +333,7 @@ export default () => {
               onChange={handleServiceForm}
             />
 
-            <Input
+            <Input 
               className="PriceEdit"
               labelPosition="right"
               type="text"
@@ -345,6 +354,7 @@ export default () => {
         </div>
             )
           })}
+          <BsFillPlusSquareFill/>
     </div>
     
   )
