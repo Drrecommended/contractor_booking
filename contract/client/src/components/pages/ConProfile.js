@@ -17,8 +17,8 @@ export default (props) => {
   const [loading] = useState("")
   const [serviceId, setServiceId] = useState(null)
   const { setLoaded } = useLoad()
-  const handleChange = (e, { value }) => setServiceId(value)
-
+  const handleChange = (e, { value }) => setServiceId(value) 
+   
   const onChange = (date) => {
     setDate(date)
   }
@@ -35,6 +35,7 @@ export default (props) => {
       <div className="profilePage">
         <div className="profile-nav">
           <div className="profile-image">
+            
             <Avatar image={profile.thumbnail} />
           </div>
           <div className="name-trade-edit-shelf">
