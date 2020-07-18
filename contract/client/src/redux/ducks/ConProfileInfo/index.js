@@ -8,8 +8,10 @@ const GET_PROFILE = "ConProfileInfo/GET_PROFILE"
 // 3. initial state
 const profileState = {
   profile: {
+    services: [],
+    user: {},
     address: {},
-    images: [],
+    gallery: [],
   },
 }
 
@@ -30,7 +32,7 @@ function getProfileData() {
     return api.get("/profile").then((resp) => {
       dispatch({
         type: GET_PROFILE,
-        payload: resp,
+        payload: {...resp, gallery: resp.gallery.map(item => ({...item, image: item.img_src}))}
       })
     })
   }
