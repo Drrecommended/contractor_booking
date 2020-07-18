@@ -14,9 +14,9 @@ import GalleryImage from "../GalleryImage"
 
 export default () => {
   
-  // const [modalVisible, setModalVisible] = useState(false)
-  // const handleClose = () => setModalVisible(false)
-  // const handleShow = () => setModalVisible(true)
+  const [modalVisible, setModalVisible] = useState(false)
+  const handleClose = () => setModalVisible(false)
+  const handleShow = () => setModalVisible(true)
   
   const {
     addGalleryImage,
@@ -43,7 +43,7 @@ export default () => {
     state: "",
     zip: "",
     trade2: "",
-    thumbnail: ""
+    thumbnail: "",
   })
   const [ trade, setTrade ] = useState('')
   const handleChange = (e, { value }) => {
@@ -72,7 +72,7 @@ export default () => {
     handleGalleryForm,
     resetGalleryForm,
     setGalleryFormTo,
-  ] = useForm()
+  ] = useForm({ gallery: ""})
 
   const options = [
     { key: "Plumber", text: "Plumber", value: "plumber" },
@@ -152,6 +152,7 @@ export default () => {
     e.preventDefault()
     console.log(editForm)
     resetForm()
+    handleClose()
     
   }
   const handleTrade =(e) =>{
@@ -192,7 +193,10 @@ export default () => {
         state: resp.address.state,
         zip: resp.address.zip,
         trade2: resp.address.trade_2,
-        thumbnail: resp.address.thumbnail
+        thumbnail: resp.address.thumbnail,
+      })
+      setGalleryFormTo({
+        gallery: ""
       })
 
      
@@ -208,12 +212,14 @@ export default () => {
       <div className="BusinessInfoContainer">
         <div className="profile-image">
           <div className="avatarEdit">
-            <Modal trigger={<AiOutlinePlus/>}>
+            <Modal  onClose={() => setModalVisible(false)}
+                    open={modalVisible}  trigger={<AiOutlinePlus onClick={() => setModalVisible(true)}/>}>
               <Modal.Content>
-                <Form onSubmit={handlesubmit}>
-                  <Input onChange={handleTopForm} icon={<Icon name='search' inverted circular link />} placeholder='Search...'/>
-                  <GiSaveArrow/>
-                </Form>
+                  <Input onChange={handleTopForm} 
+                  name="thumbnail"
+                  icon={<Icon name='search' 
+                  onClick={() => setModalVisible(false)} inverted circular link />} 
+                  placeholder='Search...'/>
               </Modal.Content>
             </Modal>
             <Avatar image={topForm.thumbnail} />
@@ -315,15 +321,19 @@ export default () => {
           }}
         ></GalleryImage>
         <div className="GalleryButtons">
-        <Modal trigger={<Button onClick={handleRequest}>add gallery image</Button>}>
+        <Modal  onClose={() => setModalVisible(false)}
+                    open={modalVisible} 
+                    trigger={<Button onClick={() => setModalVisible(true)}>add gallery image</Button>}>
               <Modal.Content>
-                <Form onSubmit={handlesubmit}>
-                  <Input icon={<Icon name='search' inverted circular link />} placeholder='Search...'/>
-                  <GiSaveArrow/>
-                </Form>
+                  <Input 
+                  name="gallery"
+                  onChange={handleGalleryForm}
+                  icon={<Icon name='search'
+                  onClick={() => setModalVisible(false)} inverted circular link />} 
+                  placeholder='Search...'/>
               </Modal.Content>
             </Modal>
-          <Button positive>SAVE</Button>
+          <Button  onClick={() => addGalleryImage(galleryForm)} positive>SAVE</Button>
         </div>
       </div>
 

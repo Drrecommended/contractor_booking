@@ -1,6 +1,6 @@
 .EditPage{
     width: 90%;
-    background-color: white;
+    background-color: #ffffffd1;
     margin: auto;
     margin-top: 3%;
     box-shadow: 0px 0px 89px -4px rgba(0, 0, 0, 0.75);
@@ -49,9 +49,10 @@
 .BioEdit {
   padding-bottom: 35px;
   margin: 40px;
-  border-bottom-style: ridge;
-  border-color: #efef16;
+  border-bottom-style: solid;
+  border-color: lightgray;
   flex-direction: column;
+  border-width: thin
 }
 
 
@@ -80,6 +81,9 @@
 .TextEdit {
   width: 1000px;
   height: 200px;
+  border-style: inset;
+  border-color: cadetblue;
+  border-width: medium;
 }
 .AddDescriptionButton {
   margin-left: 40px;
@@ -88,9 +92,10 @@
 
 .GalleryEditButton {
   margin: 40px;
-  border-bottom-style: ridge;
-  border-color: #efef16;
+  border-bottom-style: solid;
+  border-color: lightgray;
   padding-bottom: 20px;
+  border-width: thin
 }
 
 .MinusButton {
@@ -108,6 +113,7 @@
 
 .ui.input{
     min-width: 14.3em;
+    
 }
 .EditPen{
     margin: 10px;
@@ -125,6 +131,7 @@
 
 .BusinessInfoContainer{
     display: flex;
+    align-items: center;
    
 }
 
