@@ -28,7 +28,6 @@ router.get('/profile', async (req, res, next) => {
       last: user.last_name
     }
   }
-  console.log(profile)
   res.json(profile)
 })
 
