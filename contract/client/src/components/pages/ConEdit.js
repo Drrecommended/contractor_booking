@@ -4,6 +4,7 @@ import { Button, Input, Dropdown, Container, Label, Modal, Image, Form, Icon } f
 import { BsFillPlusSquareFill } from "react-icons/bs"
 import { GiSaveArrow } from "react-icons/gi"
 import { AiOutlineMinusCircle, AiOutlinePlus } from "react-icons/ai"
+import { TiCancel } from "react-icons/ti";
 import { GrEdit } from "react-icons/gr"
 import Avatar from "../ui/Avatar"
 import { useEditProfile, useForm, useProfileIndex } from "../../hooks"
@@ -51,6 +52,12 @@ export default () => {
     
   }
 
+  const [ trade2, setTrade2 ] = useState('')
+  const handleChange2 = (e, { value }) => {
+    console.log(value)
+    setTopFormTo({...topForm, trade2: value})
+    
+  }
 
 
   const [
@@ -195,6 +202,7 @@ export default () => {
   }, [])
 
   return (
+    <div className="EditBg">
     <div className="EditPage">
       <div className="EditTopOfPage">
       <div className="BusinessInfoContainer">
@@ -242,7 +250,7 @@ export default () => {
               selection
               options={options}
               value={topForm.trade2}
-              onChange={handleTopForm}
+              onChange={handleChange2}
             />
           </form>
         </div>
@@ -283,11 +291,7 @@ export default () => {
           />
         </div></div>
         
-        <div>
-          <Button onClick={() => updateAddress(topForm)} positive>
-            SAVE
-          </Button>
-        </div>
+        
       </div>
 
       <div className="BioEdit">
@@ -299,7 +303,7 @@ export default () => {
            </textarea>
         </div>
         <div>
-          <Button positive>SAVE</Button>
+          <Button positive onClick={() => updateAddress(topForm)}>SAVE</Button>
         </div>
       </div>
       <div className="GalleryEditButton">
@@ -327,9 +331,8 @@ export default () => {
             return (
           <div  className="InputContainer">
             <div class="ui focus input">
-              <AiOutlineMinusCircle />
+              <AiOutlineMinusCircle className="MinusButton" size={20}/>
                 <input
-              disabled={true}
               type="text"
               placeholder="JOB DESCRIPTION"
               name="description"
@@ -352,13 +355,15 @@ export default () => {
               <Label>.00</Label>
             </Input>
             <div className="EditPen">
-              <GrEdit />
+              <GrEdit size={20}/>
+              <TiCancel size={20}/>
             </div>
           </div>
         </div>
             )
           })}
-          <BsFillPlusSquareFill/>
+          <BsFillPlusSquareFill size={30} />
+    </div>
     </div>
     
   )

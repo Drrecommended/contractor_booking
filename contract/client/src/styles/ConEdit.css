@@ -1,5 +1,21 @@
 .EditPage{
-    background-Image: url('https://images.unsplash.com/photo-1556912167-f556f1f39fdf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1660&q=80')
+    width: 90%;
+    background-color: white;
+    margin: auto;
+    margin-top: 3%;
+    box-shadow: 0px 0px 89px -4px rgba(0, 0, 0, 0.75);
+    border-radius: 0.28571429rem;
+}
+.EditBg{
+        background-image: url("https://images.unsplash.com/photo-1556912167-f556f1f39fdf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1660&q=80");
+        background-color: #cccccc; /* Used if the image is unavailable */
+        background-position: center; /* Center the image */
+        
+        width: 100%;
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+        position: absolute;
+      
 }
 
 .EditTopOfPage{
