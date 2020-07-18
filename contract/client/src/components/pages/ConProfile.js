@@ -25,7 +25,7 @@ export default (props) => {
 
   useEffect(() => {
     setLoaded(true)
-    getProfile().then(() => {
+    getProfile(props.match.params.id).then(() => {
       setLoaded(false)
     })
   }, [])
@@ -35,11 +35,11 @@ export default (props) => {
       <div className="profilePage">
         <div className="profile-nav">
           <div className="profile-image">
-            <Avatar image={profile.thumbnail} />
+            <Avatar image={profile.address.thumbnail} />
           </div>
           <div className="name-trade-edit-shelf">
             <h2 className="conName">
-              {profile.first} {profile.last}
+              {profile.user.first} {profile.user.last}
             </h2>
             <div>{profile.trade}</div>
             <Link to="/profile/edit">edit profile</Link>
@@ -53,7 +53,7 @@ export default (props) => {
         <div className="profile-bio">{profile.BIO}</div>
         <div className="gallery-shelf">
           <GalleryImage
-            images={profile.images}
+            images={profile.gallery}
             onDelete={(id) => console.log(id)}
             isEditable={false}
           />
@@ -63,7 +63,7 @@ export default (props) => {
             <div className="service-font">Select your service below</div>
             <Dropdown
               placeholder="services"
-              options={profile.options}
+              options={profile.services}
               onChange={handleChange}
               selection
             />
@@ -76,7 +76,7 @@ export default (props) => {
                 marginTop: "10%",
               }}
               onClick={() =>
-                addToCart(profile.options.find((o) => o.id === serviceId))
+                addToCart(profile.services.find((o) => o.id === serviceId))
               }
             >
               Add to cart

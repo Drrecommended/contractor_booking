@@ -8,8 +8,10 @@ const GET_PROFILE = "ConProfileInfo/GET_PROFILE"
 // 3. initial state
 const profileState = {
   profile: {
+    services: [],
+    user: {},
     address: {},
-    images: [],
+    gallery: [],
   },
 }
 
@@ -25,12 +27,14 @@ export default (state = profileState, action) => {
 
 // 5. action creators
 
-function getProfileData() {
+function getProfileData(id) {
+  const path = id == undefined ? "/profile" : "/profile/" + id 
+  console.log("/profile/" + id)
   return (dispatch) => {
-    return api.get("/profile").then((resp) => {
+    return api.get(path).then((resp) => {
       dispatch({
         type: GET_PROFILE,
-        payload: resp,
+        payload: {...resp, gallery: resp.gallery.map(item => ({...item, image: item.img_src}))}
       })
     })
   }
@@ -41,7 +45,7 @@ export function useProfileIndex() {
   const dispatch = useDispatch()
   const profile = useSelector((appState) => appState.profileState.profile)
 
-  const getProfile = () => dispatch(getProfileData())
+  const getProfile = (id) => dispatch(getProfileData(id))
 
   return { profile, getProfile }
 }
