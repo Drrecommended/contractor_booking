@@ -129,7 +129,13 @@ const DividerExampleVerticalForm = (props) => {
                       type="password"
                       error={!!loginError}
                     />
-                    <Button content="Login" primary />
+                    <Button 
+                      content="Login" 
+                      style={{
+                        backgroundColor: "cadetblue",
+                        color: "white",
+                      }}
+                      primary />
                   </Form>
                 </Grid.Column>
                 <Grid.Column verticalAlign="middle">
@@ -213,7 +219,15 @@ const DividerExampleVerticalForm = (props) => {
                             onChange={() => setContractor(!contractor)}
                           />
                         </div>
-                        <Button type="submit" content="Submit" primary />
+                        <Button 
+                          type="submit" 
+                          content="Submit" 
+                          primary 
+                          style={{
+                            backgroundColor: "cadetblue",
+                            color: "white",
+                          }}
+                        />
                       </div>
                     </Form>
                   </Modal>

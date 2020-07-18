@@ -44,3 +44,8 @@
   text-decoration: underline;
   text-decoration-color: cadetblue;
 }
+
+.search-link:visited {
+  text-decoration: none;
+  color: black;
+}

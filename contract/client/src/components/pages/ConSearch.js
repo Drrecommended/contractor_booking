@@ -27,7 +27,7 @@ export default () => {
         <div className="searchPage">
           {contractors.map((contractor) => {
             return (
-              <Link to={`/profile/${contractor.id}`}>
+              <Link className="search-link" to={`/profile/${contractor.id}`}>
                 <div className="contractor-shelf">
                   <div className="conSearchImage">
                     <img src={contractor.thumbnail} />
