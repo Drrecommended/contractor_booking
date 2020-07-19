@@ -30,7 +30,7 @@ export default (props) => {
     })
   }, [])
   return (
-      <div className="Login">
+      <div className="profile-background">
         <div className="profilePage">
           <div className="profile-nav">
             <div className="profile-image">
@@ -42,7 +42,12 @@ export default (props) => {
               </h2>
               <div>{profile.trade}</div>
               {user.id == props.match.params.id || !props.match.params.id ?  
-              <Link to="/profile/edit">edit profile</Link> :
+              <Link 
+                style={{color: "cadetblue"}} 
+                to="/profile/edit"
+              >
+                edit profile
+              </Link> :
               null
               }
               

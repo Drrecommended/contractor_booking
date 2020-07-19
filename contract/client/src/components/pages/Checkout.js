@@ -8,9 +8,12 @@ import {
 } from "semantic-ui-react"
 import "../../styles/Checkout.scss"
 import { useCart, useForm } from "../../hooks"
+import validator from "validator"
+import { AiFillPropertySafety } from "react-icons/ai"
 
-export default () => {
+export default (props) => {
   const { cart, createOrder } = useCart()
+  console.log(cart)
   // const addressDefinitions = faker.definitions.address
   // const stateOptions = _.map(addressDefinitions.state, (state, index) => ({
   //   key: addressDefinitions.state_abbr[index],
@@ -27,6 +30,7 @@ export default () => {
     email: "",
     phone: "",
   })
+  const [order] = useState("")
   const [firstNameError, setFirstNameError] = useState(null)
   const [lastNameError, setLastNameError] = useState(null)
   const [addressError, setAddressError] = useState(null)
@@ -35,10 +39,8 @@ export default () => {
   const [postalError, setPostalError] = useState(null)
   const [emailError, setEmailError] = useState(null)
   const [phoneError, setPhoneError] = useState(null)
-
-  function handleSubmit() {
-
-  }
+  const [terms, setTerms] = useState(false)
+  const [serviceFormError, setServiceFormError] = useState("")
 
   function handleOrder() {
     let canOrder = true
@@ -91,7 +93,11 @@ export default () => {
       setPhoneError("")
     }
     if(canOrder) {
-      createOrder()
+      createOrder({...form, cart})
+      .then((resp) => {
+        resetForm()
+        props.history.push("/search")
+      })
     }
   }
 
@@ -100,54 +106,77 @@ export default () => {
       <div className="form-container">
         <Form 
         className="checkout-form"
-        onSubmit={handleSubmit}
+        onSubmit={handleOrder}
         >
           <h1>Who and where should we bill this service?</h1>
           <Form.Group unstackable widths={2}>
             <Form.Input 
               onChange={setForm}
-              label="First name" 
+              label={"First Name " + (firstNameError || "")}
               placeholder="First name" 
               error={!!firstNameError}
             />
             <Form.Input 
-              label="Last name" 
+              onChange={setForm}
+              label={"Last name " + (lastNameError || "")}
               placeholder="Last name" 
+              error={!!lastNameError}
             />
           </Form.Group>
           <Form.Group widths={4}>
-            <Form.Input  
-              label="Address" 
+            <Form.Input
+              onChange={setForm}  
+              label={"Address " + (addressError || "")}
               placeholder="Address" 
+              error={!!addressError}
             />
             <Form.Dropdown
-              label="City"
+              onChange={setForm}
+              label={"City " + (cityError || "")}
               placeholder="city"
               search
               selection
               options="hey"
+              error={!!cityError}
             />
             <Form.Dropdown
-              label="State"
+              onChange={setForm}
+              label={"State " + (stateError || "")}
               placeholder="state"
               search
               selection
               options="hey"
+              error={!!stateError}
             />
             <Form.Input 
-              label="Postal code" 
+              onChange={setForm}
+              label={"Postal Code " + (postalError || "")}
               placeholder="Postal code" 
+              error={!!postalError}
             />
           </Form.Group>
           <Form.Group widths={2}>
-            <Form.Input label="Email" placeholder="Email" />
-            <Form.Input label="Phone" placeholder="Phone" />
+            <Form.Input 
+              onChange={setForm}
+              label={"Email " + (emailError || "")}
+              placeholder="Email" 
+              error={!!emailError}
+            />
+            <Form.Input 
+              onChange={setForm}
+              label={"Phone " + (phoneError || "")}
+              placeholder="Phone" 
+              error={!!phoneError}
+            />
           </Form.Group>
-          <Form.Checkbox label="I agree to the Terms and Conditions" />
+          <Form.Checkbox 
+            name="terms"
+            label="I agree to the Terms and Conditions" 
+            onChange={() => setTerms(!terms)}
+            />
+            
           <Button
-            onClick={() => {
-              createOrder()
-            }}
+            primary
             type="submit"
             style={{
               backgroundColor: "cadetblue",
