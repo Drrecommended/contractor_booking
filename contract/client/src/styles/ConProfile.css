@@ -15,11 +15,12 @@
 }
 
 .profile-image {
-  margin: 2%;
+  margin-top: 2.7%;
 }
 
 .name-trade-edit-shelf {
   margin: 2%;
+  margin-top: 3%;
 }
 
 .profile-bio {
@@ -50,7 +51,8 @@
 
 .profile-address {
   margin-left: 2%;
-  margin-top: 2.5%;
+  margin-top: 5%;
+
 }
 
 .profile-page .hide {
@@ -74,7 +76,8 @@
 
 .select-service-shelf {
   width: 100%;
-  margin: auto;
+  margin-top: 5%;
+  margin-left: 15%;
 }
 
 .calender-shelf {
@@ -84,8 +87,11 @@
 
 .cart-shelf {
   margin-top: 2%;
-  width: 100%;
+  width: 80%;
+  height: 80%;
   margin: auto;
+  /* border: #CFD0D0 solid 1px;
+  border-radius: 5px; */
 }
 
 .service-list {
@@ -116,4 +122,9 @@
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
   position: absolute;
+}
+.profilConName {
+  text-decoration: underline;
+  text-decoration-color: cadetblue;
+  font-size: 38px;
 }

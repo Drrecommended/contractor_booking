@@ -37,7 +37,7 @@ export default (props) => {
               <Avatar image={profile.thumbnail} />
             </div>
             <div className="name-trade-edit-shelf">
-              <h2 className="conName">
+              <h2 className="profilConName">
                 {profile.first} {profile.last}
               </h2>
               <div>{profile.trade}</div>
@@ -130,12 +130,30 @@ export default (props) => {
                   </div>
                 ) : (
                   <div className="cart-shelf">
-                    <Icon name="shopping cart" size="large" />
+                    <div>Add services here</div>
+                    <Button
+                      disabled={!serviceId || cart === 0}
+                        style={{
+                          backgroundColor: "cadetblue",
+                          color: "white",
+                          marginTop: "25%",
+                          marginLeft: "70%",
+                          position: "absolute,"
+                        }}
+                        onClick={() => {
+                          props.history.push("/checkout")
+                        }}
+                      >
+                        Select date
+                      </Button>
                   </div>
+                  
                 )}
                 <div className="calender-shelf">
                   <Calendar
-                    style={{ float: "right" }}
+                    style={{ 
+                      float: "right",
+                      border: "#CFD0D0 solid 5px" }}
                     onClickDay={date}
                     onChange={onChange}
                     value={date}
