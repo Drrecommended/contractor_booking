@@ -34,14 +34,15 @@ export default (props) => {
         <div className="profilePage">
           <div className="profile-nav">
             <div className="profile-image">
-              <Avatar image={profile.thumbnail} />
+              <Avatar image={profile.address.thumbnail} />
             </div>
             <div className="name-trade-edit-shelf">
               <h2 className="profilConName">
-                {profile.first} {profile.last}
+                {profile.user.first} {profile.user.last}
               </h2>
-              <div>{profile.trade}</div>
-              {user.id == props.match.params.id || !props.match.params.id ?  
+              <div>{profile.address.trade_1}
+              {profile.address.trade_2}</div>
+              {user.profile_id == props.match.params.id || !props.match.params.id ?  
               <Link 
                 style={{color: "cadetblue"}} 
                 to="/profile/edit"
@@ -50,7 +51,6 @@ export default (props) => {
               </Link> :
               null
               }
-              
             </div>
             <div className="profile-address"> 
               <div>{profile.address.street}</div>
@@ -58,11 +58,11 @@ export default (props) => {
               <div>{profile.address.state}</div>
             </div>
           </div>
-          <div className="profile-bio">{profile.BIO}</div>
+          <div className="profile-bio">{profile.address.bio}</div>
             {user.contractor ?  
                 <> <div className="gallery-shelf">
                 <GalleryImage
-                  images={profile.images}
+                  images={profile.gallery}
                   onDelete={(id) => console.log(id)}
                   isEditable={false}
                 />
@@ -72,7 +72,7 @@ export default (props) => {
                   <div className="service-font">Select your service below</div>
                   <Dropdown
                     placeholder="services"
-                    options={profile.options}
+                    options={profile.services}
                     onChange={handleChange}
                     selection
                   />
@@ -85,7 +85,7 @@ export default (props) => {
                       marginTop: "10%",
                     }}
                     onClick={() =>
-                      addToCart(profile.options.find((o) => o.id === serviceId))
+                      addToCart(profile.services.find((o) => o.id === serviceId))
                     }
                   >
                     Add to cart

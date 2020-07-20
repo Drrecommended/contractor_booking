@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react"
 import "../../styles/ConOrder.css"
 import { Button, Icon, Table, Menu } from "semantic-ui-react"
 import moment from "moment"
-import { useOrder, useLoad } from "../../hooks"
+import { useOrder, useLoad, useAuth } from "../../hooks"
+import { Link } from "react-router-dom"
 
 export default () => {
   const { orders, getOrder, approve, deny } = useOrder()
   const { setLoaded } = useLoad()
   const [loading] = useState("")
+  const { user } = useAuth()
+
 
   useEffect(() => {
     setLoaded(true)
@@ -22,7 +25,8 @@ export default () => {
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Order #</Table.HeaderCell>
-              <Table.HeaderCell>Customer</Table.HeaderCell>
+              <Table.HeaderCell>{user.contractor ? "Customer" : "Contractor"}</Table.HeaderCell>
+
               <Table.HeaderCell>Date</Table.HeaderCell>
               <Table.HeaderCell>Services</Table.HeaderCell>
               <Table.HeaderCell>Total</Table.HeaderCell>
@@ -37,7 +41,7 @@ export default () => {
                   <Table.Row className={{}}>
                     <Table.Cell>{order.id}</Table.Cell>
                     <Table.Cell>
-                      {order.first_name} {order.last_name}
+                      <Link to={'/profile/' + order.profile_id}>{order.first_name} {order.last_name}</Link>
                     </Table.Cell>
                     <Table.Cell>
                       {moment(order.date).subtract(10, "days").calendar()}
@@ -60,8 +64,8 @@ export default () => {
               })}
             </Table.Body>
           ) : (
-            <Table.Body>No orders yet! Check back soon!</Table.Body>
-          )}
+              <Table.Body>No orders yet! Check back soon!</Table.Body>
+            )}
         </Table>
       </div>
     </div>

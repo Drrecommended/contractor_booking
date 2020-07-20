@@ -37,6 +37,7 @@ const DividerExampleVerticalForm = (props) => {
   const [confirm, setconfirm] = useState()
   const [nameExists, setNameExists] = useState()
   const [contractor, setContractor] = useState(false)
+  const [contractUser, setContractUser] = useState(null)
 
   function handleLogin(e) {
     e.preventDefault()
