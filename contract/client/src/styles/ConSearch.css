@@ -13,6 +13,7 @@
   display: flex;
   border-bottom: solid 1px;
   padding: 1.5%;
+  cursor: pointer;
 }
 
 .info-shelf {
@@ -42,4 +43,9 @@
 .conName {
   text-decoration: underline;
   text-decoration-color: cadetblue;
+}
+
+.search-link:visited {
+  text-decoration: none;
+  color: black;
 }
