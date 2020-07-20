@@ -25,7 +25,7 @@ export default (props) => {
 
   useEffect(() => {
     setLoaded(true)
-    getProfile().then(() => {
+    getProfile(props.match.params.id).then(() => {
       setLoaded(false)
     })
   }, [])
