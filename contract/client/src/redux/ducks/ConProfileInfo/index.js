@@ -29,7 +29,6 @@ export default (state = profileState, action) => {
 
 function getProfileData(id) {
   const path = id == undefined ? "/profile" : "/profile/" + id 
-  console.log("/profile/" + id)
   return (dispatch) => {
     return api.get(path).then((resp) => {
       dispatch({

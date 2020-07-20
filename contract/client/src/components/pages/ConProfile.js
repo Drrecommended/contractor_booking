@@ -18,10 +18,10 @@ export default (props) => {
   const [serviceId, setServiceId] = useState(null)
   const { setLoaded } = useLoad()
   const handleChange = (e, { value }) => setServiceId(value)
-
   const onChange = (date) => {
     setDate(date)
   }
+
 
   useEffect(() => {
     setLoaded(true)
@@ -29,6 +29,9 @@ export default (props) => {
       setLoaded(false)
     })
   }, [])
+
+
+
 
   return (
     <div className="Login">
@@ -120,10 +123,10 @@ export default (props) => {
               </div>
             </div>
           ) : (
-            <div className="cart-shelf">
-              <Icon name="shopping cart" size="large" />
-            </div>
-          )}
+              <div className="cart-shelf">
+                <Icon name="shopping cart" size="large" />
+              </div>
+            )}
           <div className="calender-shelf">
             <Calendar
               style={{ float: "right" }}

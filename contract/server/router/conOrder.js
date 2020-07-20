@@ -4,19 +4,20 @@ const conn = require('../db.js')
 
 
 router.get('/contractor-order', (req, res, next) => {
+  const contractor = req.user.contractor
   console.log(req.user)
   const sql = `
       SELECT 
-      o.status, o.id, o.services, o.date, o.total, u.first_name, u.last_name
+      o.status, o.id, o.services, o.date, o.total, u.first_name, u.last_name, u.profile_id
       FROM orders o 
-      JOIN users u ON customer_id = u.id
-      WHERE contractor_id = ?
+      JOIN users u ON ${contractor ? 'customer_id' : 'contractor_id'} = u.id
+      WHERE ${contractor ? 'contractor_id' : 'customer_id'} = ?
     `
+  console.log(sql)
   conn.query(
     sql,
     [req.user.id],
     (err, results, fields) => {
-      console.log(results)
       res.json(results)
     }
   )
