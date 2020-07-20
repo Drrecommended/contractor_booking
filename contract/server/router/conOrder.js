@@ -13,7 +13,6 @@ router.get('/contractor-order', (req, res, next) => {
       JOIN users u ON ${contractor ? 'customer_id' : 'contractor_id'} = u.id
       WHERE ${contractor ? 'contractor_id' : 'customer_id'} = ?
     `
-  console.log(sql)
   conn.query(
     sql,
     [req.user.id],
@@ -29,7 +28,6 @@ router.patch('/contractor-order', (req, res, next) => {
     SET status = ? 
     WHERE id = ?;
     `
-  console.log(req.body)
   conn.query(
     sql,
     [req.body.status, req.body.id],
