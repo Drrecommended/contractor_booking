@@ -42,7 +42,8 @@ export default (props) => {
   const [terms, setTerms] = useState(false)
   const [serviceFormError, setServiceFormError] = useState("")
 
-  function handleOrder() {
+  function handleOrder(e) {
+    e.preventDefault()
     let canOrder = true
     if(!form.firstname) {
       setFirstNameError('cannot be blank')
@@ -92,13 +93,13 @@ export default (props) => {
     } else {
       setPhoneError("")
     }
-    if(canOrder) {
-      createOrder({...form, cart})
-      .then((resp) => {
-        resetForm()
-        props.history.push("/search")
-      })
-    }
+    // if(canOrder) {
+    //   createOrder({...form})
+    //   .then((resp) => {
+    //     resetForm()
+    //     props.history.push("/search")
+    //   })
+    // }
   }
 
   return (
@@ -136,7 +137,6 @@ export default (props) => {
               placeholder="city"
               search
               selection
-              options="hey"
               error={!!cityError}
             />
             <Form.Dropdown
@@ -145,7 +145,6 @@ export default (props) => {
               placeholder="state"
               search
               selection
-              options="hey"
               error={!!stateError}
             />
             <Form.Input 
