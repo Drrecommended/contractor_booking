@@ -37,6 +37,7 @@ const DividerExampleVerticalForm = (props) => {
   const [confirm, setconfirm] = useState()
   const [nameExists, setNameExists] = useState()
   const [contractor, setContractor] = useState(false)
+  const [contractUser, setContractUser] = useState(null)
 
   function handleLogin(e) {
     e.preventDefault()
@@ -69,9 +70,6 @@ const DividerExampleVerticalForm = (props) => {
     } else {
       setUsernameError("")
     }
-    // if(form.username === username) {
-    //   setNameExists('UserName already exists')
-    // }
     if (!form.email) {
       setEmailError("cannot be blank")
       canSubmit = false
@@ -90,11 +88,16 @@ const DividerExampleVerticalForm = (props) => {
     if (validator.isEmail(form.email)) {
     }
     if (canSubmit) {
-      signup({ ...form, contractor }).then((resp) => {
+      signup({ ...form, contractor })
+      .then((resp) => {
         resetForm()
         handleClose()
-      })
-    }
+      }).catch((err) => {
+        console.log(err)
+        setNameExists('already exists')
+      }
+      )
+    } 
   }
 
   return (
@@ -127,7 +130,13 @@ const DividerExampleVerticalForm = (props) => {
                       type="password"
                       error={!!loginError}
                     />
-                    <Button content="Login" primary />
+                    <Button 
+                      content="Login" 
+                      style={{
+                        backgroundColor: "cadetblue",
+                        color: "white",
+                      }}
+                      primary />
                   </Form>
                 </Grid.Column>
                 <Grid.Column verticalAlign="middle">
@@ -169,9 +178,9 @@ const DividerExampleVerticalForm = (props) => {
                           name="username"
                           icon="user"
                           iconPosition="left"
-                          label={"UserName " + (userNameError || "")}
+                          label={"UserName " + (userNameError || nameExists || "")}
                           placeholder="Username"
-                          error={!!userNameError}
+                          error={!!userNameError || !!nameExists}
                         />
                         <Form.Input
                           onChange={setForm}
@@ -211,7 +220,15 @@ const DividerExampleVerticalForm = (props) => {
                             onChange={() => setContractor(!contractor)}
                           />
                         </div>
-                        <Button type="submit" content="Submit" primary />
+                        <Button 
+                          type="submit" 
+                          content="Submit" 
+                          primary 
+                          style={{
+                            backgroundColor: "cadetblue",
+                            color: "white",
+                          }}
+                        />
                       </div>
                     </Form>
                   </Modal>

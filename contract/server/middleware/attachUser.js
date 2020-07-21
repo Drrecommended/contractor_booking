@@ -9,7 +9,7 @@ module.exports = function (req, res, next) {
   if (authorizationHeader) {
     const token = authorizationHeader.split(' ')[1]
     const decoded = jwtWebToken.decode(token)
-    req.user = { id: decoded.id, username: decoded.username, profile_id: decoded.profile_id }
+    req.user = { id: decoded.id, username: decoded.username, profile_id: decoded.profile_id, contractor: decoded.contractor}
   }
   next()
 }

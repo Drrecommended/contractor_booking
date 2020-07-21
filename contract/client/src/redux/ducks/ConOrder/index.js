@@ -47,7 +47,10 @@ function handleOrder(id, status) {
 // 6. custom hook
 export function useOrder() {
   const dispatch = useDispatch()
-  const orders = useSelector((appState) => appState.orderState.orderData)
+  const orders = useSelector((appState) => {
+    console.log(appState)
+    return appState.orderState.orderData
+  })
 
   const getOrder = () => dispatch(userOrders())
   const approve = (id) => dispatch(handleOrder(id, "approved"))

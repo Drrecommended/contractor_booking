@@ -74,5 +74,5 @@ export function useAuth() {
   const user = AuthService.getProfile()
   const testProtected = () => api.get("/dashboard")
 
-  return { login, logout, signup, isAuthenticated, testProtected }
+  return { login, logout, signup, isAuthenticated, testProtected, user }
 }
