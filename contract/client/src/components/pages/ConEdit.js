@@ -10,6 +10,7 @@ import Avatar from "../ui/Avatar"
 import { useEditProfile, useForm, useProfileIndex } from "../../hooks"
 import { TradeOptions } from "../TradeOptions"
 import GalleryImage from "../GalleryImage"
+import { states, options } from '../utils/profile-constants'
 
 
 export default () => {
@@ -30,7 +31,6 @@ export default () => {
   } = useEditProfile()
 
   const { profile } = useProfileIndex()
-  console.log(gallery)
 
   const [editForm, resetForm, setFormTo, setEditForm] = useForm({ first: "" })
   const [topForm, handleTopForm, resetTopForm, setTopFormTo] = useForm({
@@ -74,79 +74,9 @@ export default () => {
     setGalleryFormTo,
   ] = useForm({ gallery: ""})
 
-  const options = [
-    { key: "plumber", text: "Plumber", value: "plumber" },
-    { key: "landscaper", text: "Landscaper", value: "landscaper" },
-    { key: "junk removal", text: "Junk Removal", value: "junk removal" },
-    { key: "electrician", text: "Electrician", value: "electrician" },
-    { key: "painter", text: "Painter", value: "painter" },
-    { key: "carpenter", text: "Carpenter", value: "carpenter" },
-    { key: "roofer", text: "Roofer", value: "roofer" },
-    { key: "welder", text: "Welder", value: "welder" },
-    { key: "mechanic", text: "Mechanic", value: "mechanic" },
-  ]
+  const [avatarImage, setAvatarImage] = useState('')
 
-  const states = [
-    "AL",
-    "AK",
-    "AS",
-    "AZ",
-    "AR",
-    "CA",
-    "CO",
-    "CT",
-    "DE",
-    "DC",
-    "FM",
-    "FL",
-    "GA",
-    "GU",
-    "HI",
-    "ID",
-    "IL",
-    "IN",
-    "IA",
-    "KS",
-    "KY",
-    "LA",
-    "ME",
-    "MH",
-    "MD",
-    "MA",
-    "MI",
-    "MN",
-    "MS",
-    "MO",
-    "MT",
-    "NE",
-    "NV",
-    "NH",
-    "NJ",
-    "NM",
-    "NY",
-    "NC",
-    "ND",
-    "MP",
-    "OH",
-    "OK",
-    "OR",
-    "PW",
-    "PA",
-    "PR",
-    "RI",
-    "SC",
-    "SD",
-    "TN",
-    "TX",
-    "UT",
-    "VT",
-    "VI",
-    "VA",
-    "WA",
-    "WV",
-    "WI",
-    "WY",
-  ].map((item) => ({ key: item, value: item, text: item }))
+  
 
   function handlesubmit(e) {
     e.preventDefault()
@@ -159,25 +89,14 @@ export default () => {
     console.log(e)
     setTrade(e)
   }
+  function handleAvatarSubmit() {
+    setModalVisible(false)
+    setTopFormTo({...topForm, thumbnail: avatarImage})
+  }
   function dataFromBackend() {
     getProfile().then((resp) => {
       setFormTo(resp.user)
     })
-  }
-  function handleRequest() {
-    // addGalleryImage({ imgSrc: 'https://placehold.it/250x250/8B63A1' })
-    //deleteGalleryImage(4) // *use later
-    //updateAddress({
-    //  street: "Fenway",
-    //  city: "LV",
-    //  state: "AZ",
-    //  zipcode: "89166"
-    //})
-    deleteConService(2)
-    //addService({
-    //  description:"Tile Removal",
-    //  price: "600.00"
-    //})
   }
 
   useEffect(() => {
@@ -198,10 +117,6 @@ export default () => {
       setGalleryFormTo({
         gallery: ""
       })
-
-     
-      console.log(resp.services[0].price)
-      //resp.services[0].price.. will give me the first index in the services array which will give me access to the price object
     })
   }, [])
 
@@ -216,11 +131,12 @@ export default () => {
                     open={modalVisible}  trigger={<AiOutlinePlus onClick={() => setModalVisible(true)}/>}>
               <Modal.Content>
                   <Input
-                  onChange={handleTopForm} 
+                  onChange={(e) => setAvatarImage(e.target.value)} 
                   name="thumbnail"
-                  icon={<Icon name='search' 
-                  onClick={() => setModalVisible(false)} inverted circular link />} 
-                  placeholder='Search...'/>
+                  defaultValue={topForm.thumbnail}
+                  icon={<Icon name='add' 
+                  onClick={handleAvatarSubmit} inverted circular link />} 
+                  placeholder='Add'/>
               </Modal.Content>
             </Modal>
             <Avatar image={topForm.thumbnail} />
