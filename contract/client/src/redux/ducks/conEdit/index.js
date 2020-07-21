@@ -4,6 +4,7 @@ import api from "../../../utils/request"
 const EDIT_PROFILE = "edit/EDIT_PROFILE"
 const SET_GALLERY = "edit/SET_GALLERY"
 const SET_SERVICES = "edit/SET_SERVICES"
+const DIS_SERVICES = "edit/DIS_SERVICES"
 
 const profileState = {
   first: "",
@@ -25,6 +26,13 @@ export default (state = profileState, action) => {
       return { ...state, gallery: action.payload }
     case SET_SERVICES:
       return { ...state, services: action.payload }
+    case DIS_SERVICES:
+        return{ ...state, services: state.services.map(item =>{
+            const disabledItem = action.payload === item.id
+            return{...item,
+            disabled: disabledItem ? !item.disabled : item.disabled}
+
+        })}
     default:
       return state
   }
@@ -43,7 +51,8 @@ function getProfileData() {
       })
       dispatch({
         type: SET_SERVICES,
-        payload: resp.services, 
+        payload: resp.services
+         
       })
 
       return resp

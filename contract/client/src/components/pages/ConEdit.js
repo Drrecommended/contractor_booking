@@ -75,7 +75,7 @@ export default () => {
   ] = useForm({ gallery: ""})
 
   const options = [
-    { key: "Plumber", text: "Plumber", value: "plumber" },
+    { key: "plumber", text: "Plumber", value: "plumber" },
     { key: "landscaper", text: "Landscaper", value: "landscaper" },
     { key: "junk removal", text: "Junk Removal", value: "junk removal" },
     { key: "electrician", text: "Electrician", value: "electrician" },
@@ -215,7 +215,8 @@ export default () => {
             <Modal  onClose={() => setModalVisible(false)}
                     open={modalVisible}  trigger={<AiOutlinePlus onClick={() => setModalVisible(true)}/>}>
               <Modal.Content>
-                  <Input onChange={handleTopForm} 
+                  <Input
+                  onChange={handleTopForm} 
                   name="thumbnail"
                   icon={<Icon name='search' 
                   onClick={() => setModalVisible(false)} inverted circular link />} 
@@ -343,11 +344,12 @@ export default () => {
             <div class="ui focus input">
               <AiOutlineMinusCircle className="MinusButton" size={20}/>
                 <input
-              type="text"
-              placeholder="JOB DESCRIPTION"
-              name="description"
-              value={item.description}
-              onChange={handleServiceForm}
+                  disabled
+                  type="text"
+                  placeholder="JOB DESCRIPTION"
+                  name="description"
+                  value={item.description}
+                  onChange={handleServiceForm}
             />
 
             <Input 
@@ -358,6 +360,7 @@ export default () => {
             >
               <Label basic>$</Label>
               <input
+                disabled={true}
                 name="price"
                 value={item.price}
                 onChange={handleServiceForm}
