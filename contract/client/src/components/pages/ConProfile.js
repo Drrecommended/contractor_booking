@@ -99,7 +99,6 @@ export default (props) => {
                       </div>
                       <div>
                         {cart.map((item) => {
-                          console.log(item)
                           return (
                             <div className="service-list">
                               <div className="service">{item.text}</div>

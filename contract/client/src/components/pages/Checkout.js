@@ -200,8 +200,6 @@ export default (props) => {
               onChange={setForm}
               label={"City " + (cityError || "")}
               placeholder="city"
-              search
-              selection
               error={!!cityError}
             />
             <Form.Dropdown

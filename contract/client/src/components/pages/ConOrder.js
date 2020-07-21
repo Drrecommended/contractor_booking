@@ -6,14 +6,23 @@ import { useOrder, useLoad, useAuth } from "../../hooks"
 import { Link } from "react-router-dom"
 
 export default () => {
-  const { orders, getOrder, approve, deny } = useOrder()
+  const { order, getOrder, approve, deny } = useOrder()
+  console.log(getOrder)
+  console.log(order)
   const { setLoaded } = useLoad()
   const [ loading ] = useState("")
   const { user } = useAuth()
-  const [confirm, setConfirm ] = useState(false)
+  const [ confirmOrder, setConfirm ] = useState(false)
+  const [ denyOrder, setDeny ] = useState(false)
+
+  const openConfirm = () => setConfirm(true)
+  const closeConfirm = () => setConfirm(false)
+
+  const openDeny = () => setDeny(true)
+  const closeDeny = () => setDeny(false)
+
+
   
-
-
   useEffect(() => {
     setLoaded(true)
     getOrder().then(() => {
@@ -22,6 +31,18 @@ export default () => {
   }, [])
   return (
     <div className="order">
+      <Confirm
+        content= "Would you like to confirm this order?"
+        open={confirmOrder}
+        onCancel={closeConfirm}
+        onConfirm={() => approve(order.id).then(() => setConfirm(false))}
+      />
+      <Confirm
+        content= "Would you like to deny this order?"
+        open={denyOrder}
+        onCancel={closeDeny}
+        onConfirm={() => deny(order.id).then(() => setDeny(false))}
+      />
       <div className="tableResize">
         <Table celled>
           <Table.Header>
@@ -37,35 +58,31 @@ export default () => {
               <Table.HeaderCell>Order Status</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          {orders.length !== 0 ? (
+          {order.length !== 0 ? (
             <Table.Body>
-              {orders.map((order) => {
+              {order.map((orders) => {
                 return (
                   <Table.Row className={{}}>
-                    <Table.Cell style={{width: "80px"}}>{order.id}</Table.Cell>
+                    <Table.Cell style={{width: "80px"}}>{orders.id}</Table.Cell>
                     <Table.Cell style={{width: "100px"}}>
-                      <Link to={'/profile/' + order.profile_id}>{order.first_name} {order.last_name}</Link>
+                      <Link 
+                        style={{color: "cadetblue"}}
+                        to={'/profile/' + orders.profile_id}>{orders.first_name} {orders.last_name}
+                      </Link>
                     </Table.Cell>
                     <Table.Cell style={{width: "100px"}}>
-                      {moment(order.date).subtract(10, "days").calendar()}
+                      {moment(orders.date).subtract(10, "days").calendar()}
                     </Table.Cell>
-                    <Table.Cell style={{width: "150px"}}>{order.services}</Table.Cell>
-                    <Table.Cell style={{width: "80px"}}>$ {order.total}</Table.Cell>
+                    <Table.Cell style={{width: "150px"}}>{orders.services}</Table.Cell>
+                    <Table.Cell style={{width: "80px"}}>$ {orders.total}</Table.Cell>
                     <Table.Cell style={{width: "60px"}}>
                       <Button 
                         style={{
                           backgroundColor: "cadetblue",
                           color: "white",
                         }}
-                        onClick={() => confirm(true)} icon>
+                        onClick={openConfirm} icon>
                         <Icon name="wrench" />
-                        <Confirm
-                          content= "Would you like to confirm this order?"
-                          // style={{confirmButton backgroundColor: "cadetblue"}}
-                          open
-                          onCancel
-                          onConfirm
-                        />
                       </Button>
                       <Button 
                         style={{
@@ -73,12 +90,12 @@ export default () => {
                           color: "white",
                           
                         }}
-                        onClick={() => deny(order.id)} icon>
+                        onClick={openDeny} icon>
                         deny
                       </Button>
                     </Table.Cell>
                     <Table.Cell style={{width: "80px"}}>
-                      {order.status === "pending" ? "pending order" : "false"}{" "}
+                      {orders.status}
                     </Table.Cell>
                   </Table.Row>
                 )

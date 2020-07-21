@@ -22,10 +22,9 @@ export default (state = orderState, action) => {
 }
 
 // 5. action creators
-function userOrders() {
+function userOrders(id) {
   return (dispatch) => {
     return api.get("/contractor-order").then((resp) => {
-      console.log(resp)
       dispatch({
         type: GRAB_ORDERS,
         payload: resp,
@@ -38,7 +37,7 @@ function userOrders() {
 
 function handleOrder(id, status) {
   return (dispatch) => {
-    api.patch("/contractor-order", { id, status }).then((resp) => {
+    return api.patch("/contractor-order", { id, status }).then((resp) => {
       dispatch(userOrders())
     })
   }
@@ -47,8 +46,7 @@ function handleOrder(id, status) {
 // 6. custom hook
 export function useOrder() {
   const dispatch = useDispatch()
-  const orders = useSelector((appState) => {
-    console.log(appState)
+  const order = useSelector((appState) => {
     return appState.orderState.orderData
   })
 
@@ -56,5 +54,5 @@ export function useOrder() {
   const approve = (id) => dispatch(handleOrder(id, "approved"))
   const deny = (id) => dispatch(handleOrder(id, "denied"))
 
-  return { orders, getOrder, approve, deny }
+  return { order, getOrder, approve, deny }
 }

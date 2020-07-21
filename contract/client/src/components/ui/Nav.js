@@ -30,7 +30,6 @@ export default () => {
     setSearchPage(location.pathname === "/search")
     setActiveItem(location.pathname)
     getContractor(search)
-    console.log(location.pathname)
   }, [location])
 
   return (
