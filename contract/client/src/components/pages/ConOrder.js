@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import "../../styles/ConOrder.css"
-import { Button, Icon, Table, Menu } from "semantic-ui-react"
+import { Button, Icon, Table, Confirm } from "semantic-ui-react"
 import moment from "moment"
 import { useOrder, useLoad, useAuth } from "../../hooks"
 import { Link } from "react-router-dom"
@@ -8,8 +8,10 @@ import { Link } from "react-router-dom"
 export default () => {
   const { orders, getOrder, approve, deny } = useOrder()
   const { setLoaded } = useLoad()
-  const [loading] = useState("")
+  const [ loading ] = useState("")
   const { user } = useAuth()
+  const [confirm, setConfirm ] = useState(false)
+  
 
 
   useEffect(() => {
@@ -25,8 +27,9 @@ export default () => {
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Order #</Table.HeaderCell>
-              <Table.HeaderCell>{user.contractor ? "Customer" : "Contractor"}</Table.HeaderCell>
-
+              <Table.HeaderCell>
+                {user.contractor ? "Customer" : "Contractor"}
+              </Table.HeaderCell>
               <Table.HeaderCell>Date</Table.HeaderCell>
               <Table.HeaderCell>Services</Table.HeaderCell>
               <Table.HeaderCell>Total</Table.HeaderCell>
@@ -39,24 +42,42 @@ export default () => {
               {orders.map((order) => {
                 return (
                   <Table.Row className={{}}>
-                    <Table.Cell>{order.id}</Table.Cell>
-                    <Table.Cell>
+                    <Table.Cell style={{width: "80px"}}>{order.id}</Table.Cell>
+                    <Table.Cell style={{width: "100px"}}>
                       <Link to={'/profile/' + order.profile_id}>{order.first_name} {order.last_name}</Link>
                     </Table.Cell>
-                    <Table.Cell>
+                    <Table.Cell style={{width: "100px"}}>
                       {moment(order.date).subtract(10, "days").calendar()}
                     </Table.Cell>
-                    <Table.Cell>{order.services}</Table.Cell>
-                    <Table.Cell>$ {order.total}</Table.Cell>
-                    <Table.Cell>
-                      <Button onClick={() => approve(order.id)} icon>
+                    <Table.Cell style={{width: "150px"}}>{order.services}</Table.Cell>
+                    <Table.Cell style={{width: "80px"}}>$ {order.total}</Table.Cell>
+                    <Table.Cell style={{width: "60px"}}>
+                      <Button 
+                        style={{
+                          backgroundColor: "cadetblue",
+                          color: "white",
+                        }}
+                        onClick={() => confirm(true)} icon>
                         <Icon name="wrench" />
+                        <Confirm
+                          content= "Would you like to confirm this order?"
+                          // style={{confirmButton backgroundColor: "cadetblue"}}
+                          open
+                          onCancel
+                          onConfirm
+                        />
                       </Button>
-                      <Button onClick={() => deny(order.id)} icon>
+                      <Button 
+                        style={{
+                          backgroundColor: "#f45858",
+                          color: "white",
+                          
+                        }}
+                        onClick={() => deny(order.id)} icon>
                         deny
                       </Button>
                     </Table.Cell>
-                    <Table.Cell>
+                    <Table.Cell style={{width: "80px"}}>
                       {order.status === "pending" ? "pending order" : "false"}{" "}
                     </Table.Cell>
                   </Table.Row>
