@@ -91,7 +91,7 @@ router.delete('/profile/service/:id', (req, res, next) => {
 
 router.patch('/profile/address', async (req, res, next) => {
   console.log('is it working', req.body)
-  const { city, state, street, zip, first, last, trade_1, trade_2, bio } = req.body
+  const { city, state, street, zip, first, last, trade1, trade2, bio } = req.body
 
   const profileId = req.user.profile_id
   const sql = 'SELECT address_id FROM profiles WHERE id = ?'
@@ -109,7 +109,7 @@ router.patch('/profile/address', async (req, res, next) => {
           SET first_name = ?, last_name = ? WHERE id = ?;`
           await conn.promise().query(updateUser, [first, last, req.user.id])
   const updateProfile = ` UPDATE profiles SET trade_1 = ?, trade_2 = ?, bio = ? WHERE id = ?;`
-        await conn.promise().query(updateProfile, [trade_1, trade_2, bio, profileId])
+        await conn.promise().query(updateProfile, [trade1, trade2, bio, profileId])
         res.json({ data: 'address updated' })
       
 })

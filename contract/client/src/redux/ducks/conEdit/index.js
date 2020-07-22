@@ -49,11 +49,11 @@ function getProfileData() {
         type: SET_GALLERY,
         payload: resp.gallery,
       })
-      dispatch({
-        type: SET_SERVICES,
-        payload: resp.services
+      // dispatch({
+      //   type: SET_SERVICES,
+      //   payload: resp.services.map(item ({...item, disabled: true}))
          
-      })
+      // })
 
       return resp
     })

@@ -218,11 +218,12 @@ export default () => {
                   <Input
                   onChange={handleTopForm} 
                   name="thumbnail"
-                  icon={<Icon name='search' 
+                  icon={<Icon name='add' 
                   onClick={() => setModalVisible(false)} inverted circular link />} 
                   placeholder='Search...'/>
               </Modal.Content>
             </Modal>
+            {topForm.thumbnail}
             <Avatar image={topForm.thumbnail} />
            </div>
           </div>
@@ -344,7 +345,7 @@ export default () => {
             <div class="ui focus input">
               <AiOutlineMinusCircle className="MinusButton" size={20}/>
                 <input
-                  disabled
+                  disabled={item.disabled}
                   type="text"
                   placeholder="JOB DESCRIPTION"
                   name="description"
