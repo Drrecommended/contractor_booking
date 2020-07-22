@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "env NODE_ENV=development nodemon app.js",
+    "start": "nodemon app.js",
     "start-prod": "env NODE_ENV=production node app.js",
     "tables:drop": "node seed/drop-tables.js",
     "tables:create": "node seed/create-tables.js",
@@ -24,5 +24,8 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
     "nodemon": "^2.0.4"
+  },
+  "devDependencies": {
+    "kill-port": "^1.6.1"
   }
 }
