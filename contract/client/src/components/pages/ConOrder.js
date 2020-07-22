@@ -86,7 +86,7 @@ export default () => {
                     <Table.Cell style={{width: "15%"}}>$ {order.total}</Table.Cell>
                     <Table.Cell style={{width: "15%"}}>
                       <Button 
-                        disabled={order.status === "approved" || "denied"}
+                        disabled={order.status != "pending"}
                         style={{
                           backgroundColor: "cadetblue",
                           color: "white",
@@ -96,7 +96,7 @@ export default () => {
                         <Icon name="wrench" />
                       </Button>
                       <Button 
-                        disabled={order.status === "approved" || "denied"}
+                        disabled={order.status != "pending"}
                         style={{
                           backgroundColor: "#f45858",
                           color: "white",
