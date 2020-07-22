@@ -111,11 +111,12 @@ export function useEditProfile() {
   const dispatch = useDispatch()
   const profile = useSelector((appState) => appState.profileEditState.user)
   const services = useSelector((appState) => appState.profileEditState.services)
-  const gallery = useSelector((appState) =>
-    appState.profileEditState.gallery.map((item) => {
-      item.image = item.img_src
-      return item
-    })
+  const gallery = useSelector((appState) => {
+      return appState.profileEditState.gallery.map((item) => {
+        item.image = item.img_src
+        return item
+      })
+    }
   )
   const addGalleryImage = (galleryItem) => dispatch(addImage(galleryItem))
   const deleteGalleryImage = (galleryId) => dispatch(deleteImage(galleryId))

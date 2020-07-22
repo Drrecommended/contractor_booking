@@ -6,6 +6,7 @@ const conn = require('../db.js')
 router.get('/profile/edit', async (req, res, next) => {
   const profileId = req.user.profile_id
   const userId = req.user.id
+  console.log(profileId)
   const sql = `SELECT * FROM profiles
                 INNER JOIN addresses ON profiles.address_id = addresses.id
                 WHERE profiles.id = ?`
@@ -18,6 +19,7 @@ router.get('/profile/edit', async (req, res, next) => {
   const [servicesProfile] = await conn.promise().query(sql3, [userId])
   const [userInfo] = await conn.promise().query(userSql, [userId])
   const user = userInfo[0]
+  console.log(galleriesProfile)
   res.json({
     address: addressProfile[0],
     gallery: galleriesProfile,
