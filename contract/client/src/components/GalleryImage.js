@@ -10,6 +10,7 @@ import "pure-react-carousel/dist/react-carousel.es.css"
 import { Button, Icon } from "semantic-ui-react"
 
 export default (props) => {
+
   return (
     <div style={{ height: "200px" }}>
       <CarouselProvider
