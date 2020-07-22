@@ -69,12 +69,12 @@ export default (props) => {
     } else {
       setCityError("")
     }
-    // if(!form.state != states) {
-    //   setStateError('cannot be blank')
-    //   canOrder = false
-    // } else {
-    //   setStateError("")
-    // }
+    if(form.state != states) {
+      setStateError('cannot be blank')
+      canOrder = false
+    } else {
+      setStateError("")
+    }
     if(!form.postal) {
       setPostalError('cannot be blank')
       canOrder = false
