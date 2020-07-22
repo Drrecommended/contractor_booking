@@ -46,7 +46,7 @@ function handleOrder(id, status) {
 // 6. custom hook
 export function useOrder() {
   const dispatch = useDispatch()
-  const order = useSelector((appState) => {
+  const orders = useSelector((appState) => {
     return appState.orderState.orderData
   })
 
@@ -54,5 +54,5 @@ export function useOrder() {
   const approve = (id) => dispatch(handleOrder(id, "approved"))
   const deny = (id) => dispatch(handleOrder(id, "denied"))
 
-  return { order, getOrder, approve, deny }
+  return { orders, getOrder, approve, deny }
 }
