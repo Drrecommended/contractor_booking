@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const conn = require('../db.js')
+const { formatDate, addDaysToDate } = require('../utils')
 
 // conn.query(sql , [], (err, results, fields) => {})
 router.get('/profile', async (req, res, next) => {
@@ -58,34 +59,33 @@ router.get('/profile/:id', async (req, res, next) => {
   res.json(profile)
 })
 
-router.get('/available/:id', async (req, res, next) => {
-  const sub = `
-  select * from 
-    (select adddate('1970-01-01',t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) selected_date from
-     (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,
-     (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1,
-     (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2,
-     (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3,
-     (select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) v
-    where selected_date between '2020-05-22' and '2020-06-23'
+router.get('/available/:profile_id', async (req, res, next) => {
+  // generate a date range starting today and going to 30 days from today
+  const today = new Date()
+  const todayFormatted = formatDate(today)
+  const thirtyDaysFromToday = formatDate(addDaysToDate(today, 30))
+  const selectUnion = '(SELECT 0 i union SELECT 1 union SELECT 2 union SELECT 3 union SELECT 4 union SELECT 5 union SELECT 6 union SELECT 7 union SELECT 8 union SELECT 9)'
+  const dateRange = `
+  SELECT selected_date, o.id FROM (
+    SELECT * FROM
+      (SELECT 
+        adddate('1970-01-01',t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) selected_date FROM
+        ${selectUnion} t0,
+        ${selectUnion} t1,
+        ${selectUnion} t2,
+        ${selectUnion} t3,
+        ${selectUnion} t4
+      ) v
+    WHERE selected_date BETWEEN '${todayFormatted}' AND '${thirtyDaysFromToday}'
+  ) dates
+  LEFT JOIN orders o
+  ON dates.selected_date = o.date
+  WHERE o.contractor_id IS NULL OR o.contractor_id = ?;
   `
-
-  const [results] = await conn.promise().query(`
-  SELECT FORMAT(date, 'YYYY-MM-DD') as date FROM orders
-  WHERE date IN (${sub}) AND contractor_id = ?;
-  `, [req.params.id])
-  
-  const dateCache = {}
-  results.map(item => {
-    console.log(item.date)
-    dateCache[item.date] = true
-  })
-
-  const [range] = await conn.promise().query(sub)
-  const available = range.map(item => {
-    return {date: item.selected_date, available: !dateCache[item.selected_date]}
-  })
-  res.json(available)
+  const [user] = await conn.promise().query(`SELECT * FROM users WHERE profile_id = ?`, [req.params.profile_id])
+  const userId = user[0].id
+  const [results] = await conn.promise().query(`${dateRange}`, [userId])
+  res.json(results.map(item => ({date: item.selected_date, available: !!item.id})))
 })
 
 
