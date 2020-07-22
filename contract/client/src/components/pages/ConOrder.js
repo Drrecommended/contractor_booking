@@ -13,6 +13,7 @@ export default () => {
   const { user } = useAuth()
   const [ confirmOrder, setConfirm ] = useState(false)
   const [ denyOrder, setDeny ] = useState(false)
+  console.log(orders)
 
   const openConfirm = () => setConfirm(true)
   const closeConfirm = () => setConfirm(false)
@@ -22,7 +23,7 @@ export default () => {
 
   function processOrder(id, status) {
     setOrderId(id)
-    if (status === "approve") {
+    if (status === "approved") {
       openConfirm()
     }
     if (status === "denied") {
@@ -70,39 +71,41 @@ export default () => {
             <Table.Body>
               {orders.map((order) => {
                 return (
-                  <Table.Row disabled={}>
-                    <Table.Cell style={{width: "80px"}}>{order.id}</Table.Cell>
-                    <Table.Cell style={{width: "100px"}}>
+                  <Table.Row>
+                    <Table.Cell style={{width: "5%"}}>{order.id}</Table.Cell>
+                    <Table.Cell style={{width: "10%"}}>
                       <Link 
                         style={{color: "cadetblue"}}
                         to={'/profile/' + order.profile_id}>{order.first_name} {order.last_name}
                       </Link>
                     </Table.Cell>
-                    <Table.Cell style={{width: "100px"}}>
+                    <Table.Cell style={{width: "10%"}}>
                       {moment(order.date).subtract(10, "days").calendar()}
                     </Table.Cell>
-                    <Table.Cell style={{width: "150px"}}>{order.services}</Table.Cell>
-                    <Table.Cell style={{width: "80px"}}>$ {order.total}</Table.Cell>
-                    <Table.Cell style={{width: "60px"}}>
+                    <Table.Cell style={{width: "10%"}}>{order.services}</Table.Cell>
+                    <Table.Cell style={{width: "15%"}}>$ {order.total}</Table.Cell>
+                    <Table.Cell style={{width: "15%"}}>
                       <Button 
+                        disabled={order.status === "approved" || "denied"}
                         style={{
                           backgroundColor: "cadetblue",
                           color: "white",
                         }}
-                        onClick={() => processOrder(order.id, "approve")} icon>
+                        onClick={() => processOrder(order.id, "approved")}
+                        > 
                         <Icon name="wrench" />
                       </Button>
                       <Button 
+                        disabled={order.status === "approved" || "denied"}
                         style={{
                           backgroundColor: "#f45858",
                           color: "white",
-                          
                         }}
                         onClick={() => processOrder(order.id, "denied")} icon>
                         deny
                       </Button>
                     </Table.Cell>
-                    <Table.Cell style={{width: "80px"}}>
+                    <Table.Cell style={{width: "5%"}}>
                       {order.status}
                     </Table.Cell>
                   </Table.Row>
