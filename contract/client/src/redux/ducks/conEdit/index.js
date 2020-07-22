@@ -5,6 +5,7 @@ const EDIT_PROFILE = "edit/EDIT_PROFILE"
 const SET_GALLERY = "edit/SET_GALLERY"
 const SET_SERVICES = "edit/SET_SERVICES"
 const DIS_SERVICES = "edit/DIS_SERVICES"
+const ENABLE_INPUT = "edit/ENABLE_INPUT"
 
 const profileState = {
   first: "",
@@ -26,6 +27,10 @@ export default (state = profileState, action) => {
       return { ...state, gallery: action.payload }
     case SET_SERVICES:
       return { ...state, services: action.payload }
+    case ENABLE_INPUT:
+      return {...state, services: state.services.map(item =>{
+        return action.payload == item.id ? {...item, disabled: false} : item
+      })}
     case DIS_SERVICES:
         return{ ...state, services: state.services.map(item =>{
             const disabledItem = action.payload === item.id
@@ -49,11 +54,11 @@ function getProfileData() {
         type: SET_GALLERY,
         payload: resp.gallery,
       })
-      // dispatch({
-      //   type: SET_SERVICES,
-      //   payload: resp.services.map(item ({...item, disabled: true}))
+      dispatch({
+        type: SET_SERVICES,
+        payload: resp.services.map(item => ({...item, disabled: true}))
          
-      // })
+      })
 
       return resp
     })
@@ -89,6 +94,13 @@ function updateService(service) {
   }
 }
 
+function enableServiceInput(serviceId){
+  return{
+    type: ENABLE_INPUT,
+    payload: serviceId
+  }
+}
+
 function deleteService(serviceId) {
   return (dispatch) => {
     api.delete("/profile/service/" + serviceId)
@@ -111,11 +123,13 @@ export function useEditProfile() {
   const addService = (service) => dispatch(updateService(service))
   const deleteConService = (serviceId) => dispatch(deleteService(serviceId))
   const getProfile = () => dispatch(getProfileData())
+  const enableInput = (id) => dispatch (enableServiceInput(id))
 
   return {
     profile,
     gallery,
     services,
+    enableInput,
     addGalleryImage,
     deleteGalleryImage,
     updateAddress,

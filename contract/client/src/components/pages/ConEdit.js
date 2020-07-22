@@ -22,6 +22,7 @@ export default () => {
     addGalleryImage,
     deleteGalleryImage,
     addService,
+    enableInput,
     deleteConService,
     updateAddress,
     getProfile,
@@ -200,8 +201,7 @@ export default () => {
       })
 
      
-      console.log(resp.services[0].price)
-      //resp.services[0].price.. will give me the first index in the services array which will give me access to the price object
+     
     })
   }, [])
 
@@ -262,9 +262,6 @@ export default () => {
             />
           </form>
         </div>
-        {/* <Button style={{ margin: "20px" }} onClick={() => dataFromBackend()}>
-          {editForm.first}
-        </Button> */}
         <div className="BusinessLocationEdit">
           <Input
             placeholder="Street"
@@ -361,7 +358,7 @@ export default () => {
             >
               <Label basic>$</Label>
               <input
-                disabled={true}
+                disabled={item.disabled}
                 name="price"
                 value={item.price}
                 onChange={handleServiceForm}
@@ -369,7 +366,7 @@ export default () => {
               <Label>.00</Label>
             </Input>
             <div className="EditPen">
-              <GrEdit size={20}/>
+              <GrEdit onClick={() => enableInput(item.id)} size={20}/>
               <TiCancel size={20}/>
             </div>
           </div>
