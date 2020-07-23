@@ -31,7 +31,6 @@ export default () => {
     }
   }
 
-  
   useEffect(() => {
     setLoaded(true)
     getOrder().then(() => {
@@ -53,7 +52,7 @@ export default () => {
         onConfirm={() => deny(orderId).then(() => setDeny(false))}
       />
       <div className="tableResize">
-        <Table celled>
+        <Table>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Order #</Table.HeaderCell>
