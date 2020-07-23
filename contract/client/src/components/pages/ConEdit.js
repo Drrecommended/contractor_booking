@@ -20,12 +20,14 @@ export default () => {
   const handleShow = () => setModalVisible(true)
   
   const {
+    saveInput,
     addGalleryImage,
     deleteGalleryImage,
     addService,
     enableInput,
     deleteConService,
     updateAddress,
+    handleServiceForm,
     getProfile,
     gallery,
     services, 
@@ -61,12 +63,12 @@ export default () => {
   }
 
 
-  const [
-    serviceForm,
-    handleServiceForm,
-    resetServiceForm,
-    setServiceFormTo,
-  ] = useForm({ description: "", price: "" })
+  // const [
+  //   serviceForm,
+  //   handleServiceForm,
+  //   resetServiceForm,
+  //   setServiceFormTo,
+  // ] = useForm({ description: "", price: "" })
 
   const [
     galleryForm,
@@ -264,7 +266,7 @@ export default () => {
                   placeholder="JOB DESCRIPTION"
                   name="description"
                   value={item.description}
-                  onChange={handleServiceForm}
+                  onChange={(e) => handleServiceForm(item.id, 'description', e.target.value)}
             />
 
             <Input 
@@ -278,12 +280,13 @@ export default () => {
                 disabled={item.disabled}
                 name="price"
                 value={item.price}
-                onChange={handleServiceForm}
+                onChange={(e) => handleServiceForm(item.id, 'price', e.target.value)}
               />
               <Label>.00</Label>
             </Input>
             <div className="EditPen">
-              <GrEdit onClick={() => enableInput(item.id)} size={20}/>
+              { item.disabled ? <GrEdit onClick={() => enableInput(item.id)} size={20}/> :
+              <GiSaveArrow onClick={() => saveInput(item.id)}/>} 
               <TiCancel size={20}/>
             </div>
           </div>
