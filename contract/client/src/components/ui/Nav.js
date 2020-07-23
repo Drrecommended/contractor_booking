@@ -47,7 +47,7 @@ export default () => {
           </Link>
           {isAuthenticated && searchPage ? (
             <Menu.Item style={{ width: "30%" }}>
-              <form style={{ width: "100%" }} onSubmit={handleSubmit}>
+              <form style={{ width: "100%", marginBottom: "8px" }} onSubmit={handleSubmit}>
                 <Input
                   action={{ type: "submit", icon: "search" }}
                   onChange={(e) => setSearch(e.target.value)}
