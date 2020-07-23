@@ -1,5 +1,5 @@
 .searchPage {
-  width: 90%;
+  width: 80%;
   background-color: white;
   margin: auto;
   margin-top: 3%;
@@ -11,7 +11,6 @@
 
 .contractor-shelf {
   display: flex;
-  border-bottom: solid 1px;
   padding: 1.5%;
   cursor: pointer;
 }
@@ -33,6 +32,7 @@
 
 .conSearchImage {
   margin: 1%;
+  
 }
 
 .noResults {
@@ -43,9 +43,34 @@
 .conName {
   text-decoration: underline;
   text-decoration-color: cadetblue;
+  font-size: 40px;
+  text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+                   0px -5px 35px rgba(255,255,255,0.3);
 }
 
 .search-link:visited {
   text-decoration: none;
   color: black;
+}
+
+.trade-shelf {
+  display: flex;
+  margin-top: 2%;
+  margin-left: 5%;
+  font-weight: 600;
+}
+
+.rating-shelf {
+  margin-left: 72%;
+  margin-top: 1.5%;
+  position: absolute;
+}
+
+.trades-header {
+  font-size: 24px;
+}
+
+.bio-shelf {
+  margin-top: 5%;
+  margin-left: 10%;
 }
