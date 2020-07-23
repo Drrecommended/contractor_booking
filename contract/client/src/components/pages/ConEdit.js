@@ -14,7 +14,10 @@ import { states, options } from '../utils/profile-constants'
 
 
 export default () => {
-  
+  const [modalGalleryVisible, setModalGalleryVisible] = useState(false)
+  const handleGalleryClose = () => setModalGalleryVisible(false)
+  const handleGalleryShow = () => setModalGalleryVisible(true)
+
   const [modalVisible, setModalVisible] = useState(false)
   const handleClose = () => setModalVisible(false)
   const handleShow = () => setModalVisible(true)
@@ -78,6 +81,7 @@ export default () => {
   ] = useForm({ gallery: ""})
 
   const [avatarImage, setAvatarImage] = useState('')
+  const [galleryImage, setGalleryImage] = useState('')
 
   
 
@@ -86,6 +90,7 @@ export default () => {
     console.log(editForm)
     resetForm()
     handleClose()
+    handleGalleryClose()
     
   }
   const handleTrade =(e) =>{
@@ -96,6 +101,13 @@ export default () => {
     setModalVisible(false)
     setTopFormTo({...topForm, thumbnail: avatarImage})
   }
+
+  function handleGalleryImg(){
+    setModalGalleryVisible(false)
+    setGalleryFormTo({...galleryForm, img_src: galleryImage})
+  }
+
+
   function dataFromBackend() {
     getProfile().then((resp) => {
       setFormTo(resp.user)
@@ -118,7 +130,7 @@ export default () => {
         thumbnail: resp.address.thumbnail,
       })
       setGalleryFormTo({
-        gallery: ""
+        gallery: resp.gallery.img_src,
       })
     })
   }, [])
@@ -142,7 +154,7 @@ export default () => {
                   placeholder='Add'/>
               </Modal.Content>
             </Modal>
-            {topForm.thumbnail}
+            {/* {topForm.thumbnail} */}
             <Avatar image={topForm.thumbnail} />
            </div>
           </div>
@@ -240,18 +252,19 @@ export default () => {
         ></GalleryImage>
         <div className="GalleryButtons">
         <Modal  onClose={() => setModalVisible(false)}
-                    open={modalVisible} 
-                    trigger={<Button onClick={() => setModalVisible(true)}>add gallery image</Button>}>
+                    open={modalGalleryVisible} 
+                    trigger={<Button onClick={() => setModalGalleryVisible(true)}>add gallery image</Button>}>
               <Modal.Content>
                   <Input 
                   name="gallery"
-                  onChange={handleGalleryForm}
+                  onChange={(e) => setGalleryImage(e.target.value)}
                   icon={<Icon name='search'
-                  onClick={() => setModalVisible(false)} inverted circular link />} 
+                  onClick={handleGalleryImg} inverted circular link />} 
                   placeholder='Search...'/>
               </Modal.Content>
             </Modal>
-          <Button  onClick={() => addGalleryImage(galleryForm)} positive>SAVE</Button>
+            {galleryForm.img_src}
+          <Button positive onClick={() => addGalleryImage(galleryForm)}>SAVE</Button>
         </div>
       </div>
 
