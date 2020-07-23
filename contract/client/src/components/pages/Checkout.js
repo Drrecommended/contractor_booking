@@ -69,7 +69,7 @@ export default (props) => {
     } else {
       setCityError("")
     }
-    if(!form.state != states) {
+    if(!form.state || form.state != states) {
       setStateError('cannot be blank')
       canOrder = false
     } else {
@@ -205,12 +205,12 @@ export default (props) => {
             />
             <Form.Dropdown
               name="state"
-              onChange={setForm.state}
+              onChange={setForm}
               label={"State " + (stateError || "")}
               placeholder="State"
               options={states}
               error={!!stateError}
-              style={{marginTop: "3%"}}
+              style={{marginTop: "3.5%"}}
             />
             <Form.Input 
               name="postal"
@@ -218,6 +218,7 @@ export default (props) => {
               label={"Postal Code " + (postalError || "")}
               placeholder="Postal code" 
               error={!!postalError}
+              style={{marginRight: "60%"}}
             />
           </Form.Group>
           <Form.Group widths={2}>
