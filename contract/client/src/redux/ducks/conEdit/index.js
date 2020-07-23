@@ -8,6 +8,7 @@ const DIS_SERVICES = "edit/DIS_SERVICES"
 const ENABLE_INPUT = "edit/ENABLE_INPUT"
 const UPDATE_SERVICE = "edit/UPDATE_SERVICE"
 const EDIT_SERVICE_ENTRY = "edit/EDIT_SERVICE_ENTRY"
+const ADD_SERVICE = "edit/ADD_SERVICE"
 
 const profileState = {
   first: "",
@@ -25,6 +26,12 @@ export default (state = profileState, action) => {
   switch (action.type) {
     case EDIT_PROFILE:
       return { ...state, user: action.payload }
+    case ADD_SERVICE:
+      const last = state.services[state.services.length -1]
+      if (last && last.new){
+        return state
+      }
+      return { ...state, services: [...state.services, {description: '', price: '', disabled: false, new: true }]}
     case SET_GALLERY:
       return { ...state, gallery: action.payload }
     case SET_SERVICES:
@@ -87,7 +94,9 @@ function addImage(galleryItem) {
 
 function deleteImage(galleryId) {
   return (dispatch) => {
-    api.delete("/profile/gallery/" + galleryId)
+    api.delete("/profile/gallery/" + galleryId).then(() =>{
+      dispatch(getProfileData())
+    })
   }
 }
 
@@ -157,13 +166,14 @@ export function useEditProfile() {
   const deleteConService = (serviceId) => dispatch(deleteService(serviceId))
   const getProfile = () => dispatch(getProfileData())
   const enableInput = (id) => dispatch (enableServiceInput(id))
-  const saveInput = (id) => dispatch(changeService(id))
+  const saveInput = (service) => dispatch(changeService(service))
   const handleServiceForm = (id, field, value) => dispatch (handleService(id, field, value))
 
   return {
     profile,
     gallery,
     services,
+    updateService,
     handleServiceForm,
     saveInput,
     enableInput,

@@ -65,6 +65,13 @@ export default () => {
     
   }
 
+  const [ updateStates, setStates ] = useState('')
+  const handleStates = (e, { value }) => {
+    console.log(value)
+    setTopFormTo({...topForm, state: value})
+    
+  }
+
 
   // const [
   //   serviceForm,
@@ -216,7 +223,7 @@ export default () => {
             type="text"
             name="state"
             value={topForm.state}
-            onChange={handleTopForm}
+            onChange={handleStates}
           ></Dropdown>
           <Input
             placeholder="Zip Code"
@@ -272,7 +279,7 @@ export default () => {
             return (
           <div  className="InputContainer">
             <div class="ui focus input">
-              <AiOutlineMinusCircle className="MinusButton" size={20}/>
+              <AiOutlineMinusCircle onClick={() => deleteConService(item.id)} className="MinusButton" size={20}/>
                 <input
                   disabled={item.disabled}
                   type="text"
@@ -298,7 +305,8 @@ export default () => {
               <Label>.00</Label>
             </Input>
             <div className="EditPen">
-              { item.disabled ? <GrEdit onClick={() => enableInput(item.id)} size={20}/> :
+              {item.new ? null : 
+               item.disabled ? <GrEdit onClick={() => enableInput(item.id)} size={20}/> :
               <GiSaveArrow onClick={() => saveInput(item.id)}/>} 
               <TiCancel size={20}/>
             </div>
@@ -306,7 +314,7 @@ export default () => {
         </div>
             )
           })}
-          <BsFillPlusSquareFill size={30} />
+          <BsFillPlusSquareFill onClick={addService}size={30} />
     </div>
     </div>
     
