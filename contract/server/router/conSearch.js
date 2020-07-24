@@ -7,11 +7,12 @@ router.get('/contractor-search', (req, res, next) => {
   // TODO: quotes with percentage and ? in backtick string not working...
   const fuzzySearchTerm = "%" + req.query.word + "%"
   const sql = `
-    SELECT p.bio, p.thumbnail, u.profile_id, u.first_name, u.last_name, u.id, s.description
-    FROM contractor_app.services s
-    INNER JOIN users u ON s.user_id = u.id
-    INNER JOIN profiles p ON p.id = u.profile_id
-    WHERE s.description LIKE ?
+      SELECT s.user_id, u.first_name, u.last_name, u.profile_id, p.bio, p.thumbnail, p.trade_1, p.trade_2
+      FROM contractor_app.services s
+      INNER JOIN users u ON u.id = s.user_id
+      INNER JOIN profiles p ON p.id = u.profile_id
+      WHERE s.description LIKE ?
+      GROUP BY s.user_id
     `
   conn.query(
     sql,
@@ -25,3 +26,4 @@ router.get('/contractor-search', (req, res, next) => {
 
 
 module.exports = router
+

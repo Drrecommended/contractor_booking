@@ -10,6 +10,7 @@ export default () => {
   const { contractors, getContractor } = useContractor()
   const [search, setSearch] = useState("")
   const { setLoaded } = useLoad()
+  console.log(contractors)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -28,7 +29,7 @@ export default () => {
         <div className="searchPage">
           {contractors.map((contractor) => {
             return (
-              <Link className="search-link" to={`/profile/${contractor.profile_id}`}>
+              <Link className="search-link" to={`/profile/detail/${contractor.profile_id}`}>
                 <div className="contractor-shelf">
                   <div className="conSearchImage">
                     <img src={contractor.thumbnail} />
@@ -37,13 +38,18 @@ export default () => {
                     <h2 className="conName">
                       {contractor.first_name} {contractor.last_name}
                     </h2>
-                    <div>{contractor.bio}</div>
-                    <div className="trades">
-                      <div>Landscaper</div>
-                      <div>Carpenter</div>
+                    <div className="trades-header">Trades:</div>
+                    <div className="trade-shelf">
+                      <div>{contractor.trade_1}//</div>
+                      <div>{contractor.trade_2}</div>
+                    </div>
+                    <div className="bio-shelf">
+                      <div>{contractor.bio}</div>
                     </div>
                   </div>
-                  <Rating bool icon="star" defaultRating={3} maxRating={4} />
+                  <div className="rating-shelf">
+                    <Rating bool icon="star" defaultRating={3} maxRating={4} />
+                  </div>
                 </div>
               </Link>
             )
