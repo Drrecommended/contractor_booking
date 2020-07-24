@@ -4,6 +4,7 @@ import { Button, Icon, Table, Confirm } from "semantic-ui-react"
 import moment from "moment"
 import { useOrder, useLoad, useAuth } from "../../hooks"
 import { Link } from "react-router-dom"
+import Logo from "../../images/logowhite.png"
 
 export default () => {
   const { orders, getOrder, approve, deny } = useOrder()
@@ -31,7 +32,6 @@ export default () => {
     }
   }
 
-  
   useEffect(() => {
     setLoaded(true)
     getOrder().then(() => {
@@ -53,7 +53,7 @@ export default () => {
         onConfirm={() => deny(orderId).then(() => setDeny(false))}
       />
       <div className="tableResize">
-        <Table celled>
+        <Table>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Order #</Table.HeaderCell>
@@ -86,7 +86,7 @@ export default () => {
                     <Table.Cell style={{width: "15%"}}>$ {order.total}</Table.Cell>
                     <Table.Cell style={{width: "15%"}}>
                       <Button 
-                        disabled={order.status === "approved" || "denied"}
+                        disabled={order.status != "pending"}
                         style={{
                           backgroundColor: "cadetblue",
                           color: "white",
@@ -96,7 +96,7 @@ export default () => {
                         <Icon name="wrench" />
                       </Button>
                       <Button 
-                        disabled={order.status === "approved" || "denied"}
+                        disabled={order.status != "pending"}
                         style={{
                           backgroundColor: "#f45858",
                           color: "white",
@@ -117,6 +117,10 @@ export default () => {
             )}
         </Table>
       </div>
+      <img 
+            src={Logo} alt="logo"
+            className="page-logo"
+          />
     </div>
   )
 }
