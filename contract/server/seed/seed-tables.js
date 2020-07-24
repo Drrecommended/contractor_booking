@@ -1,5 +1,5 @@
 const conn = require('../db.js')
-const { createHash } = require('../utils')
+const { createHash, formatDate, addDaysToDate } = require('../utils')
 const sha512 = require('js-sha512')
 const query = require('./query')
 
@@ -87,12 +87,12 @@ users.map(async user => {
     (2, 'https://placehold.it/250x250/007B7B'),
     (2, 'https://placehold.it/250x250/8B63A1')
   `)
-
+  console.log(formatDate(new Date()))
   await query(`
       INSERT INTO orders (customer_id, contractor_id, date, services, total, status)
       VALUES 
-      (1, 2, '2020-06-10', 'testing', 22.22, 'approved'),
-      (1, 2, '2020-06-7', 'testing', 42.22, 'denied'),
+      (1, 2, '${formatDate(new Date())}', 'testing', 22.22, 'approved'),
+      (1, 2, '${formatDate(new Date(), addDaysToDate(new Date(), 1))}', 'testing', 42.22, 'denied'),
       (1, 2, '2020-06-7', 'testing', 52.22, 'pending')
   `)
 })()

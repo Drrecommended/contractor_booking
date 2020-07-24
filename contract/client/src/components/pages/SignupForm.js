@@ -93,7 +93,6 @@ const DividerExampleVerticalForm = (props) => {
         resetForm()
         handleClose()
       }).catch((err) => {
-        console.log(err)
         setNameExists('already exists')
       }
       )

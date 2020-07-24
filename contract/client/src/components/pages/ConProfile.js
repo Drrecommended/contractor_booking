@@ -8,6 +8,7 @@ import Calendar from "react-calendar"
 import "react-calendar/dist/Calendar.css"
 import { Button } from "semantic-ui-react"
 import GalleryImage from "../GalleryImage"
+import Logo from "../../images/logowhite.png"
 
 export default (props) => {
   const { profile, getProfile } = useProfileIndex()

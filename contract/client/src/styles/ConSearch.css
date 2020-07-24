@@ -49,3 +49,9 @@
   text-decoration: none;
   color: black;
 }
+
+.input-positioning {
+  width: 30%;
+  margin-bottom: -0.3%;
+  margin-left: 10%;
+}
