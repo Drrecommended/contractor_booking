@@ -6,6 +6,7 @@ const conn = require('../db.js')
 router.get('/profile/edit', async (req, res, next) => {
   const profileId = req.user.profile_id
   const userId = req.user.id
+  console.log(profileId)
   const sql = `SELECT * FROM profiles
                 INNER JOIN addresses ON profiles.address_id = addresses.id
                 WHERE profiles.id = ?`
@@ -18,6 +19,7 @@ router.get('/profile/edit', async (req, res, next) => {
   const [servicesProfile] = await conn.promise().query(sql3, [userId])
   const [userInfo] = await conn.promise().query(userSql, [userId])
   const user = userInfo[0]
+  console.log(galleriesProfile)
   res.json({
     address: addressProfile[0],
     gallery: galleriesProfile,
@@ -85,13 +87,26 @@ router.delete('/profile/service/:id', (req, res, next) => {
     })
 })
 
+router.patch('/profile/service/:id', (req, res, next) => {
+  console.log(req.params.id)
+  const {description, price} = req.body
+  const serviceId = req.params.id
+  const sql = `UPDATE FROM services SET description = ?, price =? Where id = ?`
+  conn.query(
+    sql,
+    [description, price, serviceId ],
+    (err, results, fields) => {
+      console.log(results)
+      res.json({ message: 'Byebye' })
+    })
+})
 
 
 
 
 router.patch('/profile/address', async (req, res, next) => {
   console.log('is it working', req.body)
-  const { city, state, street, zip, first, last, trade_1, trade_2, bio } = req.body
+  const { city, state, street, zip, first, last, trade1, trade2, bio } = req.body
 
   const profileId = req.user.profile_id
   const sql = 'SELECT address_id FROM profiles WHERE id = ?'
@@ -109,7 +124,7 @@ router.patch('/profile/address', async (req, res, next) => {
           SET first_name = ?, last_name = ? WHERE id = ?;`
           await conn.promise().query(updateUser, [first, last, req.user.id])
   const updateProfile = ` UPDATE profiles SET trade_1 = ?, trade_2 = ?, bio = ? WHERE id = ?;`
-        await conn.promise().query(updateProfile, [trade_1, trade_2, bio, profileId])
+        await conn.promise().query(updateProfile, [trade1, trade2, bio, profileId])
         res.json({ data: 'address updated' })
       
 })

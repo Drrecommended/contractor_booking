@@ -1,26 +1,42 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import "../../styles/ConEdit.css"
-import { Button, Input, Dropdown, Container, Label } from "semantic-ui-react"
+import { Button, Input, Dropdown, Container, Label, Modal, Image, Form, Icon } from "semantic-ui-react"
 import { BsFillPlusSquareFill } from "react-icons/bs"
-import { AiOutlineMinusCircle } from "react-icons/ai"
+import { GiSaveArrow } from "react-icons/gi"
+import { AiOutlineMinusCircle, AiOutlinePlus } from "react-icons/ai"
+import { TiCancel } from "react-icons/ti";
 import { GrEdit } from "react-icons/gr"
+import Avatar from "../ui/Avatar"
 import { useEditProfile, useForm, useProfileIndex } from "../../hooks"
 import { TradeOptions } from "../TradeOptions"
 import GalleryImage from "../GalleryImage"
+import { states, options } from '../utils/profile-constants'
+
 
 export default () => {
-  //const { profile, getProfile } = useProfileIndex()
+  const [modalGalleryVisible, setModalGalleryVisible] = useState(false)
+  const handleGalleryClose = () => setModalGalleryVisible(false)
+  const handleGalleryShow = () => setModalGalleryVisible(true)
+
+  const [modalVisible, setModalVisible] = useState(false)
+  const handleClose = () => setModalVisible(false)
+  const handleShow = () => setModalVisible(true)
+  
   const {
+    saveInput,
     addGalleryImage,
     deleteGalleryImage,
     addService,
+    enableInput,
     deleteConService,
     updateAddress,
+    handleServiceForm,
     getProfile,
     gallery,
+    services, 
   } = useEditProfile()
 
-  console.log(gallery)
+  const { profile } = useProfileIndex()
 
   const [editForm, resetForm, setFormTo, setEditForm] = useForm({ first: "" })
   const [topForm, handleTopForm, resetTopForm, setTopFormTo] = useForm({
@@ -33,121 +49,76 @@ export default () => {
     state: "",
     zip: "",
     trade2: "",
+    thumbnail: "",
   })
+  const [ trade, setTrade ] = useState('')
+  const handleChange = (e, { value }) => {
+    console.log(value)
+    setTopFormTo({...topForm, trade1: value})
+    
+  }
 
-  const [
-    serviceForm,
-    handleServiceForm,
-    resetServiceForm,
-    setServiceFormTo,
-  ] = useForm({ description: "", price: "" })
+  const [ trade2, setTrade2 ] = useState('')
+  const handleChange2 = (e, { value }) => {
+    console.log(value)
+    setTopFormTo({...topForm, trade2: value})
+    
+  }
+
+  const [ updateStates, setStates ] = useState('')
+  const handleStates = (e, { value }) => {
+    console.log(value)
+    setTopFormTo({...topForm, state: value})
+    
+  }
+
+
+  // const [
+  //   serviceForm,
+  //   handleServiceForm,
+  //   resetServiceForm,
+  //   setServiceFormTo,
+  // ] = useForm({ description: "", price: "" })
 
   const [
     galleryForm,
     handleGalleryForm,
     resetGalleryForm,
     setGalleryFormTo,
-  ] = useForm()
+  ] = useForm({ gallery: ""})
 
-  const options = [
-    { key: "Plumber", text: "Plumber", value: "plumber" },
-    { key: "landscaper", text: "Landscaper", value: "landscaper" },
-    { key: "junk removal", text: "Junk Removal", value: "junk removal" },
-    { key: "electrician", text: "Electrician", value: "electrician" },
-    { key: "painter", text: "Painter", value: "painter" },
-    { key: "carpenter", text: "Carpenter", value: "carpenter" },
-    { key: "roofer", text: "Roofer", value: "roofer" },
-    { key: "welder", text: "Welder", value: "welder" },
-    { key: "mechanic", text: "Mechanic", value: "mechanic" },
-  ]
+  const [avatarImage, setAvatarImage] = useState('')
+  const [galleryImage, setGalleryImage] = useState('')
 
-  const states = [
-    "AL",
-    "AK",
-    "AS",
-    "AZ",
-    "AR",
-    "CA",
-    "CO",
-    "CT",
-    "DE",
-    "DC",
-    "FM",
-    "FL",
-    "GA",
-    "GU",
-    "HI",
-    "ID",
-    "IL",
-    "IN",
-    "IA",
-    "KS",
-    "KY",
-    "LA",
-    "ME",
-    "MH",
-    "MD",
-    "MA",
-    "MI",
-    "MN",
-    "MS",
-    "MO",
-    "MT",
-    "NE",
-    "NV",
-    "NH",
-    "NJ",
-    "NM",
-    "NY",
-    "NC",
-    "ND",
-    "MP",
-    "OH",
-    "OK",
-    "OR",
-    "PW",
-    "PA",
-    "PR",
-    "RI",
-    "SC",
-    "SD",
-    "TN",
-    "TX",
-    "UT",
-    "VT",
-    "VI",
-    "VA",
-    "WA",
-    "WV",
-    "WI",
-    "WY",
-  ].map((item) => ({ key: item, value: item, text: item }))
+  
 
   function handlesubmit(e) {
     e.preventDefault()
     console.log(editForm)
     resetForm()
+    handleClose()
+    handleGalleryClose()
+    
   }
+  const handleTrade =(e) =>{
+    console.log(e)
+    setTrade(e)
+  }
+  function handleAvatarSubmit() {
+    setModalVisible(false)
+    setTopFormTo({...topForm, thumbnail: avatarImage})
+  }
+
+  function handleGalleryImg(){
+    setModalGalleryVisible(false)
+    setGalleryFormTo({...galleryForm, img_src: galleryImage})
+  }
+
 
   function dataFromBackend() {
     getProfile().then((resp) => {
       setFormTo(resp.user)
     })
-  }
-  function handleRequest() {
-    // addGalleryImage({ imgSrc: 'https://placehold.it/250x250/8B63A1' })
-    //deleteGalleryImage(4) // *use later
-    //updateAddress({
-    //  street: "Fenway",
-    //  city: "LV",
-    //  state: "AZ",
-    //  zipcode: "89166"
-    //})
-    deleteConService(2)
-    //addService({
-    //  description:"Tile Removal",
-    //  price: "600.00"
-    //})
   }
 
   useEffect(() => {
@@ -163,27 +134,38 @@ export default () => {
         state: resp.address.state,
         zip: resp.address.zip,
         trade2: resp.address.trade_2,
+        thumbnail: resp.address.thumbnail,
       })
-
-      setServiceFormTo({
-        description: resp.services[0].description,
-        price: resp.services[0].price,
+      setGalleryFormTo({
+        gallery: resp.gallery.img_src,
       })
-      console.log(resp.services[0].price)
-      //resp.services[0].price.. will give me the first index in the services array which will give me access to the price object
     })
   }, [])
 
   return (
-    <div>
+    <div className="EditBg">
+    <div className="EditPage">
       <div className="EditTopOfPage">
-        <div
-          className="EditAvatar"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1516876437184-593fda40c7ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80')`,
-          }}
-        ></div>
-
+      <div className="BusinessInfoContainer">
+        <div className="profile-image">
+          <div className="avatarEdit">
+            <Modal  onClose={() => setModalVisible(false)}
+                    open={modalVisible}  trigger={<AiOutlinePlus onClick={() => setModalVisible(true)}/>}>
+              <Modal.Content>
+                  <Input
+                  onChange={(e) => setAvatarImage(e.target.value)} 
+                  name="thumbnail"
+                  defaultValue={topForm.thumbnail}
+                  icon={<Icon name='add' 
+                  onClick={handleAvatarSubmit} inverted circular link />} 
+                  placeholder='Add'/>
+              </Modal.Content>
+            </Modal>
+            {/* {topForm.thumbnail} */}
+            <Avatar image={topForm.thumbnail} />
+           </div>
+          </div>
+          
         <div className="BusinessEdit">
           <form onSubmit={handlesubmit}>
             <Input
@@ -206,7 +188,7 @@ export default () => {
               selection
               options={options}
               value={topForm.trade1}
-              onChange={handleTopForm}
+              onChange={handleChange}
             />
             <Dropdown
               placeholder="Skills"
@@ -214,13 +196,10 @@ export default () => {
               selection
               options={options}
               value={topForm.trade2}
-              onChange={handleTopForm}
+              onChange={handleChange2}
             />
           </form>
         </div>
-        <Button style={{ margin: "20px" }} onClick={() => dataFromBackend()}>
-          {editForm.first}
-        </Button>
         <div className="BusinessLocationEdit">
           <Input
             placeholder="Street"
@@ -244,7 +223,7 @@ export default () => {
             type="text"
             name="state"
             value={topForm.state}
-            onChange={handleTopForm}
+            onChange={handleStates}
           ></Dropdown>
           <Input
             placeholder="Zip Code"
@@ -253,140 +232,64 @@ export default () => {
             value={topForm.zip}
             onChange={handleTopForm}
           />
-        </div>
-
-        <div>
-          <Button onClick={() => updateAddress(topForm)} positive>
-            SAVE
-          </Button>
-        </div>
+        </div></div>
+        
+        
       </div>
 
       <div className="BioEdit">
         <div className="EditContainer">
-          <textarea className="TextEdit" value={topForm.bio}></textarea>
+          <textarea className="TextEdit"
+           name="bio" 
+           value={topForm.bio}
+           onChange={handleTopForm}>
+           </textarea>
         </div>
         <div>
-          <Button positive>SAVE</Button>
+          <Button positive onClick={() => updateAddress(topForm)}>SAVE</Button>
         </div>
       </div>
       <div className="GalleryEditButton">
         <GalleryImage
           images={gallery}
           isEditable={true}
-          onDelete={(id) => {
+          onDelete={(id) => { deleteGalleryImage(id)
             console.log(id)
           }}
         ></GalleryImage>
-        <div>
-          <Button onClick={handleRequest}>add gallery image</Button>
-          <Button positive>SAVE</Button>
+        <div className="GalleryButtons">
+        <Modal  onClose={() => setModalVisible(false)}
+                    open={modalGalleryVisible} 
+                    trigger={<Button onClick={() => setModalGalleryVisible(true)}>add gallery image</Button>}>
+              <Modal.Content>
+                  <Input 
+                  name="gallery"
+                  onChange={(e) => setGalleryImage(e.target.value)}
+                  icon={<Icon name='search'
+                  onClick={handleGalleryImg} inverted circular link />} 
+                  placeholder='Search...'/>
+              </Modal.Content>
+            </Modal>
+            {galleryForm.img_src}
+          <Button positive onClick={() => addGalleryImage(galleryForm)}>SAVE</Button>
         </div>
       </div>
-      <div className="InputContainer">
-        <div>
-          <div class="ui focus input">
-            <div className="MinusButton">
-              <AiOutlineMinusCircle />
-            </div>
-            <input
-              type="text"
-              placeholder="JOB DESCRIPTION"
-              name="description"
-              value={serviceForm.description}
-              onChange={handleServiceForm}
-            />
-            <Input
-              className="PriceEdit"
-              labelPosition="right"
-              type="text"
-              placeholder="Amount"
-            >
-              <Label basic>$</Label>
-              <input
-                name="price"
-                value={serviceForm.price}
-                onChange={handleServiceForm}
-              />
-              <Label>.00</Label>
-            </Input>
-            <div className="EditPen">
-              <GrEdit />
-            </div>
-            <div></div>
-          </div>
-          <div class="ui focus input">
-            <div className="MinusButton">
-              <AiOutlineMinusCircle />
-            </div>
-            <input
-              type="text"
-              placeholder="JOB DESCRIPTION"
-              name="description"
-              value={serviceForm.description}
-              onChange={handleServiceForm}
-            />
-            <Input
-              className="PriceEdit"
-              labelPosition="right"
-              type="text"
-              placeholder="Amount"
-            >
-              <Label basic>$</Label>
-              <input
-                name="price"
-                value={serviceForm.price}
-                onChange={handleServiceForm}
-              />
-              <Label>.00</Label>
-            </Input>
-            <div className="EditPen">
-              <GrEdit />
-            </div>
-          </div>
-          <div class="ui focus input">
-            <div className="MinusButton">
-              <AiOutlineMinusCircle />
-            </div>
-            <input
-              type="text"
-              placeholder="JOB DESCRIPTION"
-              name="description"
-              value={serviceForm.description}
-              onChange={handleServiceForm}
-            />
-            <Input
-              className="PriceEdit"
-              labelPosition="right"
-              type="text"
-              placeholder="Amount"
-            >
-              <Label basic>$</Label>
-              <input
-                name="price"
-                value={serviceForm.price}
-                onChange={handleServiceForm}
-              />
-              <Label>.00</Label>
-            </Input>
-            <div className="EditPen">
-              <GrEdit />
-            </div>
-            <div></div>
-          </div>
-          <div class="ui focus input">
-            <div className="MinusButton">
-              <AiOutlineMinusCircle />
-            </div>
-            <input
-              type="text"
-              placeholder="JOB DESCRIPTION"
-              name="description"
-              value={serviceForm.description}
-              onChange={handleServiceForm}
+
+          {services.map((item) => {
+            return (
+          <div  className="InputContainer">
+            <div class="ui focus input">
+              <AiOutlineMinusCircle onClick={() => deleteConService(item.id)} className="MinusButton" size={20}/>
+                <input
+                  disabled={item.disabled}
+                  type="text"
+                  placeholder="JOB DESCRIPTION"
+                  name="description"
+                  value={item.description}
+                  onChange={(e) => handleServiceForm(item.id, 'description', e.target.value)}
             />
 
-            <Input
+            <Input 
               className="PriceEdit"
               labelPosition="right"
               type="text"
@@ -394,21 +297,26 @@ export default () => {
             >
               <Label basic>$</Label>
               <input
+                disabled={item.disabled}
                 name="price"
-                value={serviceForm.price}
-                onChange={handleServiceForm}
+                value={item.price}
+                onChange={(e) => handleServiceForm(item.id, 'price', e.target.value)}
               />
               <Label>.00</Label>
             </Input>
             <div className="EditPen">
-              <GrEdit />
+              {item.new ? null : 
+               item.disabled ? <GrEdit onClick={() => enableInput(item.id)} size={20}/> :
+              <GiSaveArrow onClick={() => saveInput(item.id)}/>} 
+              <TiCancel size={20}/>
             </div>
           </div>
         </div>
-      </div>
-      <div className="AddDescriptionButton">
-        <BsFillPlusSquareFill size={25} on />
-      </div>
+            )
+          })}
+          <BsFillPlusSquareFill onClick={addService}size={30} />
     </div>
+    </div>
+    
   )
 }
