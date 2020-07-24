@@ -4,6 +4,7 @@ import { Button, Icon, Table, Confirm } from "semantic-ui-react"
 import moment from "moment"
 import { useOrder, useLoad, useAuth } from "../../hooks"
 import { Link } from "react-router-dom"
+import Logo from "../../images/logowhite.png"
 
 export default () => {
   const { orders, getOrder, approve, deny } = useOrder()
@@ -116,6 +117,10 @@ export default () => {
             )}
         </Table>
       </div>
+      <img 
+            src={Logo} alt="logo"
+            className="page-logo"
+          />
     </div>
   )
 }

@@ -3,6 +3,7 @@ import "../../styles/Nav.scss"
 import { Button, Icon, Menu, Segment, Input } from "semantic-ui-react"
 import { useContractor, useAuth, useLoad } from "../../hooks"
 import { Link, useLocation } from "react-router-dom"
+import Logo from "../../images/logowhite.png"
 
 export default () => {
   const { contractors, getContractor } = useContractor()
@@ -36,18 +37,33 @@ export default () => {
     <Segment style={{ zIndex: 10000 }} inverted>
       {isAuthenticated ? (
         <Menu inverted pointing secondary>
-          <Link to="/profile">
-            <Menu.Item name="Profile" active={activeItem === "/profile"} />
-          </Link>
-          <Link to="/search">
-            <Menu.Item name="Search" active={activeItem === "/search"} />
-          </Link>
-          <Link to="/order">
-            <Menu.Item name="Orders" active={activeItem === "/order"} />
-          </Link>
+          <img 
+            src={Logo} alt="logo"
+            style={{width: "15%", height: "80%", marginTop: "5px"}}
+          />
+          <div className="nav-shelf">
+            <Link to="/profile">
+              <Menu.Item 
+                className="navButtons" 
+                name="Profile" 
+                active={activeItem === "/profile"} 
+              />
+            </Link>
+            <Link to="/search">
+              <Menu.Item 
+                className="navButtons" 
+                name="Search" 
+                active={activeItem === "/search"} 
+              />
+            </Link>
+          </div>
           {isAuthenticated && searchPage ? (
-            <Menu.Item style={{ width: "30%" }}>
-              <form style={{ width: "100%" }} onSubmit={handleSubmit}>
+            <Menu.Item style={{ 
+                width: "30%", 
+                marginBottom: "-0.3%", 
+                marginLeft: "10%"
+              }}>
+              <form style={{ width: "100%"}} onSubmit={handleSubmit}>
                 <Input
                   action={{ type: "submit", icon: "search" }}
                   onChange={(e) => setSearch(e.target.value)}
@@ -58,8 +74,16 @@ export default () => {
             </Menu.Item>
           ) : null}
           <Menu.Menu position="right">
+            <Link to="/order">
+              <Menu.Item 
+                className="navButtons" 
+                name="Orders" 
+                active={activeItem === "/order"} 
+              />
+            </Link>
             <Link to="/signup">
               <Menu.Item
+                className="navButtons"
                 name="Logout"
                 active={activeItem === "friends"}
                 onClick={logout}
@@ -67,7 +91,10 @@ export default () => {
             </Link>
           </Menu.Menu>
         </Menu>
-      ) : null}
+      ) :       <img 
+      src={Logo} alt="logo"
+      className="home-page-logo"
+    />}
     </Segment>
   )
 }
