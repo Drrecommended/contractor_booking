@@ -10,7 +10,6 @@ export default (props) => {
   const { getExample } = useExample()
   function handleSubmit(e) {
     e.preventDefault()
-    console.log(exampleForm)
     resetForm()
   }
   function populateFormWithDataFromBackend() {

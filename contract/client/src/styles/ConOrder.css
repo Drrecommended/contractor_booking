@@ -24,10 +24,22 @@
 }
 
 .tableResize {
-  margin-left: 15%;
+  margin: auto;
   margin-top: 3%;
-  width: 65%;
+  width: 60%;
+  height: 70%;
+  overflow-y: scroll;
   -webkit-box-shadow: 0px 0px 89px -4px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 89px -4px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 89px -4px rgba(0, 0, 0, 0.75);
+}
+
+.tableResize::-webkit-scrollbar {
+  width: 1em;
+  margin-right: 5px;
+}
+
+
+.tableResize::-webkit-scrollbar-thumb {
+  background-color: cadetblue;
 }

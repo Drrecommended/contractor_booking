@@ -13,7 +13,7 @@ import { AiFillPropertySafety } from "react-icons/ai"
 
 export default (props) => {
   const { cart, createOrder } = useCart()
-  console.log(cart)
+  
   // const addressDefinitions = faker.definitions.address
   // const stateOptions = _.map(addressDefinitions.state, (state, index) => ({
   //   key: addressDefinitions.state_abbr[index],
@@ -57,7 +57,7 @@ export default (props) => {
     } else {
       setLastNameError("")
     }
-    if(!form.adress) {
+    if(!form.address) {
       setAddressError('cannot be blank')
       canOrder = false
     } else {
@@ -93,14 +93,76 @@ export default (props) => {
     } else {
       setPhoneError("")
     }
-    // if(canOrder) {
-    //   createOrder({...form})
-    //   .then((resp) => {
-    //     resetForm()
-    //     props.history.push("/search")
-    //   })
-    // }
+    if(canOrder) {
+      createOrder({...form})
+      .then((resp) => {
+        resetForm()
+        props.history.push("/order")
+      })
+    }
   }
+
+  const states = [
+    "AL",
+    "AK",
+    "AS",
+    "AZ",
+    "AR",
+    "CA",
+    "CO",
+    "CT",
+    "DE",
+    "DC",
+    "FM",
+    "FL",
+    "GA",
+    "GU",
+    "HI",
+    "ID",
+    "IL",
+    "IN",
+    "IA",
+    "KS",
+    "KY",
+    "LA",
+    "ME",
+    "MH",
+    "MD",
+    "MA",
+    "MI",
+    "MN",
+    "MS",
+    "MO",
+    "MT",
+    "NE",
+    "NV",
+    "NH",
+    "NJ",
+    "NM",
+    "NY",
+    "NC",
+    "ND",
+    "MP",
+    "OH",
+    "OK",
+    "OR",
+    "PW",
+    "PA",
+    "PR",
+    "RI",
+    "SC",
+    "SD",
+    "TN",
+    "TX",
+    "UT",
+    "VT",
+    "VI",
+    "VA",
+    "WA",
+    "WV",
+    "WI",
+    "WY",
+  ].map((item) => ({ key: item, value: item, text: item }))
 
   return (
     <div className="checkoutBackground">
@@ -112,12 +174,14 @@ export default (props) => {
           <h1>Who and where should we bill this service?</h1>
           <Form.Group unstackable widths={2}>
             <Form.Input 
+              name="firstname"
               onChange={setForm}
               label={"First Name " + (firstNameError || "")}
               placeholder="First name" 
               error={!!firstNameError}
             />
             <Form.Input 
+              name="lastname"
               onChange={setForm}
               label={"Last name " + (lastNameError || "")}
               placeholder="Last name" 
@@ -126,17 +190,16 @@ export default (props) => {
           </Form.Group>
           <Form.Group widths={4}>
             <Form.Input
+              name="address"
               onChange={setForm}  
               label={"Address " + (addressError || "")}
               placeholder="Address" 
               error={!!addressError}
             />
-            <Form.Dropdown
+            <Form.Input
               onChange={setForm}
               label={"City " + (cityError || "")}
               placeholder="city"
-              search
-              selection
               error={!!cityError}
             />
             <Form.Dropdown
@@ -144,10 +207,12 @@ export default (props) => {
               label={"State " + (stateError || "")}
               placeholder="state"
               search
-              selection
+              options={states}
               error={!!stateError}
+              style={{marginTop: "3%"}}
             />
             <Form.Input 
+              name="postal"
               onChange={setForm}
               label={"Postal Code " + (postalError || "")}
               placeholder="Postal code" 
@@ -156,12 +221,14 @@ export default (props) => {
           </Form.Group>
           <Form.Group widths={2}>
             <Form.Input 
+              name="email"
               onChange={setForm}
               label={"Email " + (emailError || "")}
               placeholder="Email" 
               error={!!emailError}
             />
             <Form.Input 
+              name="phone"
               onChange={setForm}
               label={"Phone " + (phoneError || "")}
               placeholder="Phone" 

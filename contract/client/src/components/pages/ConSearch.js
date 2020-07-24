@@ -4,6 +4,7 @@ import { useContractor, useLoad } from "../../hooks"
 import { Rating } from "semantic-ui-react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useHistory, Link } from "react-router-dom"
+import Logo from "../../images/logowhite.png"
 
 export default () => {
   const { contractors, getContractor } = useContractor()
@@ -55,6 +56,10 @@ export default () => {
           </div>
         </div>
       )}
+              <img 
+            src={Logo} alt="logo"
+            className="page-logo"
+          />
     </div>
   )
 }

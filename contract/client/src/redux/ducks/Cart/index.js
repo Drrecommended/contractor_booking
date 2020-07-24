@@ -47,7 +47,7 @@ function deleteCart(id) {
 function createOrderData(cart) {
   const orderData = { contractor_id: 2, date: "2020-07-11", cart }
   return (dispatch) => {
-    api.post("/orders", orderData)
+    return api.post("/orders", orderData)
   }
 }
 
