@@ -37,10 +37,13 @@ export default () => {
     <Segment style={{ zIndex: 10000 }} inverted>
       {isAuthenticated ? (
         <Menu inverted pointing secondary>
-          <img 
+          <div
+            style={{alignSelf: "center", width: "15%"}}>
+            <img 
             src={Logo} alt="logo"
-            style={{width: "15%", height: "80%", marginTop: "5px"}}
-          />
+            style={{maxWidth: "100%", alignSelf: "center", objectFit: "cover", display: "block", width: "auto", height: "auto"}}
+            />
+          </div>
           <div className="nav-shelf">
             <Link to="/profile">
               <Menu.Item 
