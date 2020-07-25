@@ -8,7 +8,6 @@ import Calendar from "react-calendar"
 import "react-calendar/dist/Calendar.css"
 import { Button } from "semantic-ui-react"
 import GalleryImage from "../GalleryImage"
-import Logo from "../../images/logowhite.png"
 
 export default (props) => {
   const { profile, getProfile } = useProfileIndex()
@@ -36,7 +35,7 @@ export default (props) => {
       <div className="profilePage">
         <div className="profile-nav">
           <div className="profile-image">
-            <Avatar image={profile.address.thumbnail}/>
+            <Avatar image={profile.address.thumbnail} />
           </div>
           <div className="name-trade-edit-shelf">
             <h2 className="profilConName">
@@ -157,7 +156,6 @@ export default (props) => {
                     float: "right",
                     border: "#CFD0D0 solid 5px"
                   }}
-                  onClickDay={date}
                   onChange={onChange}
                   value={date}
                 />
