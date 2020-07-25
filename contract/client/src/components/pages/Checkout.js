@@ -10,17 +10,11 @@ import "../../styles/Checkout.scss"
 import { useCart, useForm } from "../../hooks"
 import validator from "validator"
 import { AiFillPropertySafety } from "react-icons/ai"
+import { states } from '../utils/profile-constants'
 
 export default (props) => {
   const { cart, createOrder } = useCart()
-  
-  // const addressDefinitions = faker.definitions.address
-  // const stateOptions = _.map(addressDefinitions.state, (state, index) => ({
-  //   key: addressDefinitions.state_abbr[index],
-  //   text: state,
-  //   value: addressDefinitions.state_abbr[index],
-  // }))
-  const [form, setForm, resetForm] = useForm({
+  const [form, handleForm, resetForm, setForm] = useForm({
     firstname: "",
     lastname: "",
     address: "",
@@ -40,7 +34,11 @@ export default (props) => {
   const [emailError, setEmailError] = useState(null)
   const [phoneError, setPhoneError] = useState(null)
   const [terms, setTerms] = useState(false)
-  const [serviceFormError, setServiceFormError] = useState("")
+  const [serviceFormError, setServiceFormError] = useState(null)
+
+  const handleStates = (e, { value }) => {
+    setForm({...form, state: value})
+  }
 
   function handleOrder(e) {
     e.preventDefault()
@@ -69,12 +67,12 @@ export default (props) => {
     } else {
       setCityError("")
     }
-    // if(!form.state || form.state != states) {
-    //   setStateError('cannot be blank')
-    //   canOrder = false
-    // } else {
-    //   setStateError("")
-    // }
+    if(!form.state) {
+      setStateError('cannot be blank')
+      canOrder = false
+    } else {
+      setStateError("")
+    }
     if(!form.postal) {
       setPostalError('cannot be blank')
       canOrder = false
@@ -93,6 +91,9 @@ export default (props) => {
     } else {
       setPhoneError("")
     }
+    if(terms !== true) {
+      canOrder = false
+    }
     if(canOrder) {
       createOrder({...form})
       .then((resp) => {
@@ -102,67 +103,7 @@ export default (props) => {
     }
   }
 
-  const states = [
-    "AL",
-    "AK",
-    "AS",
-    "AZ",
-    "AR",
-    "CA",
-    "CO",
-    "CT",
-    "DE",
-    "DC",
-    "FM",
-    "FL",
-    "GA",
-    "GU",
-    "HI",
-    "ID",
-    "IL",
-    "IN",
-    "IA",
-    "KS",
-    "KY",
-    "LA",
-    "ME",
-    "MH",
-    "MD",
-    "MA",
-    "MI",
-    "MN",
-    "MS",
-    "MO",
-    "MT",
-    "NE",
-    "NV",
-    "NH",
-    "NJ",
-    "NM",
-    "NY",
-    "NC",
-    "ND",
-    "MP",
-    "OH",
-    "OK",
-    "OR",
-    "PW",
-    "PA",
-    "PR",
-    "RI",
-    "SC",
-    "SD",
-    "TN",
-    "TX",
-    "UT",
-    "VT",
-    "VI",
-    "VA",
-    "WA",
-    "WV",
-    "WI",
-    "WY",
-  ].map((item) => ({ key: item, value: item, text: item }))
+
 
   return (
     <div className="checkoutBackground">
@@ -175,63 +116,76 @@ export default (props) => {
           <Form.Group unstackable widths={2}>
             <Form.Input 
               name="firstname"
-              onChange={setForm}
+              onChange={handleForm}
               label={"First Name " + (firstNameError || "")}
               placeholder="First name" 
               error={!!firstNameError}
+              style={{minWidth: "100%"}}
+              fluid
             />
             <Form.Input 
               name="lastname"
-              onChange={setForm}
+              onChange={handleForm}
               label={"Last name " + (lastNameError || "")}
               placeholder="Last name" 
               error={!!lastNameError}
+              style={{minWidth: "100%"}}
+              fluid
             />
           </Form.Group>
           <Form.Group widths={4}>
             <Form.Input
               name="address"
-              onChange={setForm}  
+              onChange={handleForm}  
               label={"Address " + (addressError || "")}
               placeholder="Address" 
               error={!!addressError}
+              style={{minWidth: "100%"}}
+              fluid
             />
             <Form.Input
               name="city"
-              onChange={setForm}
+              onChange={handleForm}
               label={"City " + (cityError || "")}
               placeholder="City"
               error={!!cityError}
+              style={{minWidth: "100%"}}
+              fluid
             />
             <Form.Dropdown
               name="state"
-              onChange={setForm}
+              onChange={handleStates}
+              value={form.state}
+              fluid
+              selection
               label={"State " + (stateError || "")}
               placeholder="State"
               options={states}
               error={!!stateError}
-              style={{marginTop: "3.5%"}}
+              style={{minWidth: "100%"}}
+              fluid
             />
             <Form.Input 
               name="postal"
-              onChange={setForm}
+              onChange={handleForm}
               label={"Postal Code " + (postalError || "")}
               placeholder="Postal code" 
               error={!!postalError}
-              style={{marginRight: "60%"}}
+              style={{minWidth: "100%"}}
+              fluid
             />
           </Form.Group>
           <Form.Group widths={2}>
             <Form.Input 
               name="email"
-              onChange={setForm}
+              onChange={handleForm}
               label={"Email " + (emailError || "")}
               placeholder="Email" 
               error={!!emailError}
             />
             <Form.Input 
               name="phone"
-              onChange={setForm}
+              onChange={handleForm}
               label={"Phone " + (phoneError || "")}
               placeholder="Phone" 
               error={!!phoneError}
