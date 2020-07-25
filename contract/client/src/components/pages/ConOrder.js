@@ -14,7 +14,6 @@ export default () => {
   const { user } = useAuth()
   const [ confirmOrder, setConfirm ] = useState(false)
   const [ denyOrder, setDeny ] = useState(false)
-  console.log(orders)
 
   const openConfirm = () => setConfirm(true)
   const closeConfirm = () => setConfirm(false)
@@ -52,7 +51,7 @@ export default () => {
         onCancel={closeDeny}
         onConfirm={() => deny(orderId).then(() => setDeny(false))}
       />
-      <div className="tableResize">
+      <div style={{backgroundColor: "white"}} className="tableResize">
         <Table>
           <Table.Header>
             <Table.Row>

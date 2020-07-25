@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const conn = require('../db.js')
 const { formatDate, addDaysToDate } = require('../utils')
+const { useContractor } = require('../../client/src/hooks/index.js')
 
 // conn.query(sql , [], (err, results, fields) => {})
 router.get('/profile', async (req, res, next) => {
@@ -26,7 +27,8 @@ router.get('/profile', async (req, res, next) => {
     user: {
       id: user.id,
       first: user.first_name,
-      last: user.last_name
+      last: user.last_name,
+      contractor: user.contractor
     }
   }
   res.json(profile)
@@ -53,7 +55,8 @@ router.get('/profile/:id', async (req, res, next) => {
     user: {
       id: user.id,
       first: user.first_name,
-      last: user.last_name
+      last: user.last_name,
+      contractor: user.contractor
     }
   }
   res.json(profile)

@@ -14,6 +14,7 @@ export default (props) => {
   const { profile, getProfile } = useProfileIndex()
   const { cart, addToCart, deleteCartItem } = useCart()
   const [date, setDate] = useState(new Date())
+
   const [loading] = useState("")
   const [serviceId, setServiceId] = useState(null)
   const { setLoaded } = useLoad()
@@ -22,6 +23,7 @@ export default (props) => {
 
   const onChange = (date) => {
     setDate(date)
+    console.log(setDate)
   }
 
   useEffect(() => {
@@ -61,7 +63,7 @@ export default (props) => {
           </div>
         </div>
         <div className="profile-bio">{profile.address.bio}</div>
-        {user.contractor ?
+        {profile.user.contractor ?
           <> <div className="gallery-shelf">
             {profile.gallery.length == 0 ? <h2>Gallery is empty</h2> : <GalleryImage images={profile.gallery}
               onDelete={(id) => console.log(id)}
@@ -157,9 +159,9 @@ export default (props) => {
                     float: "right",
                     border: "#CFD0D0 solid 5px"
                   }}
-                  onClickDay={date}
                   onChange={onChange}
                   value={date}
+                  tileDisable={date}
                 />
               </div>
             </div></> : null
