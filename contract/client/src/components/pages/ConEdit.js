@@ -308,7 +308,7 @@ export default () => {
               {item.new ? null : 
                item.disabled ? <GrEdit onClick={() => enableInput(item.id)} size={20}/> :
               <GiSaveArrow onClick={() => saveInput(item.id)}/>} 
-              <TiCancel size={20}/>
+              <TiCancel onClick={() => getProfile()} size={20}/>
             </div>
           </div>
         </div>
