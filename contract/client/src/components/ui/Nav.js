@@ -41,7 +41,14 @@ export default () => {
             style={{alignSelf: "center", width: "15%"}}>
             <img 
             src={Logo} alt="logo"
-            style={{maxWidth: "100%", alignSelf: "center", objectFit: "cover", display: "block", width: "auto", height: "auto"}}
+            style={{
+                    maxWidth: "100%", 
+                    alignSelf: "center", 
+                    objectFit: "cover", 
+                    display: "block", 
+                    width: "auto", 
+                    height: "auto"
+                  }}
             />
           </div>
           <div className="nav-shelf">
