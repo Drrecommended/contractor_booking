@@ -79,7 +79,7 @@ export default () => {
                       </Link>
                     </Table.Cell>
                     <Table.Cell style={{width: "10%"}}>
-                      {moment(order.date).subtract(10, "days").calendar()}
+                      {moment(order.date).format("MM/DD/YYYY")}
                     </Table.Cell>
                     <Table.Cell style={{width: "10%"}}>{order.services}</Table.Cell>
                     <Table.Cell style={{width: "15%"}}>$ {order.total}</Table.Cell>

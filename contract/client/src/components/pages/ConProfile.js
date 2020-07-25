@@ -8,13 +8,13 @@ import Calendar from "react-calendar"
 import "react-calendar/dist/Calendar.css"
 import { Button } from "semantic-ui-react"
 import GalleryImage from "../GalleryImage"
+import moment from "moment"
 
 export default (props) => {
   const { profile, getProfile } = useProfileIndex()
-  const { cart, addToCart, deleteCartItem } = useCart()
+  const { cart, addToCart, deleteCartItem, trackDate } = useCart()
   const [date, setDate] = useState(new Date())
-
-  const [loading] = useState("")
+  // const [loading] = useState("")
   const [serviceId, setServiceId] = useState(null)
   const { setLoaded } = useLoad()
   const { user } = useAuth()
@@ -22,10 +22,11 @@ export default (props) => {
 
   const onChange = (date) => {
     setDate(date)
-    console.log(setDate)
+    trackDate(moment(date).format("YYYY-MM-DD"))
   }
 
   useEffect(() => {
+    trackDate(moment(new Date()).format("YYYY-MM-DD"))
     setLoaded(true)
     getProfile(props.match.params.id).then(() => {
       setLoaded(false)
@@ -98,7 +99,7 @@ export default (props) => {
                 <div className="cart-shelf">
                   <div className="cart">
                     <div>
-                      <h2>Would you like to book {cart.length} services?</h2>
+                      <div>Would you like to book {cart.length} services?</div>
                     </div>
                     <div>
                       {cart.map((item) => {
@@ -127,28 +128,13 @@ export default (props) => {
                         props.history.push("/checkout")
                       }}
                     >
-                      Book
+                      Select Date
                       </Button>
                   </div>
                 </div>
               ) : (
                   <div className="cart-shelf">
-                    <div>Add services here</div>
-                    <Button
-                      disabled={!serviceId || cart === 0}
-                      style={{
-                        backgroundColor: "cadetblue",
-                        color: "white",
-                        marginTop: "25%",
-                        marginLeft: "70%",
-                        position: "absolute,"
-                      }}
-                      onClick={() => {
-                        props.history.push("/checkout")
-                      }}
-                    >
-                      Select date
-                      </Button>
+                    <div>Your services:</div>
                   </div>
 
                 )}
@@ -158,6 +144,7 @@ export default (props) => {
                     float: "right",
                     border: "#CFD0D0 solid 5px"
                   }}
+                  // tileDsiabled={}
                   onChange={onChange}
                   value={date}
                   tileDisable={date}

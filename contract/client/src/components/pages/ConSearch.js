@@ -27,33 +27,33 @@ export default () => {
     <div className="background-search">
       {contractors.length !== 0 ? (
         <div className="searchPage">
-          {contractors.map((contractor) => {
-            return (
-              <Link className="search-link" to={`/profile/detail/${contractor.profile_id}`}>
-                <div className="contractor-shelf">
-                  <div className="conSearchImage">
-                    <img src={contractor.thumbnail} />
-                  </div>
-                  <div className="info-shelf">
-                    <h2 className="conName">
-                      {contractor.first_name} {contractor.last_name}
-                    </h2>
-                    <div className="trades-header">Trades:</div>
-                    <div className="trade-shelf">
-                      <div>{contractor.trade_1}//</div>
-                      <div>{contractor.trade_2}</div>
+            {contractors.map((contractor) => {
+              return (
+                  <Link className="search-link" to={`/profile/detail/${contractor.profile_id}`}>
+                    <div className="contractor-shelf">
+                      <div className="conSearchImage">
+                        <img src={contractor.thumbnail} />
+                      </div>
+                      <div className="info-shelf">
+                        <h2 className="conName">
+                          {contractor.first_name} {contractor.last_name}
+                        </h2>
+                        <div className="trades-header">Trades:</div>
+                        <div className="trade-shelf">
+                          <div>{contractor.trade_1}//</div>
+                          <div>{contractor.trade_2}</div>
+                        </div>
+                        <div className="bio-shelf">
+                          <div>{contractor.bio}</div>
+                        </div>
+                      </div>
+                      <div className="rating-shelf">
+                        <Rating bool icon="star" defaultRating={3} maxRating={4} />
+                      </div>
                     </div>
-                    <div className="bio-shelf">
-                      <div>{contractor.bio}</div>
-                    </div>
-                  </div>
-                  <div className="rating-shelf">
-                    <Rating bool icon="star" defaultRating={3} maxRating={4} />
-                  </div>
-                </div>
-              </Link>
-            )
-          })}
+                  </Link>
+              )
+            })}
         </div>
       ) : (
         <div className="searchPage">
