@@ -5,7 +5,7 @@ const query = require('./query')
 
 // create a new user with hashed password
 class User {
-  constructor(username, password, first, last, email, contractor) {
+  constructor(username, password, first, last, email, contractor, avatar, id) {
     this.username = username
     this.salt = createHash(20)
     this.password = sha512(password + this.salt)
@@ -13,12 +13,15 @@ class User {
     this.last = last
     this.contractor = contractor
     this.email = email
+    this.avatar = avatar || 'https://placehold.it/250x250/8B63A1'
+    this.id = id
   }
 }
 
 const users = [
-  new User('user', 'user', 'user', 'one', 'user@example.com', false),
-  new User('contractor', 'contractor', 'contractor', 'one', 'contractor@example.com', true)
+  new User('user', 'user', 'user', 'one', 'user@example.com', false, 'https://randomuser.me/api/portraits/men/15.jpg', 1),
+  new User('contractor', 'contractor', 'contractor', 'one', 'contractor@example.com', true, 'https://randomuser.me/api/portraits/men/95.jpg', 2),
+  new User('contractor2', 'contractor2', 'contractor', 'two', 'contractor2@example.com', true, 'https://randomuser.me/api/portraits/men/94.jpg', 3)
 ]
 
 // create a random service to be associated with a contractor
@@ -29,7 +32,7 @@ function makeService() {
   return { description: services[randomIndex], price: randomPrice }
 }
 
-users.map(async user => {
+async function makeUser(user) {
   let addressId
   await query(
     `INSERT INTO addresses (city, street, state, zip) VALUES (?,?,?,?)
@@ -43,7 +46,7 @@ users.map(async user => {
   await query(
     `INSERT INTO profiles (address_id, bio, thumbnail, trade_1, trade_2) VALUES(?, ?, ?, ?, ?)
     `,
-    [addressId, 'I am a bio', 'https://placehold.it/250x250/8B63A1', 'plumber', 'electrician'],
+    [addressId, 'I am a bio', user.avatar, (user.contractor && 'landscaper' || null), (user.contractor && 'plumber' || null)],
     (result => {
       user.profile_id = result.insertId
     })
@@ -51,9 +54,10 @@ users.map(async user => {
 
   await query(
     `INSERT INTO users
-    (username, password, salt, first_name, last_name, email, contractor, profile_id)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+    (id, username, password, salt, first_name, last_name, email, contractor, profile_id)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
+      user.id,
       user.username,
       user.password,
       user.salt,
@@ -64,12 +68,16 @@ users.map(async user => {
       user.profile_id
     ],
   )
-});
+}
+
+makeUser(users[0]);
+makeUser(users[1]);
+makeUser(users[2]);
 
 // user w/ id 1: user
 // user w/ id: 2: contractor
 (async () => {
-  [makeService(), makeService()].map(async service => {
+  [{price: 100, description: 'plumbing'}, {price: 1000, description: 'landscaping'}].map(async service => {
     await query(
       `
       INSERT INTO services (user_id, description, price)
@@ -77,17 +85,26 @@ users.map(async user => {
       `,
       [2, service.description, service.price]
     )
-  })
+  });
+
+  [{price: 100, description: 'roofing'}, {price: 1000, description: 'tiling'}].map(async service => {
+    await query(
+      `
+      INSERT INTO services (user_id, description, price)
+      VALUES (?,?,?)
+      `,
+      [3, service.description, service.price]
+    )
+  });
 
 
   await query(`
     INSERT INTO galleries (profile_id, img_src)
     VALUES 
-    (2, 'https://placehold.it/250x250/1D3030'),
-    (2, 'https://placehold.it/250x250/007B7B'),
-    (2, 'https://placehold.it/250x250/8B63A1')
+    (2, 'https://images.squarespace-cdn.com/content/v1/55c9505ae4b006a44568dcd5/1584571394917-K039OTK682IDD3B7QI8V/ke17ZwdGBToddI8pDm48kDogYgQdVQAkUW98gmY9Vgt7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0lCvyAd1-5UQFnp8aARaJsX8L94t2u-XxysXjqpmT3livZa5xrrf04fAJQc50Z6gVg/blob?format=1500w'),
+    (2, 'https://images.squarespace-cdn.com/content/v1/55c9505ae4b006a44568dcd5/1584571394917-K039OTK682IDD3B7QI8V/ke17ZwdGBToddI8pDm48kDogYgQdVQAkUW98gmY9Vgt7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0lCvyAd1-5UQFnp8aARaJsX8L94t2u-XxysXjqpmT3livZa5xrrf04fAJQc50Z6gVg/blob?format=1500w'),
+    (2, 'https://images.squarespace-cdn.com/content/v1/55c9505ae4b006a44568dcd5/1584571394917-K039OTK682IDD3B7QI8V/ke17ZwdGBToddI8pDm48kDogYgQdVQAkUW98gmY9Vgt7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0lCvyAd1-5UQFnp8aARaJsX8L94t2u-XxysXjqpmT3livZa5xrrf04fAJQc50Z6gVg/blob?format=1500w')
   `)
-  console.log(formatDate(new Date()))
   await query(`
       INSERT INTO orders (customer_id, contractor_id, date, services, total, status)
       VALUES 
