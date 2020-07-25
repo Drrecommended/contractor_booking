@@ -88,6 +88,7 @@
   border-style: inset;
   border-color: cadetblue;
   border-width: medium;
+  padding: 8px;
 }
 .AddDescriptionButton {
   margin-left: 40px;

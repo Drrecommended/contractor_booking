@@ -3,7 +3,7 @@ import "../../styles/ConEdit.css"
 import { Button, Input, Dropdown, Container, Label, Modal, Image, Form, Icon } from "semantic-ui-react"
 import { BsFillPlusSquareFill } from "react-icons/bs"
 import { GiSaveArrow } from "react-icons/gi"
-import { AiOutlineMinusCircle, AiOutlinePlus } from "react-icons/ai"
+import { AiOutlineMinusCircle, AiOutlinePlus, AiFillPlusCircle } from "react-icons/ai"
 import { TiCancel } from "react-icons/ti";
 import { GrEdit } from "react-icons/gr"
 import Avatar from "../ui/Avatar"
@@ -150,7 +150,7 @@ export default () => {
         <div className="profile-image">
           <div className="avatarEdit">
             <Modal  onClose={() => setModalVisible(false)}
-                    open={modalVisible}  trigger={<AiOutlinePlus onClick={() => setModalVisible(true)}/>}>
+                    open={modalVisible}  trigger={<AiFillPlusCircle size={24} onClick={() => setModalVisible(true)}/>}>
               <Modal.Content>
                   <Input
                   onChange={(e) => setAvatarImage(e.target.value)} 
