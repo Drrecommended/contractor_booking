@@ -109,6 +109,10 @@ function updatedAllAddress(address) {
 function updateService(service) {
   return (dispatch) => {
     api.post("/profile/service", service)
+    dispatch({
+      type: ADD_SERVICE,
+      
+    })
   }
 }
 
@@ -128,7 +132,9 @@ function enableServiceInput(serviceId){
 
 function deleteService(serviceId) {
   return (dispatch) => {
-    api.delete("/profile/service/" + serviceId)
+    api.delete("/profile/service/" + serviceId).then(() =>{
+    dispatch (getProfileData())
+    })
   }
 }
 
