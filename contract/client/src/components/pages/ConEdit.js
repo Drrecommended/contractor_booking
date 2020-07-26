@@ -27,6 +27,7 @@ export default () => {
     addGalleryImage,
     deleteGalleryImage,
     addService,
+    updateService,
     enableInput,
     deleteConService,
     updateAddress,
@@ -308,10 +309,11 @@ export default () => {
               <Label>.00</Label>
             </Input>
             <div className="EditPen">
-              {item.new ?  <GiSaveArrow onClick={() => saveInput(item.id)}/> : 
-               item.disabled ? <GrEdit onClick={() => enableInput(item.id)} size={20}/> :
-              <GiSaveArrow onClick={() => saveInput(item.id)}/>} 
-              <TiCancel onClick={() => getProfile()} size={20}/>
+              {item.new && !item.disabled ? <GiSaveArrow onClick={() => saveInput(item)}/> : null}
+              {!item.new && !item.disabled ? <GiSaveArrow onClick={() => updateService(item)}/> : null}
+
+              {!item.new && item.disabled ? <GrEdit onClick={() => enableInput(item.id)} size={20}/> : null}
+              {!item.new && !item.disabled ? <TiCancel onClick={() => getProfile()} size={20}/> : null}
             </div>
           </div>
         </div>

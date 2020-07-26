@@ -6,7 +6,6 @@ const conn = require('../db.js')
 router.get('/profile/edit', async (req, res, next) => {
   const profileId = req.user.profile_id
   const userId = req.user.id
-  console.log(profileId)
   const sql = `SELECT * FROM profiles
                 INNER JOIN addresses ON profiles.address_id = addresses.id
                 WHERE profiles.id = ?`
@@ -17,10 +16,8 @@ router.get('/profile/edit', async (req, res, next) => {
   const [galleriesProfile] = await conn.promise().query(sql2, [profileId])
   //console.log('Hi', addressProfile)
   const [servicesProfile] = await conn.promise().query(sql3, [userId])
-  console.log(servicesProfile)
   const [userInfo] = await conn.promise().query(userSql, [userId])
   const user = userInfo[0]
-  console.log(galleriesProfile)
   res.json({
     address: addressProfile[0],
     gallery: galleriesProfile,
@@ -61,7 +58,6 @@ router.delete('/profile/gallery/:id', (req, res, next) => {
 
 
 router.post('/profile/service', (req, res, next) => {
-  console.log('Im working', req.body)
   const userId = req.user.id
   const description = req.body.description
   const price = req.body.price
@@ -70,26 +66,22 @@ router.post('/profile/service', (req, res, next) => {
     sql,
     [userId, description, price],
     (err, results, fields) => {
-      console.log(results)
       res.json({ message: 'Hello' })
     })
 })
 
 router.delete('/profile/service/:id', (req, res, next) => {
-  console.log(req.params.id)
   const serviceId = req.params.id
   const sql = `DELETE FROM services WHERE id = ?`
   conn.query(
     sql,
     [serviceId],
     (err, results, fields) => {
-      console.log(results)
       res.json({ message: 'Byebye' })
     })
 })
 
 router.patch('/profile/service/:id', (req, res, next) => {
-  console.log(req.params.id)
   const {description, price} = req.body
   const serviceId = req.params.id
   const sql = `UPDATE FROM services SET description = ?, price =? WHERE id = ?`
@@ -97,7 +89,6 @@ router.patch('/profile/service/:id', (req, res, next) => {
     sql,
     [description, price, serviceId ],
     (err, results, fields) => {
-      console.log(results)
       res.json({ message: 'update service buddy' })
     })
 })
@@ -106,7 +97,6 @@ router.patch('/profile/service/:id', (req, res, next) => {
 
 
 router.patch('/profile/address', async (req, res, next) => {
-  console.log('is it working', req.body)
   const { city, state, street, zip, first, last, trade1, trade2, bio } = req.body
 
   const profileId = req.user.profile_id

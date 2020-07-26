@@ -22,6 +22,16 @@ const profileState = {
   services: [],
 }
 
+function createId(){
+  var dt = new Date().getTime();
+  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = (dt + Math.random()*16)%16 | 0;
+      dt = Math.floor(dt/16);
+      return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+  });
+  return uuid;
+}
+
 export default (state = profileState, action) => {
   switch (action.type) {
     case EDIT_PROFILE:
@@ -31,7 +41,7 @@ export default (state = profileState, action) => {
       if (last && last.new){
         return state
       }
-      return { ...state, services: [...state.services, {description: '', price: '', disabled: false, new: true }]}
+      return { ...state, services: [...state.services, {id: createId(), description: '', price: '', disabled: false, new: true }]}
     case SET_GALLERY:
       return { ...state, gallery: action.payload }
     case SET_SERVICES:
@@ -45,6 +55,7 @@ export default (state = profileState, action) => {
       return { ...state, services: state.services.map(item => {
         const newItem = {...item}
         newItem[field] = value
+        console.log(newItem)
         return id === item.id ? newItem : item
       })}
     case DIS_SERVICES:
@@ -139,7 +150,15 @@ function deleteService(serviceId) {
   }
 }
 
-function changeService(service){
+function createService(service){
+  return (dispatch) => {
+    api.post('/profile/service/', service).then(() => {
+      dispatch(getProfileData())
+    })
+  }
+}
+
+function patchService(service){
   return (dispatch) => {
     api.patch('/profile/service/' + service.id, service).then(() => {
       dispatch(getProfileData())
@@ -173,8 +192,9 @@ export function useEditProfile() {
   const deleteConService = (serviceId) => dispatch(deleteService(serviceId))
   const getProfile = () => dispatch(getProfileData())
   const enableInput = (id) => dispatch (enableServiceInput(id))
-  const saveInput = (service) => dispatch(changeService(service))
-  const handleServiceForm = (id, field, value) => dispatch (handleService(id, field, value))
+  const saveInput = (service) => dispatch(createService(service))
+  const updateService = (service) => dispatch(patchService(service))
+  const handleServiceForm = (id, field, value) => dispatch(handleService(id, field, value))
 
   return {
     profile,
