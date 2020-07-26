@@ -268,7 +268,7 @@ export default () => {
                   
                   onChange={(e) => setGalleryImage(e.target.value)}
                   icon={<Icon name='search'
-                  onClick={handleGalleryImg} inverted circular link />} 
+                  onClick={() => addGalleryImage(galleryForm)} inverted circular link />} 
                   placeholder='Search...'/>
               </Modal.Content>
             </Modal>

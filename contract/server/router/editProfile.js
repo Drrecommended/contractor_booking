@@ -33,7 +33,7 @@ router.get('/profile/edit', async (req, res, next) => {
 
 router.post('/profile/gallery', (req, res, next) => {
   const profileId = req.user.profile_id
-  const src = req.body.imgSrc
+  const src = req.body.img_src
   const sql = `INSERT INTO galleries (profile_id, img_src) VALUES (?, ?)`
   conn.query(
     sql,
