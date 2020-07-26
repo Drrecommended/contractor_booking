@@ -17,6 +17,7 @@ router.get('/profile/edit', async (req, res, next) => {
   const [galleriesProfile] = await conn.promise().query(sql2, [profileId])
   //console.log('Hi', addressProfile)
   const [servicesProfile] = await conn.promise().query(sql3, [userId])
+  console.log(servicesProfile)
   const [userInfo] = await conn.promise().query(userSql, [userId])
   const user = userInfo[0]
   console.log(galleriesProfile)
@@ -60,7 +61,7 @@ router.delete('/profile/gallery/:id', (req, res, next) => {
 
 
 router.post('/profile/service', (req, res, next) => {
-  console.log(req.body)
+  console.log('Im working', req.body)
   const userId = req.user.id
   const description = req.body.description
   const price = req.body.price

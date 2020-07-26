@@ -108,6 +108,7 @@ function updatedAllAddress(address) {
 
 function updateService(service) {
   return (dispatch) => {
+    console.log(service)
     api.post("/profile/service", service)
     dispatch({
       type: ADD_SERVICE,
@@ -133,7 +134,7 @@ function enableServiceInput(serviceId){
 function deleteService(serviceId) {
   return (dispatch) => {
     api.delete("/profile/service/" + serviceId).then(() =>{
-    dispatch (getProfileData())
+    dispatch(getProfileData())
     })
   }
 }
@@ -141,7 +142,7 @@ function deleteService(serviceId) {
 function changeService(service){
   return (dispatch) => {
     api.patch('/profile/service/' + service.id, service).then(() => {
-      dispatch (getProfileData())
+      dispatch(getProfileData())
     })
   }
 }
