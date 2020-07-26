@@ -62,7 +62,7 @@ export default () => {
               <Table.HeaderCell>Date</Table.HeaderCell>
               <Table.HeaderCell>Services</Table.HeaderCell>
               <Table.HeaderCell>Total</Table.HeaderCell>
-              <Table.HeaderCell>Actions</Table.HeaderCell>
+              {user.contractor === 1 && <Table.HeaderCell>Actions</Table.HeaderCell>}
               <Table.HeaderCell>Order Status</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
@@ -83,7 +83,8 @@ export default () => {
                     </Table.Cell>
                     <Table.Cell style={{width: "10%"}}>{order.services}</Table.Cell>
                     <Table.Cell style={{width: "15%"}}>$ {order.total}</Table.Cell>
-                    <Table.Cell style={{width: "15%"}}>
+                    
+                    {user.contractor === 1 && <Table.Cell style={{width: "15%"}}>
                       <Button 
                         disabled={order.status != "pending"}
                         style={{
@@ -103,7 +104,7 @@ export default () => {
                         onClick={() => processOrder(order.id, "denied")} icon>
                         deny
                       </Button>
-                    </Table.Cell>
+                    </Table.Cell>}
                     <Table.Cell style={{width: "5%"}}>
                       {order.status}
                     </Table.Cell>
