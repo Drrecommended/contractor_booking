@@ -38,7 +38,7 @@ export default () => {
       {isAuthenticated ? (
         <Menu inverted pointing secondary>
           <div
-            style={{alignSelf: "center", width: "15%"}}>
+            style={{alignSelf: "center", width: "10%"}}>
             <img 
             src={Logo} alt="logo"
             style={{

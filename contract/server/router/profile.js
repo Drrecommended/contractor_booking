@@ -26,6 +26,7 @@ router.get('/profile', async (req, res, next) => {
       id: user.id,
       first: user.first_name,
       last: user.last_name,
+      contractor: user.contractor
     }
   }
   res.json(profile)
@@ -52,6 +53,7 @@ router.get('/profile/:id', async (req, res, next) => {
       id: user.id,
       first: user.first_name,
       last: user.last_name,
+      contractor: user.contractor
     }
   }
   res.json(profile)
