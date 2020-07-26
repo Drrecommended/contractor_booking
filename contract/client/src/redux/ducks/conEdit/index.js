@@ -90,15 +90,10 @@ function getProfileData() {
     })
   }
 }
-// function getProfileData() {
-//    return dispatch => {
-//        api.get('/profile/edit')
-//    }
-// }
 
 function addImage(galleryItem) {
   return (dispatch) => {
-    api.post("/profile/gallery", galleryItem)
+    return api.post("/profile/gallery", {img_src: galleryItem})
   }
 }
 
@@ -116,22 +111,11 @@ function updatedAllAddress(address) {
   }
 }
 
-function updateService(service) {
-  return (dispatch) => {
-    api.post("/profile/service", service)
-    dispatch({
-      type: ADD_SERVICE,
-      
-    })
+function addServiceItem() {
+  return {
+    type: ADD_SERVICE,
   }
 }
-
-// function updateService(serviceId){
-//   return{
-//     type: UPDATE_SERVICE,
-//     payload: {id: serviceId, field, value}
-//   }
-// }
 
 function enableServiceInput(serviceId){
   return{
@@ -186,7 +170,7 @@ export function useEditProfile() {
   const addGalleryImage = (galleryItem) => dispatch(addImage(galleryItem))
   const deleteGalleryImage = (galleryId) => dispatch(deleteImage(galleryId))
   const updateAddress = (address) => dispatch(updatedAllAddress(address))
-  const addService = (service) => dispatch(updateService(service))
+  const addService = () => dispatch(addServiceItem())
   const deleteConService = (serviceId) => dispatch(deleteService(serviceId))
   const getProfile = () => dispatch(getProfileData())
   const enableInput = (id) => dispatch (enableServiceInput(id))
