@@ -84,7 +84,7 @@ router.delete('/profile/service/:id', (req, res, next) => {
 router.patch('/profile/service/:id', (req, res, next) => {
   const {description, price} = req.body
   const serviceId = req.params.id
-  const sql = `UPDATE FROM services SET description = ?, price =? WHERE id = ?`
+  const sql = `UPDATE services SET description = ?, price = ? WHERE id = ?`
   conn.query(
     sql,
     [description, price, serviceId ],
