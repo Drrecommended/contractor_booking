@@ -65,7 +65,6 @@ export default (props) => {
         {profile.user.contractor ?
           <> <div className="gallery-shelf">
             {profile.gallery.length == 0 ? <h2>Gallery is empty</h2> : <GalleryImage images={profile.gallery}
-              onDelete={(id) => console.log(id)}
               isEditable={false}
             />}
 
@@ -102,7 +101,6 @@ export default (props) => {
                     </div>
                     <div>
                       {cart.map((item) => {
-                        console.log(item)
                         return (
                           <div className="service-list">
                             <div className="service">{item.text}</div>

@@ -69,9 +69,5 @@ export function useExample() {
   const reset = () => dispatch(resetAction())
   const getExample = () => dispatch(getExampleData())
 
-  useEffect(() => {
-    console.log("mounting component")
-  }, [])
-
   return { example, syncaction, asyncaction, reset, getExample }
 }

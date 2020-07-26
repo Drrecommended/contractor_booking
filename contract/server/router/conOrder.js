@@ -5,7 +5,6 @@ const conn = require('../db.js')
 
 router.get('/contractor-order', (req, res, next) => {
   const contractor = req.user.contractor
-  console.log(req.user)
   const sql = `
       SELECT 
       o.status, o.id, o.services, o.date, o.total, u.first_name, u.last_name, u.profile_id
@@ -32,7 +31,6 @@ router.patch('/contractor-order', (req, res, next) => {
     sql,
     [req.body.status, req.body.id],
     (err, results, fields) => {
-      console.log(err)
       res.json(results)
     })
 })
@@ -59,7 +57,6 @@ router.post('/orders', (req, res, next) => {
     sql,
     [customerId, contractor, services, date, total, status],
     (err, results, fields) => {
-      console.log(err, results)
       res.json(results)
     })
 })

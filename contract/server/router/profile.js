@@ -16,7 +16,6 @@ router.get('/profile', async (req, res, next) => {
   const userSql = `SELECT * FROM users WHERE id = ?`
   const [addressProfile] = await conn.promise().query(sql, [profileId])
   const [galleriesProfile] = await conn.promise().query(sql2, [profileId])
-  //console.log('Hi', addressProfile)
   const [servicesProfile] = await conn.promise().query(sql3, [userId])
   const [userInfo] = await conn.promise().query(userSql, [userId])
   const user = userInfo[0]
@@ -28,7 +27,10 @@ router.get('/profile', async (req, res, next) => {
       id: user.id,
       first: user.first_name,
       last: user.last_name,
+<<<<<<< HEAD
       contractor: user.contractor
+=======
+>>>>>>> d330904a5846cb006a80c6eef7225025ffaf8589
     }
   }
   res.json(profile)
@@ -44,7 +46,6 @@ router.get('/profile/:id', async (req, res, next) => {
   const userSql = `SELECT * FROM users WHERE profile_id = ?`
   const [addressProfile] = await conn.promise().query(sql, [profileId])
   const [galleriesProfile] = await conn.promise().query(sql2, [profileId])
-  //console.log('Hi', addressProfile)
   const [userInfo] = await conn.promise().query(userSql, [profileId])
   const user = userInfo[0]
   const [servicesProfile] = await conn.promise().query(sql3, [user.id])
@@ -56,7 +57,10 @@ router.get('/profile/:id', async (req, res, next) => {
       id: user.id,
       first: user.first_name,
       last: user.last_name,
+<<<<<<< HEAD
       contractor: user.contractor
+=======
+>>>>>>> d330904a5846cb006a80c6eef7225025ffaf8589
     }
   }
   res.json(profile)
