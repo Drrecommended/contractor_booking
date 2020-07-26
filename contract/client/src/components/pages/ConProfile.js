@@ -18,6 +18,7 @@ export default (props) => {
   const [serviceId, setServiceId] = useState(null)
   const { setLoaded } = useLoad()
   const { user } = useAuth()
+  const [dateError, setDateError] = useState()
   const handleChange = (e, { value }) => setServiceId(value)
 
   const onChange = (date) => {
@@ -128,7 +129,7 @@ export default (props) => {
                         props.history.push("/checkout")
                       }}
                     >
-                      Select Date
+                      Select date and book
                       </Button>
                   </div>
                 </div>
