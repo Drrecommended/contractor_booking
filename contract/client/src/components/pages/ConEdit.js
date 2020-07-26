@@ -11,9 +11,11 @@ import { useEditProfile, useForm, useProfileIndex } from "../../hooks"
 import { TradeOptions } from "../TradeOptions"
 import GalleryImage from "../GalleryImage"
 import { states, options } from '../utils/profile-constants'
+import { useOrder, useLoad, useAuth } from "../../hooks"
 
 
 export default () => {
+  const { setLoaded } = useLoad()
   const [modalGalleryVisible, setModalGalleryVisible] = useState(false)
   const handleGalleryClose = () => setModalGalleryVisible(false)
   const handleGalleryShow = () => setModalGalleryVisible(true)
@@ -121,9 +123,14 @@ export default () => {
     })
   }
 
+  function handleImageAdd() {
+    setModalGalleryVisible(false)
+    setGalleryImage('')
+  }
+
   useEffect(() => {
+    setLoaded(false)
     getProfile().then((resp) => {
-      console.log(resp)
       setTopFormTo({
         first: resp.user.first,
         last: resp.user.last,
@@ -140,6 +147,7 @@ export default () => {
         
         gallery: resp.gallery.img_src,
       })
+      setLoaded(true)
     })
   }, [])
 
@@ -151,19 +159,24 @@ export default () => {
         <div className="profile-image">
           <div className="avatarEdit">
             <Modal  onClose={() => setModalVisible(false)}
-                    open={modalVisible}  trigger={<AiFillPlusCircle size={24} onClick={() => setModalVisible(true)}/>}>
+                    open={modalVisible}>
               <Modal.Content>
+                <h2>Add thumbnail image</h2>
                   <Input
+                  fluid
                   onChange={(e) => setAvatarImage(e.target.value)} 
                   name="thumbnail"
                   defaultValue={topForm.thumbnail}
                   icon={<Icon name='add' 
                   onClick={handleAvatarSubmit} inverted circular link />} 
-                  placeholder='Add'/>
+                  placeholder='http://www.example-image.com'/>
               </Modal.Content>
             </Modal>
             {/* {topForm.thumbnail} */}
-            <Avatar image={topForm.thumbnail} />
+            <div style={{position: 'relative'}}>
+              <Avatar image={topForm.thumbnail} />
+              <AiFillPlusCircle style={{position: 'absolute', bottom: '10px', right: '5px'}} size={34} onClick={() => setModalVisible(true)}/>
+            </div>
            </div>
           </div>
           
@@ -259,65 +272,66 @@ export default () => {
           }}
         ></GalleryImage>
         <div className="GalleryButtons">
-        <Modal  onClose={() => setModalVisible(false)}
+        <Modal  onClose={() => setModalGalleryVisible(false)}
                     open={modalGalleryVisible} 
                     trigger={<Button onClick={() => setModalGalleryVisible(true)}>add gallery image</Button>}>
               <Modal.Content>
+                <h2>Add gallery image</h2>
                   <Input 
                   name="gallery"
-                  
+                  fluid
                   onChange={(e) => setGalleryImage(e.target.value)}
-                  icon={<Icon name='search'
-                  onClick={() => handleGalleryImggit(galleryForm)} inverted circular link />} 
-                  placeholder='Search...'/>
+                  icon={<Icon name='add'
+                  onClick={() => addGalleryImage(galleryImage).then(() => handleImageAdd())} inverted circular link />} 
+                  placeholder='http://www.example-image.com'/>
               </Modal.Content>
             </Modal>
-            {galleryForm.img_src}
-          <Button positive onClick={() => addGalleryImage(galleryForm)}>SAVE</Button>
         </div>
       </div>
+          <div>
+            {services.map((item) => {
+              return (
+            <div  className="InputContainer">
+              <div class="ui focus input">
+                <AiOutlineMinusCircle onClick={() => deleteConService(item.id)} className="MinusButton" size={20}/>
+                  <input
+                    disabled={item.disabled}
+                    type="text"
+                    placeholder="JOB DESCRIPTION"
+                    name="description"
+                    value={item.description}
+                    onChange={(e) => handleServiceForm(item.id, 'description', e.target.value)}
+              />
 
-          {services.map((item) => {
-            return (
-          <div  className="InputContainer">
-            <div class="ui focus input">
-              <AiOutlineMinusCircle onClick={() => deleteConService(item.id)} className="MinusButton" size={20}/>
+              <Input 
+                className="PriceEdit"
+                labelPosition="right"
+                type="text"
+                placeholder="Amount"
+              >
+                <Label basic>$</Label>
                 <input
                   disabled={item.disabled}
-                  type="text"
-                  placeholder="JOB DESCRIPTION"
-                  name="description"
-                  value={item.description}
-                  onChange={(e) => handleServiceForm(item.id, 'description', e.target.value)}
-            />
+                  name="price"
+                  value={item.price}
+                  onChange={(e) => handleServiceForm(item.id, 'price', e.target.value)}
+                />
+                <Label>.00</Label>
+              </Input>
+              <div className="EditPen">
+                {item.new && !item.disabled ? <GiSaveArrow onClick={() => saveInput(item)}/> : null}
+                {!item.new && !item.disabled ? <GiSaveArrow onClick={() => updateService(item)}/> : null}
 
-            <Input 
-              className="PriceEdit"
-              labelPosition="right"
-              type="text"
-              placeholder="Amount"
-            >
-              <Label basic>$</Label>
-              <input
-                disabled={item.disabled}
-                name="price"
-                value={item.price}
-                onChange={(e) => handleServiceForm(item.id, 'price', e.target.value)}
-              />
-              <Label>.00</Label>
-            </Input>
-            <div className="EditPen">
-              {item.new && !item.disabled ? <GiSaveArrow onClick={() => saveInput(item)}/> : null}
-              {!item.new && !item.disabled ? <GiSaveArrow onClick={() => updateService(item)}/> : null}
-
-              {!item.new && item.disabled ? <GrEdit onClick={() => enableInput(item.id)} size={20}/> : null}
-              {!item.new && !item.disabled ? <TiCancel onClick={() => getProfile()} size={20}/> : null}
+                {!item.new && item.disabled ? <GrEdit onClick={() => enableInput(item.id)} size={20}/> : null}
+                {!item.new && !item.disabled ? <TiCancel onClick={() => getProfile()} size={20}/> : null}
+              </div>
             </div>
           </div>
-        </div>
-            )
-          })}
-          <BsFillPlusSquareFill onClick={addService}size={30} />
+              )
+            })}
+            <BsFillPlusSquareFill style={{marginLeft: '30px', marginBottom: '20px'}} onClick={addService}size={30} />
+          </div>
+          
     </div>
     </div>
     

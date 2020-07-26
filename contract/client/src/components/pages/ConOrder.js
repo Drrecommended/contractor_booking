@@ -14,7 +14,6 @@ export default () => {
   const { user } = useAuth()
   const [ confirmOrder, setConfirm ] = useState(false)
   const [ denyOrder, setDeny ] = useState(false)
-  console.log(orders)
 
   const openConfirm = () => setConfirm(true)
   const closeConfirm = () => setConfirm(false)
@@ -52,7 +51,7 @@ export default () => {
         onCancel={closeDeny}
         onConfirm={() => deny(orderId).then(() => setDeny(false))}
       />
-      <div className="tableResize">
+      <div style={{backgroundColor: "white"}} className="tableResize">
         <Table>
           <Table.Header>
             <Table.Row>
@@ -63,7 +62,7 @@ export default () => {
               <Table.HeaderCell>Date</Table.HeaderCell>
               <Table.HeaderCell>Services</Table.HeaderCell>
               <Table.HeaderCell>Total</Table.HeaderCell>
-              <Table.HeaderCell>Actions</Table.HeaderCell>
+              {user.contractor === 1 && <Table.HeaderCell>Actions</Table.HeaderCell>}
               <Table.HeaderCell>Order Status</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
@@ -76,15 +75,16 @@ export default () => {
                     <Table.Cell style={{width: "10%"}}>
                       <Link 
                         style={{color: "cadetblue"}}
-                        to={'/profile/' + order.profile_id}>{order.first_name} {order.last_name}
+                        to={'/profile/detail/' + order.profile_id}>{order.first_name} {order.last_name}
                       </Link>
                     </Table.Cell>
                     <Table.Cell style={{width: "10%"}}>
-                      {moment(order.date).subtract(10, "days").calendar()}
+                      {moment(order.date).format("MM/DD/YYYY")}
                     </Table.Cell>
                     <Table.Cell style={{width: "10%"}}>{order.services}</Table.Cell>
                     <Table.Cell style={{width: "15%"}}>$ {order.total}</Table.Cell>
-                    <Table.Cell style={{width: "15%"}}>
+                    
+                    {user.contractor === 1 && <Table.Cell style={{width: "15%"}}>
                       <Button 
                         disabled={order.status != "pending"}
                         style={{
@@ -104,7 +104,7 @@ export default () => {
                         onClick={() => processOrder(order.id, "denied")} icon>
                         deny
                       </Button>
-                    </Table.Cell>
+                    </Table.Cell>}
                     <Table.Cell style={{width: "5%"}}>
                       {order.status}
                     </Table.Cell>

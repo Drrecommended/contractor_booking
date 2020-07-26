@@ -1,6 +1,4 @@
 
-
-
 .profilePage {
   width: 90%;
   background-color: white;
@@ -27,7 +25,9 @@
 }
 
 .profile-bio {
-  margin: 2%;
+  margin-bottom: 8%;
+  width: 80%;
+  margin-left: 20%;
 }
 
 .service-font {
