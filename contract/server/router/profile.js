@@ -26,10 +26,6 @@ router.get('/profile', async (req, res, next) => {
       id: user.id,
       first: user.first_name,
       last: user.last_name,
-<<<<<<< HEAD
-      contractor: user.contractor
-=======
->>>>>>> d330904a5846cb006a80c6eef7225025ffaf8589
     }
   }
   res.json(profile)
@@ -56,10 +52,6 @@ router.get('/profile/:id', async (req, res, next) => {
       id: user.id,
       first: user.first_name,
       last: user.last_name,
-<<<<<<< HEAD
-      contractor: user.contractor
-=======
->>>>>>> d330904a5846cb006a80c6eef7225025ffaf8589
     }
   }
   res.json(profile)
