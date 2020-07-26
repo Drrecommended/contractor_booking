@@ -111,7 +111,7 @@ export default () => {
   function handleGalleryImg(){
     setModalGalleryVisible(false)
     console.log(galleryForm)
-    setGalleryFormTo({...galleryForm, img_src: galleryImage})
+    setGalleryFormTo({...galleryForm, gallery: galleryImage})
   }
 
 
@@ -268,7 +268,7 @@ export default () => {
                   
                   onChange={(e) => setGalleryImage(e.target.value)}
                   icon={<Icon name='search'
-                  onClick={() => addGalleryImage(galleryForm)} inverted circular link />} 
+                  onClick={() => handleGalleryImggit(galleryForm)} inverted circular link />} 
                   placeholder='Search...'/>
               </Modal.Content>
             </Modal>
