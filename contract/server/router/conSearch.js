@@ -18,7 +18,6 @@ router.get('/contractor-search', (req, res, next) => {
     sql,
     [fuzzySearchTerm],
     (err, results, fields) => {
-      console.log(req.query.word)
       res.json(results)
     })
 })

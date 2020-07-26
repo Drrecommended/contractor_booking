@@ -27,6 +27,7 @@ export default () => {
     addGalleryImage,
     deleteGalleryImage,
     addService,
+    updateService,
     enableInput,
     deleteConService,
     updateAddress,
@@ -53,14 +54,12 @@ export default () => {
   })
   const [ trade, setTrade ] = useState('')
   const handleChange = (e, { value }) => {
-    console.log(value)
     setTopFormTo({...topForm, trade1: value})
     
   }
 
   const [ trade2, setTrade2 ] = useState('')
   const handleChange2 = (e, { value }) => {
-    console.log(value)
     setTopFormTo({...topForm, trade2: value})
     
   }
@@ -111,6 +110,7 @@ export default () => {
 
   function handleGalleryImg(){
     setModalGalleryVisible(false)
+    console.log(galleryForm)
     setGalleryFormTo({...galleryForm, img_src: galleryImage})
   }
 
@@ -137,6 +137,7 @@ export default () => {
         thumbnail: resp.address.thumbnail,
       })
       setGalleryFormTo({
+        
         gallery: resp.gallery.img_src,
       })
     })
@@ -264,6 +265,7 @@ export default () => {
               <Modal.Content>
                   <Input 
                   name="gallery"
+                  
                   onChange={(e) => setGalleryImage(e.target.value)}
                   icon={<Icon name='search'
                   onClick={handleGalleryImg} inverted circular link />} 
@@ -305,10 +307,11 @@ export default () => {
               <Label>.00</Label>
             </Input>
             <div className="EditPen">
-              {item.new ? null : 
-               item.disabled ? <GrEdit onClick={() => enableInput(item.id)} size={20}/> :
-              <GiSaveArrow onClick={() => saveInput(item.id)}/>} 
-              <TiCancel onClick={() => getProfile()} size={20}/>
+              {item.new && !item.disabled ? <GiSaveArrow onClick={() => saveInput(item)}/> : null}
+              {!item.new && !item.disabled ? <GiSaveArrow onClick={() => updateService(item)}/> : null}
+
+              {!item.new && item.disabled ? <GrEdit onClick={() => enableInput(item.id)} size={20}/> : null}
+              {!item.new && !item.disabled ? <TiCancel onClick={() => getProfile()} size={20}/> : null}
             </div>
           </div>
         </div>

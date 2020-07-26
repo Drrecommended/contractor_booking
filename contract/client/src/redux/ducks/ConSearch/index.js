@@ -23,7 +23,6 @@ export default (state = contractState, action) => {
 
 // 5. action creators
 function contract(search) {
-  console.log(search)
   return (dispatch) => {
     return api.get("/contractor-search?word=" + search).then((resp) => {
       dispatch({

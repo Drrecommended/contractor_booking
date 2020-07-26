@@ -10,7 +10,6 @@ export default () => {
   const { contractors, getContractor } = useContractor()
   const [search, setSearch] = useState("")
   const { setLoaded } = useLoad()
-  console.log(contractors)
 
   const handleSubmit = (e) => {
     e.preventDefault()
