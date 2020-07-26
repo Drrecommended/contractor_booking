@@ -90,15 +90,10 @@ function getProfileData() {
     })
   }
 }
-// function getProfileData() {
-//    return dispatch => {
-//        api.get('/profile/edit')
-//    }
-// }
 
 function addImage(galleryItem) {
   return (dispatch) => {
-    api.post("/profile/gallery", galleryItem)
+    return api.post("/profile/gallery", {img_src: galleryItem})
   }
 }
 
@@ -116,28 +111,11 @@ function updatedAllAddress(address) {
   }
 }
 
-// function updateService(service) {
-//   return (dispatch) => {
-//     api.post("/profile/service", service)
-//     dispatch({
-//       type: ADD_SERVICE,
-      
-//     })
-//   }
-// }
-
 function addServiceItem() {
   return {
     type: ADD_SERVICE,
   }
 }
-
-// function updateService(serviceId){
-//   return{
-//     type: UPDATE_SERVICE,
-//     payload: {id: serviceId, field, value}
-//   }
-// }
 
 function enableServiceInput(serviceId){
   return{
