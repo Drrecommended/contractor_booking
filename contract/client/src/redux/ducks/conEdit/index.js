@@ -55,7 +55,6 @@ export default (state = profileState, action) => {
       return { ...state, services: state.services.map(item => {
         const newItem = {...item}
         newItem[field] = value
-        console.log(newItem)
         return id === item.id ? newItem : item
       })}
     case DIS_SERVICES:
@@ -119,7 +118,6 @@ function updatedAllAddress(address) {
 
 function updateService(service) {
   return (dispatch) => {
-    console.log(service)
     api.post("/profile/service", service)
     dispatch({
       type: ADD_SERVICE,

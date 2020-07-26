@@ -54,14 +54,12 @@ export default () => {
   })
   const [ trade, setTrade ] = useState('')
   const handleChange = (e, { value }) => {
-    console.log(value)
     setTopFormTo({...topForm, trade1: value})
     
   }
 
   const [ trade2, setTrade2 ] = useState('')
   const handleChange2 = (e, { value }) => {
-    console.log(value)
     setTopFormTo({...topForm, trade2: value})
     
   }
