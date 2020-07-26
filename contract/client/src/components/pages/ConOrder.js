@@ -75,7 +75,7 @@ export default () => {
                     <Table.Cell style={{width: "10%"}}>
                       <Link 
                         style={{color: "cadetblue"}}
-                        to={'/profile/' + order.profile_id}>{order.first_name} {order.last_name}
+                        to={'/profile/detail/' + order.profile_id}>{order.first_name} {order.last_name}
                       </Link>
                     </Table.Cell>
                     <Table.Cell style={{width: "10%"}}>

@@ -11,6 +11,7 @@ router.get('/contractor-order', (req, res, next) => {
       FROM orders o 
       JOIN users u ON ${contractor ? 'customer_id' : 'contractor_id'} = u.id
       WHERE ${contractor ? 'contractor_id' : 'customer_id'} = ?
+      ORDER BY o.date DESC
     `
   conn.query(
     sql,
@@ -44,7 +45,7 @@ router.patch('/contractor-order', (req, res, next) => {
 router.post('/orders', (req, res, next) => {
   const status = "pending"
   const total = req.body.cart.reduce((a, b) => a + b.price, 0)
-  const services = req.body.cart.map(item => item.text).toString()
+  const services = req.body.cart.map(item => item.description).toString()
   const customerId = req.user.id
   const contractor = req.body.contractor_id
   const date = req.body.date
