@@ -111,6 +111,7 @@ export default () => {
 
   function handleGalleryImg(){
     setModalGalleryVisible(false)
+    console.log(galleryForm)
     setGalleryFormTo({...galleryForm, img_src: galleryImage})
   }
 
@@ -137,6 +138,7 @@ export default () => {
         thumbnail: resp.address.thumbnail,
       })
       setGalleryFormTo({
+        
         gallery: resp.gallery.img_src,
       })
     })
@@ -264,6 +266,7 @@ export default () => {
               <Modal.Content>
                   <Input 
                   name="gallery"
+                  
                   onChange={(e) => setGalleryImage(e.target.value)}
                   icon={<Icon name='search'
                   onClick={handleGalleryImg} inverted circular link />} 
@@ -305,7 +308,7 @@ export default () => {
               <Label>.00</Label>
             </Input>
             <div className="EditPen">
-              {item.new ? null : 
+              {item.new ?  <GiSaveArrow onClick={() => saveInput(item.id)}/> : 
                item.disabled ? <GrEdit onClick={() => enableInput(item.id)} size={20}/> :
               <GiSaveArrow onClick={() => saveInput(item.id)}/>} 
               <TiCancel onClick={() => getProfile()} size={20}/>

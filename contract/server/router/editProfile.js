@@ -91,13 +91,13 @@ router.patch('/profile/service/:id', (req, res, next) => {
   console.log(req.params.id)
   const {description, price} = req.body
   const serviceId = req.params.id
-  const sql = `UPDATE FROM services SET description = ?, price =? Where id = ?`
+  const sql = `UPDATE FROM services SET description = ?, price =? WHERE id = ?`
   conn.query(
     sql,
     [description, price, serviceId ],
     (err, results, fields) => {
       console.log(results)
-      res.json({ message: 'Byebye' })
+      res.json({ message: 'update service buddy' })
     })
 })
 
