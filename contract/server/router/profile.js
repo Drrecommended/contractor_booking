@@ -26,7 +26,7 @@ router.get('/profile', async (req, res, next) => {
     user: {
       id: user.id,
       first: user.first_name,
-      last: user.last_name
+      last: user.last_name,
     }
   }
   res.json(profile)
@@ -53,7 +53,7 @@ router.get('/profile/:id', async (req, res, next) => {
     user: {
       id: user.id,
       first: user.first_name,
-      last: user.last_name
+      last: user.last_name,
     }
   }
   res.json(profile)

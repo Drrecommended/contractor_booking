@@ -2,10 +2,10 @@
 
 
 .profilePage {
-  padding: 1%;
-  margin: 4%;
   width: 90%;
   background-color: white;
+  margin: auto;
+  margin-top: 3%;
   -webkit-box-shadow: 0px 0px 89px -4px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 89px -4px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 89px -4px rgba(0, 0, 0, 0.75);
@@ -14,15 +14,30 @@
 
 .profile-nav {
   display: flex;
-  margin: 1%;
+  margin-left: 4%;
 }
 
+.profile-image {
+  margin-top: 2.7%;
+}
+
+.name-trade-edit-shelf {
+  margin: 2%;
+  margin-top: 3%;
+}
+
+.profile-bio {
+  margin: 2%;
+}
 
 .service-font {
   font-size: 22px;
+  margin-bottom: 3%;
 }
 
 .service-shelf {
+  margin: auto;
+  padding: 2%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
@@ -37,10 +52,15 @@
   font-size: 1.5em;
 }
 
+.profile-address {
+  margin-left: 2%;
+  margin-top: 5%;
 
+}
 
 .profile-page .hide {
   display: none;
+  padding: 20px;
   background: #ddd;
 }
 
@@ -59,19 +79,33 @@
 
 .select-service-shelf {
   width: 100%;
-  
+  margin-top: 5%;
+  margin-left: 15%;
+}
+
+.calender-shelf {
+  margin-top: 2%;
+  margin: auto;
 }
 
 .cart-shelf {
+  margin-top: 2%;
   width: 80%;
   height: 80%;
-
+  margin: auto;
+  /* border: #CFD0D0 solid 1px;
+  border-radius: 5px; */
 }
 
 .service-list {
+  margin-left: 7%;
+  padding: 2%;
   display: flex;
 }
 
+.delete-cart-item {
+  margin-left: 2%;
+}
 
 .delete-cart-item:hover {
   cursor: pointer;
@@ -96,4 +130,8 @@
   text-decoration: underline;
   text-decoration-color: cadetblue;
   font-size: 38px;
+}
+
+.gallery-shelf{
+  margin: 60px;
 }
