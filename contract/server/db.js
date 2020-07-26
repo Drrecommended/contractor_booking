@@ -11,5 +11,5 @@ const connObj = {
 }
 // TODO: NOT WORKING IN PROD needs to be fixed....
 const connection = process.env.NODE_ENV === 'development' ? connObj : process.env.JAWSDB_URL
-const pool = mysql.createPool(process.env.JAWSDB_URL)
+const pool = mysql.createPool(connObj)
 module.exports = pool
