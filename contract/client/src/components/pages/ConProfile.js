@@ -45,8 +45,7 @@ export default (props) => {
             <h2 className="profilConName">
               {profile.user.first} {profile.user.last}
             </h2>
-            <div>{profile.address.trade_1}
-              {profile.address.trade_2}</div>
+            <div>{profile.address.trade_1} | {profile.address.trade_2}</div>
             {user.profile_id == props.match.params.id || !props.match.params.id ?
               <Link
                 style={{ color: "cadetblue" }}
@@ -73,7 +72,7 @@ export default (props) => {
           </div>
             <div className="service-shelf">
               <div className="select-service-shelf">
-                <div className="service-font">Select your service below</div>
+                <h4 className="service-font">Select your service below</h4>
                 <Dropdown
                   placeholder="services"
                   options={profile.services}
@@ -99,7 +98,7 @@ export default (props) => {
                 <div className="cart-shelf">
                   <div className="cart">
                     <div>
-                      <div>Would you like to book {cart.length} services?</div>
+                      <h4>Would you like to book {cart.length} services?</h4>
                     </div>
                     <div>
                       {cart.map((item) => {
@@ -121,7 +120,6 @@ export default (props) => {
                         backgroundColor: "cadetblue",
                         color: "white",
                         marginTop: "10%",
-                        marginLeft: "70%",
                       }}
                       onClick={() => {
                         props.history.push("/checkout")
@@ -133,7 +131,7 @@ export default (props) => {
                 </div>
               ) : (
                   <div className="cart-shelf">
-                    <div>Your services:</div>
+                    <h4>Your services:</h4>
                   </div>
 
                 )}

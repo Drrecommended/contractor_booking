@@ -37,11 +37,8 @@ export default () => {
                         <h2 className="conName">
                           {contractor.first_name} {contractor.last_name}
                         </h2>
-                        <div className="trades-header">Trades:</div>
-                        <div className="trade-shelf">
-                          <div>{contractor.trade_1}//</div>
-                          <div>{contractor.trade_2}</div>
-                        </div>
+                        <div>{contractor.trade_1} | {contractor.trade_2}</div>
+                        <div></div>
                         <div className="bio-shelf">
                           <div>{contractor.bio}</div>
                         </div>

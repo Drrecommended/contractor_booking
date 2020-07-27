@@ -27,7 +27,8 @@
 .profile-bio {
   margin-bottom: 8%;
   width: 80%;
-  margin-left: 20%;
+  margin-left: 4%;
+  margin-top: 4%;
 }
 
 .service-font {
@@ -54,7 +55,7 @@
 
 .profile-address {
   margin-left: 2%;
-  margin-top: 5%;
+  margin-top: 7%;
 
 }
 
@@ -98,8 +99,7 @@
 }
 
 .service-list {
-  margin-left: 7%;
-  padding: 2%;
+  padding-top: 16px;
   display: flex;
 }
 
