@@ -5,7 +5,7 @@ const query = require('./query')
 
 // create a new user with hashed password
 class User {
-  constructor(username, password, first, last, email, contractor, avatar, id) {
+  constructor(username, password, first, last, email, contractor, avatar, id, profileId) {
     this.username = username
     this.salt = createHash(20)
     this.password = sha512(password + this.salt)
@@ -15,13 +15,29 @@ class User {
     this.email = email
     this.avatar = avatar || 'https://placehold.it/250x250/8B63A1'
     this.id = id
+    this.profile_id = profileId
   }
 }
 
 const users = [
-  new User('user', 'user', 'user', 'one', 'user@example.com', false, 'https://randomuser.me/api/portraits/men/15.jpg', 1),
-  new User('contractor', 'contractor', 'contractor', 'one', 'contractor@example.com', true, 'https://randomuser.me/api/portraits/men/95.jpg', 2),
-  new User('contractor2', 'contractor2', 'contractor', 'two', 'contractor2@example.com', true, 'https://randomuser.me/api/portraits/men/94.jpg', 3)
+  new User('user', 'user', 'user', 'one', 'user@example.com', false, 'https://randomuser.me/api/portraits/men/15.jpg', 1, 1),
+  new User('contractor', 'contractor', 'contractor', 'one', 'contractor@example.com', true, 'https://randomuser.me/api/portraits/men/95.jpg', 2, 2),
+  new User('Jane', 'jane', 'jane', 'smith', 'jane@example.com', true, 'https://randomuser.me/api/portraits/women/1.jpg', 3, 3),
+  new User('Aubrey', 'aubrey', 'aubrey', 'sykes', 'aubrey@example.com', true, 'https://randomuser.me/api/portraits/women/2.jpg', 4, 4)
+]
+
+const bio = [
+  'I am a bio',
+  'I\'ve been doing landscaping for as long as I can remember. Also if you are having issues with plumbing, I have a blue thumb.',
+  'I always had an affinity for electronics and wiring. Also if you need car repair, please reach out.',
+  'Hand me a circular saw and let me craft you a dog house!'
+]
+
+const trades = [
+  null,
+  ['landscaper', 'plumber'],
+  ['electrician', 'mechanic'],
+  ['carpenter', 'pipefitter']
 ]
 
 // create a random service to be associated with a contractor
@@ -32,21 +48,21 @@ function makeService() {
   return { description: services[randomIndex], price: randomPrice }
 }
 
-async function makeUser(user) {
+async function makeUser(user, index) {
   let addressId
   await query(
     `INSERT INTO addresses (city, street, state, zip) VALUES (?,?,?,?)
     `,
-    ['las vegas', '555 apple st', 'AZ', '89101'],
+    ['las vegas', '555 apple st', 'NV', '89103'],
     (result => {
       addressId = result.insertId
     })
   )
 
   await query(
-    `INSERT INTO profiles (address_id, bio, thumbnail, trade_1, trade_2) VALUES(?, ?, ?, ?, ?)
+    `INSERT INTO profiles (address_id, bio, thumbnail, trade_1, trade_2, id) VALUES(?, ?, ?, ?, ?, ?)
     `,
-    [addressId, 'I am a bio', user.avatar, (user.contractor && 'landscaper' || null), (user.contractor && 'plumber' || null)],
+    [addressId, bio[index], user.avatar, (user.contractor && trades[index] && trades[index][0] || null), (user.contractor && trades[index] && trades[index][1] || null), user.profile_id],
     (result => {
       user.profile_id = result.insertId
     })
@@ -70,9 +86,10 @@ async function makeUser(user) {
   )
 }
 
-makeUser(users[0]);
-makeUser(users[1]);
-makeUser(users[2]);
+makeUser(users[0], 0);
+makeUser(users[1], 1);
+makeUser(users[2], 2);
+makeUser(users[3], 3);
 
 // user w/ id 1: user
 // user w/ id: 2: contractor
@@ -97,13 +114,23 @@ makeUser(users[2]);
     )
   });
 
+  [{price: 100, description: 'roofing'}, {price: 1000, description: 'tiling'}].map(async service => {
+    await query(
+      `
+      INSERT INTO services (user_id, description, price)
+      VALUES (?,?,?)
+      `,
+      [4, service.description, service.price]
+    )
+  });
+
 
   await query(`
     INSERT INTO galleries (profile_id, img_src)
     VALUES 
-    (2, 'https://images.squarespace-cdn.com/content/v1/55c9505ae4b006a44568dcd5/1584571394917-K039OTK682IDD3B7QI8V/ke17ZwdGBToddI8pDm48kDogYgQdVQAkUW98gmY9Vgt7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0lCvyAd1-5UQFnp8aARaJsX8L94t2u-XxysXjqpmT3livZa5xrrf04fAJQc50Z6gVg/blob?format=1500w'),
-    (2, 'https://images.squarespace-cdn.com/content/v1/55c9505ae4b006a44568dcd5/1584571394917-K039OTK682IDD3B7QI8V/ke17ZwdGBToddI8pDm48kDogYgQdVQAkUW98gmY9Vgt7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0lCvyAd1-5UQFnp8aARaJsX8L94t2u-XxysXjqpmT3livZa5xrrf04fAJQc50Z6gVg/blob?format=1500w'),
-    (2, 'https://images.squarespace-cdn.com/content/v1/55c9505ae4b006a44568dcd5/1584571394917-K039OTK682IDD3B7QI8V/ke17ZwdGBToddI8pDm48kDogYgQdVQAkUW98gmY9Vgt7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0lCvyAd1-5UQFnp8aARaJsX8L94t2u-XxysXjqpmT3livZa5xrrf04fAJQc50Z6gVg/blob?format=1500w')
+    (2, '//hgtvhome.sndimg.com/content/dam/images/hgtv/stock/2018/1/15/iStock-516844708_colorful-garden-path.jpg.rend.hgtvcom.616.462.suffix/1516141969592.jpeg'),
+    (2, 'https://decortips.com/wp-content/uploads/2020/06/bushes-for-your-garden-e1593104926815.jpg'),
+    (2, 'https://s3.amazonaws.com/greenpal-production/posts/header_images/000/000/044/original/Perfectly_mowed_grass.jpg?1570548578')
   `)
   await query(`
       INSERT INTO orders (customer_id, contractor_id, date, services, total, status)
