@@ -77,7 +77,7 @@ makeUser(users[2]);
 // user w/ id 1: user
 // user w/ id: 2: contractor
 (async () => {
-  [{price: 100, description: 'plumbing'}, {price: 1000, description: 'landscaping'}].map(async service => {
+  [{price: 100, description: 'plumbing'}, {price: 500, description: 'trim bushes'}].map(async service => {
     await query(
       `
       INSERT INTO services (user_id, description, price)
