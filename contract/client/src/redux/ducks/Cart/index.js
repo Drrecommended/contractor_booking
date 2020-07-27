@@ -4,9 +4,10 @@ import { useSelector, useDispatch } from "react-redux"
 import api from "../../../utils/request"
 
 // 2. action definitions
-const ADD_TO_CART = "product/ADD_TO_CART"
-const DELETE_FROM_CART = "product/DELETE_FROM_CART"
-const TRACK_DATE = "product/TRACK_DATE"
+const ADD_TO_CART = "checkout/ADD_TO_CART"
+const CLEAR_CART = "checkout/CLEAR_CART"
+const DELETE_FROM_CART = "checkout/DELETE_FROM_CART"
+const TRACK_DATE = "checkout/TRACK_DATE"
 
 // 3. initial state
 const cartState = {
@@ -18,6 +19,8 @@ const cartState = {
 
 export default (state = cartState, action) => {
   switch (action.type) {
+    case CLEAR_CART:
+      return { ...state, cart: [] }
     case ADD_TO_CART:
       return { ...state, cart: [...state.cart, action.payload] }
     case DELETE_FROM_CART:
@@ -51,7 +54,9 @@ function deleteCart(id) {
 function createOrderData(cart, date) {
   const orderData = { contractor_id: 2, date, cart }
   return (dispatch) => {
-    return api.post("/orders", orderData)
+    return api.post("/orders", orderData).then(() => {
+      dispatch({type: CLEAR_CART})
+    })
   }
 }
 
