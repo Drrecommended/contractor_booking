@@ -22,7 +22,7 @@
   "dependencies": {
     "concurrently": "^5.1.1",
     "is-arrayish": "^0.3.2",
-    "node-sass": "^4.14.1"
+    "node-sass": "^7.0.0"
   },
   "boilerplate": {
     "name": "boilerplate",
